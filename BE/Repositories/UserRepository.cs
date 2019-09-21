@@ -24,10 +24,7 @@ namespace BE.Repositories
     public class UserRepository : RepositoryBase<User>, IUserRepository
     {
         public UserRepository(FriendyContext friendyContext)
-            : base(friendyContext)
-        {
-
-        }
+            : base(friendyContext) { }
 
         public async Task<IEnumerable<User>> GetAllUsersAsync()
         {
@@ -51,6 +48,13 @@ namespace BE.Repositories
                 .SingleOrDefaultAsync();
 
             return user;
+        }        
+        public async Task<User> GetUserByEmail(string email)
+        {
+            var user = await FindByCondition(o => o.Email == email)
+                .SingleOrDefaultAsync();
+
+            return user;
         }
 
         public async Task SetSessionId(int userId, int sessionId)
@@ -58,6 +62,15 @@ namespace BE.Repositories
             var user = await FindByCondition(o => o.Id == userId).SingleOrDefaultAsync();
             user.SessionId = sessionId;
             await SaveAsync();
+        }
+
+        public async Task<List<User>> GetUsersByCriteria(UsersLookUpCriteriaDto usersLookUpCriteriaDto)
+        {
+            var foundUsers = await FindByCondition(e => (e.Name != "" && e.Name == usersLookUpCriteriaDto.Name)
+                                                       && (e.Surname != "" && e.Surname == usersLookUpCriteriaDto.Surname))
+                .ToListAsync();
+            
+            return foundUsers;
         }
 
         public async Task GetUserEntries(int id)

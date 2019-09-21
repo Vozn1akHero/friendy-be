@@ -9,8 +9,12 @@ namespace BE.Models
         {
             Comment = new HashSet<Comment>();
             EventAdmin = new HashSet<EventAdmin>();
+            EventPostLikes = new HashSet<EventPostLikes>();
             Friend = new HashSet<Friend>();
-            UserEntry = new HashSet<UserEntry>();
+            UserEvents = new HashSet<UserEvents>();
+            UserFriends = new HashSet<UserFriends>();
+            UserImage = new HashSet<UserImage>();
+            UserPost = new HashSet<UserPost>();
         }
 
         public int Id { get; set; }
@@ -27,12 +31,18 @@ namespace BE.Models
         public string ProfileBg { get; set; }
         public string Status { get; set; }
         public int? SessionId { get; set; }
+        public int? AdditionalInfoId { get; set; }
 
+        public virtual UserAdditionalInfo AdditionalInfo { get; set; }
         public virtual Gender Gender { get; set; }
         public virtual Session Session { get; set; }
         public virtual ICollection<Comment> Comment { get; set; }
         public virtual ICollection<EventAdmin> EventAdmin { get; set; }
+        public virtual ICollection<EventPostLikes> EventPostLikes { get; set; }
         public virtual ICollection<Friend> Friend { get; set; }
-        public virtual ICollection<UserEntry> UserEntry { get; set; }
+        public virtual ICollection<UserEvents> UserEvents { get; set; }
+        public virtual ICollection<UserFriends> UserFriends { get; set; }
+        public virtual ICollection<UserImage> UserImage { get; set; }
+        public virtual ICollection<UserPost> UserPost { get; set; }
     }
 }

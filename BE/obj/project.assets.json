@@ -11,6 +11,34 @@
           "lib/netstandard2.0/BCrypt.Net-Core.dll": {}
         }
       },
+      "LazyCache/2.0.1": {
+        "type": "package",
+        "dependencies": {
+          "microsoft.extensions.caching.abstractions": "2.2.0",
+          "microsoft.extensions.caching.memory": "2.2.0"
+        },
+        "compile": {
+          "lib/netstandard2.0/LazyCache.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/LazyCache.dll": {}
+        }
+      },
+      "LazyCache.AspNetCore/2.0.1": {
+        "type": "package",
+        "dependencies": {
+          "LazyCache": "2.0.1",
+          "microsoft.extensions.caching.abstractions": "2.2.0",
+          "microsoft.extensions.caching.memory": "2.2.0",
+          "microsoft.extensions.dependencyinjection.abstractions": "2.2.0"
+        },
+        "compile": {
+          "lib/netstandard2.0/LazyCache.AspNetCore.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/LazyCache.AspNetCore.dll": {}
+        }
+      },
       "Microsoft.AspNet.WebApi.Client/5.2.6": {
         "type": "package",
         "dependencies": {
@@ -4781,6 +4809,30 @@
         "lib/netstandard1.3/BCrypt.Net-Core.pdb",
         "lib/netstandard2.0/BCrypt.Net-Core.dll",
         "lib/netstandard2.0/BCrypt.Net-Core.pdb"
+      ]
+    },
+    "LazyCache/2.0.1": {
+      "sha512": "7KQGlBk2kHTqMOn5e5RKteZxS6sPOUvkoBVx8FFHfqLYxP4477KQBoQg8Q2dqhYDNUX2w5Z3FUJtJI5jZUVsbA==",
+      "type": "package",
+      "path": "lazycache/2.0.1",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "lazycache.2.0.1.nupkg.sha512",
+        "lazycache.nuspec",
+        "lib/netstandard2.0/LazyCache.dll"
+      ]
+    },
+    "LazyCache.AspNetCore/2.0.1": {
+      "sha512": "C7NzeupdIW2uQEOYFxWXLno8Fqllx9jq54349+SHYhvD0B+7qxpuRY9nw2RgM9iq4+StpoSCCpMrVMiOgA73/A==",
+      "type": "package",
+      "path": "lazycache.aspnetcore/2.0.1",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "lazycache.aspnetcore.2.0.1.nupkg.sha512",
+        "lazycache.aspnetcore.nuspec",
+        "lib/netstandard2.0/LazyCache.AspNetCore.dll"
       ]
     },
     "Microsoft.AspNet.WebApi.Client/5.2.6": {
@@ -13016,6 +13068,7 @@
   "projectFileDependencyGroups": {
     ".NETCoreApp,Version=v2.2": [
       "BCrypt.Net-Core >= 1.6.0",
+      "LazyCache.AspNetCore >= 2.0.1",
       "Microsoft.AspNetCore.App >= 2.2.0",
       "Microsoft.AspNetCore.Authentication.JwtBearer >= 2.2.0",
       "Microsoft.AspNetCore.Razor.Design >= 2.2.0",
@@ -13072,6 +13125,10 @@
           "BCrypt.Net-Core": {
             "target": "Package",
             "version": "[1.6.0, )"
+          },
+          "LazyCache.AspNetCore": {
+            "target": "Package",
+            "version": "[2.0.1, )"
           },
           "Microsoft.AspNetCore.App": {
             "suppressParent": "All",

@@ -9,13 +9,21 @@
         <e p="appsettings.json" t="Include" />
         <e p="BE.csproj" t="IncludeRecursive" />
         <e p="bin" t="ExcludeRecursive" />
+        <e p="Cache" t="Include" />
         <e p="Controllers" t="Include">
           <e p="AuthController.cs" t="Include" />
-          <e p="EntryController.cs" t="Include" />
+          <e p="ChatController.cs" t="Include" />
+          <e p="EventController.cs" t="Include" />
+          <e p="FriendController.cs" t="Include" />
+          <e p="PostController.cs" t="Include" />
           <e p="UserController.cs" t="Include" />
         </e>
         <e p="Dtos" t="Include">
           <e p="AuthResponse.cs" t="Include" />
+          <e p="LikeDto.cs" t="Include" />
+          <e p="LoggedInUserEntryDto.cs" t="Include" />
+          <e p="UserEntryDto.cs" t="Include" />
+          <e p="UsersLookUpCriteriaDto.cs" t="Include" />
         </e>
         <e p="Entities" t="Include">
           <e p="UserEntity.cs" t="Include" />
@@ -25,11 +33,16 @@
         </e>
         <e p="Interfaces" t="Include">
           <e p="Repositories" t="Include">
-            <e p="IEntryRepository.cs" t="Include" />
+            <e p="ICommentRepository.cs" t="Include" />
+            <e p="IEventRepository.cs" t="Include" />
+            <e p="IFriendRepository.cs" t="Include" />
             <e p="IRepositoryBase.cs" t="Include" />
             <e p="IRepositoryWrapper.cs" t="Include" />
             <e p="ISessionRepository.cs" t="Include" />
-            <e p="IUserEntryRepository.cs" t="Include" />
+            <e p="IUserEventsRepository.cs" t="Include" />
+            <e p="IUserFriendsRepository.cs" t="Include" />
+            <e p="IUserPostLikesRepository.cs" t="Include" />
+            <e p="IUserPostRepository.cs" t="Include" />
             <e p="IUserRepository.cs" t="Include" />
           </e>
           <e p="Services" t="Include">
@@ -37,21 +50,38 @@
           </e>
         </e>
         <e p="Middlewares" t="Include">
+          <e p="ExceptionMiddleware.cs" t="Include" />
           <e p="JWTInHeaderMiddleware.cs" t="Include" />
+          <e p="UserIDInHeaderMiddleware.cs" t="Include" />
         </e>
         <e p="Models" t="Include">
+          <e p="AlcoholAttitude.cs" t="Include" />
           <e p="Comment.cs" t="Include" />
-          <e p="Comments.cs" t="Include" />
-          <e p="Entry.cs" t="Include" />
+          <e p="DrugsAttitude.cs" t="Include" />
+          <e p="Education.cs" t="Include" />
           <e p="Event.cs" t="Include" />
           <e p="EventAdmin.cs" t="Include" />
-          <e p="EventEntry.cs" t="Include" />
+          <e p="EventComments.cs" t="Include" />
+          <e p="EventImage.cs" t="Include" />
+          <e p="EventPost.cs" t="Include" />
+          <e p="EventPostLikes.cs" t="Include" />
+          <e p="FamilyStatus.cs" t="Include" />
           <e p="Friend.cs" t="Include" />
           <e p="FriendyContext.cs" t="Include" />
           <e p="Gender.cs" t="Include" />
+          <e p="Interest.cs" t="Include" />
+          <e p="Religion.cs" t="Include" />
           <e p="Session.cs" t="Include" />
+          <e p="SmokingAttitude.cs" t="Include" />
           <e p="User.cs" t="Include" />
-          <e p="UserEntry.cs" t="Include" />
+          <e p="UserAdditionalInfo.cs" t="Include" />
+          <e p="UserEvents.cs" t="Include" />
+          <e p="UserFriends.cs" t="Include" />
+          <e p="UserImage.cs" t="Include" />
+          <e p="UserInterests.cs" t="Include" />
+          <e p="UserPost.cs" t="Include" />
+          <e p="UserPostComments.cs" t="Include" />
+          <e p="UserPostLikes.cs" t="Include" />
         </e>
         <e p="obj" t="ExcludeRecursive">
           <e p="Debug" t="Include">
@@ -65,21 +95,28 @@
           <e p="launchSettings.json" t="Include" />
         </e>
         <e p="Repositories" t="Include">
-          <e p="EntryRepository.cs" t="Include" />
+          <e p="CommentRepository.cs" t="Include" />
+          <e p="EventRepository.cs" t="Include" />
+          <e p="FriendRepository.cs" t="Include" />
+          <e p="LikeRepository.cs" t="Include" />
           <e p="RepositoryBase.cs" t="Include" />
           <e p="RepositoryWrapper.cs" t="Include" />
           <e p="SessionRepository.cs" t="Include" />
-          <e p="UserEntryRepository.cs" t="Include" />
+          <e p="UserEventsRepository.cs" t="Include" />
+          <e p="UserFriendsRepository.cs" t="Include" />
+          <e p="UserPostLikesRepository.cs" t="Include" />
+          <e p="UserPostRepository.cs" t="Include" />
           <e p="UserRepository.cs" t="Include" />
         </e>
         <e p="ServiceExtensions.cs" t="Include" />
         <e p="Services" t="Include">
           <e p="AuthenticationService.cs" t="Include" />
           <e p="JwtService.cs" t="Include" />
+          <e p="UsersLookUpCriteriaService.cs" t="Include" />
         </e>
         <e p="SignalR" t="Include">
           <e p="Hubs" t="Include">
-            <e p="EntryHub.cs" t="Include" />
+            <e p="PostHub.cs" t="Include" />
             <e p="ProfileHub.cs" t="Include" />
           </e>
         </e>

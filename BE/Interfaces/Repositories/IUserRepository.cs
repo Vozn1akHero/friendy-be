@@ -13,9 +13,9 @@ namespace BE.Interfaces
         Task<IEnumerable<User>> GetAllUsersAsync();
         Task<User> GetUser(string token);
         Task<User> GetUserById(int id);
+        Task<User> GetUserByEmail(string email);
+        Task<List<User>> GetUsersByCriteria(UsersLookUpCriteriaDto usersLookUpCriteriaDto);
         Task SetSessionId(int userId, int id);
-        
         Task UpdateUserAsync(User dbUser);
-        Task DeleteUserAsync(User user);
     }
 }

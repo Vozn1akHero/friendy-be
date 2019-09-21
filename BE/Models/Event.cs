@@ -7,7 +7,9 @@ namespace BE.Models
     {
         public Event()
         {
-            EventEntry = new HashSet<EventEntry>();
+            EventImage = new HashSet<EventImage>();
+            EventPost = new HashSet<EventPost>();
+            UserEvents = new HashSet<UserEvents>();
         }
 
         public int Id { get; set; }
@@ -24,6 +26,8 @@ namespace BE.Models
         public decimal EntryPrice { get; set; }
         public int ParticipantsAmount { get; set; }
 
-        public virtual ICollection<EventEntry> EventEntry { get; set; }
+        public virtual ICollection<EventImage> EventImage { get; set; }
+        public virtual ICollection<EventPost> EventPost { get; set; }
+        public virtual ICollection<UserEvents> UserEvents { get; set; }
     }
 }

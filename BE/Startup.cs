@@ -12,9 +12,11 @@ using BE.Services;
 using BE.SignalR.Hubs;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.AspNetCore.Identity.UI.V4.Pages.Internal;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -40,9 +42,8 @@ namespace BE
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
             services.AddSignalR();
             services.ConfigureRepositoryWrapper();
-
+            
             var key = Encoding.ASCII.GetBytes(Configuration.GetValue<string>("AppSettings:JWTSecret"));
-
             services.AddAuthentication(x =>
                 {
                     x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -63,7 +64,11 @@ namespace BE
 
             services.AddScoped<IJwtService, JwtService>();
             services.AddScoped<IAuthenticationService, AuthenticationService>();
-
+            
+            services.AddMvc().AddJsonOptions(options => {
+                options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
+            });
+            
             services.ConfigureSqlContext(Configuration);
         }
 
@@ -79,20 +84,22 @@ namespace BE
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 //app.UseHsts();
             }
-
+            
             app.UseCors(builder => builder.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin().AllowCredentials());
             //app.UseHttpsRedirection();
 
             app.UseMiddleware<JWTInHeaderMiddleware>();
+            app.UseMiddleware<ExceptionMiddleware>();
+            app.UseMiddleware<UserIdInHeaderMiddleware>();
             
             app.UseAuthentication();
             
             app.UseSignalR(routes =>
             {
-                routes.MapHub<EntryHub>("/entryHub");
+                routes.MapHub<PostHub>("/entryHub");
                 routes.MapHub<ProfileHub>("/profileHub");
             });
-
+            
             app.UseMvc();
         }
     }

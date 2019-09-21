@@ -20,6 +20,24 @@ namespace BE.Helpers
             _configuration = configuration;
         }
 
+        public int GetUserIdFromJwt(string token)
+        {
+            string cutToken = token.Split(" ")[1];
+            var jwtSecret = _configuration.GetSection("AppSettings").GetSection("JWTSecret").Value;
+            var key = Encoding.ASCII.GetBytes(jwtSecret);
+            var handler = new JwtSecurityTokenHandler();
+            var validations = new TokenValidationParameters
+            {
+                ValidateIssuerSigningKey = true,
+                IssuerSigningKey = new SymmetricSecurityKey(key),
+                ValidateIssuer = false,
+                ValidateAudience = false
+            };
+            var claims = handler.ValidateToken(cutToken, validations, out var tokenSecure);
+            int userId = Convert.ToInt32(claims.Claims.SingleOrDefault(p => p.Type == "id")?.Value);
+            return userId;
+        }
+
         public bool ValidateJwt(string token)
         {
             var tokenHandler = new JwtSecurityTokenHandler();
@@ -38,7 +56,7 @@ namespace BE.Helpers
             return validatedToken != null;
         }
 
-        public string GenerateJwt(string baseValue)
+        public string GenerateJwt(List<Claim> claims)
         {
             var tokenHandler = new JwtSecurityTokenHandler();
             var jwtSecret = _configuration.GetSection("AppSettings").GetSection("JWTSecret").Value;
@@ -46,10 +64,7 @@ namespace BE.Helpers
 
             var tokenDescriptor = new SecurityTokenDescriptor
             {
-                Subject = new ClaimsIdentity(new List<Claim>
-                {
-                    new Claim(ClaimTypes.Name, baseValue)
-                }),
+                Subject = new ClaimsIdentity(claims),
                 Expires = DateTime.UtcNow.AddDays(7),
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
             };

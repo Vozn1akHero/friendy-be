@@ -1,4 +1,7 @@
+using System;
+using System.Collections.Generic;
 using System.Net;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using BE.Helpers;
 using BE.Interfaces;
@@ -16,67 +19,58 @@ namespace BE.Controllers
     {
         private IAuthenticationService _authenticationService;
         private IRepositoryWrapper _repository;
+        private IJwtService _jwtService;
 
-        public AuthController(IAuthenticationService authenticationService, IRepositoryWrapper repository)
+        public AuthController(IAuthenticationService authenticationService, IRepositoryWrapper repository, IJwtService jwtService)
         {
             _authenticationService = authenticationService;
             _repository = repository;
+            _jwtService = jwtService;
         }
 
         [HttpPost]
         [Route("create")]
         public async Task<IActionResult> CreateNewUser([FromBody] User user)
         {
-            try
+            bool emailAvailability = await _authenticationService.CheckIfEmailIsAvailable(user.Email);
+            if (!emailAvailability)
             {
-                bool emailAvailability = await _authenticationService.CheckIfEmailIsAvailable(user.Email);
-                if (!emailAvailability)
-                {
-                    return HTTPHelpers.TextResult(HttpStatusCode.Conflict, "Email is already taken");
-                }
+                return HTTPHelpers.TextResult(HttpStatusCode.Conflict, "Email is already taken");
+            }
 
-                await _authenticationService.Create(user);
-                return Ok();
-            }
-            catch
-            {
-                return new StatusCodeResult(500);
-            }
+            await _authenticationService.Create(user);
+            return Ok();
         }
 
         [HttpPost]
         [Route("authenticate")]
         public async Task<IActionResult> Authenticate([FromBody] User user)
         {
-            try
+            var authenticationRes = await _authenticationService.Authenticate(user.Email, user.Password);
+            if (!authenticationRes)
+                return Forbid();
+            var userRes = await _repository.User.GetUserByEmail(user.Email);
+            var claims = new List<Claim>
             {
-                var authenticationRes = await _authenticationService.Authenticate(user.Email, user.Password);
-
-                //create a class which contains those messages
-                if (authenticationRes.ErrorMsg == "Data is incorrect")
-                    return Forbid();
-
-                HttpContext.Response.Cookies.Append(
-                    "SESSION_TOKEN",
-                    "Bearer " + authenticationRes.Token,
-                    new CookieOptions
-                    {
-                        HttpOnly = true,
-                        Secure = false
-                    });
-
-                var session = await _repository.Session.CreateSession(authenticationRes.Token);
-                await _repository.User.SetSessionId(authenticationRes.UserId, session.Id);
-                
-                return Ok(new
+                new Claim("id", userRes.Id.ToString()),
+                new Claim("email", user.Email)
+            };
+            var token = _jwtService.GenerateJwt(claims);
+            HttpContext.Response.Cookies.Append(
+                "SESSION_TOKEN",
+                "Bearer " + token,
+                new CookieOptions
                 {
-                    sessionHash = session.Hash
+                    Expires = DateTime.Now.AddDays(7),
+                    HttpOnly = true,
+                    Secure = false
                 });
-            }
-            catch
+            var session = await _repository.Session.CreateSession(token);
+            await _repository.User.SetSessionId(userRes.Id, session.Id);
+            return Ok(new
             {
-                return StatusCode(500, "Internal server error");
-            }
+                sessionHash = session.Hash
+            });
         }
 
         [HttpPost]
@@ -90,6 +84,10 @@ namespace BE.Controllers
             return Ok();
         }
         
+        /// <summary>
+        /// Returns status code 200 if the request comes with jwt token as a httponly cookie
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         [Authorize]
         [Route("getUserAuthStatus")]

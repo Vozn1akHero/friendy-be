@@ -34,6 +34,10 @@
           "target": "Package",
           "version": "[1.6.0, )"
         },
+        "LazyCache.AspNetCore": {
+          "target": "Package",
+          "version": "[2.0.1, )"
+        },
         "Microsoft.AspNetCore.App": {
           "suppressParent": "All",
           "target": "Package",

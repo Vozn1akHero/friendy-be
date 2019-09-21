@@ -25,6 +25,7 @@
       "BE/1.0.0": {
         "dependencies": {
           "BCrypt.Net-Core": "1.6.0",
+          "LazyCache.AspNetCore": "2.0.1",
           "Microsoft.AspNetCore.App": "2.2.0",
           "Microsoft.AspNetCore.Authentication.JwtBearer": "2.2.0",
           "Microsoft.AspNetCore.Razor.Design": "2.2.0",
@@ -52,6 +53,38 @@
         },
         "compile": {
           "lib/netstandard2.0/BCrypt.Net-Core.dll": {}
+        }
+      },
+      "LazyCache/2.0.1": {
+        "dependencies": {
+          "Microsoft.Extensions.Caching.Abstractions": "2.2.0",
+          "Microsoft.Extensions.Caching.Memory": "2.2.0"
+        },
+        "runtime": {
+          "lib/netstandard2.0/LazyCache.dll": {
+            "assemblyVersion": "2.0.1.113",
+            "fileVersion": "2.0.1.113"
+          }
+        },
+        "compile": {
+          "lib/netstandard2.0/LazyCache.dll": {}
+        }
+      },
+      "LazyCache.AspNetCore/2.0.1": {
+        "dependencies": {
+          "LazyCache": "2.0.1",
+          "Microsoft.Extensions.Caching.Abstractions": "2.2.0",
+          "Microsoft.Extensions.Caching.Memory": "2.2.0",
+          "Microsoft.Extensions.DependencyInjection.Abstractions": "2.2.0"
+        },
+        "runtime": {
+          "lib/netstandard2.0/LazyCache.AspNetCore.dll": {
+            "assemblyVersion": "2.0.1.113",
+            "fileVersion": "2.0.1.113"
+          }
+        },
+        "compile": {
+          "lib/netstandard2.0/LazyCache.AspNetCore.dll": {}
         }
       },
       "Microsoft.CodeAnalysis.CSharp.Workspaces/2.8.0": {
@@ -3677,6 +3710,20 @@
       "sha512": "sha512-hsKiHGjrnlDW05MzuzzlD9gNP8YOW2KbZ+FbvISrilsKJJ76tXKhWey6psZX5sd7DczNpSU2U6ldjPoblk8BLw==",
       "path": "bcrypt.net-core/1.6.0",
       "hashPath": "bcrypt.net-core.1.6.0.nupkg.sha512"
+    },
+    "LazyCache/2.0.1": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-7KQGlBk2kHTqMOn5e5RKteZxS6sPOUvkoBVx8FFHfqLYxP4477KQBoQg8Q2dqhYDNUX2w5Z3FUJtJI5jZUVsbA==",
+      "path": "lazycache/2.0.1",
+      "hashPath": "lazycache.2.0.1.nupkg.sha512"
+    },
+    "LazyCache.AspNetCore/2.0.1": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-C7NzeupdIW2uQEOYFxWXLno8Fqllx9jq54349+SHYhvD0B+7qxpuRY9nw2RgM9iq4+StpoSCCpMrVMiOgA73/A==",
+      "path": "lazycache.aspnetcore/2.0.1",
+      "hashPath": "lazycache.aspnetcore.2.0.1.nupkg.sha512"
     },
     "Microsoft.CodeAnalysis.CSharp.Workspaces/2.8.0": {
       "type": "package",

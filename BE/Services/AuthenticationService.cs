@@ -21,7 +21,7 @@ namespace BE.Services
 {
     public interface IAuthenticationService
     {
-        Task<AuthResponse> Authenticate(string username, string password);
+        Task<bool> Authenticate(string username, string password);
         Task<bool> CheckIfEmailIsAvailable(string email);
         Task Create(User user);
         Task LogOut(string token);
@@ -49,6 +49,10 @@ namespace BE.Services
             user.Password = BCrypt.Net.BCrypt.HashPassword(plainTextPassword);
 
             await _friendyContext.User.AddAsync(user);
+            await _friendyContext.Friend.AddAsync(new Friend
+            {
+                FriendId = user.Id
+            });
             await _friendyContext.SaveChangesAsync();
         }
 
@@ -84,23 +88,19 @@ namespace BE.Services
             return tokenHandler.CreateToken(tokenDescriptor);
         }*/
 
-        public async Task<AuthResponse> Authenticate(string email, string password)
+        public async Task<bool> Authenticate(string email, string password)
         {
-            var authResponse = new AuthResponse();
-            
             var user = await ValidateEmailAndReturnUser(email);
 
             if (user != null)
             {
-                if(!ValidatePassword(password, user.Password))
-                    return authResponse.ErrorRes("Data is incorrect");
-
-                var token = _jwtService.GenerateJwt(user.Id.ToString());
-
-                return authResponse.SuccessResult(token, user.Id);
+                if (!ValidatePassword(password, user.Password))
+                    return false;
+                
+                return true;
             }
 
-            return authResponse.ErrorRes("Data is incorrect");
+            return false;
         }
         
         public bool CheckUserAuthStatus(string token)

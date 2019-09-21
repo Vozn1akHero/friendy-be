@@ -2,7 +2,7 @@ using Microsoft.AspNetCore.SignalR;
 
 namespace BE.SignalR.Hubs
 {
-    public class EntryHub : Hub
+    public class PostHub : Hub
     {
         
     }

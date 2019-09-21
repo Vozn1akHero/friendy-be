@@ -48,22 +48,26 @@ namespace BE.Controllers
             if(user != null) return Ok(user);
             return NotFound();
         }
-
+        
+        
         [HttpGet]
         [Authorize]
         [Route("getUser")]
         public async Task<IActionResult> GetUser()
         {
-            try
-            {
-                string sessionToken = HttpContext.Request.Cookies["SESSION_TOKEN"];
-                var user = await _repository.User.GetUser(sessionToken);
-                return Ok(user);
-            }
-            catch
-            {
-                return StatusCode(500, "Internal server error");
-            }
+            string sessionToken = HttpContext.Request.Cookies["SESSION_TOKEN"];
+            var user = await _repository.User.GetUser(sessionToken);
+            return Ok(user);
+        }
+        
+        [HttpPost]
+        [Authorize]
+        [Route("getUsersByCriteria")]
+        public async Task<IActionResult> GetUsersByCriteria(
+            [FromBody] UsersLookUpCriteriaDto usersLookUpCriteriaDto)
+        {
+            var users = await _repository.User.GetUsersByCriteria(usersLookUpCriteriaDto);
+            return Ok(users);
         }
     }
 }
