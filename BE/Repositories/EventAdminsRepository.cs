@@ -7,13 +7,13 @@ using Microsoft.EntityFrameworkCore;
 
 namespace BE.Repositories
 {
-    public class UserEventsRepository : RepositoryBase<UserEvents>, IUserEventsRepository
+    public class EventAdminsRepository : RepositoryBase<EventAdmins>, IEventAdminsRepository
     {
-        public UserEventsRepository(FriendyContext friendyContext) : base(friendyContext)
+        public EventAdminsRepository(FriendyContext friendyContext) : base(friendyContext)
         {
         }
-
-        public async Task<List<Event>> GetEventsByUserId(int userId)
+        
+        public async Task<List<Event>> GetUserAdministeredEvents(int userId)
         {
             return await FindByCondition(e => e.UserId == userId)
                 .Select(e => e.Event)

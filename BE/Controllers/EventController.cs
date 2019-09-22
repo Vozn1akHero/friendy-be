@@ -23,6 +23,25 @@ namespace BE.Controllers
         {
             return Ok();
         }
+
+        [HttpGet]
+        [Authorize]
+        [Route("getLoggedInUserEvents")]
+        public async Task<IActionResult> GetLoggedInUserEvents([FromHeader(Name = "userId")] int userId)
+        {
+            var events = await _repositoryWrapper.UserEvents.GetEventsByUserId(userId);
+            
+            return Ok(events);
+        }
+
+        [HttpGet]
+        [Authorize]
+        [Route("getLoggedInUserAdministeredEvents")]
+        public async Task<IActionResult> GetLoggedInUserAdministeredEvents([FromHeader(Name = "userId")] int userId)
+        {
+            var events = await _repositoryWrapper.EventAdmins.GetUserAdministeredEvents(userId);
+            return Ok(events);
+        }
         
     }
 }

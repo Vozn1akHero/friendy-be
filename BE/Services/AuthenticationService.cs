@@ -71,23 +71,7 @@ namespace BE.Services
         {
             return BCrypt.Net.BCrypt.Verify(password, realPassword);
         }
-
-        /*private SecurityToken GenerateJwt(List<Claim> claims)
-        {
-            var tokenHandler = new JwtSecurityTokenHandler();
-            var jwtSecret = _configuration.GetSection("AppSettings").GetSection("JWTSecret").Value;
-            var key = Encoding.ASCII.GetBytes(jwtSecret);
-
-            var tokenDescriptor = new SecurityTokenDescriptor
-            {
-                Subject = new ClaimsIdentity(claims),
-                Expires = DateTime.UtcNow.AddDays(7),
-                SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
-            };
-
-            return tokenHandler.CreateToken(tokenDescriptor);
-        }*/
-
+        
         public async Task<bool> Authenticate(string email, string password)
         {
             var user = await ValidateEmailAndReturnUser(email);

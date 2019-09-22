@@ -31,7 +31,7 @@ namespace BE.Repositories
             await SaveAsync();
         }
 
-        public async Task<List<UserPost>> GetLoggedInUserPostsById(int id)
+        public async Task<List<UserPost>> GetById(int id)
         {
            var posts = await FindByCondition(e => e.UserId == id)
                 .Include("UserPostLikes")

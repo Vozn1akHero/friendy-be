@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using BE.Interfaces.Repositories;
 using BE.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace BE.Repositories
 {
@@ -12,9 +13,15 @@ namespace BE.Repositories
         }
 
 
-        public Task<List<Event>> GetExampleEventsByUserId(int userId)
+        public async Task<List<Event>> GetExampleEventsByUserId(int userId)
         {
-            //var events = FindByCondition(e => e.)
+/*
+            var events = await FindByCondition(e => e.EventParticipants.Part)
+                .Include(e => e.UserEvents)
+                .ToListAsync();
+            
+            */
+
             return null;
         }
     }

@@ -24,6 +24,7 @@ namespace BE.Repositories
         private IEventRepository _event;
         private IUserFriendsRepository _userFriends;
         private IUserEventsRepository _userEvents;
+        private IEventAdminsRepository _eventAdmins;
 
         private IJwtService _jwtService;
 
@@ -65,6 +66,11 @@ namespace BE.Repositories
         public IUserEventsRepository UserEvents
         {
             get { return _userEvents ?? (_userEvents = new UserEventsRepository(_friendyContext)); }
+        }
+
+        public IEventAdminsRepository EventAdmins
+        {
+            get { return _eventAdmins ?? (_eventAdmins = new EventAdminsRepository(_friendyContext)); }
         }
         
         public RepositoryWrapper(FriendyContext friendyContext, IJwtService jwtService)

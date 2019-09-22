@@ -19,29 +19,29 @@ namespace BE.Controllers
     {
         private readonly IHubContext<PostHub> _hubContext;
         private readonly IRepositoryWrapper _repositoryWrapper;
-        private readonly IJwtService _jwtService;
+       // private readonly IJwtService _jwtService;
         
-        public PostController(IRepositoryWrapper repositoryWrapper, IHubContext<PostHub> hubContext, IJwtService jwtService)
+        public PostController(IRepositoryWrapper repositoryWrapper, IHubContext<PostHub> hubContext)
         {
             _repositoryWrapper = repositoryWrapper;
             _hubContext = hubContext;
-            _jwtService = jwtService;
+            //_jwtService = jwtService;
         }
 
         [HttpPost]
         [Authorize]
         [Route("createUserPost")]
-        public async Task<IActionResult> CreateUserPost([FromBody] UserPost post)
+        public async Task<IActionResult> CreateUserPost([FromBody] UserPost post,
+            [FromHeader(Name = "userId")] int userId)
         {
             if (post.Image != null && post.Image.Length >= 8000)
             {
                 return BadRequest("IMAGE IS TOO HEAVY");
             }
-            var newPost = new UserPost();
-            newPost.UserId = post.UserId;
-            newPost.Content = post.Content;
-            newPost.Image = post.Image;
-            newPost.Date = DateTime.Now;
+            var newPost = new UserPost
+            {
+                UserId = userId, Content = post.Content, Image = post.Image, Date = DateTime.Now
+            };
             await _repositoryWrapper.UserPost.CreateUserPost(newPost);
             return Ok(newPost);
         }
@@ -50,22 +50,26 @@ namespace BE.Controllers
         [HttpGet]
         [Authorize]
         [Route("getLoggedInUserPostsByToken")]
-        public async Task<IActionResult> GetLoggedInUserPostsByToken()
+        public async Task<IActionResult> GetLoggedInUserPostsByToken([FromHeader(Name = "userId")] int userId)
         {
-            string sessionToken = HttpContext.Request.Cookies["SESSION_TOKEN"];
-            var user = await _repositoryWrapper.User.GetUser(sessionToken);
-            var entries = await _repositoryWrapper.UserPost.GetLoggedInUserPostsById(user.Id);
+            var entries = await _repositoryWrapper.UserPost.GetById(userId);
             return Ok(entries);
         }
+
+        [HttpGet]
+        [Authorize]
+        [Route("getById")]
+        public async Task<IActionResult> GetById(int id)
+        {
+            var posts = await _repositoryWrapper.UserPost.GetById(id);
+            return Ok(posts);
+        }
         
-                
         [HttpDelete]
         [Authorize]
         [Route("removeUserPostById/{id}")]
         public async Task<IActionResult> RemoveUserPostById([FromRoute] int id)
         {
-            /*string sessionToken = HttpContext.Request.Cookies["SESSION_TOKEN"];
-            var user = await _repositoryWrapper.User.GetUser(sessionToken);*/
             await _repositoryWrapper.UserPost.RemovePostById(id);
             return Ok();
         }
@@ -73,9 +77,9 @@ namespace BE.Controllers
         [HttpPut]
         [Authorize]
         [Route("likeUserPostById/{id}")]
-        public async Task<IActionResult> LikeUserPostById([FromRoute] int id)
+        public async Task<IActionResult> LikeUserPostById([FromRoute] int id,
+            [FromHeader(Name = "userId")] int userId)
         {
-            int userId = _jwtService.GetUserIdFromJwt(HttpContext.Request.Cookies["SESSION_TOKEN"]);
             var newLike = new UserPostLikes
             {
                 UserId = userId,
@@ -88,11 +92,9 @@ namespace BE.Controllers
         [HttpGet]
         [Authorize]
         [Route("getLoggedInUserPosts")]
-        public async Task<IActionResult> GetLoggedInUserPosts()
+        public async Task<IActionResult> GetLoggedInUserPosts([FromHeader(Name = "userId")] int userId)
         {
-            string token = HttpContext.Request.Cookies["SESSION_TOKEN"];
-            int userId = _jwtService.GetUserIdFromJwt(token);
-            var entries = await _repositoryWrapper.UserPost.GetLoggedInUserPostsById(userId);
+            var entries = await _repositoryWrapper.UserPost.GetById(userId);
             return Ok(entries);
         }
     }

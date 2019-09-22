@@ -8,7 +8,8 @@ namespace BE.Models
         public User()
         {
             Comment = new HashSet<Comment>();
-            EventAdmin = new HashSet<EventAdmin>();
+            EventAdmins = new HashSet<EventAdmins>();
+            EventParticipants = new HashSet<EventParticipants>();
             EventPostLikes = new HashSet<EventPostLikes>();
             Friend = new HashSet<Friend>();
             UserEvents = new HashSet<UserEvents>();
@@ -37,7 +38,8 @@ namespace BE.Models
         public virtual Gender Gender { get; set; }
         public virtual Session Session { get; set; }
         public virtual ICollection<Comment> Comment { get; set; }
-        public virtual ICollection<EventAdmin> EventAdmin { get; set; }
+        public virtual ICollection<EventAdmins> EventAdmins { get; set; }
+        public virtual ICollection<EventParticipants> EventParticipants { get; set; }
         public virtual ICollection<EventPostLikes> EventPostLikes { get; set; }
         public virtual ICollection<Friend> Friend { get; set; }
         public virtual ICollection<UserEvents> UserEvents { get; set; }

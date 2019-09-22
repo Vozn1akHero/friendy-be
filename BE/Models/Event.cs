@@ -7,7 +7,9 @@ namespace BE.Models
     {
         public Event()
         {
+            EventAdmins = new HashSet<EventAdmins>();
             EventImage = new HashSet<EventImage>();
+            EventParticipants = new HashSet<EventParticipants>();
             EventPost = new HashSet<EventPost>();
             UserEvents = new HashSet<UserEvents>();
         }
@@ -18,15 +20,14 @@ namespace BE.Models
         public string Description { get; set; }
         public string Street { get; set; }
         public string StreetNumber { get; set; }
-        public int Year { get; set; }
-        public int Month { get; set; }
-        public int Day { get; set; }
-        public int Hour { get; set; }
-        public int Minutre { get; set; }
         public decimal EntryPrice { get; set; }
         public int ParticipantsAmount { get; set; }
+        public string Avatar { get; set; }
+        public DateTime? Date { get; set; }
 
+        public virtual ICollection<EventAdmins> EventAdmins { get; set; }
         public virtual ICollection<EventImage> EventImage { get; set; }
+        public virtual ICollection<EventParticipants> EventParticipants { get; set; }
         public virtual ICollection<EventPost> EventPost { get; set; }
         public virtual ICollection<UserEvents> UserEvents { get; set; }
     }

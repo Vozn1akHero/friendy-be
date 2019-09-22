@@ -20,9 +20,10 @@ namespace BE.Models
         public virtual DbSet<DrugsAttitude> DrugsAttitude { get; set; }
         public virtual DbSet<Education> Education { get; set; }
         public virtual DbSet<Event> Event { get; set; }
-        public virtual DbSet<EventAdmin> EventAdmin { get; set; }
+        public virtual DbSet<EventAdmins> EventAdmins { get; set; }
         public virtual DbSet<EventComments> EventComments { get; set; }
         public virtual DbSet<EventImage> EventImage { get; set; }
+        public virtual DbSet<EventParticipants> EventParticipants { get; set; }
         public virtual DbSet<EventPost> EventPost { get; set; }
         public virtual DbSet<EventPostLikes> EventPostLikes { get; set; }
         public virtual DbSet<FamilyStatus> FamilyStatus { get; set; }
@@ -121,13 +122,19 @@ namespace BE.Models
 
                 entity.Property(e => e.Id).HasColumnName("id");
 
+                entity.Property(e => e.Avatar)
+                    .HasColumnName("avatar")
+                    .IsUnicode(false);
+
                 entity.Property(e => e.City)
                     .IsRequired()
                     .HasColumnName("city")
                     .HasMaxLength(250)
                     .IsUnicode(false);
 
-                entity.Property(e => e.Day).HasColumnName("day");
+                entity.Property(e => e.Date)
+                    .HasColumnName("date")
+                    .HasColumnType("datetime");
 
                 entity.Property(e => e.Description)
                     .IsRequired()
@@ -138,12 +145,6 @@ namespace BE.Models
                 entity.Property(e => e.EntryPrice)
                     .HasColumnName("entry_price")
                     .HasColumnType("decimal(10, 2)");
-
-                entity.Property(e => e.Hour).HasColumnName("hour");
-
-                entity.Property(e => e.Minutre).HasColumnName("minutre");
-
-                entity.Property(e => e.Month).HasColumnName("month");
 
                 entity.Property(e => e.ParticipantsAmount).HasColumnName("participants_amount");
 
@@ -164,13 +165,11 @@ namespace BE.Models
                     .HasColumnName("title")
                     .HasMaxLength(250)
                     .IsUnicode(false);
-
-                entity.Property(e => e.Year).HasColumnName("year");
             });
 
-            modelBuilder.Entity<EventAdmin>(entity =>
+            modelBuilder.Entity<EventAdmins>(entity =>
             {
-                entity.ToTable("event_admin");
+                entity.ToTable("event_admins");
 
                 entity.Property(e => e.Id).HasColumnName("id");
 
@@ -178,9 +177,16 @@ namespace BE.Models
 
                 entity.Property(e => e.UserId).HasColumnName("user_id");
 
+                entity.HasOne(d => d.Event)
+                    .WithMany(p => p.EventAdmins)
+                    .HasForeignKey(d => d.EventId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_event_admins_event");
+
                 entity.HasOne(d => d.User)
-                    .WithMany(p => p.EventAdmin)
+                    .WithMany(p => p.EventAdmins)
                     .HasForeignKey(d => d.UserId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_event_admin_user");
             });
 
@@ -219,6 +225,29 @@ namespace BE.Models
                     .HasForeignKey(d => d.EventId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_event_photo_event");
+            });
+
+            modelBuilder.Entity<EventParticipants>(entity =>
+            {
+                entity.ToTable("event_participants");
+
+                entity.Property(e => e.Id).HasColumnName("id");
+
+                entity.Property(e => e.EventId).HasColumnName("event_id");
+
+                entity.Property(e => e.ParticipantId).HasColumnName("participant_id");
+
+                entity.HasOne(d => d.Event)
+                    .WithMany(p => p.EventParticipants)
+                    .HasForeignKey(d => d.EventId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_event_participants_event");
+
+                entity.HasOne(d => d.Participant)
+                    .WithMany(p => p.EventParticipants)
+                    .HasForeignKey(d => d.ParticipantId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_event_participants_user");
             });
 
             modelBuilder.Entity<EventPost>(entity =>

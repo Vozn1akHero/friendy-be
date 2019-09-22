@@ -9,6 +9,6 @@ namespace BE.Repositories
     {
         Task CreateUserPost(UserPost post);
         Task RemovePostById(int id);
-        Task<List<UserPost>> GetLoggedInUserPostsById(int id);
+        Task<List<UserPost>> GetById(int id);
     }
 }

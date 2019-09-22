@@ -15,6 +15,9 @@ namespace BE.Interfaces
         IUserPostLikesRepository UserPostLikes { get; }
         IFriendRepository Friend { get; }
         IUserFriendsRepository UserFriends { get; }
+        IUserEventsRepository UserEvents { get; }
+        IEventRepository Event { get; }
+        IEventAdminsRepository EventAdmins { get; }
         void Save();
     }
 }

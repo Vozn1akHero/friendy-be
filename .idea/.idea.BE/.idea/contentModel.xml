@@ -20,6 +20,9 @@
         </e>
         <e p="Dtos" t="Include">
           <e p="AuthResponse.cs" t="Include" />
+          <e p="EventDtos" t="Include">
+            <e p="UserEventDto.cs" t="Include" />
+          </e>
           <e p="LikeDto.cs" t="Include" />
           <e p="LoggedInUserEntryDto.cs" t="Include" />
           <e p="UserEntryDto.cs" t="Include" />
@@ -34,6 +37,7 @@
         <e p="Interfaces" t="Include">
           <e p="Repositories" t="Include">
             <e p="ICommentRepository.cs" t="Include" />
+            <e p="IEventAdminsRepository.cs" t="Include" />
             <e p="IEventRepository.cs" t="Include" />
             <e p="IFriendRepository.cs" t="Include" />
             <e p="IRepositoryBase.cs" t="Include" />
@@ -60,9 +64,10 @@
           <e p="DrugsAttitude.cs" t="Include" />
           <e p="Education.cs" t="Include" />
           <e p="Event.cs" t="Include" />
-          <e p="EventAdmin.cs" t="Include" />
+          <e p="EventAdmins.cs" t="Include" />
           <e p="EventComments.cs" t="Include" />
           <e p="EventImage.cs" t="Include" />
+          <e p="EventParticipants.cs" t="Include" />
           <e p="EventPost.cs" t="Include" />
           <e p="EventPostLikes.cs" t="Include" />
           <e p="FamilyStatus.cs" t="Include" />
@@ -96,6 +101,7 @@
         </e>
         <e p="Repositories" t="Include">
           <e p="CommentRepository.cs" t="Include" />
+          <e p="EventAdminsRepository.cs" t="Include" />
           <e p="EventRepository.cs" t="Include" />
           <e p="FriendRepository.cs" t="Include" />
           <e p="LikeRepository.cs" t="Include" />
