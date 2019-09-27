@@ -3,7 +3,6 @@ D:\Projects\Praca dyplomowa\BE\BE\bin\Debug\netcoreapp2.2\BE.runtimeconfig.json
 D:\Projects\Praca dyplomowa\BE\BE\bin\Debug\netcoreapp2.2\BE.runtimeconfig.dev.json
 D:\Projects\Praca dyplomowa\BE\BE\bin\Debug\netcoreapp2.2\BE.dll
 D:\Projects\Praca dyplomowa\BE\BE\bin\Debug\netcoreapp2.2\BE.pdb
-D:\Projects\Praca dyplomowa\BE\BE\obj\Debug\netcoreapp2.2\BE.csproj.CoreCompileInputs.cache
 D:\Projects\Praca dyplomowa\BE\BE\obj\Debug\netcoreapp2.2\BE.RazorAssemblyInfo.cache
 D:\Projects\Praca dyplomowa\BE\BE\obj\Debug\netcoreapp2.2\BE.RazorAssemblyInfo.cs
 D:\Projects\Praca dyplomowa\BE\BE\obj\Debug\netcoreapp2.2\BE.AssemblyInfoInputs.cache

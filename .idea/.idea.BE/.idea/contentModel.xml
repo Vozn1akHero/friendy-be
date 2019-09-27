@@ -23,6 +23,9 @@
           <e p="EventDtos" t="Include">
             <e p="UserEventDto.cs" t="Include" />
           </e>
+          <e p="FriendDtos" t="Include">
+            <e p="FriendProfilePageDto.cs" t="Include" />
+          </e>
           <e p="LikeDto.cs" t="Include" />
           <e p="LoggedInUserEntryDto.cs" t="Include" />
           <e p="UserEntryDto.cs" t="Include" />
@@ -127,6 +130,12 @@
           </e>
         </e>
         <e p="Startup.cs" t="Include" />
+        <e p="wwwroot" t="Include">
+          <e p="EventAvatar" t="Include" />
+          <e p="UserAvatar" t="Include">
+            <e p="default-user-avatar.png" t="Include" />
+          </e>
+        </e>
       </e>
       <e p="BE.sln" t="IncludeFlat" />
       <e p="packages" t="ExcludeRecursive" />

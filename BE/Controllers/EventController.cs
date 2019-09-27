@@ -43,5 +43,15 @@ namespace BE.Controllers
             return Ok(events);
         }
         
+        [HttpGet]
+        [Authorize]
+        [Route("filterAdministeredEvents")]
+        public async Task<IActionResult> FilterAdministeredEvents([FromQuery(Name = "keyword")] string keyword,
+            [FromHeader(Name = "userId")] int userId)
+        {
+            var events = await _repositoryWrapper.EventAdmins.FilterAdministeredEvents(userId, keyword);
+            
+            return Ok(events);
+        }
     }
 }

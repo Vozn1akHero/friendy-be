@@ -10,5 +10,6 @@ namespace BE.Interfaces.Repositories
         Task<List<UserFriends>> GetByUserId(int userId, int startIndex, int lastIndex);
         Task<List<UserFriends>> FilterByKeyword(int userId, string keyword);
         Task RemoveById(int id);
+        Task<List<UserFriends>> GetExemplaryByUserId(int userId);
     }
 }

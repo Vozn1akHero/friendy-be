@@ -37,7 +37,7 @@ namespace BE.Controllers
             {
                 return HTTPHelpers.TextResult(HttpStatusCode.Conflict, "Email is already taken");
             }
-
+            user.Avatar = "./wwwroot/UserAvatar/default-user-avatar.png";
             await _authenticationService.Create(user);
             return Ok();
         }
@@ -76,24 +76,30 @@ namespace BE.Controllers
         [HttpPost]
         [Authorize]
         [Route("logout")]
-        public async Task<IActionResult> LogOut()
+        public async Task<IActionResult> LogOut([FromHeader(Name = "Authorization")] string token)
         {
-            string token = Request.Cookies["SESSION_TOKEN"];
             await _authenticationService.LogOut(token);
             HttpContext.Response.Cookies.Delete("SESSION_TOKEN");
             return Ok();
         }
         
-        /// <summary>
-        /// Returns status code 200 if the request comes with jwt token as a httponly cookie
-        /// </summary>
-        /// <returns></returns>
         [HttpGet]
-        [Authorize]
         [Route("getUserAuthStatus")]
-        public IActionResult GetUserAuthStatus()
+        public async Task<IActionResult> GetUserAuthStatus([FromHeader(Name = "Authorization")] string token)
         {
-            return Ok();
+            if (token != null)
+            {
+                string cutToken = token.Split(" ")[1];
+                bool tokenValidity = _jwtService.ValidateJwt(cutToken);
+                if (!tokenValidity)
+                {
+                    await _authenticationService.LogOut(cutToken);
+                    HttpContext.Response.Cookies.Delete("SESSION_TOKEN");
+                    return Forbid();
+                }
+                return Ok();
+            }
+            return Forbid();
         }
     }
 }

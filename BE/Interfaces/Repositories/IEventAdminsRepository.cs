@@ -7,5 +7,6 @@ namespace BE.Interfaces.Repositories
     public interface IEventAdminsRepository: IRepositoryBase<EventAdmins>
     {
         Task<List<Event>> GetUserAdministeredEvents(int userId);
+        Task<List<Event>> FilterAdministeredEvents(int userId, string keyword);
     }
 }

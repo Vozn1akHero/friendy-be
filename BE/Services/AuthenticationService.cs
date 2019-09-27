@@ -49,6 +49,8 @@ namespace BE.Services
             user.Password = BCrypt.Net.BCrypt.HashPassword(plainTextPassword);
 
             await _friendyContext.User.AddAsync(user);
+            await _friendyContext.SaveChangesAsync();
+            
             await _friendyContext.Friend.AddAsync(new Friend
             {
                 FriendId = user.Id

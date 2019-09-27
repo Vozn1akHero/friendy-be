@@ -18,6 +18,13 @@ namespace BE.Repositories
             return await FindByCondition(e => e.UserId == userId)
                 .Select(e => e.Event)
                 .ToListAsync();
+        }  
+        
+        public async Task<List<Event>> FilterAdministeredEvents(int userId, string keyword)
+        {
+            return await FindByCondition(e => e.UserId == userId && e.Event.Title.Contains(keyword))
+                .Select(e => e.Event)
+                .ToListAsync();
         }
     }
 }

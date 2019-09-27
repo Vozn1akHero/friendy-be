@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IdentityModel.Tokens.Jwt;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -20,6 +21,7 @@ using Microsoft.AspNetCore.Identity.UI.V4.Pages.Internal;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
@@ -42,6 +44,10 @@ namespace BE
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
             services.AddSignalR();
             services.ConfigureRepositoryWrapper();
+            
+            services.AddSingleton<IFileProvider>(  
+                new PhysicalFileProvider(  
+                    Path.Combine(Directory.GetCurrentDirectory(), "wwwroot")));  
             
             var key = Encoding.ASCII.GetBytes(Configuration.GetValue<string>("AppSettings:JWTSecret"));
             services.AddAuthentication(x =>
@@ -89,7 +95,7 @@ namespace BE
             //app.UseHttpsRedirection();
 
             app.UseMiddleware<JWTInHeaderMiddleware>();
-            app.UseMiddleware<ExceptionMiddleware>();
+           // app.UseMiddleware<ExceptionMiddleware>();
             app.UseMiddleware<UserIdInHeaderMiddleware>();
             
             app.UseAuthentication();

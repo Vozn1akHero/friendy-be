@@ -49,5 +49,16 @@ namespace BE.Repositories
             Delete(friend);
             await SaveAsync();
         }
+
+        public async Task<List<UserFriends>> GetExemplaryByUserId(int userId)
+        {
+            var friends = await FindByCondition(e => e.UserId == userId)
+                .Include(e => e.Friend.FriendNavigation)
+                .Take(3)
+                .ToListAsync();
+
+            return friends;
+        }
+        
     }
 }

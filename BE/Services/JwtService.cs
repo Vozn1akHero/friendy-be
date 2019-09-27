@@ -41,7 +41,13 @@ namespace BE.Helpers
         public bool ValidateJwt(string token)
         {
             var tokenHandler = new JwtSecurityTokenHandler();
-            TokenValidationParameters validationParameters = new TokenValidationParameters();
+            var key = Encoding.ASCII.GetBytes(_configuration.GetValue<string>("AppSettings:JWTSecret"));
+            TokenValidationParameters validationParameters = new TokenValidationParameters{
+                ValidateIssuerSigningKey = true,
+                IssuerSigningKey = new SymmetricSecurityKey(key),
+                ValidateIssuer = false,
+                ValidateAudience = false
+            };
             SecurityToken validatedToken;
 
             try

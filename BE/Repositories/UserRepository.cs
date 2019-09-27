@@ -73,6 +73,13 @@ namespace BE.Repositories
             return foundUsers;
         }
 
+        public async Task UpdateAvatar(string path, int userId)
+        {
+            var user = await FindByCondition(e => e.Id == userId).SingleOrDefaultAsync();
+            user.Avatar = path;
+            await SaveAsync();
+        }
+
         public async Task GetUserEntries(int id)
         {
             

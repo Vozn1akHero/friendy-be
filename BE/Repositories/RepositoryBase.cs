@@ -55,5 +55,10 @@ namespace BE.Repositories
         {
             await this.FriendyContext.SaveChangesAsync();
         }
+
+        public IQueryable<T> ExecuteSqlQuery(string query, List<object> parameters)
+        {
+            return this.FriendyContext.Set<T>().FromSql(query, parameters);
+        }
     }
 }

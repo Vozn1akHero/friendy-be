@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -59,7 +60,37 @@ namespace BE.Controllers
             var user = await _repository.User.GetUser(sessionToken);
             return Ok(user);
         }
-        
+
+        [HttpGet]
+        [Authorize]
+        [Route("getAvatar")]
+        public async Task<IActionResult> GetUserAvatar([FromHeader(Name = "userId")] int userId)
+        {
+            var user = await _repository.User.GetUserById(userId);
+            var content = new FileStream(user.Avatar, FileMode.Open, FileAccess.Read, FileShare.Read);
+            var response = File(content, "application/octet-stream");//FileStreamResult
+            return Ok(response);
+        }
+
+        [HttpPut]
+        [Authorize]
+        [Route("updateAvatar")]
+        public async Task<IActionResult> UpdateUserAvatar(IFormFile newAvatar, [FromHeader(Name = "userId")] int userId)
+        {
+            string newPath = newAvatar.Name + userId;
+            
+            var path = Path.Combine("wwwroot/UserAvatar", newPath);  
+  
+            using (var stream = new FileStream(path, FileMode.OpenOrCreate))  
+            {  
+                await newAvatar.CopyToAsync(stream);
+            }
+
+            await _repository.User.UpdateAvatar(newPath, userId);
+
+            return Ok();
+        }
+
         [HttpPost]
         [Authorize]
         [Route("getUsersByCriteria")]

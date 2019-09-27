@@ -16,6 +16,7 @@ namespace BE.Interfaces
         Task<User> GetUserByEmail(string email);
         Task<List<User>> GetUsersByCriteria(UsersLookUpCriteriaDto usersLookUpCriteriaDto);
         Task SetSessionId(int userId, int id);
-        Task UpdateUserAsync(User dbUser);
+        Task UpdateAvatar(string path, int userId);
+        //Task UpdateUserAsync(User dbUser);
     }
 }

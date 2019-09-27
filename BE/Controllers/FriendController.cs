@@ -51,6 +51,16 @@ namespace BE.Controllers
             await _repositoryWrapper.UserFriends.RemoveById(id);
             return Ok();
         }
-        
+
+        [HttpGet]
+        [Authorize]
+        [Route("getExemplaryByUserId")]
+        public async Task<IActionResult> GetExemplaryByUserId([FromHeader(Name = "userId")] int userId)
+        {
+            var exemplaryFriends = await _repositoryWrapper.UserFriends.GetExemplaryByUserId(userId);
+            
+            return Ok(exemplaryFriends);
+        }
+
     }
 }
