@@ -7,6 +7,8 @@ namespace BE.Models
     {
         public User()
         {
+            ChatMessage = new HashSet<ChatMessage>();
+            ChatParticipants = new HashSet<ChatParticipants>();
             Comment = new HashSet<Comment>();
             EventAdmins = new HashSet<EventAdmins>();
             EventParticipants = new HashSet<EventParticipants>();
@@ -37,6 +39,8 @@ namespace BE.Models
         public virtual UserAdditionalInfo AdditionalInfo { get; set; }
         public virtual Gender Gender { get; set; }
         public virtual Session Session { get; set; }
+        public virtual ICollection<ChatMessage> ChatMessage { get; set; }
+        public virtual ICollection<ChatParticipants> ChatParticipants { get; set; }
         public virtual ICollection<Comment> Comment { get; set; }
         public virtual ICollection<EventAdmins> EventAdmins { get; set; }
         public virtual ICollection<EventParticipants> EventParticipants { get; set; }

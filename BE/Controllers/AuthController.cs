@@ -21,7 +21,8 @@ namespace BE.Controllers
         private IRepositoryWrapper _repository;
         private IJwtService _jwtService;
 
-        public AuthController(IAuthenticationService authenticationService, IRepositoryWrapper repository, IJwtService jwtService)
+        public AuthController(IAuthenticationService authenticationService, 
+            IRepositoryWrapper repository, IJwtService jwtService)
         {
             _authenticationService = authenticationService;
             _repository = repository;

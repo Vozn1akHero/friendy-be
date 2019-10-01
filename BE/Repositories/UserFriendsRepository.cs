@@ -12,6 +12,17 @@ namespace BE.Repositories
         public UserFriendsRepository(FriendyContext friendyContext) : base(friendyContext)
         {
         }
+
+        public async Task AddNew(int id, int userId)
+        {
+            var newFriend = new UserFriends
+            {
+                UserId = userId,
+                FriendId = id
+            };
+            Create(newFriend);
+            await SaveAsync();
+        }
         
         public async Task<List<UserFriends>> FindAllByUserId(int userId)
         {

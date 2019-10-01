@@ -1,5 +1,8 @@
+using System.Collections.Generic;
+using System.IO;
 using System.Threading.Tasks;
 using BE.Dtos;
+using BE.Dtos.FriendDtos;
 using BE.Interfaces;
 using LazyCache;
 using Microsoft.AspNetCore.Authorization;
@@ -13,15 +16,26 @@ namespace BE.Controllers
     {
         private readonly IRepositoryWrapper _repositoryWrapper;
         private readonly IJwtService _jwtService;
-        public IAppCache _cache;
+       // public IAppCache _cache;
         
-        public FriendController(IRepositoryWrapper repositoryWrapper, IJwtService jwtService)
+        public FriendController(IRepositoryWrapper repositoryWrapper,
+            IJwtService jwtService)
         {
             _repositoryWrapper = repositoryWrapper;
             _jwtService = jwtService;
-            _cache = new CachingService();
         }
 
+        [HttpPost]
+        [Authorize]
+        [Route("addNew/{id}")]
+        public async Task<IActionResult> AddNew(int id, [FromHeader(Name = "userId")] int userId)
+        {
+            await _repositoryWrapper.UserFriends.AddNew(id, userId);
+            var newChat = await _repositoryWrapper.Chat.AddNewAfterFriendAdding();
+            await _repositoryWrapper.ChatParticipants.AddNewAfterFriendAdding(newChat.Id, new []{ id, userId });
+            return Ok();
+        }
+        
         [HttpGet]
         [Authorize]
         [Route("getExampleFriends")]
@@ -57,10 +71,24 @@ namespace BE.Controllers
         [Route("getExemplaryByUserId")]
         public async Task<IActionResult> GetExemplaryByUserId([FromHeader(Name = "userId")] int userId)
         {
+            List<ExemplaryFriendDto> exemplaryFriendsDtos
+                = new List<ExemplaryFriendDto>();
+            
             var exemplaryFriends = await _repositoryWrapper.UserFriends.GetExemplaryByUserId(userId);
             
-            return Ok(exemplaryFriends);
-        }
+            exemplaryFriends.ForEach(exemplaryFriend =>
+            {
+                var content = new FileStream(exemplaryFriend.Friend.FriendNavigation.Avatar, FileMode.Open, FileAccess.Read, FileShare.Read);
+                var response = File(content, "application/octet-stream");
 
+                exemplaryFriendsDtos.Add(new ExemplaryFriendDto
+                {
+                    Id = exemplaryFriend.FriendId,
+                    Avatar = response
+                });
+            });
+            
+            return Ok(exemplaryFriendsDtos);
+        }
     }
 }

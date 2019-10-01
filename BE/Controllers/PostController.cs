@@ -70,6 +70,8 @@ namespace BE.Controllers
         [Route("removeUserPostById/{id}")]
         public async Task<IActionResult> RemoveUserPostById([FromRoute] int id)
         {
+            await _repositoryWrapper.UserPostLikes.RemovePostLikes(id);
+            await _repositoryWrapper.UserPostComments.RemovePostComments(id);
             await _repositoryWrapper.UserPost.RemovePostById(id);
             return Ok();
         }
@@ -89,6 +91,21 @@ namespace BE.Controllers
             return Ok(newLike);
         }
 
+        [HttpPut]
+        [Authorize]
+        [Route("unlikeUserPostById/{id}")]
+        public async Task<IActionResult> UnlikePostById([FromRoute] int id,
+            [FromHeader(Name = "userId")] int userId)
+        {
+            var curLike = new UserPostLikes
+            {
+                UserId = userId,
+                UserPostId = id
+            };
+            await _repositoryWrapper.UserPostLikes.RemovePostLike(curLike);
+            return Ok(curLike);
+        }
+        
         [HttpGet]
         [Authorize]
         [Route("getLoggedInUserPosts")]

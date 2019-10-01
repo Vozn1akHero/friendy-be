@@ -6,7 +6,9 @@ using BE.Entities;
 using BE.Helpers;
 using BE.Interfaces;
 using BE.Interfaces.Repositories;
+using BE.Interfaces.Repositories.Chat;
 using BE.Models;
+using BE.Repositories.Chat;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Options;
 
@@ -25,7 +27,13 @@ namespace BE.Repositories
         private IUserFriendsRepository _userFriends;
         private IUserEventsRepository _userEvents;
         private IEventAdminsRepository _eventAdmins;
-
+        private IUserPostCommentsRepository _userPostComments;
+        private IChatRepository _chat;
+        private IChatMessageRepository _chatMessage;
+        private IChatMessagesRepository _chatMessages;
+        private IChatParticipantsRepository _chatParticipants;
+        
+        
         private IJwtService _jwtService;
 
         public IUserRepository User
@@ -73,6 +81,32 @@ namespace BE.Repositories
             get { return _eventAdmins ?? (_eventAdmins = new EventAdminsRepository(_friendyContext)); }
         }
         
+        public IUserPostCommentsRepository UserPostComments
+        {
+            get { return _userPostComments ?? (_userPostComments = new UserPostCommentsRepository(_friendyContext)); }
+        }
+        
+        public IChatRepository Chat
+        {
+            get { return _chat ?? (_chat = new ChatRepository(_friendyContext)); }
+        }
+        
+        public IChatMessageRepository ChatMessage
+        {
+            get { return _chatMessage ?? (_chatMessage = new ChatMessageRepository(_friendyContext)); }
+        }
+        
+        public IChatMessagesRepository ChatMessages
+        {
+            get { return _chatMessages ?? (_chatMessages = new ChatMessagesRepository(_friendyContext)); }
+        }
+        
+        public IChatParticipantsRepository ChatParticipants
+        {
+            get { return _chatParticipants ?? (_chatParticipants = new ChatParticipantsRepository(_friendyContext)); }
+        }
+        
+
         public RepositoryWrapper(FriendyContext friendyContext, IJwtService jwtService)
         {
             _friendyContext = friendyContext;

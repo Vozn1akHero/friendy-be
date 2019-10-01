@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using BE.Interfaces.Repositories;
+using BE.Interfaces.Repositories.Chat;
 using BE.Repositories;
 
 namespace BE.Interfaces
@@ -18,6 +19,11 @@ namespace BE.Interfaces
         IUserEventsRepository UserEvents { get; }
         IEventRepository Event { get; }
         IEventAdminsRepository EventAdmins { get; }
+        IUserPostCommentsRepository UserPostComments { get; }
+        IChatRepository Chat { get; }
+        IChatMessageRepository ChatMessage { get; }
+        IChatMessagesRepository ChatMessages { get; }
+        IChatParticipantsRepository ChatParticipants { get; }
         void Save();
     }
 }

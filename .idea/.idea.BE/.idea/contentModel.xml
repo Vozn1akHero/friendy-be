@@ -20,11 +20,15 @@
         </e>
         <e p="Dtos" t="Include">
           <e p="AuthResponse.cs" t="Include" />
+          <e p="ChatDtos" t="Include">
+            <e p="ChatLastMessageDto.cs" t="Include" />
+            <e p="ChatMessagesDto.cs" t="Include" />
+          </e>
           <e p="EventDtos" t="Include">
             <e p="UserEventDto.cs" t="Include" />
           </e>
           <e p="FriendDtos" t="Include">
-            <e p="FriendProfilePageDto.cs" t="Include" />
+            <e p="ExemplaryFriendDto.cs" t="Include" />
           </e>
           <e p="LikeDto.cs" t="Include" />
           <e p="LoggedInUserEntryDto.cs" t="Include" />
@@ -39,6 +43,12 @@
         </e>
         <e p="Interfaces" t="Include">
           <e p="Repositories" t="Include">
+            <e p="Chat" t="Include">
+              <e p="IChatMessageRepository.cs" t="Include" />
+              <e p="IChatMessagesRepository.cs" t="Include" />
+              <e p="IChatParticipantsRepository.cs" t="Include" />
+              <e p="IChatRepository.cs" t="Include" />
+            </e>
             <e p="ICommentRepository.cs" t="Include" />
             <e p="IEventAdminsRepository.cs" t="Include" />
             <e p="IEventRepository.cs" t="Include" />
@@ -48,6 +58,7 @@
             <e p="ISessionRepository.cs" t="Include" />
             <e p="IUserEventsRepository.cs" t="Include" />
             <e p="IUserFriendsRepository.cs" t="Include" />
+            <e p="IUserPostCommentsRepository.cs" t="Include" />
             <e p="IUserPostLikesRepository.cs" t="Include" />
             <e p="IUserPostRepository.cs" t="Include" />
             <e p="IUserRepository.cs" t="Include" />
@@ -63,6 +74,10 @@
         </e>
         <e p="Models" t="Include">
           <e p="AlcoholAttitude.cs" t="Include" />
+          <e p="Chat.cs" t="Include" />
+          <e p="ChatMessage.cs" t="Include" />
+          <e p="ChatMessages.cs" t="Include" />
+          <e p="ChatParticipants.cs" t="Include" />
           <e p="Comment.cs" t="Include" />
           <e p="DrugsAttitude.cs" t="Include" />
           <e p="Education.cs" t="Include" />
@@ -103,6 +118,12 @@
           <e p="launchSettings.json" t="Include" />
         </e>
         <e p="Repositories" t="Include">
+          <e p="Chat" t="Include">
+            <e p="ChatMessageRepository.cs" t="Include" />
+            <e p="ChatMessagesRepository.cs" t="Include" />
+            <e p="ChatParticipantsRepository.cs" t="Include" />
+            <e p="ChatRepository.cs" t="Include" />
+          </e>
           <e p="CommentRepository.cs" t="Include" />
           <e p="EventAdminsRepository.cs" t="Include" />
           <e p="EventRepository.cs" t="Include" />
@@ -113,6 +134,7 @@
           <e p="SessionRepository.cs" t="Include" />
           <e p="UserEventsRepository.cs" t="Include" />
           <e p="UserFriendsRepository.cs" t="Include" />
+          <e p="UserPostComments.cs" t="Include" />
           <e p="UserPostLikesRepository.cs" t="Include" />
           <e p="UserPostRepository.cs" t="Include" />
           <e p="UserRepository.cs" t="Include" />

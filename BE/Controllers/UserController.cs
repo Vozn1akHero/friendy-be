@@ -67,9 +67,20 @@ namespace BE.Controllers
         public async Task<IActionResult> GetUserAvatar([FromHeader(Name = "userId")] int userId)
         {
             var user = await _repository.User.GetUserById(userId);
-            var content = new FileStream(user.Avatar, FileMode.Open, FileAccess.Read, FileShare.Read);
-            var response = File(content, "application/octet-stream");//FileStreamResult
-            return Ok(response);
+            /*var content = new FileStream(user.Avatar, FileMode.Open, FileAccess.Read, FileShare.Read);
+            var response = File(content, "image/jpeg");//FileStreamResult*/
+            
+            using (FileStream fs = new FileStream(user.Avatar, FileMode.Open, FileAccess.Read))
+            {
+                // Create a byte array of file stream length
+                byte[] bytes = System.IO.File.ReadAllBytes(user.Avatar);
+                //Read block of bytes from stream into the byte array
+                fs.Read(bytes, 0, System.Convert.ToInt32(fs.Length));
+                //Close the File Stream
+                fs.Close();
+
+                return Ok(bytes);
+            }
         }
 
         [HttpPut]

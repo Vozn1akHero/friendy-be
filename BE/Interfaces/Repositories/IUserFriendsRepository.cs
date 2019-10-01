@@ -11,5 +11,6 @@ namespace BE.Interfaces.Repositories
         Task<List<UserFriends>> FilterByKeyword(int userId, string keyword);
         Task RemoveById(int id);
         Task<List<UserFriends>> GetExemplaryByUserId(int userId);
+        Task AddNew(int id, int userId);
     }
 }

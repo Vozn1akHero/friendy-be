@@ -16,6 +16,10 @@ namespace BE.Models
         }
 
         public virtual DbSet<AlcoholAttitude> AlcoholAttitude { get; set; }
+        public virtual DbSet<Chat> Chat { get; set; }
+        public virtual DbSet<ChatMessage> ChatMessage { get; set; }
+        public virtual DbSet<ChatMessages> ChatMessages { get; set; }
+        public virtual DbSet<ChatParticipants> ChatParticipants { get; set; }
         public virtual DbSet<Comment> Comment { get; set; }
         public virtual DbSet<DrugsAttitude> DrugsAttitude { get; set; }
         public virtual DbSet<Education> Education { get; set; }
@@ -67,6 +71,89 @@ namespace BE.Models
                     .HasColumnName("title")
                     .HasMaxLength(150)
                     .IsUnicode(false);
+            });
+
+            modelBuilder.Entity<Chat>(entity =>
+            {
+                entity.ToTable("chat");
+
+                entity.Property(e => e.Id).HasColumnName("id");
+
+                entity.Property(e => e.UrlHash)
+                    .IsRequired()
+                    .HasColumnName("url_hash")
+                    .HasMaxLength(250)
+                    .IsUnicode(false);
+            });
+
+            modelBuilder.Entity<ChatMessage>(entity =>
+            {
+                entity.ToTable("chat_message");
+
+                entity.Property(e => e.Id).HasColumnName("id");
+
+                entity.Property(e => e.Content)
+                    .IsRequired()
+                    .HasColumnName("content")
+                    .HasMaxLength(500)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Date)
+                    .HasColumnName("date")
+                    .HasColumnType("datetime");
+
+                entity.Property(e => e.ImageUrl)
+                    .HasColumnName("image_url")
+                    .HasMaxLength(1000)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.UserId).HasColumnName("user_id");
+
+                entity.HasOne(d => d.User)
+                    .WithMany(p => p.ChatMessage)
+                    .HasForeignKey(d => d.UserId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_chat_message_user");
+            });
+
+            modelBuilder.Entity<ChatMessages>(entity =>
+            {
+                entity.ToTable("chat_messages");
+
+                entity.Property(e => e.Id).HasColumnName("id");
+
+                entity.Property(e => e.ChatId).HasColumnName("chat_id");
+
+                entity.Property(e => e.MessageId).HasColumnName("message_id");
+
+                entity.HasOne(d => d.Message)
+                    .WithMany(p => p.ChatMessages)
+                    .HasForeignKey(d => d.MessageId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_chat_messages_chat_message");
+            });
+
+            modelBuilder.Entity<ChatParticipants>(entity =>
+            {
+                entity.ToTable("chat_participants");
+
+                entity.Property(e => e.Id).HasColumnName("id");
+
+                entity.Property(e => e.ChatId).HasColumnName("chat_id");
+
+                entity.Property(e => e.UserId).HasColumnName("user_id");
+
+                entity.HasOne(d => d.Chat)
+                    .WithMany(p => p.ChatParticipants)
+                    .HasForeignKey(d => d.ChatId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_chat_participants_chat");
+
+                entity.HasOne(d => d.User)
+                    .WithMany(p => p.ChatParticipants)
+                    .HasForeignKey(d => d.UserId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_chat_participants_user");
             });
 
             modelBuilder.Entity<Comment>(entity =>

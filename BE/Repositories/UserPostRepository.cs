@@ -14,9 +14,7 @@ namespace BE.Repositories
     {
         public UserPostRepository(FriendyContext friendyContext)
             : base(friendyContext)
-        {
-
-        }
+        { }
 
         public async Task CreateUserPost(UserPost post)
         {
