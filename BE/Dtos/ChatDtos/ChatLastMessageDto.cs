@@ -8,6 +8,7 @@ namespace BE.Dtos.ChatDtos
         public string Content { get; set; }
         public bool HasImage { get; set; }
         public byte[] UserAvatar { get; set; }
-        public DateTime Time { get; set; }
+        public int UserId { get; set; }
+        public DateTime Date { get; set; }
     }
 }

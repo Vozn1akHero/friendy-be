@@ -52,12 +52,13 @@ namespace BE.Controllers
                         Content = value.Message.Content,
                         HasImage = value.Message.ImageUrl != null,
                         UserAvatar = bytes,
-                        Time = value.Message.Date
+                        UserId = value.Message.User.Id,
+                        Date = value.Message.Date
                     });
                 }
             });
             
-            return Ok(messageList);
+            return Ok(lastMessageList);
         }
         
         [HttpGet]

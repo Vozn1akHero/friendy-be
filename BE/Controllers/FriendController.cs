@@ -14,14 +14,14 @@ namespace BE.Controllers
     [Route("api/friend")]
     public class FriendController : ControllerBase
     {
-        private readonly IRepositoryWrapper _repositoryWrapper;
+        private readonly IRepositoryWrapper _repository;
         private readonly IJwtService _jwtService;
        // public IAppCache _cache;
         
-        public FriendController(IRepositoryWrapper repositoryWrapper,
+        public FriendController(IRepositoryWrapper repository,
             IJwtService jwtService)
         {
-            _repositoryWrapper = repositoryWrapper;
+            _repository = repository;
             _jwtService = jwtService;
         }
 
@@ -30,20 +30,41 @@ namespace BE.Controllers
         [Route("addNew/{id}")]
         public async Task<IActionResult> AddNew(int id, [FromHeader(Name = "userId")] int userId)
         {
-            await _repositoryWrapper.UserFriends.AddNew(id, userId);
-            var newChat = await _repositoryWrapper.Chat.AddNewAfterFriendAdding();
-            await _repositoryWrapper.ChatParticipants.AddNewAfterFriendAdding(newChat.Id, new []{ id, userId });
+            await _repository.UserFriends.AddNew(id, userId);
+            var newChat = await _repository.Chat.AddNewAfterFriendAdding();
+            await _repository.ChatParticipants.AddNewAfterFriendAdding(newChat.Id, new []{ id, userId });
             return Ok();
         }
         
         [HttpGet]
         [Authorize]
-        [Route("getExampleFriends")]
+        [Route("sample/indexed")]
         public async Task<IActionResult> GetFriends([FromQuery(Name = "startIndex")] int startIndex, 
             [FromQuery(Name = "lastIndex")] int lastIndex, [FromHeader(Name = "userId")] int userId)
         {
-            //int userId = _jwtService.GetUserIdFromJwt(HttpContext.Request.Cookies["SESSION_TOKEN"]);
-            var friends = await _repositoryWrapper.UserFriends.GetByUserId(userId, startIndex, lastIndex);
+            var shortenedFriends = await _repository
+                .UserFriends.GetIndexedShortenedByUserId(userId, startIndex, lastIndex);
+            var friends = new List<FriendDto>();
+            foreach (var shortenedFriend in shortenedFriends)
+            {
+                using (FileStream fs = new FileStream(shortenedFriend.AvatarPath, FileMode.Open, FileAccess.Read))
+                {
+                    byte[] bytes = System.IO.File.ReadAllBytes(shortenedFriend.AvatarPath);
+                    fs.Read(bytes, 0, System.Convert.ToInt32(fs.Length));
+                    var friend = new FriendDto
+                    {
+                        Id = shortenedFriend.Id,
+                        Name = shortenedFriend.Name,
+                        Surname = shortenedFriend.Surname,
+                        DialogLink = "da2jkd21l34",
+                        OnlineStatus = true,
+                        Avatar = bytes
+                    };
+                    friends.Add(friend);
+                    fs.Close();
+                }
+            }
+            
             return Ok(friends);
         }
 
@@ -53,7 +74,7 @@ namespace BE.Controllers
         public async Task<IActionResult> FilterFriends([FromQuery(Name = "keyword")] string keyword,
             [FromHeader(Name = "userId")] int userId)
         {
-            var friends = await _repositoryWrapper.UserFriends.FilterByKeyword(userId, keyword);
+            var friends = await _repository.UserFriends.FilterByKeyword(userId, keyword);
             return Ok(friends);
         }
 
@@ -62,7 +83,7 @@ namespace BE.Controllers
         [Route("remove/{id}")]
         public async Task<IActionResult> Remove(int id)
         {
-            await _repositoryWrapper.UserFriends.RemoveById(id);
+            await _repository.UserFriends.RemoveById(id);
             return Ok();
         }
 
@@ -74,18 +95,27 @@ namespace BE.Controllers
             List<ExemplaryFriendDto> exemplaryFriendsDtos
                 = new List<ExemplaryFriendDto>();
             
-            var exemplaryFriends = await _repositoryWrapper.UserFriends.GetExemplaryByUserId(userId);
+            var exemplaryFriends = await _repository
+                .UserFriends
+                .GetExemplaryByUserId(userId);
             
             exemplaryFriends.ForEach(exemplaryFriend =>
             {
-                var content = new FileStream(exemplaryFriend.Friend.FriendNavigation.Avatar, FileMode.Open, FileAccess.Read, FileShare.Read);
-                var response = File(content, "application/octet-stream");
+/*                var content = new FileStream(exemplaryFriend.Friend.FriendNavigation.Avatar,
+                    FileMode.Open, FileAccess.Read, FileShare.Read);
+                var response = File(content, "application/octet-stream");*/
 
-                exemplaryFriendsDtos.Add(new ExemplaryFriendDto
+                using (FileStream fs = new FileStream(exemplaryFriend.Friend.FriendNavigation.Avatar, FileMode.Open, FileAccess.Read))
                 {
-                    Id = exemplaryFriend.FriendId,
-                    Avatar = response
-                });
+                    byte[] bytes = System.IO.File.ReadAllBytes(exemplaryFriend.Friend.FriendNavigation.Avatar);
+                    fs.Read(bytes, 0, System.Convert.ToInt32(fs.Length));
+                    exemplaryFriendsDtos.Add(new ExemplaryFriendDto
+                    {
+                        Id = exemplaryFriend.FriendId,
+                        Avatar = bytes
+                    });
+                    fs.Close();
+                }
             });
             
             return Ok(exemplaryFriendsDtos);

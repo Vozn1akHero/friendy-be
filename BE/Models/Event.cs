@@ -23,7 +23,7 @@ namespace BE.Models
         public decimal EntryPrice { get; set; }
         public int ParticipantsAmount { get; set; }
         public string Avatar { get; set; }
-        public DateTime? Date { get; set; }
+        public DateTime Date { get; set; }
 
         public virtual ICollection<EventAdmins> EventAdmins { get; set; }
         public virtual ICollection<EventImage> EventImage { get; set; }

@@ -7,5 +7,6 @@ namespace BE.Interfaces.Repositories
     public interface IEventRepository : IRepositoryBase<Event>
     {
         Task<List<Event>> GetExampleEventsByUserId(int userId);
+        Task<Event> GetById(int userId);
     }
 }

@@ -24,5 +24,10 @@ namespace BE.Repositories
 
             return null;
         }
+
+        public async Task<Event> GetById(int userId)
+        {
+            return await FindByCondition(e => e.Id == userId).SingleOrDefaultAsync();
+        }
     }
 }

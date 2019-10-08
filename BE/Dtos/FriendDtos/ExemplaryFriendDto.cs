@@ -6,6 +6,6 @@ namespace BE.Dtos.FriendDtos
     public class ExemplaryFriendDto
     {
         public int Id { get; set; }
-        public FileStreamResult Avatar { get; set; }
+        public byte[] Avatar { get; set; }
     }
 }

@@ -29,6 +29,8 @@
           </e>
           <e p="FriendDtos" t="Include">
             <e p="ExemplaryFriendDto.cs" t="Include" />
+            <e p="FriendDto.cs" t="Include" />
+            <e p="ShortenedFriendDto.cs" t="Include" />
           </e>
           <e p="LikeDto.cs" t="Include" />
           <e p="LoggedInUserEntryDto.cs" t="Include" />

@@ -9,11 +9,11 @@ namespace BE.Controllers
     [Route("api/event")]
     public class EventController : Controller
     {
-        private IRepositoryWrapper _repositoryWrapper;
+        private IRepositoryWrapper _repository;
 
-        public EventController(IRepositoryWrapper repositoryWrapper)
+        public EventController(IRepositoryWrapper repository)
         {
-            _repositoryWrapper = repositoryWrapper;
+            _repository = repository;
         }
 
         [HttpGet]
@@ -26,20 +26,24 @@ namespace BE.Controllers
 
         [HttpGet]
         [Authorize]
-        [Route("getLoggedInUserEvents")]
+        [Route("user/loggedin")]
         public async Task<IActionResult> GetLoggedInUserEvents([FromHeader(Name = "userId")] int userId)
         {
-            var events = await _repositoryWrapper.UserEvents.GetEventsByUserId(userId);
+            var events = await _repository
+                .UserEvents
+                .GetShortenedEventsByUserId(userId);
             
             return Ok(events);
         }
 
         [HttpGet]
         [Authorize]
-        [Route("getLoggedInUserAdministeredEvents")]
+        [Route("user/loggedin/administered")]
         public async Task<IActionResult> GetLoggedInUserAdministeredEvents([FromHeader(Name = "userId")] int userId)
         {
-            var events = await _repositoryWrapper.EventAdmins.GetUserAdministeredEvents(userId);
+            var events = await _repository
+                .EventAdmins
+                .GetShortenedAdministeredEventsByUserId(userId);
             return Ok(events);
         }
         
@@ -49,9 +53,19 @@ namespace BE.Controllers
         public async Task<IActionResult> FilterAdministeredEvents([FromQuery(Name = "keyword")] string keyword,
             [FromHeader(Name = "userId")] int userId)
         {
-            var events = await _repositoryWrapper.EventAdmins.FilterAdministeredEvents(userId, keyword);
+            var events = await _repository.EventAdmins.FilterAdministeredEvents(userId, keyword);
             
             return Ok(events);
         }
+
+        [HttpGet]
+        [Authorize]
+        [Route("{id}")]
+        public async Task<IActionResult> GetById(int id)
+        {
+            var eventData = await _repository.Event.GetById(id);
+            return Ok(eventData);
+        }
+        
     }
 }

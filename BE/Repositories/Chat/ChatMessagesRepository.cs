@@ -16,7 +16,7 @@ namespace BE.Repositories.Chat
         public async Task<List<ChatMessages>> GetLastChatMessages(List<int> chatIdList)
         {
             var chatMessages = new List<ChatMessages>();
-            chatIdList.ForEach(async id =>
+            foreach (var id in chatIdList)
             {
                 var messages = await FindByCondition(e => e.ChatId == id)
                     .Include(e => e.Message)
@@ -24,7 +24,7 @@ namespace BE.Repositories.Chat
                     .OrderByDescending(e => e.Message.Date)
                     .FirstOrDefaultAsync();
                 chatMessages.Add(messages);
-            });
+            }
             return chatMessages;
         }
     }

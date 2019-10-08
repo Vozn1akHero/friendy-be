@@ -1,6 +1,8 @@
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using BE.Dtos.EventDtos;
 using BE.Interfaces.Repositories;
 using BE.Models;
 using Microsoft.EntityFrameworkCore;
@@ -25,6 +27,34 @@ namespace BE.Repositories
             return await FindByCondition(e => e.UserId == userId && e.Event.Title.Contains(keyword))
                 .Select(e => e.Event)
                 .ToListAsync();
+        }
+        
+        public async Task<List<UserEventDto>> GetShortenedAdministeredEventsByUserId(int userId)
+        {
+            var events = await FindByCondition(e => e.UserId == userId)
+                .Select(e => new UserEventDto
+                {
+                    Id = e.EventId,
+                    Title = e.Event.Title,
+                    Street = e.Event.Street,
+                    StreetNumber = e.Event.StreetNumber,
+                    City = e.Event.City,
+                    AvatarPath = e.Event.Avatar,
+                    ParticipantsAmount = e.Event.ParticipantsAmount,
+                    Date = e.Event.Date
+                })
+                .ToListAsync();
+            events.ForEach(userEvent =>
+            {
+                using (FileStream fs = new FileStream(userEvent.AvatarPath, FileMode.Open, FileAccess.Read))
+                {
+                    byte[] bytes = File.ReadAllBytes(userEvent.AvatarPath);
+                    fs.Read(bytes, 0, System.Convert.ToInt32(fs.Length));
+                    userEvent.Avatar = bytes;
+                    fs.Close();
+                }
+            });
+            return events;
         }
     }
 }
