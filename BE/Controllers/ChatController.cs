@@ -38,34 +38,59 @@ namespace BE.Controllers
             var chatIdList = chatList.Select(e => e.ChatId).ToList();
             var messageList = await _repositoryWrapper.ChatMessages.GetLastChatMessages(chatIdList);
 
-            messageList.ForEach(value =>
+            foreach (var chatMessage in messageList)
             {
-                using (FileStream fs = new FileStream(value.Message.User.Avatar, FileMode.Open, FileAccess.Read))
+                using (FileStream fs = new FileStream(chatMessage.Message.User.Avatar, FileMode.Open, FileAccess.Read))
                 {
-                    byte[] bytes = System.IO.File.ReadAllBytes(value.Message.User.Avatar);
+                    byte[] bytes = System.IO.File.ReadAllBytes(chatMessage.Message.User.Avatar);
                     fs.Read(bytes, 0, System.Convert.ToInt32(fs.Length));
                     fs.Close();
                     
+                    string chatUrl = await _repositoryWrapper.Chat.GetChatUrlPartById(chatMessage.ChatId);
                     lastMessageList.Add(new ChatLastMessageDto
                     {
-                        ChatUrlPart = value.ChatId,
-                        Content = value.Message.Content,
-                        HasImage = value.Message.ImageUrl != null,
+                        ChatUrlPart = chatUrl,
+                        Content = chatMessage.Message.Content,
+                        HasImage = chatMessage.Message.ImageUrl != null,
                         UserAvatar = bytes,
-                        UserId = value.Message.User.Id,
-                        Date = value.Message.Date
+                        UserId = chatMessage.Message.User.Id,
+                        Date = chatMessage.Message.Date
                     });
                 }
-            });
+            }
             
             return Ok(lastMessageList);
         }
         
         [HttpGet]
         [Authorize]
-        [Route("getChat/{hashUrl}")]
-        public async Task<IActionResult> GetChat(string hashUrl)
+        [Route("participants/friend-basic-data/{chatHash}")]
+        public async Task<IActionResult> GetFriendBasicDataInDialog(string chatHash, [FromHeader(Name = "userId")] int userId)
         {
+            var chatId = await _repositoryWrapper.Chat.GetChatIdByUrlHash(chatHash);
+            var participantsData = await _repositoryWrapper
+                .ChatParticipants
+                .GetFriendBasicDataInDialogByChatId(chatId, userId);
+            return Ok(participantsData);
+        }
+        
+        [HttpGet]
+        [Authorize]
+        [Route("participants/basic-data/{chatHash}")]
+        public async Task<IActionResult> GetDialogParticipantsBasicData(string chatHash)
+        {
+            var chatId = await _repositoryWrapper.Chat.GetChatIdByUrlHash(chatHash);
+            var participantsData = await _repositoryWrapper.ChatParticipants.GetParticipantsBasicDataByChatId(chatId);
+            return Ok(participantsData);
+        }
+        
+        [HttpGet]
+        [Authorize]
+        [Route("messages/{hashUrl}")]
+        public async Task<IActionResult> GetMessagesInDialog(string hashUrl)
+        {
+            var chatId = await _repositoryWrapper.Chat.GetChatIdByUrlHash(hashUrl);
+            
             return Ok();
         }
     }

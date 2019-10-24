@@ -69,6 +69,8 @@ namespace BE
                 });
 
             services.AddScoped<IJwtService, JwtService>();
+            services.AddScoped<IUserAvatarConverterService, UserAvatarConverterService>();
+            services.AddScoped<ICustomSqlQueryService, CustomSqlQueryService>();
             services.AddScoped<IAuthenticationService, AuthenticationService>();
             
             services.AddMvc().AddJsonOptions(options => {

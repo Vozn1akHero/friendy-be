@@ -27,6 +27,8 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Cache" />
+    <Folder Include="Repositories\Custom" />
+    <Folder Include="Services\Model" />
     <Folder Include="wwwroot\EventAvatar" />
   </ItemGroup>
 </Project>

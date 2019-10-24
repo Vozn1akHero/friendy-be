@@ -35,7 +35,9 @@ namespace BE.Repositories
         
         
         private IJwtService _jwtService;
-
+        private IUserAvatarConverterService _userAvatarConverterService;
+        private ICustomSqlQueryService _customSqlQueryService;
+        
         public IUserRepository User
         {
             get { return _user ?? (_user = new UserRepository(_friendyContext)); }
@@ -103,14 +105,21 @@ namespace BE.Repositories
         
         public IChatParticipantsRepository ChatParticipants
         {
-            get { return _chatParticipants ?? (_chatParticipants = new ChatParticipantsRepository(_friendyContext)); }
+            get { return _chatParticipants ?? (_chatParticipants = new ChatParticipantsRepository(_friendyContext, 
+                             _userAvatarConverterService, 
+                             _customSqlQueryService)); }
         }
         
 
-        public RepositoryWrapper(FriendyContext friendyContext, IJwtService jwtService)
+        public RepositoryWrapper(FriendyContext friendyContext,
+            IJwtService jwtService, 
+            IUserAvatarConverterService userAvatarConverterService,
+            ICustomSqlQueryService customSqlQueryService)
         {
             _friendyContext = friendyContext;
             _jwtService = jwtService;
+            _userAvatarConverterService = userAvatarConverterService;
+            _customSqlQueryService = customSqlQueryService;
         }
 
         public void Save()
