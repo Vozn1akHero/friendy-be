@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using BE.Dtos.ChatDtos;
 using BE.Interfaces.Repositories.Chat;
 using BE.Models;
 using Microsoft.EntityFrameworkCore;
@@ -25,6 +26,19 @@ namespace BE.Repositories.Chat
                     .FirstOrDefaultAsync();
                 chatMessages.Add(messages);
             }
+            return chatMessages;
+        }
+
+        public async Task<List<ChatMessageDto>> GetByChatId(int chatId, int userId)
+        {
+            var chatMessages = await FindByCondition(e => e.ChatId == chatId)
+                .Include(e => e.Message)
+                .Select(e => new ChatMessageDto()
+                {
+                    Content = e.Message.Content,
+                    IsUserAuthor = e.Message.UserId == userId,
+                    Date = e.Message.Date
+                }).ToListAsync();
             return chatMessages;
         }
     }

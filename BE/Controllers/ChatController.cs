@@ -87,11 +87,11 @@ namespace BE.Controllers
         [HttpGet]
         [Authorize]
         [Route("messages/{hashUrl}")]
-        public async Task<IActionResult> GetMessagesInDialog(string hashUrl)
+        public async Task<IActionResult> GetMessagesInDialog(string hashUrl, [FromHeader(Name = "userId")] int userId)
         {
             var chatId = await _repositoryWrapper.Chat.GetChatIdByUrlHash(hashUrl);
-            
-            return Ok();
+            var messages = await _repositoryWrapper.ChatMessages.GetByChatId(chatId, userId);
+            return Ok(messages);
         }
     }
 }
