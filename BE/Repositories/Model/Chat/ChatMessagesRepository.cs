@@ -14,6 +14,16 @@ namespace BE.Repositories.Chat
         {
         }
 
+        public async Task Add(int chatId, int messageId)
+        {
+            Create(new ChatMessages
+            {
+                ChatId = chatId,
+                MessageId = messageId
+            });
+            await SaveAsync();
+        }
+
         public async Task<List<ChatMessages>> GetLastChatMessages(List<int> chatIdList)
         {
             var chatMessages = new List<ChatMessages>();

@@ -21,12 +21,17 @@
         <e p="Dtos" t="Include">
           <e p="AuthResponse.cs" t="Include" />
           <e p="ChatDtos" t="Include">
-            <e p="ChatLastMessageDto.cs" t="Include" />
-            <e p="ChatMessageDto.cs" t="Include" />
-            <e p="DialogBasicDataDto.cs" t="Include" />
-            <e p="FriendBasicDataInDialogDto.cs" t="Include" />
-            <e p="ParticipantsBasicDataDto.cs" t="Include" />
-            <e p="ParticipantsBasicDataSqlDto.cs" t="Include" />
+            <e p="ClientDtos" t="Include">
+              <e p="NewMessageDto.cs" t="Include" />
+            </e>
+            <e p="ServerDtos" t="Include">
+              <e p="ChatLastMessageDto.cs" t="Include" />
+              <e p="ChatMessageDto.cs" t="Include" />
+              <e p="DialogBasicDataDto.cs" t="Include" />
+              <e p="FriendBasicDataInDialogDto.cs" t="Include" />
+              <e p="ParticipantsBasicDataDto.cs" t="Include" />
+              <e p="ParticipantsBasicDataSqlDto.cs" t="Include" />
+            </e>
           </e>
           <e p="EventDtos" t="Include">
             <e p="UserEventDto.cs" t="Include" />

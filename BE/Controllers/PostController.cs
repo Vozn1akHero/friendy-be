@@ -36,7 +36,7 @@ namespace BE.Controllers
         {
             if (post.Image != null && post.Image.Length >= 8000)
             {
-                return BadRequest("IMAGE IS TOO HEAVY");
+                return BadRequest("IMAGE IS TOO BIG");
             }
             var newPost = new UserPost
             {

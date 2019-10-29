@@ -1,9 +1,11 @@
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using BE.Dtos.ChatDtos;
 using BE.Interfaces;
+using BE.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -93,5 +95,27 @@ namespace BE.Controllers
             var messages = await _repositoryWrapper.ChatMessages.GetByChatId(chatId, userId);
             return Ok(messages);
         }
+
+        [HttpPost]
+        [Authorize]
+        [Route("message/{chatHash}")]
+        public async Task<IActionResult> AddNewMessage(string chatHash, 
+            [FromBody] NewMessageDto chatMessage,
+            [FromHeader(Name = "userId")] int userId)
+        {
+            var newMessage = new ChatMessage
+            {
+                Content = chatMessage.Content,
+                ImageUrl = null,
+                Date = DateTime.Now,
+                UserId = userId
+            };
+            var chatId = await _repositoryWrapper.Chat.GetChatIdByUrlHash(chatHash);
+            await _repositoryWrapper.ChatMessage.Add(newMessage);
+            await _repositoryWrapper.ChatMessages.Add(chatId, newMessage.Id);
+            
+            return CreatedAtAction("AddNewMessage", chatMessage);
+        }
+        
     }
 }
