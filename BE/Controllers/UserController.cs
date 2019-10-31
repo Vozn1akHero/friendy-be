@@ -61,6 +61,7 @@ namespace BE.Controllers
             return Ok(user);
         }
 
+
         [HttpGet]
         [Authorize]
         [Route("getAvatar")]
@@ -72,11 +73,8 @@ namespace BE.Controllers
             
             using (FileStream fs = new FileStream(user.Avatar, FileMode.Open, FileAccess.Read))
             {
-                // Create a byte array of file stream length
                 byte[] bytes = System.IO.File.ReadAllBytes(user.Avatar);
-                //Read block of bytes from stream into the byte array
                 fs.Read(bytes, 0, System.Convert.ToInt32(fs.Length));
-                //Close the File Stream
                 fs.Close();
 
                 return Ok(bytes);
@@ -104,7 +102,7 @@ namespace BE.Controllers
 
         [HttpPost]
         [Authorize]
-        [Route("getUsersByCriteria")]
+        [Route("with-criteria")]
         public async Task<IActionResult> GetUsersByCriteria(
             [FromBody] UsersLookUpCriteriaDto usersLookUpCriteriaDto)
         {

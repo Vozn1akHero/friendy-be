@@ -101,10 +101,6 @@ namespace BE.Controllers
             
             exemplaryFriends.ForEach(exemplaryFriend =>
             {
-/*                var content = new FileStream(exemplaryFriend.Friend.FriendNavigation.Avatar,
-                    FileMode.Open, FileAccess.Read, FileShare.Read);
-                var response = File(content, "application/octet-stream");*/
-
                 using (FileStream fs = new FileStream(exemplaryFriend.Friend.FriendNavigation.Avatar, FileMode.Open, FileAccess.Read))
                 {
                     byte[] bytes = System.IO.File.ReadAllBytes(exemplaryFriend.Friend.FriendNavigation.Avatar);

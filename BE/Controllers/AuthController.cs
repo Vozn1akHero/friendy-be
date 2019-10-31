@@ -79,13 +79,14 @@ namespace BE.Controllers
         [Route("logout")]
         public async Task<IActionResult> LogOut([FromHeader(Name = "Authorization")] string token)
         {
-            await _authenticationService.LogOut(token);
+            string cutToken = token.Split(" ")[1];
+            await _authenticationService.LogOut(cutToken);
             HttpContext.Response.Cookies.Delete("SESSION_TOKEN");
             return Ok();
         }
         
         [HttpGet]
-        [Route("getUserAuthStatus")]
+        [Route("status")]
         public async Task<IActionResult> GetUserAuthStatus([FromHeader(Name = "Authorization")] string token)
         {
             if (token != null)

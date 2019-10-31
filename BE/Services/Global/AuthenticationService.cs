@@ -97,8 +97,7 @@ namespace BE.Services
 
         public async Task LogOut(string token)
         {
-            string cutToken = token.Split(" ")[1];
-            var session = await _friendyContext.Session.SingleOrDefaultAsync(e => e.Token == cutToken);
+            var session = await _friendyContext.Session.SingleOrDefaultAsync(e => e.Token == token);
             var user = await _friendyContext.User.SingleOrDefaultAsync(e => e.SessionId == session.Id);
             user.SessionId = null;
             user.Session = null;
