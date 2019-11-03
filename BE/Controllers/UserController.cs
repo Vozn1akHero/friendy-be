@@ -100,6 +100,16 @@ namespace BE.Controllers
             return Ok();
         }
 
+        [HttpGet]
+        [Authorize]
+        [Route("/api/user/search/exemplary")]
+        public async Task<IActionResult> GetStartingListForSearching([FromQuery(Name = "firstIndex")] int firstIndex,
+            [FromQuery(Name = "lastIndex")] int lastIndex)
+        {
+            var users = await _repository.User.GetByRange(firstIndex, lastIndex);
+            return Ok(users);
+        }
+
         [HttpPost]
         [Authorize]
         [Route("with-criteria")]

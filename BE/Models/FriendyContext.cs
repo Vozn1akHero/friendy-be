@@ -21,7 +21,6 @@ namespace BE.Models
         public virtual DbSet<ChatMessages> ChatMessages { get; set; }
         public virtual DbSet<ChatParticipants> ChatParticipants { get; set; }
         public virtual DbSet<Comment> Comment { get; set; }
-        public virtual DbSet<DrugsAttitude> DrugsAttitude { get; set; }
         public virtual DbSet<Education> Education { get; set; }
         public virtual DbSet<Event> Event { get; set; }
         public virtual DbSet<EventAdmins> EventAdmins { get; set; }
@@ -30,10 +29,10 @@ namespace BE.Models
         public virtual DbSet<EventParticipants> EventParticipants { get; set; }
         public virtual DbSet<EventPost> EventPost { get; set; }
         public virtual DbSet<EventPostLikes> EventPostLikes { get; set; }
-        public virtual DbSet<FamilyStatus> FamilyStatus { get; set; }
         public virtual DbSet<Friend> Friend { get; set; }
         public virtual DbSet<Gender> Gender { get; set; }
         public virtual DbSet<Interest> Interest { get; set; }
+        public virtual DbSet<MaritalStatus> MaritalStatus { get; set; }
         public virtual DbSet<Religion> Religion { get; set; }
         public virtual DbSet<Session> Session { get; set; }
         public virtual DbSet<SmokingAttitude> SmokingAttitude { get; set; }
@@ -176,19 +175,7 @@ namespace BE.Models
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_comment_user");
             });
-
-            modelBuilder.Entity<DrugsAttitude>(entity =>
-            {
-                entity.ToTable("drugs_attitude");
-
-                entity.Property(e => e.Id).HasColumnName("id");
-
-                entity.Property(e => e.Title)
-                    .IsRequired()
-                    .HasColumnName("title")
-                    .HasMaxLength(150)
-                    .IsUnicode(false);
-            });
+            
 
             modelBuilder.Entity<Education>(entity =>
             {
@@ -210,6 +197,7 @@ namespace BE.Models
                 entity.Property(e => e.Id).HasColumnName("id");
 
                 entity.Property(e => e.Avatar)
+                    .IsRequired()
                     .HasColumnName("avatar")
                     .IsUnicode(false);
 
@@ -388,19 +376,6 @@ namespace BE.Models
                     .HasConstraintName("FK_event_post_likes_user");
             });
 
-            modelBuilder.Entity<FamilyStatus>(entity =>
-            {
-                entity.ToTable("family_status");
-
-                entity.Property(e => e.Id).HasColumnName("id");
-
-                entity.Property(e => e.Title)
-                    .IsRequired()
-                    .HasColumnName("title")
-                    .HasMaxLength(150)
-                    .IsUnicode(false);
-            });
-
             modelBuilder.Entity<Friend>(entity =>
             {
                 entity.ToTable("friend");
@@ -432,6 +407,19 @@ namespace BE.Models
             modelBuilder.Entity<Interest>(entity =>
             {
                 entity.ToTable("interest");
+
+                entity.Property(e => e.Id).HasColumnName("id");
+
+                entity.Property(e => e.Title)
+                    .IsRequired()
+                    .HasColumnName("title")
+                    .HasMaxLength(150)
+                    .IsUnicode(false);
+            });
+
+            modelBuilder.Entity<MaritalStatus>(entity =>
+            {
+                entity.ToTable("marital_status");
 
                 entity.Property(e => e.Id).HasColumnName("id");
 
@@ -573,11 +561,9 @@ namespace BE.Models
 
                 entity.Property(e => e.AlcoholAttitudeId).HasColumnName("alcohol_attitude_id");
 
-                entity.Property(e => e.DrugsAttitudeId).HasColumnName("drugs_attitude_id");
-
                 entity.Property(e => e.EducationId).HasColumnName("education_id");
 
-                entity.Property(e => e.FamilyStatusId).HasColumnName("family_status_id");
+                entity.Property(e => e.MaritalStatusId).HasColumnName("marital_status_id");
 
                 entity.Property(e => e.ReligionId).HasColumnName("religion_id");
 
@@ -588,19 +574,14 @@ namespace BE.Models
                     .HasForeignKey(d => d.AlcoholAttitudeId)
                     .HasConstraintName("FK_user_additional_info_alcohol_attitude");
 
-                entity.HasOne(d => d.DrugsAttitude)
-                    .WithMany(p => p.UserAdditionalInfo)
-                    .HasForeignKey(d => d.DrugsAttitudeId)
-                    .HasConstraintName("FK_user_additional_info_drugs_attitude");
-
                 entity.HasOne(d => d.Education)
                     .WithMany(p => p.UserAdditionalInfo)
                     .HasForeignKey(d => d.EducationId)
                     .HasConstraintName("FK_user_additional_info_education");
 
-                entity.HasOne(d => d.FamilyStatus)
+                entity.HasOne(d => d.MaritalStatus)
                     .WithMany(p => p.UserAdditionalInfo)
-                    .HasForeignKey(d => d.FamilyStatusId)
+                    .HasForeignKey(d => d.MaritalStatusId)
                     .HasConstraintName("FK_user_additional_info_family_status");
 
                 entity.HasOne(d => d.Religion)

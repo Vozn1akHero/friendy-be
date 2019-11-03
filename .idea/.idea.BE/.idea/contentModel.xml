@@ -53,32 +53,8 @@
           <e p="HTTPHelpers.cs" t="Include" />
         </e>
         <e p="Interfaces" t="Include">
-          <e p="Repositories" t="Include">
-            <e p="Chat" t="Include">
-              <e p="IChatMessageRepository.cs" t="Include" />
-              <e p="IChatMessagesRepository.cs" t="Include" />
-              <e p="IChatParticipantsRepository.cs" t="Include" />
-              <e p="IChatRepository.cs" t="Include" />
-            </e>
-            <e p="ICommentRepository.cs" t="Include" />
-            <e p="IEventAdminsRepository.cs" t="Include" />
-            <e p="IEventRepository.cs" t="Include" />
-            <e p="IFriendRepository.cs" t="Include" />
-            <e p="IRepositoryBase.cs" t="Include" />
-            <e p="IRepositoryWrapper.cs" t="Include" />
-            <e p="ISessionRepository.cs" t="Include" />
-            <e p="IUserEventsRepository.cs" t="Include" />
-            <e p="IUserFriendsRepository.cs" t="Include" />
-            <e p="IUserPostCommentsRepository.cs" t="Include" />
-            <e p="IUserPostLikesRepository.cs" t="Include" />
-            <e p="IUserPostRepository.cs" t="Include" />
-            <e p="IUserRepository.cs" t="Include" />
-          </e>
-          <e p="Services" t="Include">
-            <e p="ICustomSqlQueryService.cs" t="Include" />
-            <e p="IJWTService.cs" t="Include" />
-            <e p="IUserAvatarConverterService.cs" t="Include" />
-          </e>
+          <e p="Repositories" t="Include" />
+          <e p="Services" t="Include" />
         </e>
         <e p="Middlewares" t="Include">
           <e p="ExceptionMiddleware.cs" t="Include" />
@@ -106,6 +82,7 @@
           <e p="FriendyContext.cs" t="Include" />
           <e p="Gender.cs" t="Include" />
           <e p="Interest.cs" t="Include" />
+          <e p="MaritalStatus.cs" t="Include" />
           <e p="Religion.cs" t="Include" />
           <e p="Session.cs" t="Include" />
           <e p="SmokingAttitude.cs" t="Include" />
@@ -132,6 +109,27 @@
         </e>
         <e p="Repositories" t="Include">
           <e p="Custom" t="Include" />
+          <e p="Interfaces" t="Include">
+            <e p="Chat" t="Include">
+              <e p="IChatMessageRepository.cs" t="Include" />
+              <e p="IChatMessagesRepository.cs" t="Include" />
+              <e p="IChatParticipantsRepository.cs" t="Include" />
+              <e p="IChatRepository.cs" t="Include" />
+            </e>
+            <e p="ICommentRepository.cs" t="Include" />
+            <e p="IEventAdminsRepository.cs" t="Include" />
+            <e p="IEventRepository.cs" t="Include" />
+            <e p="IFriendRepository.cs" t="Include" />
+            <e p="IRepositoryBase.cs" t="Include" />
+            <e p="IRepositoryWrapper.cs" t="Include" />
+            <e p="ISessionRepository.cs" t="Include" />
+            <e p="IUserEventsRepository.cs" t="Include" />
+            <e p="IUserFriendsRepository.cs" t="Include" />
+            <e p="IUserPostCommentsRepository.cs" t="Include" />
+            <e p="IUserPostLikesRepository.cs" t="Include" />
+            <e p="IUserPostRepository.cs" t="Include" />
+            <e p="IUserRepository.cs" t="Include" />
+          </e>
           <e p="Model" t="Include">
             <e p="Chat" t="Include">
               <e p="ChatMessageRepository.cs" t="Include" />
@@ -153,6 +151,11 @@
             <e p="UserRepository.cs" t="Include" />
           </e>
           <e p="RepositoryBase.cs" t="Include" />
+          <e p="RepositoryServices" t="Include">
+            <e p="User" t="Include">
+              <e p="UserSearching.cs" t="Include" />
+            </e>
+          </e>
           <e p="RepositoryWrapper.cs" t="Include" />
         </e>
         <e p="ServiceExtensions.cs" t="Include" />
@@ -160,6 +163,11 @@
           <e p="Global" t="Include">
             <e p="AuthenticationService.cs" t="Include" />
             <e p="CustomSqlQueryService.cs" t="Include" />
+            <e p="Interfaces" t="Include">
+              <e p="ICustomSqlQueryService.cs" t="Include" />
+              <e p="IJWTService.cs" t="Include" />
+              <e p="IUserAvatarConverterService.cs" t="Include" />
+            </e>
             <e p="JwtService.cs" t="Include" />
             <e p="UserAvatarConverterService.cs" t="Include" />
             <e p="UsersLookUpCriteriaService.cs" t="Include" />

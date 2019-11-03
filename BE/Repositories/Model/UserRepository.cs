@@ -64,15 +64,49 @@ namespace BE.Repositories
             await SaveAsync();
         }
 
-        public async Task<List<User>> GetUsersByCriteria(UsersLookUpCriteriaDto usersLookUpCriteriaDto)
+        public async Task<IEnumerable<User>> GetUsersByCriteria(UsersLookUpCriteriaDto usersLookUpCriteriaDto)
         {
-            var foundUsers = await FindByCondition(e => (e.Name != "" && e.Name == usersLookUpCriteriaDto.Name)
-                                                       && (e.Surname != "" && e.Surname == usersLookUpCriteriaDto.Surname))
-                .ToListAsync();
+            var foundUsers = await FindAll().ToListAsync();
             
+            if (usersLookUpCriteriaDto.Name != null)
+            {
+                foundUsers.RemoveAll(e =>
+                    e.Name.ToLower().StartsWith(usersLookUpCriteriaDto.Name.ToLower()));
+            }
+
+            if (usersLookUpCriteriaDto.Surname != null)
+            {
+                foundUsers.RemoveAll(e =>
+                    e.Surname.ToLower().Contains(usersLookUpCriteriaDto.Surname.ToLower()));
+            }
+
+            if (usersLookUpCriteriaDto.City != null)
+            {
+                foundUsers.RemoveAll(e => e.City.ToLower().Contains(usersLookUpCriteriaDto.City.ToLower()));
+            }
+            
+            /*await FindByCondition(e => ( (usersLookUpCriteriaDto.Education != 0
+                                                            && e.AdditionalInfo.EducationId == usersLookUpCriteriaDto.Education)
+                                                       && (usersLookUpCriteriaDto.Gender != 0 
+                                                           && e.GenderId == usersLookUpCriteriaDto.Gender)
+                                                       && (usersLookUpCriteriaDto.MaritalStatus != 0  
+                                                           && e.AdditionalInfo.MaritalStatusId == usersLookUpCriteriaDto.MaritalStatus)
+                                                       && (usersLookUpCriteriaDto.Religion != 0 
+                                                           && e.AdditionalInfo.ReligionId == usersLookUpCriteriaDto.Religion)
+                                                       && (usersLookUpCriteriaDto.AlcoholOpinion != 0 
+                                                           && e.AdditionalInfo.AlcoholAttitudeId == usersLookUpCriteriaDto.AlcoholOpinion)
+                                                       && (usersLookUpCriteriaDto.SmokingOpinion != 0 
+                                                           && e.AdditionalInfo.SmokingAttitudeId == usersLookUpCriteriaDto.SmokingOpinion));*/
+
             return foundUsers;
         }
 
+        public async Task<IEnumerable<User>> GetByRange(int firstIndex, int lastIndex)
+        {
+            return await FindByCondition(e => e.Id >= firstIndex && e.Id <= lastIndex)
+                .ToListAsync();
+        }
+        
         public async Task UpdateAvatar(string path, int userId)
         {
             var user = await FindByCondition(e => e.Id == userId).SingleOrDefaultAsync();
