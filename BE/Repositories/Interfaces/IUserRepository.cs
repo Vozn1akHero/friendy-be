@@ -14,8 +14,8 @@ namespace BE.Interfaces
         Task<User> GetUser(string token);
         Task<User> GetUserById(int id);
         Task<User> GetUserByEmail(string email);
-        Task<IEnumerable<User>> GetUsersByCriteria(UsersLookUpCriteriaDto usersLookUpCriteriaDto);
-        Task<IEnumerable<User>> GetByRange(int firstIndex, int lastIndex);
+        Task<IEnumerable<UserBasicDto>> GetUsersByCriteria(UsersLookUpCriteriaDto usersLookUpCriteriaDto);
+        Task<IEnumerable<UserBasicDto>> GetByRange(int firstIndex, int lastIndex);
         Task SetSessionId(int userId, int id);
         Task UpdateAvatar(string path, int userId);
         //Task UpdateUserAsync(User dbUser);

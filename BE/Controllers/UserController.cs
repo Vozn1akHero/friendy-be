@@ -61,7 +61,6 @@ namespace BE.Controllers
             return Ok(user);
         }
 
-
         [HttpGet]
         [Authorize]
         [Route("getAvatar")]
@@ -98,26 +97,6 @@ namespace BE.Controllers
             await _repository.User.UpdateAvatar(newPath, userId);
 
             return Ok();
-        }
-
-        [HttpGet]
-        [Authorize]
-        [Route("/api/user/search/exemplary")]
-        public async Task<IActionResult> GetStartingListForSearching([FromQuery(Name = "firstIndex")] int firstIndex,
-            [FromQuery(Name = "lastIndex")] int lastIndex)
-        {
-            var users = await _repository.User.GetByRange(firstIndex, lastIndex);
-            return Ok(users);
-        }
-
-        [HttpPost]
-        [Authorize]
-        [Route("with-criteria")]
-        public async Task<IActionResult> GetUsersByCriteria(
-            [FromBody] UsersLookUpCriteriaDto usersLookUpCriteriaDto)
-        {
-            var users = await _repository.User.GetUsersByCriteria(usersLookUpCriteriaDto);
-            return Ok(users);
         }
     }
 }

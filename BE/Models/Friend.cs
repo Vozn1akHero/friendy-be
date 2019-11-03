@@ -7,6 +7,7 @@ namespace BE.Models
     {
         public Friend()
         {
+            FriendRequest = new HashSet<FriendRequest>();
             UserFriends = new HashSet<UserFriends>();
         }
 
@@ -14,6 +15,7 @@ namespace BE.Models
         public int FriendId { get; set; }
 
         public virtual User FriendNavigation { get; set; }
+        public virtual ICollection<FriendRequest> FriendRequest { get; set; }
         public virtual ICollection<UserFriends> UserFriends { get; set; }
     }
 }

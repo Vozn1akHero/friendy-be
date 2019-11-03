@@ -21,6 +21,7 @@ namespace BE.Models
         public virtual DbSet<ChatMessages> ChatMessages { get; set; }
         public virtual DbSet<ChatParticipants> ChatParticipants { get; set; }
         public virtual DbSet<Comment> Comment { get; set; }
+        public virtual DbSet<DrugsAttitude> DrugsAttitude { get; set; }
         public virtual DbSet<Education> Education { get; set; }
         public virtual DbSet<Event> Event { get; set; }
         public virtual DbSet<EventAdmins> EventAdmins { get; set; }
@@ -30,6 +31,7 @@ namespace BE.Models
         public virtual DbSet<EventPost> EventPost { get; set; }
         public virtual DbSet<EventPostLikes> EventPostLikes { get; set; }
         public virtual DbSet<Friend> Friend { get; set; }
+        public virtual DbSet<FriendRequest> FriendRequest { get; set; }
         public virtual DbSet<Gender> Gender { get; set; }
         public virtual DbSet<Interest> Interest { get; set; }
         public virtual DbSet<MaritalStatus> MaritalStatus { get; set; }
@@ -175,7 +177,19 @@ namespace BE.Models
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_comment_user");
             });
-            
+
+            modelBuilder.Entity<DrugsAttitude>(entity =>
+            {
+                entity.ToTable("drugs_attitude");
+
+                entity.Property(e => e.Id).HasColumnName("id");
+
+                entity.Property(e => e.Title)
+                    .IsRequired()
+                    .HasColumnName("title")
+                    .HasMaxLength(150)
+                    .IsUnicode(false);
+            });
 
             modelBuilder.Entity<Education>(entity =>
             {
@@ -389,6 +403,29 @@ namespace BE.Models
                     .HasForeignKey(d => d.FriendId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_friend_user");
+            });
+
+            modelBuilder.Entity<FriendRequest>(entity =>
+            {
+                entity.ToTable("friend_request");
+
+                entity.Property(e => e.Id).HasColumnName("id");
+
+                entity.Property(e => e.AuthorId).HasColumnName("author_id");
+
+                entity.Property(e => e.ReceiverId).HasColumnName("receiver_id");
+
+                entity.HasOne(d => d.Author)
+                    .WithMany(p => p.FriendRequest)
+                    .HasForeignKey(d => d.AuthorId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_friend_request_user");
+
+                entity.HasOne(d => d.Receiver)
+                    .WithMany(p => p.FriendRequest)
+                    .HasForeignKey(d => d.ReceiverId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_friend_request_friend");
             });
 
             modelBuilder.Entity<Gender>(entity =>

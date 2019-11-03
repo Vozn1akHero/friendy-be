@@ -7,7 +7,6 @@ using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 using BE.Dtos;
-using BE.Entities;
 using BE.Interfaces;
 using BE.Models;
 using Microsoft.EntityFrameworkCore;
@@ -34,6 +33,11 @@ namespace BE.Repositories
         {
             return this.FriendyContext.Set<T>()
                 .Where(expression);
+        }
+        
+        public bool ExistsByCondition(Expression<Func<T, bool>> expression)
+        {
+            return FindAll().Any(expression);
         }
 
         public void Create(T entity)

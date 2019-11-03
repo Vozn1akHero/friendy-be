@@ -24,6 +24,7 @@ namespace BE.Interfaces
         IChatMessageRepository ChatMessage { get; }
         IChatMessagesRepository ChatMessages { get; }
         IChatParticipantsRepository ChatParticipants { get; }
+        IFriendRequestRepository FriendRequest { get; }
         void Save();
     }
 }

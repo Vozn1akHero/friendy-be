@@ -87,6 +87,12 @@ namespace BE.Repositories
 
             return friends;
         }
-        
+
+        public bool CheckIfFriendsByUserIds(int firstUserId, int secondUserId)
+        {
+            return ExistsByCondition(e => (e.UserId == firstUserId && e.Friend.FriendId == secondUserId)
+                                          || (e.Friend.FriendId == firstUserId &&
+                                              e.UserId == secondUserId));
+        }
     }
 }

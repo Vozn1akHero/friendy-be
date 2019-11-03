@@ -11,7 +11,5 @@ namespace BE.Repositories
         public FriendRepository(FriendyContext friendyContext) : base(friendyContext)
         {
         }
-
-
     }
 }

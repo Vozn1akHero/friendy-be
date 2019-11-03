@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 
 namespace BE.Dtos
 {
@@ -17,6 +18,6 @@ namespace BE.Dtos
         public int Religion { get; set; }
         public int AlcoholOpinion { get; set; }
         public int SmokingOpinion { get; set; }
-        public string[] Interests { get; set; }
+        public IEnumerable<string> Interests { get; set; }
     }
 }

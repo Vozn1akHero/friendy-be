@@ -14,5 +14,6 @@ namespace BE.Interfaces.Repositories
         Task RemoveById(int id);
         Task<List<UserFriends>> GetExemplaryByUserId(int userId);
         Task AddNew(int id, int userId);
+        bool CheckIfFriendsByUserIds(int firstUserId, int secondUserId);
     }
 }

@@ -7,10 +7,11 @@ using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
 using BE.Dtos;
-using BE.Entities;
 using BE.Helpers;
 using BE.Interfaces;
 using BE.Models;
+using BE.Repositories.RepositoryServices.Interfaces.User;
+using BE.RepositoryServices.User;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -23,8 +24,17 @@ namespace BE.Repositories
 {
     public class UserRepository : RepositoryBase<User>, IUserRepository
     {
-        public UserRepository(FriendyContext friendyContext)
-            : base(friendyContext) { }
+        private IUserSearchingService _userSearchingService;
+        private IUserAvatarConverterService _userAvatarConverterService;
+        
+        public UserRepository(FriendyContext friendyContext,
+            IUserAvatarConverterService userAvatarConverterService,
+            IUserSearchingService userSearchingService)
+            : base(friendyContext)
+        {
+            _userSearchingService = userSearchingService;
+            _userAvatarConverterService = userAvatarConverterService;
+        }
 
         public async Task<IEnumerable<User>> GetAllUsersAsync()
         {
@@ -64,47 +74,68 @@ namespace BE.Repositories
             await SaveAsync();
         }
 
-        public async Task<IEnumerable<User>> GetUsersByCriteria(UsersLookUpCriteriaDto usersLookUpCriteriaDto)
+        public async Task<IEnumerable<UserBasicDto>> GetUsersByCriteria(UsersLookUpCriteriaDto usersLookUpCriteriaDto)
         {
-            var foundUsers = await FindAll().ToListAsync();
-            
-            if (usersLookUpCriteriaDto.Name != null)
-            {
-                foundUsers.RemoveAll(e =>
-                    e.Name.ToLower().StartsWith(usersLookUpCriteriaDto.Name.ToLower()));
-            }
-
-            if (usersLookUpCriteriaDto.Surname != null)
-            {
-                foundUsers.RemoveAll(e =>
-                    e.Surname.ToLower().Contains(usersLookUpCriteriaDto.Surname.ToLower()));
-            }
-
-            if (usersLookUpCriteriaDto.City != null)
-            {
-                foundUsers.RemoveAll(e => e.City.ToLower().Contains(usersLookUpCriteriaDto.City.ToLower()));
-            }
-            
-            /*await FindByCondition(e => ( (usersLookUpCriteriaDto.Education != 0
-                                                            && e.AdditionalInfo.EducationId == usersLookUpCriteriaDto.Education)
-                                                       && (usersLookUpCriteriaDto.Gender != 0 
-                                                           && e.GenderId == usersLookUpCriteriaDto.Gender)
-                                                       && (usersLookUpCriteriaDto.MaritalStatus != 0  
-                                                           && e.AdditionalInfo.MaritalStatusId == usersLookUpCriteriaDto.MaritalStatus)
-                                                       && (usersLookUpCriteriaDto.Religion != 0 
-                                                           && e.AdditionalInfo.ReligionId == usersLookUpCriteriaDto.Religion)
-                                                       && (usersLookUpCriteriaDto.AlcoholOpinion != 0 
-                                                           && e.AdditionalInfo.AlcoholAttitudeId == usersLookUpCriteriaDto.AlcoholOpinion)
-                                                       && (usersLookUpCriteriaDto.SmokingOpinion != 0 
-                                                           && e.AdditionalInfo.SmokingAttitudeId == usersLookUpCriteriaDto.SmokingOpinion));*/
-
-            return foundUsers;
+            var users = await FindAll()
+                .Include(e => e.AdditionalInfo)
+                .Include(e => e.AdditionalInfo.AlcoholAttitude)
+                .Include(e => e.AdditionalInfo.Education)
+                .Include(e => e.AdditionalInfo.MaritalStatus)
+                .Include(e => e.AdditionalInfo.Religion)
+                .Include(e => e.AdditionalInfo.SmokingAttitude)
+                .Select(e => new UserLookUpModelDto
+                {
+                    Id = e.Id,
+                    Name = e.Name,
+                    Surname = e.Surname,
+                    City = e.City,
+                    EducationId = e.AdditionalInfo.EducationId,
+                    GenderId = e.GenderId,
+                    MaritalStatusId = e.AdditionalInfo.MaritalStatusId,
+                    ReligionId = e.AdditionalInfo.ReligionId,
+                    AlcoholAttitudeId = e.AdditionalInfo.AlcoholAttitudeId,
+                    SmokingAttitudeId = e.AdditionalInfo.SmokingAttitudeId,
+                    UserInterests = e.AdditionalInfo.UserInterests.Select(interest => interest.Interest.Title)
+                })
+                .ToListAsync();
+            var filteredUsers = _userSearchingService.Filter(users, usersLookUpCriteriaDto);
+            var filteredUsersIds = filteredUsers.Select(e => e.Id);
+            return await FindByCondition(e => filteredUsersIds.Contains(e.Id))
+                .Select(e => new UserBasicDto
+                {
+                    Id = e.Id,
+                    Avatar = _userAvatarConverterService.ConvertToByte(e.Avatar),
+                    Birthday = e.Birthday,
+                    BirthMonth = e.BirthMonth,
+                    BirthYear = e.BirthYear,
+                    City = e.City,
+                    GenderId = e.GenderId,
+                    Name = e.Name,
+                    Surname = e.Surname,
+                    Status = e.Status
+                })
+                .ToListAsync();
         }
 
-        public async Task<IEnumerable<User>> GetByRange(int firstIndex, int lastIndex)
+        public async Task<IEnumerable<UserBasicDto>> GetByRange(int firstIndex, int lastIndex)
         {
-            return await FindByCondition(e => e.Id >= firstIndex && e.Id <= lastIndex)
+            var users = await FindByCondition(e => e.Id >= firstIndex && e.Id <= lastIndex)
+                .Select(e => new UserBasicDto
+                {
+                    Id = e.Id,
+                    Avatar = _userAvatarConverterService.ConvertToByte(e.Avatar),
+                    Birthday = e.Birthday,
+                    BirthMonth = e.BirthMonth,
+                    BirthYear = e.BirthYear,
+                    City = e.City,
+                    GenderId = e.GenderId,
+                    Name = e.Name,
+                    Surname = e.Surname,
+                    Status = e.Status
+                })
                 .ToListAsync();
+            
+            return users;
         }
         
         public async Task UpdateAvatar(string path, int userId)

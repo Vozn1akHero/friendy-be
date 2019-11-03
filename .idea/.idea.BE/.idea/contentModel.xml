@@ -17,9 +17,12 @@
           <e p="FriendController.cs" t="Include" />
           <e p="PostController.cs" t="Include" />
           <e p="UserController.cs" t="Include" />
+          <e p="UserSearchController.cs" t="Include" />
         </e>
         <e p="Dtos" t="Include">
-          <e p="AuthResponse.cs" t="Include" />
+          <e p="AuthDtos" t="Include">
+            <e p="AuthResponse.cs" t="Include" />
+          </e>
           <e p="ChatDtos" t="Include">
             <e p="ClientDtos" t="Include">
               <e p="NewMessageDto.cs" t="Include" />
@@ -41,14 +44,18 @@
             <e p="FriendDto.cs" t="Include" />
             <e p="ShortenedFriendDto.cs" t="Include" />
           </e>
-          <e p="LikeDto.cs" t="Include" />
-          <e p="LoggedInUserEntryDto.cs" t="Include" />
-          <e p="UserEntryDto.cs" t="Include" />
-          <e p="UsersLookUpCriteriaDto.cs" t="Include" />
+          <e p="PostDtos" t="Include">
+            <e p="LikeDto.cs" t="Include" />
+          </e>
+          <e p="UserDtos" t="Include">
+            <e p="FoundUserDto.cs" t="Include" />
+            <e p="LoggedInUserEntryDto.cs" t="Include" />
+            <e p="UserBasicDto.cs" t="Include" />
+            <e p="UserLookUpModelDto.cs" t="Include" />
+            <e p="UsersLookUpCriteriaDto.cs" t="Include" />
+          </e>
         </e>
-        <e p="Entities" t="Include">
-          <e p="UserEntity.cs" t="Include" />
-        </e>
+        <e p="Entities" t="Include" />
         <e p="Helpers" t="Include">
           <e p="HTTPHelpers.cs" t="Include" />
         </e>
@@ -79,6 +86,7 @@
           <e p="EventPostLikes.cs" t="Include" />
           <e p="FamilyStatus.cs" t="Include" />
           <e p="Friend.cs" t="Include" />
+          <e p="FriendRequest.cs" t="Include" />
           <e p="FriendyContext.cs" t="Include" />
           <e p="Gender.cs" t="Include" />
           <e p="Interest.cs" t="Include" />
@@ -116,15 +124,18 @@
               <e p="IChatParticipantsRepository.cs" t="Include" />
               <e p="IChatRepository.cs" t="Include" />
             </e>
+            <e p="Friend" t="Include">
+              <e p="IFriendRepository.cs" t="Include" />
+              <e p="IFriendRequestRepository.cs" t="Include" />
+              <e p="IUserFriendsRepository.cs" t="Include" />
+            </e>
             <e p="ICommentRepository.cs" t="Include" />
             <e p="IEventAdminsRepository.cs" t="Include" />
             <e p="IEventRepository.cs" t="Include" />
-            <e p="IFriendRepository.cs" t="Include" />
             <e p="IRepositoryBase.cs" t="Include" />
             <e p="IRepositoryWrapper.cs" t="Include" />
             <e p="ISessionRepository.cs" t="Include" />
             <e p="IUserEventsRepository.cs" t="Include" />
-            <e p="IUserFriendsRepository.cs" t="Include" />
             <e p="IUserPostCommentsRepository.cs" t="Include" />
             <e p="IUserPostLikesRepository.cs" t="Include" />
             <e p="IUserPostRepository.cs" t="Include" />
@@ -140,11 +151,14 @@
             <e p="CommentRepository.cs" t="Include" />
             <e p="EventAdminsRepository.cs" t="Include" />
             <e p="EventRepository.cs" t="Include" />
-            <e p="FriendRepository.cs" t="Include" />
+            <e p="Friend" t="Include">
+              <e p="FriendRepository.cs" t="Include" />
+              <e p="FriendRequestRepository.cs" t="Include" />
+              <e p="UserFriendsRepository.cs" t="Include" />
+            </e>
             <e p="LikeRepository.cs" t="Include" />
             <e p="SessionRepository.cs" t="Include" />
             <e p="UserEventsRepository.cs" t="Include" />
-            <e p="UserFriendsRepository.cs" t="Include" />
             <e p="UserPostComments.cs" t="Include" />
             <e p="UserPostLikesRepository.cs" t="Include" />
             <e p="UserPostRepository.cs" t="Include" />
@@ -152,8 +166,13 @@
           </e>
           <e p="RepositoryBase.cs" t="Include" />
           <e p="RepositoryServices" t="Include">
+            <e p="Interfaces" t="Include">
+              <e p="User" t="Include">
+                <e p="IUserSearchingService.cs" t="Include" />
+              </e>
+            </e>
             <e p="User" t="Include">
-              <e p="UserSearching.cs" t="Include" />
+              <e p="UserSearchingService.cs" t="Include" />
             </e>
           </e>
           <e p="RepositoryWrapper.cs" t="Include" />

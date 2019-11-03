@@ -27,6 +27,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Cache" />
+    <Folder Include="Entities" />
     <Folder Include="Interfaces\Repositories" />
     <Folder Include="Interfaces\Services" />
     <Folder Include="Repositories\Custom" />

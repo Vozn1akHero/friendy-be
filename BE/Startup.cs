@@ -9,6 +9,8 @@ using System.Threading.Tasks;
 using BE.Helpers;
 using BE.Interfaces;
 using BE.Middlewares;
+using BE.Repositories.RepositoryServices.Interfaces.User;
+using BE.RepositoryServices.User;
 using BE.Services;
 using BE.SignalR.Hubs;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -72,6 +74,8 @@ namespace BE
             services.AddScoped<IUserAvatarConverterService, UserAvatarConverterService>();
             services.AddScoped<ICustomSqlQueryService, CustomSqlQueryService>();
             services.AddScoped<IAuthenticationService, AuthenticationService>();
+
+            services.AddScoped<IUserSearchingService, UserSearchingService>();
             
             services.AddMvc().AddJsonOptions(options => {
                 options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
