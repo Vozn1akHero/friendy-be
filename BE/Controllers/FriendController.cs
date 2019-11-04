@@ -29,6 +29,34 @@ namespace BE.Controllers
             await _repository.FriendRequest.Add(userId, id);
             return Ok();
         }
+        
+        [HttpDelete]
+        [Authorize]
+        [Route("request/{id}")]
+        public async Task<IActionResult> DeleteRequest(int id,
+            [FromHeader(Name = "userId")] int userId)
+        {
+            var friendRequest = await _repository.FriendRequest.FindByUserIds(userId, id);
+            if (friendRequest != null)
+            {
+                await _repository.FriendRequest.DeleteByEntity(friendRequest);
+            }
+            else
+            {
+                return UnprocessableEntity();
+            }
+            return Ok();
+        }
+        
+        [HttpGet]
+        [Authorize]
+        [Route("request/status")]
+        public async Task<IActionResult> GetReceivedRequestStatus(int id, 
+            [FromHeader(Name = "userId")] int userId)
+        {
+            bool status = await _repository.FriendRequest.GetStatusByUserIds(id, userId);
+            return Ok(status);
+        }
 
         [HttpGet]
         [Authorize]

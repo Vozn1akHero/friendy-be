@@ -6,6 +6,7 @@ using System.Net;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
+using AutoMapper;
 using BE.Dtos;
 using BE.Helpers;
 using BE.Interfaces;
@@ -98,6 +99,7 @@ namespace BE.Repositories
                     UserInterests = e.AdditionalInfo.UserInterests.Select(interest => interest.Interest.Title)
                 })
                 .ToListAsync();
+            
             var filteredUsers = _userSearchingService.Filter(users, usersLookUpCriteriaDto);
             var filteredUsersIds = filteredUsers.Select(e => e.Id);
             return await FindByCondition(e => filteredUsersIds.Contains(e.Id))
@@ -120,22 +122,18 @@ namespace BE.Repositories
         public async Task<IEnumerable<UserBasicDto>> GetByRange(int firstIndex, int lastIndex)
         {
             var users = await FindByCondition(e => e.Id >= firstIndex && e.Id <= lastIndex)
-                .Select(e => new UserBasicDto
-                {
-                    Id = e.Id,
-                    Avatar = _userAvatarConverterService.ConvertToByte(e.Avatar),
-                    Birthday = e.Birthday,
-                    BirthMonth = e.BirthMonth,
-                    BirthYear = e.BirthYear,
-                    City = e.City,
-                    GenderId = e.GenderId,
-                    Name = e.Name,
-                    Surname = e.Surname,
-                    Status = e.Status
-                })
                 .ToListAsync();
             
-            return users;
+            var config = new MapperConfiguration(cfg =>
+            {
+                cfg.CreateMap<User, UserBasicDto>()
+                    .ForMember(e => e.Avatar,
+                        map => map.MapFrom(source => _userAvatarConverterService.ConvertToByte(source.Avatar)));
+            });
+            //var iMapper = config.CreateMapper();
+            var fields = config.CreateMapper().Map<List<User>, List<UserBasicDto>>(users);
+            
+            return fields;
         }
         
         public async Task UpdateAvatar(string path, int userId)

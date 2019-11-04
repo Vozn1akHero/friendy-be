@@ -30,6 +30,14 @@
   "frameworks": {
     "netcoreapp2.2": {
       "dependencies": {
+        "AutoMapper": {
+          "target": "Package",
+          "version": "[9.0.0, )"
+        },
+        "AutoMapper.Extensions.Microsoft.DependencyInjection": {
+          "target": "Package",
+          "version": "[7.0.0, )"
+        },
         "BCrypt.Net-Core": {
           "target": "Package",
           "version": "[1.6.0, )"
