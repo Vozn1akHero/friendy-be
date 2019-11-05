@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using AutoMapper;
 using BE.Helpers;
 using BE.Interfaces;
 using BE.Interfaces.Repositories;
@@ -19,8 +18,7 @@ namespace BE.Repositories
     public class RepositoryWrapper : IRepositoryWrapper
     {
         private FriendyContext _friendyContext;
-        private IMapper _mapper;
-        
+
         private IUserRepository _user;
         private ISessionRepository _session;
         private IUserPostRepository _userPost;
@@ -107,7 +105,7 @@ namespace BE.Repositories
         
         public IChatMessagesRepository ChatMessages
         {
-            get { return _chatMessages ?? (_chatMessages = new ChatMessagesRepository(_friendyContext, _mapper)); }
+            get { return _chatMessages ?? (_chatMessages = new ChatMessagesRepository(_friendyContext)); }
         }
         
         public IFriendRequestRepository FriendRequest
@@ -127,14 +125,13 @@ namespace BE.Repositories
             IJwtService jwtService, 
             IUserAvatarConverterService userAvatarConverterService,
             ICustomSqlQueryService customSqlQueryService,
-            IUserSearchingService userSearchingService, IMapper mapper)
+            IUserSearchingService userSearchingService)
         {
             _friendyContext = friendyContext;
             _jwtService = jwtService;
             _userAvatarConverterService = userAvatarConverterService;
             _customSqlQueryService = customSqlQueryService;
             _userSearchingService = userSearchingService;
-            _mapper = mapper;
         }
 
         public void Save()

@@ -1,8 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using AutoMapper;
-using AutoMapper.QueryableExtensions;
 using BE.Dtos.ChatDtos;
 using BE.Interfaces.Repositories.Chat;
 using BE.Models;
@@ -12,12 +10,7 @@ namespace BE.Repositories.Chat
 {
     public class ChatMessagesRepository : RepositoryBase<ChatMessages>, IChatMessagesRepository
     {
-        private readonly IMapper _mapper;
-        public ChatMessagesRepository(FriendyContext friendyContext,
-            IMapper mapper) : base(friendyContext)
-        {
-            _mapper = mapper;
-        }
+        public ChatMessagesRepository(FriendyContext friendyContext) : base(friendyContext) { }
 
         public async Task Add(int chatId, int messageId)
         {
@@ -46,12 +39,9 @@ namespace BE.Repositories.Chat
 
         public async Task<List<ChatMessageDto>> GetByChatId(int chatId, int userId)
         {
-/*            var chatMessages = FindByCondition(e => e.ChatId == chatId)
-                .ProjectTo<ChatMessageDto>(_mapper).ToListAsync();*/
-                
             var chatMessages = await FindByCondition(e => e.ChatId == chatId)
                 .Include(e => e.Message)
-                .Select(e => new ChatMessageDto()
+                .Select(e => new ChatMessageDto
                 {
                     Content = e.Message.Content,
                     IsUserAuthor = e.Message.UserId == userId,

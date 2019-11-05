@@ -1,8 +1,11 @@
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using BE.Dtos.FriendRequestDto;
 using BE.Interfaces.Repositories;
 using BE.Models;
+using BE.Repositories.RepositoryServices;
 using Microsoft.EntityFrameworkCore;
 
 namespace BE.Repositories
@@ -44,13 +47,39 @@ namespace BE.Repositories
 
         public async Task<List<FriendRequest>> GetReceivedByUserId(int userId)
         {
-            return await FindByCondition(e => e.ReceiverId == userId)
+            return await FindByCondition(e => e.Receiver.FriendId == userId)
                 .ToListAsync();
         }
         
         public async Task<List<FriendRequest>> GetSentByUserId(int userId)
         {
             return await FindByCondition(e => e.AuthorId == userId)
+                .ToListAsync();
+        }
+        
+        public async Task<List<ReceivedFriendRequestDto>> GetReceivedByUserIdWithDto(int userId)
+        {
+            return await FindByCondition(e => e.Receiver.FriendId == userId)
+                .Select(e => new ReceivedFriendRequestDto
+                {
+                    RequestId = e.Id,
+                    Name = e.Author.Name,
+                    Surname = e.Author.Surname,
+                    AuthorId = e.AuthorId
+                })
+                .ToListAsync();
+        }   
+        
+        public async Task<List<SentFriendRequestDto>> GetSentByUserIdWithDto(int userId)
+        {
+            return await FindByCondition(e => e.Receiver.FriendId == userId)
+                .Select(e => new SentFriendRequestDto
+                {
+                    RequestId = e.Id,
+                    Name = e.Receiver.FriendNavigation.Name,
+                    Surname = e.Receiver.FriendNavigation.Surname,
+                    ReceiverId = e.Receiver.FriendId
+                })
                 .ToListAsync();
         }
     }

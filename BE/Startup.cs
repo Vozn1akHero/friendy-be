@@ -6,7 +6,6 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using AutoMapper;
 using BE.Helpers;
 using BE.Interfaces;
 using BE.Middlewares;
@@ -46,7 +45,6 @@ namespace BE
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
             services.AddSignalR();
-            services.AddAutoMapper(typeof(Startup));
             services.ConfigureRepositoryWrapper();
             
             services.AddSingleton<IFileProvider>(  

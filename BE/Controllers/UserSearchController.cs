@@ -1,3 +1,4 @@
+using System.Linq;
 using System.Threading.Tasks;
 using BE.Dtos;
 using BE.Interfaces;
@@ -21,10 +22,12 @@ namespace BE.Controllers
         [Authorize]
         [Route("exemplary")]
         public async Task<IActionResult> GetStartingListForSearching([FromQuery(Name = "firstIndex")] int firstIndex,
-            [FromQuery(Name = "lastIndex")] int lastIndex)
+            [FromQuery(Name = "lastIndex")] int lastIndex,
+            [FromHeader(Name = "userId")] int userId)
         {
             var users = await _repository.User.GetByRange(firstIndex, lastIndex);
-            return Ok(users);
+            var usersCut = users.Where(e => e.Id != userId).ToHashSet();
+            return Ok(usersCut);
         }
         
         [HttpPost]

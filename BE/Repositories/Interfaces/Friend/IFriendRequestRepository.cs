@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using BE.Dtos.FriendRequestDto;
 using BE.Models;
 
 namespace BE.Interfaces.Repositories
@@ -12,5 +13,7 @@ namespace BE.Interfaces.Repositories
         Task<List<FriendRequest>> GetSentByUserId(int userId);
         Task DeleteByEntity(FriendRequest friendRequest);
         Task<bool> GetStatusByUserIds(int firstId, int secondId);
+        Task<List<SentFriendRequestDto>> GetSentByUserIdWithDto(int userId);
+        Task<List<ReceivedFriendRequestDto>> GetReceivedByUserIdWithDto(int userId);
     }
 }

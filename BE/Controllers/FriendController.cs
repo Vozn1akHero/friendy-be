@@ -23,20 +23,22 @@ namespace BE.Controllers
 
         [HttpPost]
         [Authorize]
-        [Route("request/{id}")]
-        public async Task<IActionResult> AddNewRequest(int id, [FromHeader(Name = "userId")] int userId)
+        [Route("request/{receiverId}")]
+        public async Task<IActionResult> AddNewRequest(int receiverId, [FromHeader(Name = "userId")] int userId)
         {
-            await _repository.FriendRequest.Add(userId, id);
+            var receiverFriend = await _repository.Friend.GetByUserId(receiverId); 
+            await _repository.FriendRequest.Add(userId, receiverFriend.Id);
             return Ok();
         }
         
         [HttpDelete]
         [Authorize]
-        [Route("request/{id}")]
-        public async Task<IActionResult> DeleteRequest(int id,
+        [Route("request/{receiverId}")]
+        public async Task<IActionResult> DeleteRequest(int receiverId,
             [FromHeader(Name = "userId")] int userId)
         {
-            var friendRequest = await _repository.FriendRequest.FindByUserIds(userId, id);
+            var receiverFriend = await _repository.Friend.GetByUserId(receiverId);
+            var friendRequest = await _repository.FriendRequest.FindByUserIds(userId, receiverFriend.Id);
             if (friendRequest != null)
             {
                 await _repository.FriendRequest.DeleteByEntity(friendRequest);
@@ -51,13 +53,33 @@ namespace BE.Controllers
         [HttpGet]
         [Authorize]
         [Route("request/status")]
-        public async Task<IActionResult> GetReceivedRequestStatus(int id, 
+        public async Task<IActionResult> GetReceivedRequestStatus(int receiverId, 
             [FromHeader(Name = "userId")] int userId)
         {
-            bool status = await _repository.FriendRequest.GetStatusByUserIds(id, userId);
+            var receiverFriend = await _repository.Friend.GetByUserId(receiverId);
+            bool status = await _repository.FriendRequest.GetStatusByUserIds(receiverFriend.Id, userId);
             return Ok(status);
         }
+        
+        [HttpGet]
+        [Authorize]
+        [Route("requests/received")]
+        public async Task<IActionResult> GetReceivedRequests([FromHeader(Name = "userId")] int userId)
+        {
+            var requests = await _repository.FriendRequest.GetReceivedByUserIdWithDto(userId);
+            return Ok(requests);
+        }
 
+        [HttpGet]
+        [Authorize]
+        [Route("requests/sent")]
+        public async Task<IActionResult> GetSentRequests([FromHeader(Name = "userId")] int userId)
+        {
+            var requests = await _repository.FriendRequest.GetSentByUserIdWithDto(userId);
+            return Ok(requests);
+        }
+        
+/*
         [HttpGet]
         [Authorize]
         [Route("requests/received")]
@@ -74,7 +96,7 @@ namespace BE.Controllers
         {
             var requests = await _repository.FriendRequest.GetSentByUserId(userId);
             return Ok(requests);
-        }
+        }*/
 
         [HttpPost]
         [Authorize]

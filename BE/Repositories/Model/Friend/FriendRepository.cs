@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using BE.Interfaces.Repositories;
 using BE.Models;
@@ -10,6 +11,12 @@ namespace BE.Repositories
     {
         public FriendRepository(FriendyContext friendyContext) : base(friendyContext)
         {
+        }
+
+        public async Task<Friend> GetByUserId(int userId)
+        {
+            return await FindByCondition(e => e.FriendId == userId)
+                .SingleOrDefaultAsync();
         }
     }
 }

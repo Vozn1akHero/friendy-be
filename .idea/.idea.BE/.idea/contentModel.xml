@@ -44,6 +44,10 @@
             <e p="FriendDto.cs" t="Include" />
             <e p="ShortenedFriendDto.cs" t="Include" />
           </e>
+          <e p="FriendRequestDtos" t="Include">
+            <e p="ReceivedFriendRequestDto.cs" t="Include" />
+            <e p="SentFriendRequestDto.cs" t="Include" />
+          </e>
           <e p="PostDtos" t="Include">
             <e p="LikeDto.cs" t="Include" />
           </e>
@@ -166,6 +170,7 @@
           </e>
           <e p="RepositoryBase.cs" t="Include" />
           <e p="RepositoryServices" t="Include">
+            <e p="DynamicLinqStatementService.cs" t="Include" />
             <e p="Interfaces" t="Include">
               <e p="User" t="Include">
                 <e p="IUserSearchingService.cs" t="Include" />

@@ -12,7 +12,6 @@ using Microsoft.Extensions.Logging;
 
 namespace BE.RepositoryServices.User
 {
-    
     public class UserSearchingService : IUserSearchingService
     {
         public List<UserLookUpModelDto> Filter(List<UserLookUpModelDto> users,

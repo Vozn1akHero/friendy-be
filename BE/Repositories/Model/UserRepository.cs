@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
@@ -6,7 +7,6 @@ using System.Net;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
-using AutoMapper;
 using BE.Dtos;
 using BE.Helpers;
 using BE.Interfaces;
@@ -122,18 +122,22 @@ namespace BE.Repositories
         public async Task<IEnumerable<UserBasicDto>> GetByRange(int firstIndex, int lastIndex)
         {
             var users = await FindByCondition(e => e.Id >= firstIndex && e.Id <= lastIndex)
+                .Select(e => new UserBasicDto
+                {
+                    Id = e.Id,
+                    Avatar = _userAvatarConverterService.ConvertToByte(e.Avatar),
+                    Birthday = e.Birthday,
+                    BirthMonth = e.BirthMonth,
+                    BirthYear = e.BirthYear,
+                    City = e.City,
+                    GenderId = e.GenderId,
+                    Name = e.Name,
+                    Surname = e.Surname,
+                    Status = e.Status
+                })
                 .ToListAsync();
-            
-            var config = new MapperConfiguration(cfg =>
-            {
-                cfg.CreateMap<User, UserBasicDto>()
-                    .ForMember(e => e.Avatar,
-                        map => map.MapFrom(source => _userAvatarConverterService.ConvertToByte(source.Avatar)));
-            });
-            //var iMapper = config.CreateMapper();
-            var fields = config.CreateMapper().Map<List<User>, List<UserBasicDto>>(users);
-            
-            return fields;
+
+            return users;
         }
         
         public async Task UpdateAvatar(string path, int userId)
