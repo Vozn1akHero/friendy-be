@@ -61,9 +61,8 @@ namespace BE.Controllers
             return Ok(status);
         }
         
-        [HttpGet]
+        [HttpGet("requests/received")]
         [Authorize]
-        [Route("requests/received")]
         public async Task<IActionResult> GetReceivedRequests([FromHeader(Name = "userId")] int userId)
         {
             var requests = await _repository.FriendRequest.GetReceivedByUserIdWithDto(userId);
