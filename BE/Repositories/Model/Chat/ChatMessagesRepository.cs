@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using BE.Dtos.ChatDtos;
+using BE.Interfaces;
 using BE.Interfaces.Repositories.Chat;
 using BE.Models;
 using Microsoft.EntityFrameworkCore;
@@ -10,7 +11,13 @@ namespace BE.Repositories.Chat
 {
     public class ChatMessagesRepository : RepositoryBase<ChatMessages>, IChatMessagesRepository
     {
-        public ChatMessagesRepository(FriendyContext friendyContext) : base(friendyContext) { }
+        private IUserAvatarConverterService _userAvatarConverterService;
+
+        public ChatMessagesRepository(FriendyContext friendyContext,
+            IUserAvatarConverterService userAvatarConverterService) : base(friendyContext)
+        {
+            _userAvatarConverterService = userAvatarConverterService;
+        }
 
         public async Task Add(int chatId, int messageId)
         {

@@ -15,8 +15,8 @@
           <e p="ChatController.cs" t="Include" />
           <e p="EventController.cs" t="Include" />
           <e p="FriendController.cs" t="Include" />
-          <e p="PostController.cs" t="Include" />
           <e p="UserController.cs" t="Include" />
+          <e p="UserPostController.cs" t="Include" />
           <e p="UserSearchController.cs" t="Include" />
         </e>
         <e p="Dtos" t="Include">

@@ -75,7 +75,7 @@ namespace BE.Repositories
         
         public IUserFriendsRepository UserFriends
         {
-            get { return _userFriends ?? (_userFriends = new UserFriendsRepository(_friendyContext)); }
+            get { return _userFriends ?? (_userFriends = new UserFriendsRepository(_friendyContext, _userAvatarConverterService)); }
         }
         
         public IUserEventsRepository UserEvents
@@ -105,7 +105,7 @@ namespace BE.Repositories
         
         public IChatMessagesRepository ChatMessages
         {
-            get { return _chatMessages ?? (_chatMessages = new ChatMessagesRepository(_friendyContext)); }
+            get { return _chatMessages ?? (_chatMessages = new ChatMessagesRepository(_friendyContext, _userAvatarConverterService)); }
         }
         
         public IFriendRequestRepository FriendRequest

@@ -14,23 +14,21 @@ using Microsoft.CodeAnalysis.Diagnostics.Telemetry;
 namespace BE.Controllers
 {
     [ApiController]
-    [Route("api/post")]
+    [Route("api/user-post")]
     public class PostController : Controller
     {
         private readonly IHubContext<PostHub> _hubContext;
-        private readonly IRepositoryWrapper _repositoryWrapper;
-       // private readonly IJwtService _jwtService;
+        private readonly IRepositoryWrapper _repository;
         
-        public PostController(IRepositoryWrapper repositoryWrapper, IHubContext<PostHub> hubContext)
+        public PostController(IRepositoryWrapper repository, 
+            IHubContext<PostHub> hubContext)
         {
-            _repositoryWrapper = repositoryWrapper;
+            _repository = repository;
             _hubContext = hubContext;
-            //_jwtService = jwtService;
         }
 
         [HttpPost]
         [Authorize]
-        [Route("createUserPost")]
         public async Task<IActionResult> CreateUserPost([FromBody] UserPost post,
             [FromHeader(Name = "userId")] int userId)
         {
@@ -42,43 +40,44 @@ namespace BE.Controllers
             {
                 UserId = userId, Content = post.Content, Image = post.Image, Date = DateTime.Now
             };
-            await _repositoryWrapper.UserPost.CreateUserPost(newPost);
+            await _repository.UserPost.CreateUserPost(newPost);
             return Ok(newPost);
         }
         
+/*
         
         [HttpGet]
         [Authorize]
         [Route("getLoggedInUserPostsByToken")]
         public async Task<IActionResult> GetLoggedInUserPostsByToken([FromHeader(Name = "userId")] int userId)
         {
-            var entries = await _repositoryWrapper.UserPost.GetById(userId);
+            var entries = await _repository.UserPost.GetById(userId);
             return Ok(entries);
-        }
+        }*/
 
         [HttpGet]
         [Authorize]
         [Route("getById")]
         public async Task<IActionResult> GetById(int id)
         {
-            var posts = await _repositoryWrapper.UserPost.GetById(id);
+            var posts = await _repository.UserPost.GetById(id);
             return Ok(posts);
         }
         
         [HttpDelete]
         [Authorize]
-        [Route("removeUserPostById/{id}")]
+        [Route("{id}")]
         public async Task<IActionResult> RemoveUserPostById([FromRoute] int id)
         {
-            await _repositoryWrapper.UserPostLikes.RemovePostLikes(id);
-            await _repositoryWrapper.UserPostComments.RemovePostComments(id);
-            await _repositoryWrapper.UserPost.RemovePostById(id);
+            await _repository.UserPostLikes.RemovePostLikes(id);
+            await _repository.UserPostComments.RemovePostComments(id);
+            await _repository.UserPost.RemovePostById(id);
             return Ok();
         }
 
         [HttpPut]
         [Authorize]
-        [Route("likeUserPostById/{id}")]
+        [Route("like/{id}")]
         public async Task<IActionResult> LikeUserPostById([FromRoute] int id,
             [FromHeader(Name = "userId")] int userId)
         {
@@ -87,13 +86,13 @@ namespace BE.Controllers
                 UserId = userId,
                 UserPostId = id
             };
-            await _repositoryWrapper.UserPostLikes.CreatePostLike(newLike);
+            await _repository.UserPostLikes.CreatePostLike(newLike);
             return Ok(newLike);
         }
 
         [HttpPut]
         [Authorize]
-        [Route("unlikeUserPostById/{id}")]
+        [Route("unlike/{id}")]
         public async Task<IActionResult> UnlikePostById([FromRoute] int id,
             [FromHeader(Name = "userId")] int userId)
         {
@@ -102,16 +101,16 @@ namespace BE.Controllers
                 UserId = userId,
                 UserPostId = id
             };
-            await _repositoryWrapper.UserPostLikes.RemovePostLike(curLike);
+            await _repository.UserPostLikes.RemovePostLike(curLike);
             return Ok(curLike);
         }
         
         [HttpGet]
         [Authorize]
-        [Route("getLoggedInUserPosts")]
+        [Route("current")]
         public async Task<IActionResult> GetLoggedInUserPosts([FromHeader(Name = "userId")] int userId)
         {
-            var entries = await _repositoryWrapper.UserPost.GetById(userId);
+            var entries = await _repository.UserPost.GetById(userId);
             return Ok(entries);
         }
     }

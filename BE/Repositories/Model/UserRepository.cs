@@ -147,14 +147,9 @@ namespace BE.Repositories
             await SaveAsync();
         }
 
-        public async Task GetUserEntries(int id)
+        public async Task<string> GetAvatarPathByIdAsync(int userId)
         {
-            
-        }
-        
-        public async Task UpdateUserAsync(User dbUser)
-        {
-            throw new NotImplementedException();
+            return await FindByCondition(e => e.Id == userId).Select(e => e.Avatar).SingleOrDefaultAsync();
         }
 
         public async Task DeleteUserAsync(User user)

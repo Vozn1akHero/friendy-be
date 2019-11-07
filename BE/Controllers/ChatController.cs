@@ -15,11 +15,12 @@ namespace BE.Controllers
     [Route("api/chat")]
     public class ChatController : Controller
     {
-        private IRepositoryWrapper _repositoryWrapper;
-
-        public ChatController(IRepositoryWrapper repositoryWrapper)
+        private IRepositoryWrapper _repository;
+        private IUserAvatarConverterService _userAvatarConverterService;
+        public ChatController(IRepositoryWrapper repository, IUserAvatarConverterService userAvatarConverterService)
         {
-            _repositoryWrapper = repositoryWrapper;
+            _repository = repository;
+            _userAvatarConverterService = userAvatarConverterService;
         }
 
         [HttpPost]
@@ -32,33 +33,26 @@ namespace BE.Controllers
 
         [HttpGet]
         [Authorize]
-        [Route("getLastMessages")]
+        [Route("last-messages")]
         public async Task<IActionResult> GetLastMessages([FromHeader(Name = "userId")] int userId)
         {
             var lastMessageList = new List<ChatLastMessageDto>();
-            var chatList = await _repositoryWrapper.ChatParticipants.GetUserChatList(userId);
+            var chatList = await _repository.ChatParticipants.GetUserChatList(userId);
             var chatIdList = chatList.Select(e => e.ChatId).ToList();
-            var messageList = await _repositoryWrapper.ChatMessages.GetLastChatMessages(chatIdList);
+            var messageList = await _repository.ChatMessages.GetLastChatMessages(chatIdList);
 
             foreach (var chatMessage in messageList)
             {
-                using (FileStream fs = new FileStream(chatMessage.Message.User.Avatar, FileMode.Open, FileAccess.Read))
+                string chatUrl = await _repository.Chat.GetChatUrlPartById(chatMessage.ChatId);
+                lastMessageList.Add(new ChatLastMessageDto
                 {
-                    byte[] bytes = System.IO.File.ReadAllBytes(chatMessage.Message.User.Avatar);
-                    fs.Read(bytes, 0, System.Convert.ToInt32(fs.Length));
-                    fs.Close();
-                    
-                    string chatUrl = await _repositoryWrapper.Chat.GetChatUrlPartById(chatMessage.ChatId);
-                    lastMessageList.Add(new ChatLastMessageDto
-                    {
-                        ChatUrlPart = chatUrl,
-                        Content = chatMessage.Message.Content,
-                        HasImage = chatMessage.Message.ImageUrl != null,
-                        UserAvatar = bytes,
-                        UserId = chatMessage.Message.User.Id,
-                        Date = chatMessage.Message.Date
-                    });
-                }
+                    ChatUrlPart = chatUrl,
+                    Content = chatMessage.Message.Content,
+                    HasImage = chatMessage.Message.ImageUrl != null,
+                    UserAvatar = _userAvatarConverterService.ConvertToByte(chatMessage.Message.User.Avatar),
+                    UserId = chatMessage.Message.User.Id,
+                    Date = chatMessage.Message.Date
+                });
             }
             
             return Ok(lastMessageList);
@@ -69,8 +63,8 @@ namespace BE.Controllers
         [Route("participants/friend-basic-data/{chatHash}")]
         public async Task<IActionResult> GetFriendBasicDataInDialog(string chatHash, [FromHeader(Name = "userId")] int userId)
         {
-            var chatId = await _repositoryWrapper.Chat.GetChatIdByUrlHash(chatHash);
-            var participantsData = await _repositoryWrapper
+            var chatId = await _repository.Chat.GetChatIdByUrlHash(chatHash);
+            var participantsData = await _repository
                 .ChatParticipants
                 .GetFriendBasicDataInDialogByChatId(chatId, userId);
             return Ok(participantsData);
@@ -81,8 +75,8 @@ namespace BE.Controllers
         [Route("participants/basic-data/{chatHash}")]
         public async Task<IActionResult> GetDialogParticipantsBasicData(string chatHash)
         {
-            var chatId = await _repositoryWrapper.Chat.GetChatIdByUrlHash(chatHash);
-            var participantsData = await _repositoryWrapper.ChatParticipants.GetParticipantsBasicDataByChatId(chatId);
+            var chatId = await _repository.Chat.GetChatIdByUrlHash(chatHash);
+            var participantsData = await _repository.ChatParticipants.GetParticipantsBasicDataByChatId(chatId);
             return Ok(participantsData);
         }
         
@@ -91,8 +85,8 @@ namespace BE.Controllers
         [Route("messages/{hashUrl}")]
         public async Task<IActionResult> GetMessagesInDialog(string hashUrl, [FromHeader(Name = "userId")] int userId)
         {
-            var chatId = await _repositoryWrapper.Chat.GetChatIdByUrlHash(hashUrl);
-            var messages = await _repositoryWrapper.ChatMessages.GetByChatId(chatId, userId);
+            var chatId = await _repository.Chat.GetChatIdByUrlHash(hashUrl);
+            var messages = await _repository.ChatMessages.GetByChatId(chatId, userId);
             return Ok(messages);
         }
 
@@ -110,9 +104,9 @@ namespace BE.Controllers
                 Date = DateTime.Now,
                 UserId = userId
             };
-            var chatId = await _repositoryWrapper.Chat.GetChatIdByUrlHash(chatHash);
-            await _repositoryWrapper.ChatMessage.Add(newMessage);
-            await _repositoryWrapper.ChatMessages.Add(chatId, newMessage.Id);
+            var chatId = await _repository.Chat.GetChatIdByUrlHash(chatHash);
+            await _repository.ChatMessage.Add(newMessage);
+            await _repository.ChatMessages.Add(chatId, newMessage.Id);
             
             return CreatedAtAction("AddNewMessage", chatMessage);
         }

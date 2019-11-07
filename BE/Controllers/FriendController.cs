@@ -114,28 +114,8 @@ namespace BE.Controllers
         public async Task<IActionResult> GetFriends([FromQuery(Name = "startIndex")] int startIndex,
             [FromQuery(Name = "lastIndex")] int lastIndex, [FromHeader(Name = "userId")] int userId)
         {
-            var shortenedFriends = await _repository
-                .UserFriends.GetIndexedShortenedByUserId(userId, startIndex, lastIndex);
-            var friends = new List<FriendDto>();
-            foreach (var shortenedFriend in shortenedFriends)
-            {
-                using (FileStream fs = new FileStream(shortenedFriend.AvatarPath, FileMode.Open, FileAccess.Read))
-                {
-                    byte[] bytes = System.IO.File.ReadAllBytes(shortenedFriend.AvatarPath);
-                    fs.Read(bytes, 0, System.Convert.ToInt32(fs.Length));
-                    var friend = new FriendDto
-                    {
-                        Id = shortenedFriend.Id,
-                        Name = shortenedFriend.Name,
-                        Surname = shortenedFriend.Surname,
-                        DialogLink = "da2jkd21l34",
-                        OnlineStatus = true,
-                        Avatar = bytes
-                    };
-                    friends.Add(friend);
-                    fs.Close();
-                }
-            }
+            var friends = await _repository
+                .UserFriends.GetIndexedByUserId(userId, startIndex, lastIndex);
 
             return Ok(friends);
         }
@@ -174,30 +154,11 @@ namespace BE.Controllers
         [Route("getExemplaryByUserId")]
         public async Task<IActionResult> GetExemplaryByUserId([FromHeader(Name = "userId")] int userId)
         {
-            List<ExemplaryFriendDto> exemplaryFriendsDtos
-                = new List<ExemplaryFriendDto>();
-
             var exemplaryFriends = await _repository
                 .UserFriends
                 .GetExemplaryByUserId(userId);
 
-            exemplaryFriends.ForEach(exemplaryFriend =>
-            {
-                using (FileStream fs = new FileStream(exemplaryFriend.Friend.FriendNavigation.Avatar, FileMode.Open,
-                    FileAccess.Read))
-                {
-                    byte[] bytes = System.IO.File.ReadAllBytes(exemplaryFriend.Friend.FriendNavigation.Avatar);
-                    fs.Read(bytes, 0, System.Convert.ToInt32(fs.Length));
-                    exemplaryFriendsDtos.Add(new ExemplaryFriendDto
-                    {
-                        Id = exemplaryFriend.FriendId,
-                        Avatar = bytes
-                    });
-                    fs.Close();
-                }
-            });
-
-            return Ok(exemplaryFriendsDtos);
+            return Ok(exemplaryFriends);
         }
 
         [HttpGet]

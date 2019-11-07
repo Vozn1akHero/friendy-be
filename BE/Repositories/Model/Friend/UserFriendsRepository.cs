@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using BE.Dtos.FriendDtos;
+using BE.Interfaces;
 using BE.Interfaces.Repositories;
 using BE.Models;
 using Microsoft.EntityFrameworkCore;
@@ -10,8 +11,12 @@ namespace BE.Repositories
 {
     public class UserFriendsRepository : RepositoryBase<UserFriends>, IUserFriendsRepository
     {
-        public UserFriendsRepository(FriendyContext friendyContext) : base(friendyContext)
+        private IUserAvatarConverterService _userAvatarConverterService;
+        
+        public UserFriendsRepository(FriendyContext friendyContext,
+            IUserAvatarConverterService userAvatarConverterService) : base(friendyContext)
         {
+            _userAvatarConverterService = userAvatarConverterService;
         }
 
         public async Task AddNew(int id, int userId)
@@ -34,24 +39,26 @@ namespace BE.Repositories
             return friends;
         }
         
-        public async Task<List<UserFriends>> GetIndexedByUserId(int userId, int startIndex, int lastIndex)
+/*        public async Task<List<UserFriends>> GetIndexedByUserId(int userId, int startIndex, int lastIndex)
         {
             var exampleFriendList = await FindByCondition(e => e.UserId == userId && e.Id >= startIndex && e.Id <= lastIndex)
                 .Include(e => e.Friend.FriendNavigation)
                 .ToListAsync();
             
             return exampleFriendList;
-        }
+        }*/
         
-        public async Task<List<ShortenedFriendDto>> GetIndexedShortenedByUserId(int userId, int startIndex, int lastIndex)
+        public async Task<List<FriendDto>> GetIndexedByUserId(int userId, int startIndex, int lastIndex)
         {
             var exampleFriendList = await FindByCondition(e => e.UserId == userId && e.Id >= startIndex && e.Id <= lastIndex)
                 .Include(e => e.Friend.FriendNavigation)
-                .Select(e => new ShortenedFriendDto
+                .Select(e => new FriendDto
                 {
                     Id = e.FriendId,
-                    AvatarPath = e.Friend.FriendNavigation.Avatar,
+                    Avatar = _userAvatarConverterService.ConvertToByte(e.Friend.FriendNavigation.Avatar),
                     Name = e.Friend.FriendNavigation.Name,
+                    DialogLink = "da2jkd21l34",
+                    OnlineStatus = true,
                     Surname = e.Friend.FriendNavigation.Surname
                 })
                 .ToListAsync();
@@ -78,11 +85,16 @@ namespace BE.Repositories
             await SaveAsync();
         }
 
-        public async Task<List<UserFriends>> GetExemplaryByUserId(int userId)
+        public async Task<List<ExemplaryFriendDto>> GetExemplaryByUserId(int userId)
         {
             var friends = await FindByCondition(e => e.UserId == userId)
                 .Include(e => e.Friend.FriendNavigation)
                 .Take(3)
+                .Select(e => new ExemplaryFriendDto
+                {
+                    Id = e.FriendId,
+                    Avatar = _userAvatarConverterService.ConvertToByte(e.Friend.FriendNavigation.Avatar)
+                })
                 .ToListAsync();
 
             return friends;

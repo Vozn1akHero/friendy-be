@@ -26,10 +26,12 @@ namespace BE.Controllers
     public class UserController : ControllerBase
     {
         private IRepositoryWrapper _repository;
-        
-        public UserController(IRepositoryWrapper repository)
+        private IUserAvatarConverterService _userAvatarConverterService;
+        public UserController(IRepositoryWrapper repository,
+            IUserAvatarConverterService userAvatarConverterService)
         {
             _repository = repository;
+            _userAvatarConverterService = userAvatarConverterService;
         }
 
         [HttpGet]
@@ -63,26 +65,17 @@ namespace BE.Controllers
 
         [HttpGet]
         [Authorize]
-        [Route("getAvatar")]
+        [Route("avatar")]
         public async Task<IActionResult> GetUserAvatar([FromHeader(Name = "userId")] int userId)
         {
-            var user = await _repository.User.GetUserById(userId);
-            /*var content = new FileStream(user.Avatar, FileMode.Open, FileAccess.Read, FileShare.Read);
-            var response = File(content, "image/jpeg");//FileStreamResult*/
-            
-            using (FileStream fs = new FileStream(user.Avatar, FileMode.Open, FileAccess.Read))
-            {
-                byte[] bytes = System.IO.File.ReadAllBytes(user.Avatar);
-                fs.Read(bytes, 0, System.Convert.ToInt32(fs.Length));
-                fs.Close();
-
-                return Ok(bytes);
-            }
+            var avatar = await _repository.User.GetAvatarPathByIdAsync(userId);
+            var bytes = _userAvatarConverterService.ConvertToByte(avatar);
+            return Ok(bytes);
         }
 
         [HttpPut]
         [Authorize]
-        [Route("updateAvatar")]
+        [Route("avatar")]
         public async Task<IActionResult> UpdateUserAvatar(IFormFile newAvatar, [FromHeader(Name = "userId")] int userId)
         {
             string newPath = newAvatar.Name + userId;
