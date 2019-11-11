@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using BE.Interfaces.Repositories;
 using BE.Interfaces.Repositories.Chat;
 using BE.Repositories;
+using BE.Repositories.Interfaces;
 
 namespace BE.Interfaces
 {
@@ -12,14 +13,15 @@ namespace BE.Interfaces
     {
         IUserRepository User { get; }
         ISessionRepository Session { get; }
+        IPostRepository Post { get; }
         IUserPostRepository UserPost { get; }
-        IUserPostLikesRepository UserPostLikes { get; }
+        IPostLikeRepository PostLike { get; }
         IFriendRepository Friend { get; }
         IUserFriendsRepository UserFriends { get; }
         IUserEventsRepository UserEvents { get; }
         IEventRepository Event { get; }
         IEventAdminsRepository EventAdmins { get; }
-        IUserPostCommentsRepository UserPostComments { get; }
+        IPostCommentRepository PostComment { get; }
         IChatRepository Chat { get; }
         IChatMessageRepository ChatMessage { get; }
         IChatMessagesRepository ChatMessages { get; }

@@ -49,7 +49,10 @@ namespace BE
             
             services.AddSingleton<IFileProvider>(  
                 new PhysicalFileProvider(  
-                    Path.Combine(Directory.GetCurrentDirectory(), "wwwroot")));  
+                    Path.Combine(Directory.GetCurrentDirectory(), "wwwroot")));
+
+            //services.AddDirectoryBrowser();
+            services.AddDirectoryBrowser();
             
             var key = Encoding.ASCII.GetBytes(Configuration.GetValue<string>("AppSettings:JWTSecret"));
             services.AddAuthentication(x =>
@@ -71,7 +74,7 @@ namespace BE
                 });
 
             services.AddScoped<IJwtService, JwtService>();
-            services.AddScoped<IUserAvatarConverterService, UserAvatarConverterService>();
+            services.AddScoped<IAvatarConverterService, AvatarConverterService>();
             services.AddScoped<ICustomSqlQueryService, CustomSqlQueryService>();
             services.AddScoped<IAuthenticationService, AuthenticationService>();
 
@@ -91,11 +94,23 @@ namespace BE
             {
                 app.UseDeveloperExceptionPage();
             }
-            else
+            
+/*            app.UseDirectoryBrowser(new DirectoryBrowserOptions
             {
-                // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
-                //app.UseHsts();
-            }
+                FileProvider = new PhysicalFileProvider(
+                    Path.Combine(Directory.GetCurrentDirectory(), "wwwroot")),
+                RequestPath = "/images"
+            });*/
+
+            app.UseStaticFiles();
+            
+            app.UseFileServer(new FileServerOptions
+            {
+                FileProvider = new PhysicalFileProvider(
+                    Path.Combine(Directory.GetCurrentDirectory(), "wwwroot")),
+                RequestPath = "/wwwroot",
+                EnableDirectoryBrowsing = true
+            });
             
             app.UseCors(builder => builder.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin().AllowCredentials());
             //app.UseHttpsRedirection();

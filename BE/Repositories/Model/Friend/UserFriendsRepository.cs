@@ -11,10 +11,10 @@ namespace BE.Repositories
 {
     public class UserFriendsRepository : RepositoryBase<UserFriends>, IUserFriendsRepository
     {
-        private IUserAvatarConverterService _userAvatarConverterService;
+        private IAvatarConverterService _userAvatarConverterService;
         
         public UserFriendsRepository(FriendyContext friendyContext,
-            IUserAvatarConverterService userAvatarConverterService) : base(friendyContext)
+            IAvatarConverterService userAvatarConverterService) : base(friendyContext)
         {
             _userAvatarConverterService = userAvatarConverterService;
         }

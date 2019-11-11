@@ -13,11 +13,11 @@ namespace BE.Controllers
 {
     [ApiController]
     [Route("api/chat")]
-    public class ChatController : Controller
+    public class ChatController : ControllerBase
     {
         private IRepositoryWrapper _repository;
-        private IUserAvatarConverterService _userAvatarConverterService;
-        public ChatController(IRepositoryWrapper repository, IUserAvatarConverterService userAvatarConverterService)
+        private IAvatarConverterService _userAvatarConverterService;
+        public ChatController(IRepositoryWrapper repository, IAvatarConverterService userAvatarConverterService)
         {
             _repository = repository;
             _userAvatarConverterService = userAvatarConverterService;

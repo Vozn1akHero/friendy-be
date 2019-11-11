@@ -26,9 +26,9 @@ namespace BE.Controllers
     public class UserController : ControllerBase
     {
         private IRepositoryWrapper _repository;
-        private IUserAvatarConverterService _userAvatarConverterService;
+        private IAvatarConverterService _userAvatarConverterService;
         public UserController(IRepositoryWrapper repository,
-            IUserAvatarConverterService userAvatarConverterService)
+            IAvatarConverterService userAvatarConverterService)
         {
             _repository = repository;
             _userAvatarConverterService = userAvatarConverterService;
@@ -47,7 +47,7 @@ namespace BE.Controllers
         [Route("getById/{id}")]
         public async Task<IActionResult> GetById(int id)
         {
-            var user = await _repository.User.GetUserById(id);
+            var user = await _repository.User.GetUserByIdAsync(id);
             if(user != null) return Ok(user);
             return NotFound();
         }
@@ -59,7 +59,7 @@ namespace BE.Controllers
         public async Task<IActionResult> GetUser()
         {
             string sessionToken = HttpContext.Request.Cookies["SESSION_TOKEN"];
-            var user = await _repository.User.GetUser(sessionToken);
+            var user = await _repository.User.GetUserAsync(sessionToken);
             return Ok(user);
         }
 
@@ -68,9 +68,8 @@ namespace BE.Controllers
         [Route("avatar")]
         public async Task<IActionResult> GetUserAvatar([FromHeader(Name = "userId")] int userId)
         {
-            var avatar = await _repository.User.GetAvatarPathByIdAsync(userId);
-            var bytes = _userAvatarConverterService.ConvertToByte(avatar);
-            return Ok(bytes);
+            var avatar = await _repository.User.GetAvatarByIdAsync(userId);
+            return Ok(avatar);
         }
 
         [HttpGet("profile-belonging/{id}")]
@@ -104,7 +103,7 @@ namespace BE.Controllers
                 await newAvatar.CopyToAsync(stream);
             }
 
-            await _repository.User.UpdateAvatar(newPath, userId);
+            await _repository.User.UpdateAvatarAsync(newPath, userId);
 
             return Ok();
         }

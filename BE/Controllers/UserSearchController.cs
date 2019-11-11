@@ -12,31 +12,30 @@ namespace BE.Controllers
     public class UserSearchController : ControllerBase 
     {
         private IRepositoryWrapper _repository;
-        
+
         public UserSearchController(IRepositoryWrapper repository)
         {
             _repository = repository;
+            
         }
         
-        [HttpGet]
+        [HttpGet("exemplary")]
         [Authorize]
-        [Route("exemplary")]
         public async Task<IActionResult> GetStartingListForSearching([FromQuery(Name = "firstIndex")] int firstIndex,
             [FromQuery(Name = "lastIndex")] int lastIndex,
             [FromHeader(Name = "userId")] int userId)
         {
-            var users = await _repository.User.GetByRange(firstIndex, lastIndex);
+            var users = await _repository.User.GetByRangeAsync(firstIndex, lastIndex);
             var usersCut = users.Where(e => e.Id != userId).ToHashSet();
             return Ok(usersCut);
         }
         
-        [HttpPost]
+        [HttpPost("with-criteria")]
         [Authorize]
-        [Route("with-criteria")]
         public async Task<IActionResult> GetUsersByCriteria(
             [FromBody] UsersLookUpCriteriaDto usersLookUpCriteriaDto)
         {
-            var users = await _repository.User.GetUsersByCriteria(usersLookUpCriteriaDto);
+            var users = await _repository.User.GetUsersByCriteriaAsync(usersLookUpCriteriaDto);
             return Ok(users);
         }
     }

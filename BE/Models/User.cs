@@ -12,9 +12,10 @@ namespace BE.Models
             Comment = new HashSet<Comment>();
             EventAdmins = new HashSet<EventAdmins>();
             EventParticipants = new HashSet<EventParticipants>();
-            EventPostLikes = new HashSet<EventPostLikes>();
             Friend = new HashSet<Friend>();
             FriendRequest = new HashSet<FriendRequest>();
+            PostComment = new HashSet<PostComment>();
+            PostLike = new HashSet<PostLike>();
             UserEvents = new HashSet<UserEvents>();
             UserFriends = new HashSet<UserFriends>();
             UserImage = new HashSet<UserImage>();
@@ -45,9 +46,10 @@ namespace BE.Models
         public virtual ICollection<Comment> Comment { get; set; }
         public virtual ICollection<EventAdmins> EventAdmins { get; set; }
         public virtual ICollection<EventParticipants> EventParticipants { get; set; }
-        public virtual ICollection<EventPostLikes> EventPostLikes { get; set; }
         public virtual ICollection<Friend> Friend { get; set; }
         public virtual ICollection<FriendRequest> FriendRequest { get; set; }
+        public virtual ICollection<PostComment> PostComment { get; set; }
+        public virtual ICollection<PostLike> PostLike { get; set; }
         public virtual ICollection<UserEvents> UserEvents { get; set; }
         public virtual ICollection<UserFriends> UserFriends { get; set; }
         public virtual ICollection<UserImage> UserImage { get; set; }

@@ -145,7 +145,7 @@ namespace BE.Controllers
         public async Task<IActionResult> GetRecommended([FromQuery(Name = "firstIndex")] int firstIndex,
             [FromQuery(Name = "lastIndex")] int lastIndex)
         {
-            var users = await _repository.User.GetByRange(firstIndex, lastIndex);
+            var users = await _repository.User.GetByRangeAsync(firstIndex, lastIndex);
             return Ok(users);
         }
 

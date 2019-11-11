@@ -1,6 +1,6 @@
 namespace BE.Interfaces
 {
-    public interface IUserAvatarConverterService
+    public interface IAvatarConverterService
     {
         byte[] ConvertToByte(string path);
     }

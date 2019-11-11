@@ -3,7 +3,7 @@ using BE.Interfaces;
 
 namespace BE.Services
 {
-    public class UserAvatarConverterService : IUserAvatarConverterService
+    public class AvatarConverterService : IAvatarConverterService
     {
         public byte[] ConvertToByte(string path)
         {

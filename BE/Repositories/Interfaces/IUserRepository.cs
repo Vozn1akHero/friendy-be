@@ -11,14 +11,14 @@ namespace BE.Interfaces
     public interface IUserRepository : IRepositoryBase<User>
     {
         Task<IEnumerable<User>> GetAllUsersAsync();
-        Task<User> GetUser(string token);
-        Task<User> GetUserById(int id);
-        Task<User> GetUserByEmail(string email);
-        Task<IEnumerable<UserBasicDto>> GetUsersByCriteria(UsersLookUpCriteriaDto usersLookUpCriteriaDto);
-        Task<IEnumerable<UserBasicDto>> GetByRange(int firstIndex, int lastIndex);
-        Task SetSessionId(int userId, int id);
-        Task UpdateAvatar(string path, int userId);
-        Task<string> GetAvatarPathByIdAsync(int userId);
+        Task<User> GetUserAsync(string token);
+        Task<User> GetUserByIdAsync(int id);
+        Task<User> GetUserByEmailAsync(string email);
+        Task<IEnumerable<UserBasicDto>> GetUsersByCriteriaAsync(UsersLookUpCriteriaDto usersLookUpCriteriaDto);
+        Task<IEnumerable<UserBasicDto>> GetByRangeAsync(int firstIndex, int lastIndex);
+        Task SetSessionIdAsync(int userId, int id);
+        Task UpdateAvatarAsync(string path, int userId);
+        Task<byte[]> GetAvatarByIdAsync(int userId);
         //Task UpdateUserAsync(User dbUser);
     }
 }

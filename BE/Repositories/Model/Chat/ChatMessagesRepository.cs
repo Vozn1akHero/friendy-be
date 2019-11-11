@@ -11,10 +11,10 @@ namespace BE.Repositories.Chat
 {
     public class ChatMessagesRepository : RepositoryBase<ChatMessages>, IChatMessagesRepository
     {
-        private IUserAvatarConverterService _userAvatarConverterService;
+        private IAvatarConverterService _userAvatarConverterService;
 
         public ChatMessagesRepository(FriendyContext friendyContext,
-            IUserAvatarConverterService userAvatarConverterService) : base(friendyContext)
+            IAvatarConverterService userAvatarConverterService) : base(friendyContext)
         {
             _userAvatarConverterService = userAvatarConverterService;
         }

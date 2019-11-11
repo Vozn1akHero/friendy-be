@@ -24,16 +24,17 @@ namespace BE.Models
         public virtual DbSet<Education> Education { get; set; }
         public virtual DbSet<Event> Event { get; set; }
         public virtual DbSet<EventAdmins> EventAdmins { get; set; }
-        public virtual DbSet<EventComments> EventComments { get; set; }
         public virtual DbSet<EventImage> EventImage { get; set; }
         public virtual DbSet<EventParticipants> EventParticipants { get; set; }
         public virtual DbSet<EventPost> EventPost { get; set; }
-        public virtual DbSet<EventPostLikes> EventPostLikes { get; set; }
         public virtual DbSet<Friend> Friend { get; set; }
         public virtual DbSet<FriendRequest> FriendRequest { get; set; }
         public virtual DbSet<Gender> Gender { get; set; }
         public virtual DbSet<Interest> Interest { get; set; }
         public virtual DbSet<MaritalStatus> MaritalStatus { get; set; }
+        public virtual DbSet<Post> Post { get; set; }
+        public virtual DbSet<PostComment> PostComment { get; set; }
+        public virtual DbSet<PostLike> PostLike { get; set; }
         public virtual DbSet<Religion> Religion { get; set; }
         public virtual DbSet<Session> Session { get; set; }
         public virtual DbSet<SmokingAttitude> SmokingAttitude { get; set; }
@@ -44,8 +45,6 @@ namespace BE.Models
         public virtual DbSet<UserImage> UserImage { get; set; }
         public virtual DbSet<UserInterests> UserInterests { get; set; }
         public virtual DbSet<UserPost> UserPost { get; set; }
-        public virtual DbSet<UserPostComments> UserPostComments { get; set; }
-        public virtual DbSet<UserPostLikes> UserPostLikes { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -168,7 +167,15 @@ namespace BE.Models
                     .HasMaxLength(500)
                     .IsUnicode(false);
 
+                entity.Property(e => e.PostId).HasColumnName("post_id");
+
                 entity.Property(e => e.UserId).HasColumnName("user_id");
+
+                entity.HasOne(d => d.Post)
+                    .WithMany(p => p.Comment)
+                    .HasForeignKey(d => d.PostId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_comment_post");
 
                 entity.HasOne(d => d.User)
                     .WithMany(p => p.Comment)
@@ -265,23 +272,6 @@ namespace BE.Models
                     .HasConstraintName("FK_event_admin_user");
             });
 
-            modelBuilder.Entity<EventComments>(entity =>
-            {
-                entity.ToTable("event_comments");
-
-                entity.Property(e => e.Id).HasColumnName("id");
-
-                entity.Property(e => e.CommentId).HasColumnName("comment_id");
-
-                entity.Property(e => e.EventPostId).HasColumnName("event_post_id");
-
-                entity.HasOne(d => d.EventPost)
-                    .WithMany(p => p.EventComments)
-                    .HasForeignKey(d => d.EventPostId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_event_comments_comment");
-            });
-
             modelBuilder.Entity<EventImage>(entity =>
             {
                 entity.ToTable("event_image");
@@ -333,47 +323,21 @@ namespace BE.Models
                     .HasColumnName("id")
                     .ValueGeneratedNever();
 
-                entity.Property(e => e.Content)
-                    .IsRequired()
-                    .HasColumnName("content")
-                    .HasMaxLength(1000)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.Date)
-                    .HasColumnName("date")
-                    .HasColumnType("date");
-
                 entity.Property(e => e.EventId).HasColumnName("event_id");
 
-                entity.Property(e => e.Image)
-                    .HasColumnName("image")
-                    .HasMaxLength(8000)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.LikesQuantity).HasColumnName("likes_quantity");
+                entity.Property(e => e.PostId).HasColumnName("post_id");
 
                 entity.HasOne(d => d.Event)
                     .WithMany(p => p.EventPost)
                     .HasForeignKey(d => d.EventId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_event_entry_event");
-            });
 
-            modelBuilder.Entity<EventPostLikes>(entity =>
-            {
-                entity.ToTable("event_post_likes");
-
-                entity.Property(e => e.Id).HasColumnName("id");
-
-                entity.Property(e => e.EventPostId).HasColumnName("event_post_id");
-
-                entity.Property(e => e.UserId).HasColumnName("user_id");
-
-                entity.HasOne(d => d.User)
-                    .WithMany(p => p.EventPostLikes)
-                    .HasForeignKey(d => d.UserId)
+                entity.HasOne(d => d.Post)
+                    .WithMany(p => p.EventPost)
+                    .HasForeignKey(d => d.PostId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_event_post_likes_user");
+                    .HasConstraintName("FK_event_post_post");
             });
 
             modelBuilder.Entity<Friend>(entity =>
@@ -451,6 +415,74 @@ namespace BE.Models
                     .HasColumnName("title")
                     .HasMaxLength(150)
                     .IsUnicode(false);
+            });
+
+            modelBuilder.Entity<Post>(entity =>
+            {
+                entity.ToTable("post");
+
+                entity.Property(e => e.Id).HasColumnName("id");
+
+                entity.Property(e => e.Content)
+                    .IsRequired()
+                    .HasColumnName("content")
+                    .HasMaxLength(1000)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Date)
+                    .HasColumnName("date")
+                    .HasColumnType("datetime");
+
+                entity.Property(e => e.ImagePath)
+                    .HasColumnName("imagePath")
+                    .HasMaxLength(1500)
+                    .IsUnicode(false);
+            });
+
+            modelBuilder.Entity<PostComment>(entity =>
+            {
+                entity.ToTable("post_comment");
+
+                entity.Property(e => e.Id).HasColumnName("id");
+
+                entity.Property(e => e.PostId).HasColumnName("post_id");
+
+                entity.Property(e => e.UserId).HasColumnName("user_id");
+
+                entity.HasOne(d => d.Post)
+                    .WithMany(p => p.PostComment)
+                    .HasForeignKey(d => d.PostId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_post_comment_post");
+
+                entity.HasOne(d => d.User)
+                    .WithMany(p => p.PostComment)
+                    .HasForeignKey(d => d.UserId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_post_comment_user");
+            });
+
+            modelBuilder.Entity<PostLike>(entity =>
+            {
+                entity.ToTable("post_like");
+
+                entity.Property(e => e.Id).HasColumnName("id");
+
+                entity.Property(e => e.PostId).HasColumnName("post_id");
+
+                entity.Property(e => e.UserId).HasColumnName("user_id");
+
+                entity.HasOne(d => d.Post)
+                    .WithMany(p => p.PostLike)
+                    .HasForeignKey(d => d.PostId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_post_like_post");
+
+                entity.HasOne(d => d.User)
+                    .WithMany(p => p.PostLike)
+                    .HasForeignKey(d => d.UserId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_post_like_user");
             });
 
             modelBuilder.Entity<Religion>(entity =>
@@ -713,68 +745,21 @@ namespace BE.Models
 
                 entity.Property(e => e.Id).HasColumnName("id");
 
-                entity.Property(e => e.Content)
-                    .IsRequired()
-                    .HasColumnName("content")
-                    .HasMaxLength(1000)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.Date)
-                    .HasColumnName("date")
-                    .HasColumnType("datetime");
-
-                entity.Property(e => e.Image)
-                    .HasColumnName("image")
-                    .HasMaxLength(8000)
-                    .IsUnicode(false);
+                entity.Property(e => e.PostId).HasColumnName("post_id");
 
                 entity.Property(e => e.UserId).HasColumnName("user_id");
+
+                entity.HasOne(d => d.Post)
+                    .WithMany(p => p.UserPost)
+                    .HasForeignKey(d => d.PostId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_user_post_post");
 
                 entity.HasOne(d => d.User)
                     .WithMany(p => p.UserPost)
                     .HasForeignKey(d => d.UserId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_user_entry_user");
-            });
-
-            modelBuilder.Entity<UserPostComments>(entity =>
-            {
-                entity.ToTable("user_post_comments");
-
-                entity.Property(e => e.Id).HasColumnName("id");
-
-                entity.Property(e => e.CommentId).HasColumnName("comment_id");
-
-                entity.Property(e => e.UserPostId).HasColumnName("user_post_id");
-
-                entity.HasOne(d => d.Comment)
-                    .WithMany(p => p.UserPostComments)
-                    .HasForeignKey(d => d.CommentId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_user_entry_comments_comment");
-
-                entity.HasOne(d => d.UserPost)
-                    .WithMany(p => p.UserPostComments)
-                    .HasForeignKey(d => d.UserPostId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_user_entry_comments_user_entry");
-            });
-
-            modelBuilder.Entity<UserPostLikes>(entity =>
-            {
-                entity.ToTable("user_post_likes");
-
-                entity.Property(e => e.Id).HasColumnName("id");
-
-                entity.Property(e => e.UserId).HasColumnName("user_id");
-
-                entity.Property(e => e.UserPostId).HasColumnName("user_post_id");
-
-                entity.HasOne(d => d.UserPost)
-                    .WithMany(p => p.UserPostLikes)
-                    .HasForeignKey(d => d.UserPostId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_user_post_likes_user_post");
             });
         }
     }

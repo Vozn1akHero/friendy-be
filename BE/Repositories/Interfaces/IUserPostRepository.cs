@@ -7,8 +7,9 @@ namespace BE.Repositories
 {
     public interface IUserPostRepository : IRepositoryBase<UserPost>
     {
-        Task CreateUserPost(UserPost post);
-        Task RemovePostById(int id);
-        Task<List<UserPost>> GetById(int id);
+        Task CreateAsync(UserPost post);
+        Task RemoveByIdAsync(int id);
+        Task<UserPost> GetByIdAsync(int id);
+        Task<List<UserPost>> GetRangeByIdAsync(int userId, int startIndex, int length);
     }
 }

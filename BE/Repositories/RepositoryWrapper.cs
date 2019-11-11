@@ -8,6 +8,7 @@ using BE.Interfaces.Repositories;
 using BE.Interfaces.Repositories.Chat;
 using BE.Models;
 using BE.Repositories.Chat;
+using BE.Repositories.Interfaces;
 using BE.Repositories.RepositoryServices.Interfaces.User;
 using BE.RepositoryServices.User;
 using Microsoft.Extensions.Configuration;
@@ -21,14 +22,15 @@ namespace BE.Repositories
 
         private IUserRepository _user;
         private ISessionRepository _session;
+        private IPostRepository _post;
         private IUserPostRepository _userPost;
-        private IUserPostLikesRepository _userPostLikes;
+        private IPostLikeRepository _postLike;
         private IFriendRepository _friend;
         private IEventRepository _event;
         private IUserFriendsRepository _userFriends;
         private IUserEventsRepository _userEvents;
         private IEventAdminsRepository _eventAdmins;
-        private IUserPostCommentsRepository _userPostComments;
+        private IPostCommentRepository _postComment;
         private IChatRepository _chat;
         private IChatMessageRepository _chatMessage;
         private IChatMessagesRepository _chatMessages;
@@ -36,57 +38,59 @@ namespace BE.Repositories
         private IFriendRequestRepository _friendRequest;
 
         private IJwtService _jwtService;
-        private IUserAvatarConverterService _userAvatarConverterService;
+        private IAvatarConverterService _avatarConverterService;
         private ICustomSqlQueryService _customSqlQueryService;
         
         private IUserSearchingService _userSearchingService;
         
         public IUserRepository User =>
             _user ?? (_user = new UserRepository(_friendyContext,
-                _userAvatarConverterService,
+                _avatarConverterService,
                 _userSearchingService));
 
         public ISessionRepository Session => _session ?? (_session = new SessionRepository(_friendyContext));
-
+        
+        public IPostRepository Post => _post ?? (_post = new PostRepository(_friendyContext));
+        
         public IUserPostRepository UserPost => _userPost ?? (_userPost = new UserPostRepository(_friendyContext));
 
-        public IUserPostLikesRepository UserPostLikes => _userPostLikes ?? (_userPostLikes = new UserPostLikesRepository(_friendyContext));
+        public IPostLikeRepository PostLike => _postLike ?? (_postLike = new PostLikeRepository(_friendyContext));
 
         public IFriendRepository Friend => _friend ?? (_friend = new FriendRepository(_friendyContext));
 
-        public IEventRepository Event => _event ?? (_event = new EventRepository(_friendyContext));
+        public IEventRepository Event => _event ?? (_event = new EventRepository(_friendyContext, _avatarConverterService));
 
-        public IUserFriendsRepository UserFriends => _userFriends ?? (_userFriends = new UserFriendsRepository(_friendyContext, _userAvatarConverterService));
+        public IUserFriendsRepository UserFriends => _userFriends ?? (_userFriends = new UserFriendsRepository(_friendyContext, _avatarConverterService));
 
         public IUserEventsRepository UserEvents => _userEvents ?? (_userEvents = new UserEventsRepository(_friendyContext));
 
         public IEventAdminsRepository EventAdmins => _eventAdmins ?? (_eventAdmins = new EventAdminsRepository(_friendyContext));
 
-        public IUserPostCommentsRepository UserPostComments => _userPostComments ?? (_userPostComments = new UserPostCommentsRepository(_friendyContext));
+        public IPostCommentRepository PostComment => _postComment ?? (_postComment = new PostCommentRepository(_friendyContext));
 
         public IChatRepository Chat => _chat ?? (_chat = new ChatRepository(_friendyContext));
 
         public IChatMessageRepository ChatMessage => _chatMessage ?? (_chatMessage = new ChatMessageRepository(_friendyContext));
 
-        public IChatMessagesRepository ChatMessages => _chatMessages ?? (_chatMessages = new ChatMessagesRepository(_friendyContext, _userAvatarConverterService));
+        public IChatMessagesRepository ChatMessages => _chatMessages ?? (_chatMessages = new ChatMessagesRepository(_friendyContext, _avatarConverterService));
 
         public IFriendRequestRepository FriendRequest => _friendRequest ?? (_friendRequest = new FriendRequestRepository(_friendyContext));
 
         public IChatParticipantsRepository ChatParticipants =>
             _chatParticipants ?? (_chatParticipants = new ChatParticipantsRepository(_friendyContext, 
-                _userAvatarConverterService, 
+                _avatarConverterService, 
                 _customSqlQueryService));
 
 
         public RepositoryWrapper(FriendyContext friendyContext,
             IJwtService jwtService, 
-            IUserAvatarConverterService userAvatarConverterService,
+            IAvatarConverterService avatarConverterService,
             ICustomSqlQueryService customSqlQueryService,
             IUserSearchingService userSearchingService)
         {
             _friendyContext = friendyContext;
             _jwtService = jwtService;
-            _userAvatarConverterService = userAvatarConverterService;
+            _avatarConverterService = avatarConverterService;
             _customSqlQueryService = customSqlQueryService;
             _userSearchingService = userSearchingService;
         }

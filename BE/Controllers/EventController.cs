@@ -7,7 +7,7 @@ namespace BE.Controllers
 {
     [ApiController]
     [Route("api/event")]
-    public class EventController : Controller
+    public class EventController : ControllerBase
     {
         private IRepositoryWrapper _repository;
 
@@ -58,5 +58,15 @@ namespace BE.Controllers
             var eventData = await _repository.Event.GetById(id);
             return Ok(eventData);
         }
+        
+        
+        
+/*        [HttpGet("avatar/{id}")]
+        [Authorize]
+        public async Task<IActionResult> GetAvatarById(int id)
+        {
+            var avatar = await _repository.Event.GetAvatarById(id);
+            return Ok(avatar);
+        }*/
     }
 }

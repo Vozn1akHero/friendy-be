@@ -50,7 +50,7 @@ namespace BE.Controllers
             var authenticationRes = await _authenticationService.Authenticate(user.Email, user.Password);
             if (!authenticationRes)
                 return Forbid();
-            var userRes = await _repository.User.GetUserByEmail(user.Email);
+            var userRes = await _repository.User.GetUserByEmailAsync(user.Email);
             var claims = new List<Claim>
             {
                 new Claim("id", userRes.Id.ToString()),
@@ -67,7 +67,7 @@ namespace BE.Controllers
                     Secure = false
                 });
             var session = await _repository.Session.CreateSession(token);
-            await _repository.User.SetSessionId(userRes.Id, session.Id);
+            await _repository.User.SetSessionIdAsync(userRes.Id, session.Id);
             return Ok(new
             {
                 sessionHash = session.Hash

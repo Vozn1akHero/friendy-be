@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace BE.Models
 {
-    public partial class UserPost
+    public partial class PostComment
     {
         public int Id { get; set; }
         public int UserId { get; set; }

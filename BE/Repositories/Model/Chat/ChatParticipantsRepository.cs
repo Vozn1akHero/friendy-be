@@ -14,11 +14,11 @@ namespace BE.Repositories.Chat
 {
     public class ChatParticipantsRepository : RepositoryBase<ChatParticipants>, IChatParticipantsRepository
     {
-        private readonly IUserAvatarConverterService _userAvatarConverterService;
+        private readonly IAvatarConverterService _userAvatarConverterService;
         private readonly ICustomSqlQueryService _customSqlQueryService;
 
         public ChatParticipantsRepository(FriendyContext friendyContext, 
-            IUserAvatarConverterService userAvatarConverterService,
+            IAvatarConverterService userAvatarConverterService,
             ICustomSqlQueryService customSqlQueryService) : base(friendyContext)
         {
             _userAvatarConverterService = userAvatarConverterService;
