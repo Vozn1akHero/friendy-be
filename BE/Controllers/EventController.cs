@@ -18,14 +18,6 @@ namespace BE.Controllers
 
         [HttpGet]
         [Authorize]
-        [Route("getExampleEvents")]
-        public async Task<IActionResult> GetExampleEvents()
-        {
-            return Ok();
-        }
-
-        [HttpGet]
-        [Authorize]
         [Route("user/loggedin")]
         public async Task<IActionResult> GetLoggedInUserEvents([FromHeader(Name = "userId")] int userId)
         {

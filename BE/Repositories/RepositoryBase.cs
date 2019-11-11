@@ -17,21 +17,21 @@ namespace BE.Repositories
     public abstract class RepositoryBase<T> : IRepositoryBase<T> where T : class
     {
         //protected RepositoryContext RepositoryContext { get; set; }
-        protected FriendyContext FriendyContext { get; set; }
+        private FriendyContext FriendyContext { get; }
 
-        public RepositoryBase(FriendyContext friendyContext)
+        protected RepositoryBase(FriendyContext friendyContext)
         {
-            this.FriendyContext = friendyContext;
+            FriendyContext = friendyContext;
         }
 
         public IQueryable<T> FindAll()
         {
-            return this.FriendyContext.Set<T>();
+            return FriendyContext.Set<T>();
         }
 
         public IQueryable<T> FindByCondition(Expression<Func<T, bool>> expression)
         {
-            return this.FriendyContext.Set<T>()
+            return FriendyContext.Set<T>()
                 .Where(expression);
         }
         
@@ -42,27 +42,32 @@ namespace BE.Repositories
 
         public void Create(T entity)
         {
-            this.FriendyContext.Set<T>().Add(entity);
+            FriendyContext.Set<T>().Add(entity);
         }
 
         public void Update(T entity)
         {
-            this.FriendyContext.Set<T>().Update(entity);
+            FriendyContext.Set<T>().Update(entity);
         }
 
         public void Delete(T entity)
         {
-            this.FriendyContext.Set<T>().Remove(entity);
+            FriendyContext.Set<T>().Remove(entity);
         }
 
         public async Task SaveAsync()
         {
-            await this.FriendyContext.SaveChangesAsync();
+            await FriendyContext.SaveChangesAsync();
         }
+        
+        public void Save()
+        {
+            FriendyContext.SaveChanges();
+        } 
 
         public IQueryable<T> ExecuteSqlQuery(string query, List<object> parameters)
         {
-            return this.FriendyContext.Set<T>().FromSql(query, parameters);
+            return FriendyContext.Set<T>().FromSql(query, parameters);
         }
     }
 }

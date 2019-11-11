@@ -41,85 +41,42 @@ namespace BE.Repositories
         
         private IUserSearchingService _userSearchingService;
         
-        public IUserRepository User
-        {
-            get { return _user ?? (_user = new UserRepository(_friendyContext,
-                             _userAvatarConverterService,
-                             _userSearchingService)); }
-        }
+        public IUserRepository User =>
+            _user ?? (_user = new UserRepository(_friendyContext,
+                _userAvatarConverterService,
+                _userSearchingService));
 
-        public ISessionRepository Session
-        {
-            get { return _session ?? (_session = new SessionRepository(_friendyContext)); }
-        }
-        
-        public IUserPostRepository UserPost
-        {
-            get { return _userPost ?? (_userPost = new UserPostRepository(_friendyContext)); }
-        }
-         
-        public IUserPostLikesRepository UserPostLikes
-        {
-            get { return _userPostLikes ?? (_userPostLikes = new UserPostLikesRepository(_friendyContext)); }
-        }    
-        
-        public IFriendRepository Friend
-        {
-            get { return _friend ?? (_friend = new FriendRepository(_friendyContext)); }
-        }  
-        
-        public IEventRepository Event
-        {
-            get { return _event ?? (_event = new EventRepository(_friendyContext)); }
-        }
-        
-        public IUserFriendsRepository UserFriends
-        {
-            get { return _userFriends ?? (_userFriends = new UserFriendsRepository(_friendyContext, _userAvatarConverterService)); }
-        }
-        
-        public IUserEventsRepository UserEvents
-        {
-            get { return _userEvents ?? (_userEvents = new UserEventsRepository(_friendyContext)); }
-        }
+        public ISessionRepository Session => _session ?? (_session = new SessionRepository(_friendyContext));
 
-        public IEventAdminsRepository EventAdmins
-        {
-            get { return _eventAdmins ?? (_eventAdmins = new EventAdminsRepository(_friendyContext)); }
-        }
-        
-        public IUserPostCommentsRepository UserPostComments
-        {
-            get { return _userPostComments ?? (_userPostComments = new UserPostCommentsRepository(_friendyContext)); }
-        }
-        
-        public IChatRepository Chat
-        {
-            get { return _chat ?? (_chat = new ChatRepository(_friendyContext)); }
-        }
-        
-        public IChatMessageRepository ChatMessage
-        {
-            get { return _chatMessage ?? (_chatMessage = new ChatMessageRepository(_friendyContext)); }
-        }
-        
-        public IChatMessagesRepository ChatMessages
-        {
-            get { return _chatMessages ?? (_chatMessages = new ChatMessagesRepository(_friendyContext, _userAvatarConverterService)); }
-        }
-        
-        public IFriendRequestRepository FriendRequest
-        {
-            get { return _friendRequest ?? (_friendRequest = new FriendRequestRepository(_friendyContext)); }
-        }
-        
-        public IChatParticipantsRepository ChatParticipants
-        {
-            get { return _chatParticipants ?? (_chatParticipants = new ChatParticipantsRepository(_friendyContext, 
-                             _userAvatarConverterService, 
-                             _customSqlQueryService)); }
-        }
-        
+        public IUserPostRepository UserPost => _userPost ?? (_userPost = new UserPostRepository(_friendyContext));
+
+        public IUserPostLikesRepository UserPostLikes => _userPostLikes ?? (_userPostLikes = new UserPostLikesRepository(_friendyContext));
+
+        public IFriendRepository Friend => _friend ?? (_friend = new FriendRepository(_friendyContext));
+
+        public IEventRepository Event => _event ?? (_event = new EventRepository(_friendyContext));
+
+        public IUserFriendsRepository UserFriends => _userFriends ?? (_userFriends = new UserFriendsRepository(_friendyContext, _userAvatarConverterService));
+
+        public IUserEventsRepository UserEvents => _userEvents ?? (_userEvents = new UserEventsRepository(_friendyContext));
+
+        public IEventAdminsRepository EventAdmins => _eventAdmins ?? (_eventAdmins = new EventAdminsRepository(_friendyContext));
+
+        public IUserPostCommentsRepository UserPostComments => _userPostComments ?? (_userPostComments = new UserPostCommentsRepository(_friendyContext));
+
+        public IChatRepository Chat => _chat ?? (_chat = new ChatRepository(_friendyContext));
+
+        public IChatMessageRepository ChatMessage => _chatMessage ?? (_chatMessage = new ChatMessageRepository(_friendyContext));
+
+        public IChatMessagesRepository ChatMessages => _chatMessages ?? (_chatMessages = new ChatMessagesRepository(_friendyContext, _userAvatarConverterService));
+
+        public IFriendRequestRepository FriendRequest => _friendRequest ?? (_friendRequest = new FriendRequestRepository(_friendyContext));
+
+        public IChatParticipantsRepository ChatParticipants =>
+            _chatParticipants ?? (_chatParticipants = new ChatParticipantsRepository(_friendyContext, 
+                _userAvatarConverterService, 
+                _customSqlQueryService));
+
 
         public RepositoryWrapper(FriendyContext friendyContext,
             IJwtService jwtService, 

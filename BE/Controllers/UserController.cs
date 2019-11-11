@@ -73,10 +73,27 @@ namespace BE.Controllers
             return Ok(bytes);
         }
 
+        [HttpGet("profile-belonging/{id}")]
+        [Authorize]
+        public IActionResult GetProfileBelonging(int id,
+            [FromHeader(Name = "userId")] int userId)
+        {
+            if (id == userId) return Ok();
+            return Conflict();
+        }
+
+        [HttpGet("profile-id")]
+        [Authorize]
+        public IActionResult GetProfileId([FromHeader(Name = "userId")] int userId)
+        {
+            return Ok(userId);
+        }
+        
         [HttpPut]
         [Authorize]
         [Route("avatar")]
-        public async Task<IActionResult> UpdateUserAvatar(IFormFile newAvatar, [FromHeader(Name = "userId")] int userId)
+        public async Task<IActionResult> UpdateUserAvatar(IFormFile newAvatar,
+            [FromHeader(Name = "userId")] int userId)
         {
             string newPath = newAvatar.Name + userId;
             
