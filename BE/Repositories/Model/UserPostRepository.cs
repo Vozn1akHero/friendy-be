@@ -33,14 +33,25 @@ namespace BE.Repositories
             return await FindByCondition(e => e.Id == id).SingleOrDefaultAsync();
         }
 
-        public async Task<List<UserPost>> GetRangeByIdAsync(int userId, int startIndex, int length)
+        public async Task<IEnumerable<PostOnWallDto>> GetRangeByIdAsync(int userId, int startIndex, int length)
         {
-           var posts = await FindByCondition(e => e.UserId == userId && e.Id > startIndex)
-                .Include(e => e.Post.PostComment)
-                .Include(e => e.Post.PostLike)
-                .OrderByDescending(e => e.Post.Date)
-                .Take(length)
-                .ToListAsync();
+           var posts = await FindByCondition(e => e.UserId == userId && e.Id >= startIndex)
+               .Select(e => new PostOnWallDto()
+               {
+                   Id = e.Id,
+                   CommentsCount = e.Post.Comment.Count,
+                   LikesCount = e.Post.PostLike.Count,
+                   Content = e.Post.Content,
+                   Date = e.Post.Date,
+                   ImagePath = e.Post.ImagePath,
+                   IsPostLikedByUser = e.Post.PostLike
+                       .ToList()
+                       .Exists(like => like.PostId == e.PostId && like.UserId == userId),
+                   UserId = e.UserId
+               })
+               .Take(length)
+               .OrderByDescending(e => e.Date)
+               .ToListAsync();
            return posts;
         }
     }

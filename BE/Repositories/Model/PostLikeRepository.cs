@@ -39,5 +39,10 @@ namespace BE.Repositories
                 await SaveAsync();
             }
         }
+
+        public bool GetPostLikedByUser(int postId, int userId)
+        {
+            return ExistsByCondition(e => e.PostId == postId && e.UserId == userId);
+        }
     }
 }

@@ -9,7 +9,6 @@ namespace BE.Models
         {
             Comment = new HashSet<Comment>();
             EventPost = new HashSet<EventPost>();
-            PostComment = new HashSet<PostComment>();
             PostLike = new HashSet<PostLike>();
             UserPost = new HashSet<UserPost>();
         }
@@ -21,7 +20,6 @@ namespace BE.Models
 
         public virtual ICollection<Comment> Comment { get; set; }
         public virtual ICollection<EventPost> EventPost { get; set; }
-        public virtual ICollection<PostComment> PostComment { get; set; }
         public virtual ICollection<PostLike> PostLike { get; set; }
         public virtual ICollection<UserPost> UserPost { get; set; }
     }

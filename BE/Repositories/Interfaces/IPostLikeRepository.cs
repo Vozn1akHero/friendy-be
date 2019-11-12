@@ -8,5 +8,6 @@ namespace BE.Interfaces.Repositories
         Task CreateAsync(PostLike postLike);
         Task RemoveByPostIdAsync(int postId, int userId);
         Task RemoveLikesByPostIdAsync(int postId);
+        bool GetPostLikedByUser(int postId, int userId);
     }
 }

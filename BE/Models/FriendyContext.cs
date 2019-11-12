@@ -33,7 +33,6 @@ namespace BE.Models
         public virtual DbSet<Interest> Interest { get; set; }
         public virtual DbSet<MaritalStatus> MaritalStatus { get; set; }
         public virtual DbSet<Post> Post { get; set; }
-        public virtual DbSet<PostComment> PostComment { get; set; }
         public virtual DbSet<PostLike> PostLike { get; set; }
         public virtual DbSet<Religion> Religion { get; set; }
         public virtual DbSet<Session> Session { get; set; }
@@ -437,29 +436,6 @@ namespace BE.Models
                     .HasColumnName("imagePath")
                     .HasMaxLength(1500)
                     .IsUnicode(false);
-            });
-
-            modelBuilder.Entity<PostComment>(entity =>
-            {
-                entity.ToTable("post_comment");
-
-                entity.Property(e => e.Id).HasColumnName("id");
-
-                entity.Property(e => e.PostId).HasColumnName("post_id");
-
-                entity.Property(e => e.UserId).HasColumnName("user_id");
-
-                entity.HasOne(d => d.Post)
-                    .WithMany(p => p.PostComment)
-                    .HasForeignKey(d => d.PostId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_post_comment_post");
-
-                entity.HasOne(d => d.User)
-                    .WithMany(p => p.PostComment)
-                    .HasForeignKey(d => d.UserId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_post_comment_user");
             });
 
             modelBuilder.Entity<PostLike>(entity =>

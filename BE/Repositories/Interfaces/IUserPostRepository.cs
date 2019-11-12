@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using BE.Dtos;
 using BE.Interfaces;
 using BE.Models;
 
@@ -10,6 +11,6 @@ namespace BE.Repositories
         Task CreateAsync(UserPost post);
         Task RemoveByIdAsync(int id);
         Task<UserPost> GetByIdAsync(int id);
-        Task<List<UserPost>> GetRangeByIdAsync(int userId, int startIndex, int length);
+        Task<IEnumerable<PostOnWallDto>> GetRangeByIdAsync(int userId, int startIndex, int length);
     }
 }

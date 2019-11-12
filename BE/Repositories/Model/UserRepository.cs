@@ -133,14 +133,28 @@ namespace BE.Repositories
             var user = await FindByCondition(e => e.Id == userId).SingleOrDefaultAsync();
             user.Avatar = path;
             await SaveAsync();
+        }     
+        
+        public async Task UpdateProfileBackgroundAsync(string path, int userId)
+        {
+            var user = await FindByCondition(e => e.Id == userId).SingleOrDefaultAsync();
+            user.ProfileBg = path;
+            await SaveAsync();
         }
 
-        public async Task<byte[]> GetAvatarByIdAsync(int userId)
+        public async Task<string> GetAvatarByIdAsync(int userId)
         {
-            string path = await FindByCondition(e => e.Id == userId)
+            return await FindByCondition(e => e.Id == userId)
                 .Select(e => e.Avatar)
                 .SingleOrDefaultAsync();
-            return _avatarConverterService.ConvertToByte(path);
+        }
+        
+        
+        public async Task<string> GetProfileBackgroundByIdAsync(int userId)
+        {
+            return await FindByCondition(e => e.Id == userId)
+                .Select(e => e.ProfileBg)
+                .SingleOrDefaultAsync();
         }
 
         public async Task DeleteUserAsync(User user)

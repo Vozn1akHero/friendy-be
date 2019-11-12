@@ -18,7 +18,10 @@ namespace BE.Interfaces
         Task<IEnumerable<UserBasicDto>> GetByRangeAsync(int firstIndex, int lastIndex);
         Task SetSessionIdAsync(int userId, int id);
         Task UpdateAvatarAsync(string path, int userId);
-        Task<byte[]> GetAvatarByIdAsync(int userId);
+        Task UpdateProfileBackgroundAsync(string path, int userId);
+        Task<string> GetAvatarByIdAsync(int userId);
+
+        Task<string> GetProfileBackgroundByIdAsync(int userId);
         //Task UpdateUserAsync(User dbUser);
     }
 }

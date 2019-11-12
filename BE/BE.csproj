@@ -33,6 +33,7 @@
     <Folder Include="Repositories\Custom" />
     <Folder Include="Services\Model" />
     <Folder Include="wwwroot\EventPost" />
+    <Folder Include="wwwroot\ProfileBackground" />
     <Folder Include="wwwroot\UserPost" />
   </ItemGroup>
 </Project>

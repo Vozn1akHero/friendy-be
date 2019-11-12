@@ -46,5 +46,14 @@ namespace BE.Controllers
             await _repository.PostLike.RemoveByPostIdAsync(postId, userId);
             return Ok();
         }
+
+        [HttpGet("liked-by-user/{userId}")]
+        [Authorize]
+        public IActionResult GetLikedByUser(int postId,
+            [FromHeader(Name = "userId")] int userId)
+        {
+            bool status = _repository.PostLike.GetPostLikedByUser(postId, userId);
+            return Ok(status);
+        }
     }
 }

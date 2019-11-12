@@ -65,13 +65,23 @@ namespace BE.Controllers
 
         [HttpGet]
         [Authorize]
-        [Route("avatar")]
+        [Route("{userId}/avatar")]
         public async Task<IActionResult> GetUserAvatar([FromHeader(Name = "userId")] int userId)
         {
             var avatar = await _repository.User.GetAvatarByIdAsync(userId);
             return Ok(avatar);
         }
 
+        
+        [HttpGet]
+        [Authorize]
+        [Route("{userId}/background")]
+        public async Task<IActionResult> GetProfileBackground([FromHeader(Name = "userId")] int userId)
+        {
+            var background = await _repository.User.GetProfileBackgroundByIdAsync(userId);
+            return Ok(background);
+        }
+        
         [HttpGet("profile-belonging/{id}")]
         [Authorize]
         public IActionResult GetProfileBelonging(int id,
@@ -91,21 +101,36 @@ namespace BE.Controllers
         [HttpPut]
         [Authorize]
         [Route("avatar")]
-        public async Task<IActionResult> UpdateUserAvatar(IFormFile newAvatar,
+        public async Task<IActionResult> UpdateUserAvatar([FromForm(Name = "newAvatar")] IFormFile newAvatar,
             [FromHeader(Name = "userId")] int userId)
         {
-            string newPath = newAvatar.Name + userId;
-            
-            var path = Path.Combine("wwwroot/UserAvatar", newPath);  
-  
+            int rand = new Random().Next();
+            string fileName = Convert.ToString(userId) + "_" + rand + newAvatar.FileName;
+           // string path = "wwwroot/UserPost/" + fileName;
+            var path = Path.Combine("wwwroot/UserAvatar", fileName);
             using (var stream = new FileStream(path, FileMode.OpenOrCreate))  
             {  
                 await newAvatar.CopyToAsync(stream);
             }
-
-            await _repository.User.UpdateAvatarAsync(newPath, userId);
-
-            return Ok();
+            await _repository.User.UpdateAvatarAsync(path, userId);
+            return Ok(path);
+        }
+        
+        [HttpPut]
+        [Authorize]
+        [Route("background")]
+        public async Task<IActionResult> UpdateProfileBackground([FromForm(Name = "newBackground")] IFormFile newBackground,
+            [FromHeader(Name = "userId")] int userId)
+        {
+            int rand = new Random().Next();
+            string fileName = Convert.ToString(userId) + "_" + rand + newBackground.FileName;
+            var path = Path.Combine("wwwroot/ProfileBackground", fileName);
+            using (var stream = new FileStream(path, FileMode.OpenOrCreate))  
+            {  
+                await newBackground.CopyToAsync(stream);
+            }
+            await _repository.User.UpdateProfileBackgroundAsync(path, userId);
+            return Ok(path);
         }
     }
 }

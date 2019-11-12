@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
+using System.Linq;
 using System.Threading.Tasks;
 using BE.Dtos;
 using BE.Interfaces;
@@ -21,7 +22,7 @@ namespace BE.Controllers
     {
         private readonly IHubContext<PostHub> _hubContext;
         private readonly IRepositoryWrapper _repository;
-        
+
         public UserPostController(IRepositoryWrapper repository, 
             IHubContext<PostHub> hubContext)
         {
@@ -31,12 +32,24 @@ namespace BE.Controllers
 
         [HttpPost]
         [Authorize]
-        public async Task<IActionResult> CreateUserPost([FromBody] PostDto postDto,
+        public async Task<IActionResult> CreateUserPost([FromForm(Name = "image")] IFormFile image,
+            [FromForm(Name = "content")] string content,
             [FromHeader(Name = "userId")] int userId)
         {
+            string imagePath = null;
+            if (image != null)
+            {
+                int rand = new Random().Next();
+                string fileName = Convert.ToString(userId) + "_" + rand + image.FileName;
+                imagePath = "wwwroot/UserPost/" + fileName;
+                using (var stream = new FileStream(imagePath, FileMode.OpenOrCreate))  
+                {  
+                    await image.CopyToAsync(stream);
+                }
+            }
             var newPost = new Post
             {
-                Content = postDto.Content, Date = DateTime.Now
+                Content = content, ImagePath = imagePath, Date = DateTime.Now
             };
             await _repository.Post.CreateAsync(newPost);
             var newUserPost = new UserPost
@@ -47,7 +60,7 @@ namespace BE.Controllers
             return Ok(newPost);
         }
 
-        [HttpPost("{id}/image")]
+        /*[HttpPost("{id}/image")]
         [Authorize]
         public async Task<IActionResult> PostImageInPost(IFormFile image, 
             int id, [FromHeader(Name = "userId")] int userId)
@@ -59,11 +72,11 @@ namespace BE.Controllers
             }
             
             return Ok();
-        }
+        }*/
         
         [HttpGet]
         [Authorize]
-        [Route("{id}")]
+        [Route("all/{id}")]
         public async Task<IActionResult> GetById(int id)
         {
             var posts = await _repository.UserPost.GetByIdAsync(id);
@@ -81,7 +94,16 @@ namespace BE.Controllers
             await _repository.Post.RemoveByIdAsync(id);
             return Ok();
         }
-
+        
+        [HttpGet]
+        [Authorize]
+        public async Task<IActionResult> GetUserPostsByUserId([FromQuery(Name = "start")] int startIndex,
+            [FromQuery(Name = "length")] int length, [FromQuery(Name = "userId")] int userId)
+        {
+            var entries = await _repository.UserPost.GetRangeByIdAsync(userId ,startIndex, length);
+            return Ok(entries);
+        }
+        
         [HttpGet]
         [Authorize]
         [Route("current")]
