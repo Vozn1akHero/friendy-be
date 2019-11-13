@@ -151,8 +151,20 @@ namespace BE.Controllers
 
         [HttpGet]
         [Authorize]
-        [Route("getExemplaryByUserId")]
-        public async Task<IActionResult> GetExemplaryByUserId([FromHeader(Name = "userId")] int userId)
+        [Route("exemplary/logged-in")]
+        public async Task<IActionResult> GetExemplaryLoggedInUser([FromHeader(Name = "userId")] int userId)
+        {
+            var exemplaryFriends = await _repository
+                .UserFriends
+                .GetExemplaryByUserId(userId);
+
+            return Ok(exemplaryFriends);
+        }
+        
+        [HttpGet]
+        [Authorize]
+        [Route("exemplary/{userId}")]
+        public async Task<IActionResult> GetExemplaryByUserId(int userId)
         {
             var exemplaryFriends = await _repository
                 .UserFriends

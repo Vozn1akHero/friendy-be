@@ -216,7 +216,9 @@
             <e p="default-event-avatar.png" t="Include" />
           </e>
           <e p="EventPost" t="Include" />
-          <e p="ProfileBackground" t="Include" />
+          <e p="ProfileBackground" t="Include">
+            <e p="7_185412012844811218_506049489870700_5467995208966733824_n.png" t="Include" />
+          </e>
           <e p="UserAvatar" t="Include">
             <e p="7_153921010648411093_2186198518097476_8324811620937105408_n.jpg" t="Include" />
             <e p="7_15528426534mn0udtift8z.jpg" t="Include" />

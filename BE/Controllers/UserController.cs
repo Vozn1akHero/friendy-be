@@ -35,7 +35,7 @@ namespace BE.Controllers
         }
 
         [HttpGet]
-        [Route("getAllUsers")]
+        [Route("all")]
         public async Task<IActionResult> GetAllUsers()
         {
             var users = await _repository.User.GetAllUsersAsync();
@@ -44,7 +44,7 @@ namespace BE.Controllers
         
         [HttpGet]
         [Authorize]
-        [Route("getById/{id}")]
+        [Route("{id}")]
         public async Task<IActionResult> GetById(int id)
         {
             var user = await _repository.User.GetUserByIdAsync(id);
@@ -55,18 +55,18 @@ namespace BE.Controllers
         
         [HttpGet]
         [Authorize]
-        [Route("getUser")]
-        public async Task<IActionResult> GetUser()
+        [Route("logged-in")]
+        public async Task<IActionResult> GetUser([FromHeader(Name = "userId")] int userId)
         {
-            string sessionToken = HttpContext.Request.Cookies["SESSION_TOKEN"];
-            var user = await _repository.User.GetUserAsync(sessionToken);
+            //string sessionToken = HttpContext.Request.Cookies["SESSION_TOKEN"];
+            var user = await _repository.User.GetUserByIdAsync(userId);
             return Ok(user);
         }
 
         [HttpGet]
         [Authorize]
         [Route("{userId}/avatar")]
-        public async Task<IActionResult> GetUserAvatar([FromHeader(Name = "userId")] int userId)
+        public async Task<IActionResult> GetUserAvatar(int userId)
         {
             var avatar = await _repository.User.GetAvatarByIdAsync(userId);
             return Ok(avatar);
@@ -76,7 +76,7 @@ namespace BE.Controllers
         [HttpGet]
         [Authorize]
         [Route("{userId}/background")]
-        public async Task<IActionResult> GetProfileBackground([FromHeader(Name = "userId")] int userId)
+        public async Task<IActionResult> GetProfileBackground(int userId)
         {
             var background = await _repository.User.GetProfileBackgroundByIdAsync(userId);
             return Ok(background);
@@ -87,8 +87,7 @@ namespace BE.Controllers
         public IActionResult GetProfileBelonging(int id,
             [FromHeader(Name = "userId")] int userId)
         {
-            if (id == userId) return Ok();
-            return Conflict();
+            return Ok(id == userId);
         }
 
         [HttpGet("profile-id")]
@@ -127,7 +126,7 @@ namespace BE.Controllers
             var path = Path.Combine("wwwroot/ProfileBackground", fileName);
             using (var stream = new FileStream(path, FileMode.OpenOrCreate))  
             {  
-                await newBackground.CopyToAsync(stream);
+                await newBackground.CopyToAsync(stream); 
             }
             await _repository.User.UpdateProfileBackgroundAsync(path, userId);
             return Ok(path);

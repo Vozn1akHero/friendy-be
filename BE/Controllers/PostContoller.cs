@@ -34,17 +34,17 @@ namespace BE.Controllers
                 PostId = id
             };
             await _repository.PostLike.CreateAsync(newLike);
-            return Ok(newLike);
+            return Ok(id);
         }
 
         [HttpPut]
         [Authorize]
-        [Route("unlike/{postId}")]
-        public async Task<IActionResult> UnlikePostById(int postId,
+        [Route("unlike/{id}")]
+        public async Task<IActionResult> UnlikePostById(int id,
             [FromHeader(Name = "userId")] int userId)
         {
-            await _repository.PostLike.RemoveByPostIdAsync(postId, userId);
-            return Ok();
+            await _repository.PostLike.RemoveByPostIdAsync(id, userId);
+            return Ok(id);
         }
 
         [HttpGet("liked-by-user/{userId}")]

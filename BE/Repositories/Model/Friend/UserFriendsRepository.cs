@@ -54,7 +54,7 @@ namespace BE.Repositories
                 .Include(e => e.Friend.FriendNavigation)
                 .Select(e => new FriendDto
                 {
-                    Id = e.FriendId,
+                    Id = e.Friend.FriendNavigation.Id,
                     Avatar = _userAvatarConverterService.ConvertToByte(e.Friend.FriendNavigation.Avatar),
                     Name = e.Friend.FriendNavigation.Name,
                     DialogLink = "da2jkd21l34",
@@ -93,7 +93,7 @@ namespace BE.Repositories
                 .Select(e => new ExemplaryFriendDto
                 {
                     Id = e.FriendId,
-                    Avatar = _userAvatarConverterService.ConvertToByte(e.Friend.FriendNavigation.Avatar)
+                    AvatarPath = e.Friend.FriendNavigation.Avatar
                 })
                 .ToListAsync();
 

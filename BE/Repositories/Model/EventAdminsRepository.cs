@@ -44,16 +44,7 @@ namespace BE.Repositories
                     Date = e.Event.Date
                 })
                 .ToListAsync();
-            events.ForEach(userEvent =>
-            {
-                using (FileStream fs = new FileStream(userEvent.AvatarPath, FileMode.Open, FileAccess.Read))
-                {
-                    byte[] bytes = File.ReadAllBytes(userEvent.AvatarPath);
-                    fs.Read(bytes, 0, System.Convert.ToInt32(fs.Length));
-                    userEvent.Avatar = bytes;
-                    fs.Close();
-                }
-            });
+
             return events;
         }
     }
