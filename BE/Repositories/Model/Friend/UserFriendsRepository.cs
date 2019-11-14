@@ -38,24 +38,14 @@ namespace BE.Repositories
             
             return friends;
         }
-        
-/*        public async Task<List<UserFriends>> GetIndexedByUserId(int userId, int startIndex, int lastIndex)
-        {
-            var exampleFriendList = await FindByCondition(e => e.UserId == userId && e.Id >= startIndex && e.Id <= lastIndex)
-                .Include(e => e.Friend.FriendNavigation)
-                .ToListAsync();
-            
-            return exampleFriendList;
-        }*/
-        
+
         public async Task<List<FriendDto>> GetIndexedByUserId(int userId, int startIndex, int lastIndex)
         {
             var exampleFriendList = await FindByCondition(e => e.UserId == userId && e.Id >= startIndex && e.Id <= lastIndex)
-                .Include(e => e.Friend.FriendNavigation)
                 .Select(e => new FriendDto
                 {
                     Id = e.Friend.FriendNavigation.Id,
-                    Avatar = _userAvatarConverterService.ConvertToByte(e.Friend.FriendNavigation.Avatar),
+                    AvatarPath = e.Friend.FriendNavigation.Avatar,
                     Name = e.Friend.FriendNavigation.Name,
                     DialogLink = "da2jkd21l34",
                     OnlineStatus = true,

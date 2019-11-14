@@ -65,6 +65,7 @@ namespace BE.Repositories
                     RequestId = e.Id,
                     Name = e.Author.Name,
                     Surname = e.Author.Surname,
+                    AvatarPath = e.Receiver.FriendNavigation.Avatar,
                     AuthorId = e.AuthorId
                 })
                 .ToListAsync();
@@ -72,12 +73,13 @@ namespace BE.Repositories
         
         public async Task<List<SentFriendRequestDto>> GetSentByUserIdWithDto(int userId)
         {
-            return await FindByCondition(e => e.Receiver.FriendId == userId)
+            return await FindByCondition(e => e.AuthorId == userId)
                 .Select(e => new SentFriendRequestDto
                 {
                     RequestId = e.Id,
                     Name = e.Receiver.FriendNavigation.Name,
                     Surname = e.Receiver.FriendNavigation.Surname,
+                    AvatarPath = e.Receiver.FriendNavigation.Avatar,
                     ReceiverId = e.Receiver.FriendId
                 })
                 .ToListAsync();
