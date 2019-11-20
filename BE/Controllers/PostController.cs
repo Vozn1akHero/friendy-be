@@ -10,16 +10,25 @@ namespace BE.Controllers
 {
     [ApiController]
     [Route("api/post")]
-    public class PostContoller : ControllerBase
+    public class PostController : ControllerBase
     {
         private readonly IHubContext<PostHub> _hubContext;
         private readonly IRepositoryWrapper _repository;
         
-        public PostContoller(IRepositoryWrapper repository, 
+        public PostController(IRepositoryWrapper repository, 
             IHubContext<PostHub> hubContext)
         {
             _repository = repository;
             _hubContext = hubContext;
+        }
+        
+        [HttpDelete]
+        [Authorize]
+        [Route("{id}")]
+        public async Task<IActionResult> RemoveById([FromRoute] int id)
+        {
+            await _repository.Post.RemoveByIdAsync(id);
+            return Ok();
         }
         
         [HttpPut]

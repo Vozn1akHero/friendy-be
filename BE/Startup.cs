@@ -12,6 +12,7 @@ using BE.Middlewares;
 using BE.Repositories.RepositoryServices.Interfaces.User;
 using BE.RepositoryServices.User;
 using BE.Services;
+using BE.Services.Global;
 using BE.SignalR.Hubs;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
@@ -77,7 +78,7 @@ namespace BE
             services.AddScoped<IAvatarConverterService, AvatarConverterService>();
             services.AddScoped<ICustomSqlQueryService, CustomSqlQueryService>();
             services.AddScoped<IAuthenticationService, AuthenticationService>();
-
+            services.AddScoped<IImageProcessingService, ImageProcessingService>();
             services.AddScoped<IUserSearchingService, UserSearchingService>();
             
             services.AddMvc().AddJsonOptions(options => {

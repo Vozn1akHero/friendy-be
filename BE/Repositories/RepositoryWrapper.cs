@@ -30,12 +30,13 @@ namespace BE.Repositories
         private IUserFriendsRepository _userFriends;
         private IUserEventsRepository _userEvents;
         private IEventAdminsRepository _eventAdmins;
-        private IPostCommentRepository _postComment;
+        private ICommentRepository _comment;
         private IChatRepository _chat;
         private IChatMessageRepository _chatMessage;
         private IChatMessagesRepository _chatMessages;
         private IChatParticipantsRepository _chatParticipants;
         private IFriendRequestRepository _friendRequest;
+        private IEventPostRepository _eventPost;
 
         private IJwtService _jwtService;
         private IAvatarConverterService _avatarConverterService;
@@ -66,7 +67,7 @@ namespace BE.Repositories
 
         public IEventAdminsRepository EventAdmins => _eventAdmins ?? (_eventAdmins = new EventAdminsRepository(_friendyContext));
 
-        public IPostCommentRepository PostComment => _postComment ?? (_postComment = new PostCommentRepository(_friendyContext));
+        public ICommentRepository Comment => _comment ?? (_comment = new CommentRepository(_friendyContext));
 
         public IChatRepository Chat => _chat ?? (_chat = new ChatRepository(_friendyContext));
 
@@ -75,6 +76,7 @@ namespace BE.Repositories
         public IChatMessagesRepository ChatMessages => _chatMessages ?? (_chatMessages = new ChatMessagesRepository(_friendyContext, _avatarConverterService));
 
         public IFriendRequestRepository FriendRequest => _friendRequest ?? (_friendRequest = new FriendRequestRepository(_friendyContext));
+        public IEventPostRepository EventPost => _eventPost ?? (_eventPost = new EventPostRepository(_friendyContext));
 
         public IChatParticipantsRepository ChatParticipants =>
             _chatParticipants ?? (_chatParticipants = new ChatParticipantsRepository(_friendyContext, 

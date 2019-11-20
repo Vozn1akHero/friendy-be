@@ -16,7 +16,7 @@
           <e p="EventController.cs" t="Include" />
           <e p="EventPostController.cs" t="Include" />
           <e p="FriendController.cs" t="Include" />
-          <e p="PostContoller.cs" t="Include" />
+          <e p="PostController.cs" t="Include" />
           <e p="UserController.cs" t="Include" />
           <e p="UserPostController.cs" t="Include" />
           <e p="UserSearchController.cs" t="Include" />
@@ -51,6 +51,7 @@
             <e p="SentFriendRequestDto.cs" t="Include" />
           </e>
           <e p="PostDtos" t="Include">
+            <e p="EventPostOnWallDto.cs" t="Include" />
             <e p="LikeDto.cs" t="Include" />
             <e p="PostDto.cs" t="Include" />
             <e p="PostOnWallDto.cs" t="Include" />
@@ -99,7 +100,6 @@
           <e p="Interest.cs" t="Include" />
           <e p="MaritalStatus.cs" t="Include" />
           <e p="Post.cs" t="Include" />
-          <e p="PostComment.cs" t="Include" />
           <e p="PostLike.cs" t="Include" />
           <e p="Religion.cs" t="Include" />
           <e p="Session.cs" t="Include" />
@@ -139,6 +139,7 @@
             </e>
             <e p="ICommentRepository.cs" t="Include" />
             <e p="IEventAdminsRepository.cs" t="Include" />
+            <e p="IEventPostRepository.cs" t="Include" />
             <e p="IEventRepository.cs" t="Include" />
             <e p="IPostCommentRepository.cs" t="Include" />
             <e p="IPostLikeRepository.cs" t="Include" />
@@ -159,6 +160,7 @@
             </e>
             <e p="CommentRepository.cs" t="Include" />
             <e p="EventAdminsRepository.cs" t="Include" />
+            <e p="EventPostRepository.cs" t="Include" />
             <e p="EventRepository.cs" t="Include" />
             <e p="Friend" t="Include">
               <e p="FriendRepository.cs" t="Include" />
@@ -166,7 +168,6 @@
               <e p="UserFriendsRepository.cs" t="Include" />
             </e>
             <e p="LikeRepository.cs" t="Include" />
-            <e p="PostCommentRepository.cs" t="Include" />
             <e p="PostLikeRepository.cs" t="Include" />
             <e p="PostRepository.cs" t="Include" />
             <e p="SessionRepository.cs" t="Include" />
@@ -176,7 +177,6 @@
           </e>
           <e p="RepositoryBase.cs" t="Include" />
           <e p="RepositoryServices" t="Include">
-            <e p="DynamicLinqStatementService.cs" t="Include" />
             <e p="Interfaces" t="Include">
               <e p="User" t="Include">
                 <e p="IUserSearchingService.cs" t="Include" />
@@ -193,8 +193,10 @@
           <e p="Global" t="Include">
             <e p="AuthenticationService.cs" t="Include" />
             <e p="CustomSqlQueryService.cs" t="Include" />
+            <e p="ImageProcessingService.cs" t="Include" />
             <e p="Interfaces" t="Include">
               <e p="ICustomSqlQueryService.cs" t="Include" />
+              <e p="IImageProcessingService.cs" t="Include" />
               <e p="IJWTService.cs" t="Include" />
               <e p="IUserAvatarConverterService.cs" t="Include" />
             </e>

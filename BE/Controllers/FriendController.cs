@@ -1,10 +1,5 @@
-using System.Collections.Generic;
-using System.IO;
 using System.Threading.Tasks;
-using BE.Dtos;
-using BE.Dtos.FriendDtos;
 using BE.Interfaces;
-using LazyCache;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -78,7 +73,7 @@ namespace BE.Controllers
             return Ok(requests);
         }
         
-/*
+        /*
         [HttpGet]
         [Authorize]
         [Route("requests/received")]
@@ -95,7 +90,8 @@ namespace BE.Controllers
         {
             var requests = await _repository.FriendRequest.GetSentByUserId(userId);
             return Ok(requests);
-        }*/
+        }
+        */
 
         [HttpPost]
         [Authorize]

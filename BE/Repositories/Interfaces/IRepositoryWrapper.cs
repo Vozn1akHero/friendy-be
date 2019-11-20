@@ -21,12 +21,13 @@ namespace BE.Interfaces
         IUserEventsRepository UserEvents { get; }
         IEventRepository Event { get; }
         IEventAdminsRepository EventAdmins { get; }
-        IPostCommentRepository PostComment { get; }
+        ICommentRepository Comment { get; }
         IChatRepository Chat { get; }
         IChatMessageRepository ChatMessage { get; }
         IChatMessagesRepository ChatMessages { get; }
         IChatParticipantsRepository ChatParticipants { get; }
         IFriendRequestRepository FriendRequest { get; }
+        IEventPostRepository EventPost { get; }
         void Save();
     }
 }

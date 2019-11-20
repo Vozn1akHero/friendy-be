@@ -22,12 +22,15 @@ namespace BE.Controllers
     {
         private readonly IHubContext<PostHub> _hubContext;
         private readonly IRepositoryWrapper _repository;
+        private readonly IImageProcessingService _imageProcessingService;
 
         public UserPostController(IRepositoryWrapper repository, 
-            IHubContext<PostHub> hubContext)
+            IHubContext<PostHub> hubContext,
+            IImageProcessingService imageProcessingService)
         {
             _repository = repository;
             _hubContext = hubContext;
+            _imageProcessingService = imageProcessingService;
         }
 
         [HttpPost]
@@ -36,17 +39,8 @@ namespace BE.Controllers
             [FromForm(Name = "content")] string content,
             [FromHeader(Name = "userId")] int userId)
         {
-            string imagePath = null;
-            if (image != null)
-            {
-                int rand = new Random().Next();
-                string fileName = Convert.ToString(userId) + "_" + rand + image.FileName;
-                imagePath = "wwwroot/UserPost/" + fileName;
-                using (var stream = new FileStream(imagePath, FileMode.OpenOrCreate))  
-                {  
-                    await image.CopyToAsync(stream);
-                }
-            }
+            string imagePath = await _imageProcessingService
+                .SaveAndReturnImagePath(image, "EventPost", userId);
             var newPost = new Post
             {
                 Content = content, ImagePath = imagePath, Date = DateTime.Now
@@ -60,20 +54,6 @@ namespace BE.Controllers
             return Ok(newPost);
         }
 
-        /*[HttpPost("{id}/image")]
-        [Authorize]
-        public async Task<IActionResult> PostImageInPost(IFormFile image, 
-            int id, [FromHeader(Name = "userId")] int userId)
-        {
-            var path = Path.Combine("wwwroot/UserPost", Convert.ToString(userId));
-            using (var stream = new FileStream(path, FileMode.OpenOrCreate))  
-            {  
-                await image.CopyToAsync(stream);
-            }
-            
-            return Ok();
-        }*/
-        
         [HttpGet]
         [Authorize]
         [Route("all/{id}")]
@@ -83,17 +63,17 @@ namespace BE.Controllers
             return Ok(posts);
         }
         
-        [HttpDelete]
+/*        [HttpDelete]
         [Authorize]
         [Route("{id}")]
         public async Task<IActionResult> RemoveUserPostById([FromRoute] int id)
         {
-            await _repository.PostLike.RemoveLikesByPostIdAsync(id);
-            await _repository.PostComment.RemovePostCommentsByPostIdAsync(id);
-            await _repository.UserPost.RemoveByIdAsync(id);
+/*            await _repository.PostLike.RemoveLikesByPostIdAsync(id);
+            await _repository.Comment.RemovePostCommentsByPostIdAsync(id);
+            await _repository.UserPost.RemoveByIdAsync(id);#1#
             await _repository.Post.RemoveByIdAsync(id);
             return Ok();
-        }
+        }*/
         
         [HttpGet]
         [Authorize]

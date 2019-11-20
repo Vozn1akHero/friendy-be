@@ -1,8 +1,10 @@
 using System;
+using System.IO;
 using System.Threading.Tasks;
 using BE.Interfaces;
 using BE.Models;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BE.Controllers
@@ -12,30 +14,56 @@ namespace BE.Controllers
     public class EventPostController : ControllerBase
     {
         private readonly IRepositoryWrapper _repository;
+        private readonly IImageProcessingService _imageProcessingService;
 
-        public EventPostController(IRepositoryWrapper repository)
+        public EventPostController(IRepositoryWrapper repository,
+            IImageProcessingService imageProcessingService)
         {
             _repository = repository;
+            _imageProcessingService = imageProcessingService;
         }
         
-        /*[HttpPost]
+        [HttpPost("{id}")]
         [Authorize]
-        public async Task<IActionResult> CreateUserPost([FromBody] EventPost post,
+        public async Task<IActionResult> CreateEventPost([FromForm(Name = "image")] IFormFile image,
+            [FromForm(Name = "content")] string content,
+            [FromQuery(Name = "id")] int eventId,
             [FromHeader(Name = "userId")] int userId)
         {
-            if (post.Image != null && post.Image.Length >= 8000)
+            string imagePath = await _imageProcessingService
+                .SaveAndReturnImagePath(image, "EventPost", userId);
+            var newPost = new Post
             {
-                return BadRequest("IMAGE IS TOO BIG");
-            }
-            var newPost = new EventPost
-            {
-                EventId = post.EventId,
-                Content = post.Content,
-                Image = post.Image, 
-                Date = DateTime.Now
+                Content = content, ImagePath = imagePath, Date = DateTime.Now
             };
-            //await _repository.UserPost.CreateUserPost(newPost);
+            await _repository.Post.CreateAsync(newPost);
+            var newUserPost = new EventPost
+            {
+                EventId = eventId, PostId = newPost.Id
+            };
+            await _repository.EventPost.CreateAsync(newUserPost);
             return Ok(newPost);
-        }*/
+        }
+        
+        
+        [HttpGet]
+        [Authorize]
+        public async Task<IActionResult> GetRangeByEventId([FromQuery(Name = "start")] int startIndex,
+            [FromQuery(Name = "length")] int length, 
+            [FromQuery(Name = "eventId")] int eventId, 
+            [FromHeader(Name = "userId")] int userId)
+        {
+            var entries = await _repository.EventPost.GetRangeByIdAsync(eventId, startIndex, length, userId);
+            return Ok(entries);
+        }
+        
+        [HttpDelete]
+        [Authorize]
+        [Route("{id}")]
+        public async Task<IActionResult> RemoveUserPostById([FromRoute] int id)
+        {
+            await _repository.Post.RemoveByIdAsync(id);
+            return Ok();
+        }
     }
 }

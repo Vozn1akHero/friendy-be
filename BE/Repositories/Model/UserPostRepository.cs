@@ -36,7 +36,7 @@ namespace BE.Repositories
         public async Task<IEnumerable<PostOnWallDto>> GetRangeByIdAsync(int userId, int startIndex, int length)
         {
            var posts = await FindByCondition(e => e.UserId == userId && e.Id >= startIndex)
-               .Select(e => new PostOnWallDto()
+               .Select(e => new PostOnWallDto
                {
                    Id = e.Id,
                    CommentsCount = e.Post.Comment.Count,
@@ -44,6 +44,7 @@ namespace BE.Repositories
                    Content = e.Post.Content,
                    Date = e.Post.Date,
                    ImagePath = e.Post.ImagePath,
+                   PostId = e.PostId,
                    IsPostLikedByUser = e.Post.PostLike
                        .ToList()
                        .Exists(like => like.PostId == e.PostId && like.UserId == userId),

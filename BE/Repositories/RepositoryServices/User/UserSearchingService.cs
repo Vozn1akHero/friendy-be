@@ -56,13 +56,8 @@ namespace BE.RepositoryServices.User
             IEnumerable<UserLookUpModelDto> users)
         {
             var param = Expression.Parameter(typeof(UserLookUpModelDto), "type");
-            MethodInfo method = typeof(string).GetMethod("StartsWith", new[] {typeof(string)});
-            
-/*            var method = typeof(Enumerable)
-                .GetRuntimeMethods()
-                .Single(m => m.Name == nameof(Enumerable.Contains) && m.GetParameters().Length == 2);
-            var containsMethod = method.MakeGenericMethod(typeof(string));*/
-            
+            var method = typeof(string).GetMethod("StartsWith", new[] {typeof(string)});
+
             var condition =
                 Expression.Lambda<Func<UserLookUpModelDto, bool>>(
                     Expression.Call(
