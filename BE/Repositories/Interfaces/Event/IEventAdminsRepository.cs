@@ -10,5 +10,6 @@ namespace BE.Interfaces.Repositories
         Task<List<Event>> GetUserAdministeredEvents(int userId);
         Task<List<UserEventDto>> GetShortenedAdministeredEventsByUserId(int userId);
         Task<List<Event>> FilterAdministeredEvents(int userId, string keyword);
+        Task<bool> IsUserAdminById(int eventId, int userId);
     }
 }

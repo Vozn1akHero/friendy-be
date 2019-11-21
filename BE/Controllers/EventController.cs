@@ -59,14 +59,13 @@ namespace BE.Controllers
             return Ok(eventData);
         }
         
-        
-        
-/*        [HttpGet("avatar/{id}")]
+        [HttpGet]
         [Authorize]
-        public async Task<IActionResult> GetAvatarById(int id)
+        [Route("is-admin/{id}")]
+        public async Task<IActionResult> CheckIfAdmin(int id, [FromHeader(Name = "userId")] int userId)
         {
-            var avatar = await _repository.Event.GetAvatarById(id);
-            return Ok(avatar);
-        }*/
+            bool result = await _repository.EventAdmins.IsUserAdminById(id, userId);
+            return Ok(result);
+        }
     }
 }

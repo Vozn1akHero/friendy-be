@@ -6,6 +6,7 @@ using BE.Interfaces.Repositories;
 using BE.Interfaces.Repositories.Chat;
 using BE.Repositories;
 using BE.Repositories.Interfaces;
+using BE.Repositories.Interfaces.Event;
 
 namespace BE.Interfaces
 {
@@ -28,6 +29,7 @@ namespace BE.Interfaces
         IChatParticipantsRepository ChatParticipants { get; }
         IFriendRequestRepository FriendRequest { get; }
         IEventPostRepository EventPost { get; }
+        IEventParticipantsRepository EventParticipants { get; }
         void Save();
     }
 }

@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace BE.Repositories
 {
-    public class EventRepository : RepositoryBase<Event>, IEventRepository
+    public class EventRepository : RepositoryBase<Models.Event>, IEventRepository
     {
         private readonly IAvatarConverterService _userAvatarConverterService;
         
@@ -20,7 +20,7 @@ namespace BE.Repositories
         }
 
 
-        public async Task<List<Event>> GetExampleEventsByUserId(int userId)
+        public async Task<List<Models.Event>> GetExampleEventsByUserId(int userId)
         {
 /*
             var events = await FindByCondition(e => e.EventParticipants.Part)
@@ -32,7 +32,7 @@ namespace BE.Repositories
             return null;
         }
 
-        public async Task<Event> GetById(int id)
+        public async Task<Models.Event> GetById(int id)
         {
             return await FindByCondition(e => e.Id == id)
                 .SingleOrDefaultAsync();

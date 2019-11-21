@@ -1,0 +1,38 @@
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using BE.Dtos.EventDtos;
+using BE.Models;
+using BE.Repositories.Interfaces.Event;
+using Microsoft.EntityFrameworkCore;
+
+namespace BE.Repositories.Event
+{
+    public class EventParticipantRepository : RepositoryBase<EventParticipants>, IEventParticipantsRepository
+    {
+        public EventParticipantRepository(FriendyContext friendyContext) : base(friendyContext)
+        {
+        }
+
+        public async Task<IEnumerable<ExemplaryEventParticipantDto>> GetExemplary(int eventId)
+        {
+            return await FindByCondition(e => e.EventId == eventId).Select(e => new ExemplaryEventParticipantDto()
+            {
+                Id = e.ParticipantId,
+                AvatarPath = e.Participant.Avatar
+            }).ToListAsync();
+        }
+        
+        public async Task<IEnumerable<EventParticipantForListDto>> GetRange(int eventId, int startIndex, int length)
+        {
+            return await FindByCondition(e => e.EventId == eventId && e.EventId >= startIndex).Select(e => new EventParticipantForListDto
+            {
+                Id = e.ParticipantId,
+                Name = e.Participant.Name,
+                Surname = e.Participant.Surname,
+                AvatarPath = e.Participant.Avatar
+            }).Take(length).ToListAsync();
+        }
+    }
+}

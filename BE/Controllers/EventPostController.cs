@@ -45,7 +45,6 @@ namespace BE.Controllers
             return Ok(newPost);
         }
         
-        
         [HttpGet]
         [Authorize]
         public async Task<IActionResult> GetRangeByEventId([FromQuery(Name = "start")] int startIndex,
