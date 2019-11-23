@@ -8,6 +8,7 @@ namespace BE.Interfaces.Repositories
     {
         Task<List<Event>> GetExampleEventsByUserId(int userId);
         Task<Event> GetById(int userId);
+        Task<object> GetWithSelectedFields(int id, string[] selectedFields);
         //Task<byte[]> GetAvatarById(int id);
     }
 }

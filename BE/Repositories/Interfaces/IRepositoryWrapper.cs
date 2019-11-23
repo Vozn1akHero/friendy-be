@@ -30,6 +30,8 @@ namespace BE.Interfaces
         IFriendRequestRepository FriendRequest { get; }
         IEventPostRepository EventPost { get; }
         IEventParticipantsRepository EventParticipants { get; }
+        IEventPhotoRepository EventPhoto { get; }
+        IPhotoRepository Photo { get; }
         void Save();
     }
 }

@@ -25,5 +25,20 @@ namespace BE.Services.Global
 
             return null;
         }
+        
+        public async Task<string> SaveWithSpecifiedName(IFormFile image, string imagePath)
+        {
+            if (image != null)
+            {
+                using (var stream = new FileStream(imagePath, FileMode.OpenOrCreate))  
+                {  
+                    await image.CopyToAsync(stream);
+                }
+
+                return imagePath;
+            }
+
+            return null;
+        }
     }
 }

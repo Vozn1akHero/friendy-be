@@ -1,7 +1,13 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Dynamic;
+using System.Globalization;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
 using BE.Dtos;
+using BE.Helpers;
 using BE.Interfaces;
 using BE.Models;
 using BE.Repositories.RepositoryServices.Interfaces.User;
@@ -29,6 +35,12 @@ namespace BE.Repositories
             return await FindAll()
                 .OrderBy(x => x.Name)
                 .ToListAsync();
+        }
+
+        public async Task<object> GetWithSelectedFields(int userId, string[] selectedFields)
+        {
+            var user = await FindByCondition(e => e.Id == userId).SingleOrDefaultAsync();
+            return DynamicLinqStatement.ExtractSpecifiedFields(user, selectedFields);
         }
 
         public async Task<User> GetUserAsync(string token)

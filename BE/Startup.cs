@@ -4,8 +4,10 @@ using System.Diagnostics;
 using System.IdentityModel.Tokens.Jwt;
 using System.IO;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
+using BE.CustomAttributes;
 using BE.Helpers;
 using BE.Interfaces;
 using BE.Middlewares;
@@ -21,6 +23,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Identity.UI.V4.Pages.Internal;
+using Microsoft.AspNetCore.Internal;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -29,6 +32,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
 
 namespace BE
 {
@@ -56,8 +60,10 @@ namespace BE
             services.AddDirectoryBrowser();
             
             var key = Encoding.ASCII.GetBytes(Configuration.GetValue<string>("AppSettings:JWTSecret"));
+            
             services.AddAuthentication(x =>
                 {
+                    
                     x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
                     x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
                 })
@@ -83,6 +89,7 @@ namespace BE
             
             services.AddMvc().AddJsonOptions(options => {
                 options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
+                options.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
             });
             
             services.ConfigureSqlContext(Configuration);
@@ -128,7 +135,7 @@ namespace BE
                 routes.MapHub<ProfileHub>("/profileHub");
             });
             
-            app.UseMvc();
+            app.UseEndpointRouting().UseMvc();
         }
     }
 }

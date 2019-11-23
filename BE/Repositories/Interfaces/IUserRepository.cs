@@ -11,6 +11,7 @@ namespace BE.Interfaces
     public interface IUserRepository : IRepositoryBase<User>
     {
         Task<IEnumerable<User>> GetAllUsersAsync();
+        Task<object> GetWithSelectedFields(int userId, string[] selectedFields);
         Task<User> GetUserAsync(string token);
         Task<User> GetUserByIdAsync(int id);
         Task<User> GetUserByEmailAsync(string email);

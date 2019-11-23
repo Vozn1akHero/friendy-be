@@ -15,12 +15,16 @@
           <e p="ChatController.cs" t="Include" />
           <e p="EventController.cs" t="Include" />
           <e p="EventParticipantController.cs" t="Include" />
+          <e p="EventPhotoController.cs" t="Include" />
           <e p="EventPostController.cs" t="Include" />
           <e p="FriendController.cs" t="Include" />
           <e p="PostController.cs" t="Include" />
           <e p="UserController.cs" t="Include" />
           <e p="UserPostController.cs" t="Include" />
           <e p="UserSearchController.cs" t="Include" />
+        </e>
+        <e p="CustomAttributes" t="Include">
+          <e p="AuthorizeEventAdmin.cs" t="Include" />
         </e>
         <e p="Dtos" t="Include">
           <e p="AuthDtos" t="Include">
@@ -53,6 +57,9 @@
             <e p="ReceivedFriendRequestDto.cs" t="Include" />
             <e p="SentFriendRequestDto.cs" t="Include" />
           </e>
+          <e p="PhotoDtos" t="Include">
+            <e p="PhotoDto.cs" t="Include" />
+          </e>
           <e p="PostDtos" t="Include">
             <e p="EventPostOnWallDto.cs" t="Include" />
             <e p="LikeDto.cs" t="Include" />
@@ -69,6 +76,7 @@
         </e>
         <e p="Entities" t="Include" />
         <e p="Helpers" t="Include">
+          <e p="DynamicLinqStatement.cs" t="Include" />
           <e p="HTTPHelpers.cs" t="Include" />
         </e>
         <e p="Interfaces" t="Include">
@@ -100,6 +108,7 @@
           <e p="FriendRequest.cs" t="Include" />
           <e p="FriendyContext.cs" t="Include" />
           <e p="Gender.cs" t="Include" />
+          <e p="Image.cs" t="Include" />
           <e p="Interest.cs" t="Include" />
           <e p="MaritalStatus.cs" t="Include" />
           <e p="Post.cs" t="Include" />
@@ -148,6 +157,8 @@
               <e p="IUserFriendsRepository.cs" t="Include" />
             </e>
             <e p="ICommentRepository.cs" t="Include" />
+            <e p="IEventPhotoRepository.cs" t="Include" />
+            <e p="IPhotoRepository.cs" t="Include" />
             <e p="IPostCommentRepository.cs" t="Include" />
             <e p="IPostLikeRepository.cs" t="Include" />
             <e p="IPostRepository.cs" t="Include" />
@@ -172,12 +183,14 @@
               <e p="EventRepository.cs" t="Include" />
               <e p="UserEventsRepository.cs" t="Include" />
             </e>
+            <e p="EventPhotoRepository.cs" t="Include" />
             <e p="Friend" t="Include">
               <e p="FriendRepository.cs" t="Include" />
               <e p="FriendRequestRepository.cs" t="Include" />
               <e p="UserFriendsRepository.cs" t="Include" />
             </e>
             <e p="LikeRepository.cs" t="Include" />
+            <e p="PhotoRepository.cs" t="Include" />
             <e p="PostLikeRepository.cs" t="Include" />
             <e p="PostRepository.cs" t="Include" />
             <e p="SessionRepository.cs" t="Include" />
@@ -211,7 +224,6 @@
             </e>
             <e p="JwtService.cs" t="Include" />
             <e p="UserAvatarConverterService.cs" t="Include" />
-            <e p="UsersLookUpCriteriaService.cs" t="Include" />
           </e>
           <e p="Model" t="Include" />
         </e>
@@ -226,7 +238,18 @@
           <e p="EventAvatar" t="Include">
             <e p="default-event-avatar.png" t="Include" />
           </e>
-          <e p="EventPost" t="Include" />
+          <e p="EventPhotos" t="Include">
+            <e p="1" t="Include">
+              <e p="1.jpg" t="Include" />
+              <e p="2.jpg" t="Include" />
+              <e p="3.png" t="Include" />
+              <e p="4.jpg" t="Include" />
+              <e p="5_74e77ec5c961e11e9962b10dd72b6e65_900.jpg" t="Include" />
+            </e>
+          </e>
+          <e p="EventPost" t="Include">
+            <e p="1" t="Include" />
+          </e>
           <e p="ProfileBackground" t="Include">
             <e p="7_185412012844811218_506049489870700_5467995208966733824_n.png" t="Include" />
           </e>
@@ -240,6 +263,7 @@
             <e p="7_7430601124mn0udtift8z.jpg" t="Include" />
             <e p="default-user-avatar.png" t="Include" />
           </e>
+          <e p="UserPhotos" t="Include" />
           <e p="UserPost" t="Include">
             <e p="7" t="Include" />
             <e p="7_628813034res.png" t="Include" />

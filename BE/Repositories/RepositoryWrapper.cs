@@ -40,6 +40,8 @@ namespace BE.Repositories
         private IFriendRequestRepository _friendRequest;
         private IEventPostRepository _eventPost;
         private IEventParticipantsRepository _eventParticipants;
+        private IEventPhotoRepository _eventPhoto;
+        private IPhotoRepository _photo;
 
         private IJwtService _jwtService;
         private IAvatarConverterService _avatarConverterService;
@@ -80,7 +82,12 @@ namespace BE.Repositories
 
         public IFriendRequestRepository FriendRequest => _friendRequest ?? (_friendRequest = new FriendRequestRepository(_friendyContext));
         public IEventPostRepository EventPost => _eventPost ?? (_eventPost = new EventPostRepository(_friendyContext));
-        public IEventParticipantsRepository EventParticipants => _eventParticipants ?? (_eventParticipants = new EventParticipantRepository(_friendyContext));
+        public IEventParticipantsRepository EventParticipants => _eventParticipants 
+                                                                 ?? (_eventParticipants = new EventParticipantRepository(_friendyContext));
+        
+        public IEventPhotoRepository EventPhoto => _eventPhoto ?? (_eventPhoto = new EventPhotoRepository(_friendyContext));      
+        
+        public IPhotoRepository Photo => _photo ?? (_photo = new PhotoRepository(_friendyContext));
 
         public IChatParticipantsRepository ChatParticipants =>
             _chatParticipants ?? (_chatParticipants = new ChatParticipantsRepository(_friendyContext, 

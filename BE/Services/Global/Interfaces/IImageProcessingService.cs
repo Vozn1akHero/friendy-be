@@ -6,5 +6,6 @@ namespace BE.Interfaces
     public interface IImageProcessingService
     {
         Task<string> SaveAndReturnImagePath(IFormFile image, string basePath, int baseId);
+        Task<string> SaveWithSpecifiedName(IFormFile image, string imagePath);
     }
 }

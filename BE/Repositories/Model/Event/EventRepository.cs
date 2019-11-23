@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using BE.Helpers;
 using BE.Interfaces;
 using BE.Interfaces.Repositories;
 using BE.Models;
@@ -36,6 +37,12 @@ namespace BE.Repositories
         {
             return await FindByCondition(e => e.Id == id)
                 .SingleOrDefaultAsync();
+        }
+        
+        public async Task<object> GetWithSelectedFields(int id, string[] selectedFields)
+        {
+            var obj = await FindByCondition(e => e.Id == id).SingleOrDefaultAsync();
+            return DynamicLinqStatement.ExtractSpecifiedFields<Models.Event>(obj, selectedFields);
         }
 
         /*public async Task<byte[]> GetAvatarById(int id)

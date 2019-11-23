@@ -59,6 +59,16 @@ namespace BE.Controllers
             return Ok(eventData);
         }
         
+        [HttpGet("{id}/with-selected-fields")]
+        [Authorize]
+        public async Task<IActionResult> GetSelectedFields(int id, 
+            [FromQuery(Name = "selectedFields")] string selectedFields)
+        {
+            string[] selectedFieldsArr = selectedFields.Split(",");
+            var fields = await _repository.Event.GetWithSelectedFields(id, selectedFieldsArr);
+            return Ok(fields);
+        }
+        
         [HttpGet]
         [Authorize]
         [Route("is-admin/{id}")]

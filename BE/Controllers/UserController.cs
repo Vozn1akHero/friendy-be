@@ -51,7 +51,16 @@ namespace BE.Controllers
             if(user != null) return Ok(user);
             return NotFound();
         }
-        
+
+        [HttpGet("{id}/with-selected-fields")]
+        [Authorize]
+        public async Task<IActionResult> GetSelectedFields(int id, 
+            [FromQuery(Name = "selectedFields")] string selectedFields)
+        {
+            string[] selectedFieldsArr = selectedFields.Split(",");
+            var fields = await _repository.User.GetWithSelectedFields(id, selectedFieldsArr);
+            return Ok(fields);
+        }
         
         [HttpGet]
         [Authorize]

@@ -30,6 +30,7 @@ namespace BE.Models
         public virtual DbSet<Friend> Friend { get; set; }
         public virtual DbSet<FriendRequest> FriendRequest { get; set; }
         public virtual DbSet<Gender> Gender { get; set; }
+        public virtual DbSet<Image> Image { get; set; }
         public virtual DbSet<Interest> Interest { get; set; }
         public virtual DbSet<MaritalStatus> MaritalStatus { get; set; }
         public virtual DbSet<Post> Post { get; set; }
@@ -173,7 +174,6 @@ namespace BE.Models
                 entity.HasOne(d => d.Post)
                     .WithMany(p => p.Comment)
                     .HasForeignKey(d => d.PostId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_comment_post");
 
                 entity.HasOne(d => d.User)
@@ -279,16 +279,19 @@ namespace BE.Models
 
                 entity.Property(e => e.EventId).HasColumnName("event_id");
 
-                entity.Property(e => e.Image)
-                    .IsRequired()
-                    .HasColumnName("image")
-                    .IsUnicode(false);
+                entity.Property(e => e.ImageId).HasColumnName("image_id");
 
                 entity.HasOne(d => d.Event)
                     .WithMany(p => p.EventImage)
                     .HasForeignKey(d => d.EventId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_event_photo_event");
+
+                entity.HasOne(d => d.Image)
+                    .WithMany(p => p.EventImage)
+                    .HasForeignKey(d => d.ImageId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_event_image_image");
             });
 
             modelBuilder.Entity<EventParticipants>(entity =>
@@ -318,9 +321,7 @@ namespace BE.Models
             {
                 entity.ToTable("event_post");
 
-                entity.Property(e => e.Id)
-                    .HasColumnName("id")
-                    .ValueGeneratedNever();
+                entity.Property(e => e.Id).HasColumnName("id");
 
                 entity.Property(e => e.EventId).HasColumnName("event_id");
 
@@ -335,7 +336,6 @@ namespace BE.Models
                 entity.HasOne(d => d.Post)
                     .WithMany(p => p.EventPost)
                     .HasForeignKey(d => d.PostId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_event_post_post");
             });
 
@@ -388,6 +388,22 @@ namespace BE.Models
                     .HasColumnName("title")
                     .HasMaxLength(50)
                     .IsUnicode(false);
+            });
+
+            modelBuilder.Entity<Image>(entity =>
+            {
+                entity.ToTable("image");
+
+                entity.Property(e => e.Id).HasColumnName("id");
+
+                entity.Property(e => e.Path)
+                    .IsRequired()
+                    .HasColumnName("path")
+                    .IsUnicode(false);
+
+                entity.Property(e => e.PublishDate)
+                    .HasColumnName("publish_date")
+                    .HasColumnType("datetime");
             });
 
             modelBuilder.Entity<Interest>(entity =>
@@ -451,7 +467,6 @@ namespace BE.Models
                 entity.HasOne(d => d.Post)
                     .WithMany(p => p.PostLike)
                     .HasForeignKey(d => d.PostId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_post_like_post");
 
                 entity.HasOne(d => d.User)
@@ -728,7 +743,6 @@ namespace BE.Models
                 entity.HasOne(d => d.Post)
                     .WithMany(p => p.UserPost)
                     .HasForeignKey(d => d.PostId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_user_post_post");
 
                 entity.HasOne(d => d.User)
