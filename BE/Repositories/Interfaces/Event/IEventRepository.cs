@@ -9,6 +9,9 @@ namespace BE.Interfaces.Repositories
         Task<List<Event>> GetExampleEventsByUserId(int userId);
         Task<Event> GetById(int userId);
         Task<object> GetWithSelectedFields(int id, string[] selectedFields);
+        Task<string> GetAvatarPathByEventIdAsync(int id);
+        Task UpdateAvatarAsync(string path, int id);
+        Task UpdateBackgroundAsync(string path, int id);
         //Task<byte[]> GetAvatarById(int id);
     }
 }

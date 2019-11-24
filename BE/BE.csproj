@@ -32,6 +32,7 @@
     <Folder Include="Interfaces\Services" />
     <Folder Include="Repositories\Custom" />
     <Folder Include="Services\Model" />
+    <Folder Include="wwwroot\EventBackground" />
     <Folder Include="wwwroot\EventPhotos" />
     <Folder Include="wwwroot\EventPost\1" />
     <Folder Include="wwwroot\ProfileBackground" />

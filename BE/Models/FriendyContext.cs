@@ -207,11 +207,17 @@ namespace BE.Models
                     .HasColumnName("avatar")
                     .IsUnicode(false);
 
+                entity.Property(e => e.Background)
+                    .HasColumnName("background")
+                    .IsUnicode(false);
+
                 entity.Property(e => e.City)
                     .IsRequired()
                     .HasColumnName("city")
                     .HasMaxLength(250)
                     .IsUnicode(false);
+
+                entity.Property(e => e.CreatorId).HasColumnName("creator_id");
 
                 entity.Property(e => e.Date)
                     .HasColumnName("date")
@@ -246,6 +252,12 @@ namespace BE.Models
                     .HasColumnName("title")
                     .HasMaxLength(250)
                     .IsUnicode(false);
+
+                entity.HasOne(d => d.Creator)
+                    .WithMany(p => p.Event)
+                    .HasForeignKey(d => d.CreatorId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_event_user");
             });
 
             modelBuilder.Entity<EventAdmins>(entity =>

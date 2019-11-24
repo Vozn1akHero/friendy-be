@@ -45,12 +45,23 @@ namespace BE.Repositories
             return DynamicLinqStatement.ExtractSpecifiedFields<Models.Event>(obj, selectedFields);
         }
 
-        /*public async Task<byte[]> GetAvatarById(int id)
+        public async Task<string> GetAvatarPathByEventIdAsync(int id)
         {
-            string path = await FindByCondition(e => e.Id == id)
-                .Select(e => e.Avatar)
-                .SingleOrDefaultAsync();
-            return _userAvatarConverterService.ConvertToByte(path);
-        }*/
+            return await FindByCondition(e => e.Id == id).Select(e => e.Avatar).SingleOrDefaultAsync();
+        }
+        
+        public async Task UpdateAvatarAsync(string path, int id)
+        {
+            var obj = await FindByCondition(e => e.Id == id).SingleOrDefaultAsync();
+            obj.Avatar = path;
+            await SaveAsync();
+        }
+
+        public async Task UpdateBackgroundAsync(string path, int id)
+        {
+            var obj = await FindByCondition(e => e.Id == id).SingleOrDefaultAsync();
+            obj.Background = path;
+            await SaveAsync();
+        }
     }
 }

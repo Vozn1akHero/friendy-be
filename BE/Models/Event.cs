@@ -23,8 +23,11 @@ namespace BE.Models
         public decimal EntryPrice { get; set; }
         public int ParticipantsAmount { get; set; }
         public string Avatar { get; set; }
+        public string Background { get; set; }
         public DateTime Date { get; set; }
+        public int CreatorId { get; set; }
 
+        public virtual User Creator { get; set; }
         public virtual ICollection<EventAdmins> EventAdmins { get; set; }
         public virtual ICollection<EventImage> EventImage { get; set; }
         public virtual ICollection<EventParticipants> EventParticipants { get; set; }

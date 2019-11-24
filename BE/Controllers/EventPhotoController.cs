@@ -24,7 +24,7 @@ namespace BE.Controllers
         [HttpGet]
         [Authorize]
         [Route("range")]
-        public async Task<IActionResult> GetRange([FromQuery(Name = "start")] int startIndex,
+        public async Task<IActionResult> GetRange([FromQuery(Name = "startIndex")] int startIndex,
             [FromQuery(Name = "length")] int length, 
             [FromQuery(Name = "eventId")] int eventId)
         {

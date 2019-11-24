@@ -10,6 +10,7 @@ namespace BE.Models
             ChatMessage = new HashSet<ChatMessage>();
             ChatParticipants = new HashSet<ChatParticipants>();
             Comment = new HashSet<Comment>();
+            Event = new HashSet<Event>();
             EventAdmins = new HashSet<EventAdmins>();
             EventParticipants = new HashSet<EventParticipants>();
             Friend = new HashSet<Friend>();
@@ -43,6 +44,7 @@ namespace BE.Models
         public virtual ICollection<ChatMessage> ChatMessage { get; set; }
         public virtual ICollection<ChatParticipants> ChatParticipants { get; set; }
         public virtual ICollection<Comment> Comment { get; set; }
+        public virtual ICollection<Event> Event { get; set; }
         public virtual ICollection<EventAdmins> EventAdmins { get; set; }
         public virtual ICollection<EventParticipants> EventParticipants { get; set; }
         public virtual ICollection<Friend> Friend { get; set; }

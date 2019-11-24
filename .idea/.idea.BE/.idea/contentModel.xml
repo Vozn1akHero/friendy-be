@@ -238,6 +238,7 @@
           <e p="EventAvatar" t="Include">
             <e p="default-event-avatar.png" t="Include" />
           </e>
+          <e p="EventBackground" t="Include" />
           <e p="EventPhotos" t="Include">
             <e p="1" t="Include">
               <e p="1.jpg" t="Include" />
@@ -258,6 +259,7 @@
             <e p="7_15528426534mn0udtift8z.jpg" t="Include" />
             <e p="7_16835223844mn0udtift8z.jpg" t="Include" />
             <e p="7_17200817124mn0udtift8z.jpg" t="Include" />
+            <e p="7_196341587946338567_811860422479582_7939631742581735424_n.png" t="Include" />
             <e p="7_24210801246338567_811860422479582_7939631742581735424_n.png" t="Include" />
             <e p="7_5597886214mn0udtift8z.jpg" t="Include" />
             <e p="7_7430601124mn0udtift8z.jpg" t="Include" />
