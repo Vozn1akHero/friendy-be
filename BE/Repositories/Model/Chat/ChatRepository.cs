@@ -14,29 +14,23 @@ namespace BE.Repositories.Chat
         {
         }
 
-        public async Task<Models.Chat> AddNewAfterFriendAdding()
+        public async Task Add(int firstParticipantId, int secondParticipantId)
         {
-            byte[] bytes = new byte[16];
-            var rng = new RNGCryptoServiceProvider();
-            rng.GetBytes(bytes);
-            string newChatHashUrl = BitConverter.ToString(bytes);
-            var newChat = new Models.Chat
+            var newChat = new Models.Chat()
             {
-                UrlHash = newChatHashUrl
+                FirstParticipantId = firstParticipantId,
+                SecondParticipantId = secondParticipantId
             };
             Create(newChat);
             await SaveAsync();
-            return newChat;
         }
 
-        public async Task<string> GetChatUrlPartById(int chatId)
+        public async Task<Models.Chat> GetByInterlocutorsIdentifiers(int firstParticipantId, int secondParticipantId)
         {
-            return await FindByCondition(e => e.Id == chatId).Select(e => e.UrlHash).SingleOrDefaultAsync();
-        }
-        
-        public async Task<int> GetChatIdByUrlHash(string urlHash)
-        {
-            return await FindByCondition(e => e.UrlHash == urlHash).Select(e => e.Id).SingleOrDefaultAsync();
+            return await FindByCondition(e =>
+                    e.FirstParticipantId == firstParticipantId && e.SecondParticipantId == secondParticipantId
+                    || e.FirstParticipantId == secondParticipantId && e.SecondParticipantId == secondParticipantId)
+                .SingleOrDefaultAsync();
         }
     }
 }

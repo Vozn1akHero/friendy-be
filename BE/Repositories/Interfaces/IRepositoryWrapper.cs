@@ -13,7 +13,7 @@ namespace BE.Interfaces
     public interface IRepositoryWrapper
     {
         IUserRepository User { get; }
-        ISessionRepository Session { get; }
+        IAuthenticationSessionRepository AuthenticationSession { get; }
         IPostRepository Post { get; }
         IUserPostRepository UserPost { get; }
         IPostLikeRepository PostLike { get; }
@@ -26,7 +26,7 @@ namespace BE.Interfaces
         IChatRepository Chat { get; }
         IChatMessageRepository ChatMessage { get; }
         IChatMessagesRepository ChatMessages { get; }
-        IChatParticipantsRepository ChatParticipants { get; }
+        //IChatParticipantsRepository ChatParticipants { get; }
         IFriendRequestRepository FriendRequest { get; }
         IEventPostRepository EventPost { get; }
         IEventParticipantsRepository EventParticipants { get; }

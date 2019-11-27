@@ -4,11 +4,15 @@ namespace BE.Dtos.ChatDtos
 {
     public class ChatLastMessageDto
     {
-        public string ChatUrlPart { get; set; }
+        public int ChatId { get; set; }
+        public int Id { get; set; }
         public string Content { get; set; }
-        public bool HasImage { get; set; }
-        public byte[] UserAvatar { get; set; }
-        public int UserId { get; set; }
+        public string ImageUrl { get; set; }
         public DateTime Date { get; set; }
+        public int SenderId { get; set; }
+        public string SenderAvatarPath { get; set; }
+        public int InterlocutorId { get; set; }
+        public string InterlocutorAvatarPath { get; set; }
+        public bool WrittenByRequestIssuer { get; set; }
     }
 }

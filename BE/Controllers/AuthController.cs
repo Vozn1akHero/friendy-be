@@ -38,7 +38,7 @@ namespace BE.Controllers
             {
                 return HTTPHelpers.TextResult(HttpStatusCode.Conflict, "Email is already taken");
             }
-            user.Avatar = "./wwwroot/UserAvatar/default-user-avatar.png";
+            user.Avatar = "wwwroot/UserAvatar/default-user-avatar.png";
             await _authenticationService.Create(user);
             return Ok();
         }
@@ -66,8 +66,7 @@ namespace BE.Controllers
                     HttpOnly = true,
                     Secure = false
                 });
-            var session = await _repository.Session.CreateSession(token);
-            await _repository.User.SetSessionIdAsync(userRes.Id, session.Id);
+            var session = await _repository.AuthenticationSession.CreateSession(token);
             return Ok(new
             {
                 sessionHash = session.Hash

@@ -21,7 +21,6 @@ namespace BE.Interfaces
         Task UpdateAvatarAsync(string path, int userId);
         Task UpdateProfileBackgroundAsync(string path, int userId);
         Task<string> GetAvatarByIdAsync(int userId);
-
         Task<string> GetProfileBackgroundByIdAsync(int userId);
         //Task UpdateUserAsync(User dbUser);
     }

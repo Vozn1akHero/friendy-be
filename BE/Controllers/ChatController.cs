@@ -6,8 +6,10 @@ using System.Threading.Tasks;
 using BE.Dtos.ChatDtos;
 using BE.Interfaces;
 using BE.Models;
+using BE.SignalR.Hubs;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.SignalR;
 
 namespace BE.Controllers
 {
@@ -17,7 +19,9 @@ namespace BE.Controllers
     {
         private IRepositoryWrapper _repository;
         private IAvatarConverterService _userAvatarConverterService;
-        public ChatController(IRepositoryWrapper repository, IAvatarConverterService userAvatarConverterService)
+        
+        public ChatController(IRepositoryWrapper repository,
+            IAvatarConverterService userAvatarConverterService)
         {
             _repository = repository;
             _userAvatarConverterService = userAvatarConverterService;
@@ -34,43 +38,18 @@ namespace BE.Controllers
         [HttpGet]
         [Authorize]
         [Route("last-messages")]
-        public async Task<IActionResult> GetLastMessages([FromHeader(Name = "userId")] int userId)
+        public async Task<IActionResult> GetLastMessages([FromQuery(Name = "startIndex")] int startIndex, 
+            [FromQuery(Name = "length")] int length, 
+            [FromHeader(Name = "userId")] int userId)
         {
-            var lastMessageList = new List<ChatLastMessageDto>();
-            var chatList = await _repository.ChatParticipants.GetUserChatList(userId);
-            var chatIdList = chatList.Select(e => e.ChatId).ToList();
-            var messageList = await _repository.ChatMessages.GetLastChatMessages(chatIdList);
-
-            foreach (var chatMessage in messageList)
-            {
-                string chatUrl = await _repository.Chat.GetChatUrlPartById(chatMessage.ChatId);
-                lastMessageList.Add(new ChatLastMessageDto
-                {
-                    ChatUrlPart = chatUrl,
-                    Content = chatMessage.Message.Content,
-                    HasImage = chatMessage.Message.ImageUrl != null,
-                    UserAvatar = _userAvatarConverterService.ConvertToByte(chatMessage.Message.User.Avatar),
-                    UserId = chatMessage.Message.User.Id,
-                    Date = chatMessage.Message.Date
-                });
-            }
-            
+            var lastMessageList = await _repository
+                .ChatMessages
+                .GetLastChatMessageRangeByReceiverId(userId, startIndex, length);
             return Ok(lastMessageList);
         }
+
         
-        [HttpGet]
-        [Authorize]
-        [Route("participants/friend-basic-data/{chatHash}")]
-        public async Task<IActionResult> GetFriendBasicDataInDialog(string chatHash, [FromHeader(Name = "userId")] int userId)
-        {
-            var chatId = await _repository.Chat.GetChatIdByUrlHash(chatHash);
-            var participantsData = await _repository
-                .ChatParticipants
-                .GetFriendBasicDataInDialogByChatId(chatId, userId);
-            return Ok(participantsData);
-        }
-        
-        [HttpGet]
+/*        [HttpGet]
         [Authorize]
         [Route("participants/basic-data/{chatHash}")]
         public async Task<IActionResult> GetDialogParticipantsBasicData(string chatHash)
@@ -78,22 +57,33 @@ namespace BE.Controllers
             var chatId = await _repository.Chat.GetChatIdByUrlHash(chatHash);
             var participantsData = await _repository.ChatParticipants.GetParticipantsBasicDataByChatId(chatId);
             return Ok(participantsData);
-        }
-        
+        }*/
+
         [HttpGet]
         [Authorize]
-        [Route("messages/{hashUrl}")]
-        public async Task<IActionResult> GetMessagesInDialog(string hashUrl, [FromHeader(Name = "userId")] int userId)
+        [Route("data-by-interlocutors/{to}")]
+        public async Task<IActionResult> GetByInterlocutorsIdentifiers(int to, [FromHeader(Name = "userId")] int userId)
         {
-            var chatId = await _repository.Chat.GetChatIdByUrlHash(hashUrl);
-            var messages = await _repository.ChatMessages.GetByChatId(chatId, userId);
+            return Ok(await _repository.Chat.GetByInterlocutorsIdentifiers(to, userId));
+        }
+
+        [HttpGet]
+        [Authorize]
+        [Route("{to}")]
+        public async Task<IActionResult> GetMessageRangeInDialogAsync(int to, 
+            [FromQuery(Name = "startIndex")] int startIndex,
+            [FromQuery(Name = "length")] int length,
+            [FromHeader(Name = "userId")] int userId)
+        {
+            //var chatId = await _repository.Chat.GetChatIdByUrlHash(hashUrl);
+            var messages = await _repository.ChatMessages.GetMessageRangeByReceiverId(to, userId, startIndex, length);
             return Ok(messages);
         }
 
         [HttpPost]
         [Authorize]
-        [Route("message/{chatHash}")]
-        public async Task<IActionResult> AddNewMessage(string chatHash, 
+        [Route("message/{receiverId}")]
+        public async Task<IActionResult> AddNewMessage(int receiverId, 
             [FromBody] NewMessageDto chatMessage,
             [FromHeader(Name = "userId")] int userId)
         {
@@ -104,12 +94,11 @@ namespace BE.Controllers
                 Date = DateTime.Now,
                 UserId = userId
             };
-            var chatId = await _repository.Chat.GetChatIdByUrlHash(chatHash);
+/*            var chatId = await _repository.Chat.GetChatIdByUrlHash(chatHash);
             await _repository.ChatMessage.Add(newMessage);
-            await _repository.ChatMessages.Add(chatId, newMessage.Id);
+            await _repository.ChatMessages.Add(chatId, newMessage.Id);*/
             
             return CreatedAtAction("AddNewMessage", chatMessage);
         }
-        
     }
 }

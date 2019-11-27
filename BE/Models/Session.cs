@@ -5,15 +5,11 @@ namespace BE.Models
 {
     public partial class Session
     {
-        public Session()
-        {
-            User = new HashSet<User>();
-        }
-
         public int Id { get; set; }
-        public string Hash { get; set; }
-        public string Token { get; set; }
+        public int UserId { get; set; }
+        public DateTime ConnectionStart { get; set; }
+        public DateTime? ConnectionEnd { get; set; }
 
-        public virtual ICollection<User> User { get; set; }
+        public virtual User User { get; set; }
     }
 }

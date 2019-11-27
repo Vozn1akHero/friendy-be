@@ -7,8 +7,11 @@ namespace BE.Models
     {
         public User()
         {
-            ChatMessage = new HashSet<ChatMessage>();
+            ChatFirstParticipant = new HashSet<Chat>();
+            ChatMessageReceiver = new HashSet<ChatMessage>();
+            ChatMessageUser = new HashSet<ChatMessage>();
             ChatParticipants = new HashSet<ChatParticipants>();
+            ChatSecondParticipant = new HashSet<Chat>();
             Comment = new HashSet<Comment>();
             Event = new HashSet<Event>();
             EventAdmins = new HashSet<EventAdmins>();
@@ -16,6 +19,7 @@ namespace BE.Models
             Friend = new HashSet<Friend>();
             FriendRequest = new HashSet<FriendRequest>();
             PostLike = new HashSet<PostLike>();
+            Session = new HashSet<Session>();
             UserEvents = new HashSet<UserEvents>();
             UserFriends = new HashSet<UserFriends>();
             UserImage = new HashSet<UserImage>();
@@ -35,14 +39,17 @@ namespace BE.Models
         public string Avatar { get; set; }
         public string ProfileBg { get; set; }
         public string Status { get; set; }
-        public int? SessionId { get; set; }
         public int? AdditionalInfoId { get; set; }
+        public int? AuthenticationSessionId { get; set; }
 
         public virtual UserAdditionalInfo AdditionalInfo { get; set; }
+        public virtual AuthenticationSession AuthenticationSession { get; set; }
         public virtual Gender Gender { get; set; }
-        public virtual Session Session { get; set; }
-        public virtual ICollection<ChatMessage> ChatMessage { get; set; }
+        public virtual ICollection<Chat> ChatFirstParticipant { get; set; }
+        public virtual ICollection<ChatMessage> ChatMessageReceiver { get; set; }
+        public virtual ICollection<ChatMessage> ChatMessageUser { get; set; }
         public virtual ICollection<ChatParticipants> ChatParticipants { get; set; }
+        public virtual ICollection<Chat> ChatSecondParticipant { get; set; }
         public virtual ICollection<Comment> Comment { get; set; }
         public virtual ICollection<Event> Event { get; set; }
         public virtual ICollection<EventAdmins> EventAdmins { get; set; }
@@ -50,6 +57,7 @@ namespace BE.Models
         public virtual ICollection<Friend> Friend { get; set; }
         public virtual ICollection<FriendRequest> FriendRequest { get; set; }
         public virtual ICollection<PostLike> PostLike { get; set; }
+        public virtual ICollection<Session> Session { get; set; }
         public virtual ICollection<UserEvents> UserEvents { get; set; }
         public virtual ICollection<UserFriends> UserFriends { get; set; }
         public virtual ICollection<UserImage> UserImage { get; set; }

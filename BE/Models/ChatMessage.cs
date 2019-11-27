@@ -15,7 +15,9 @@ namespace BE.Models
         public string ImageUrl { get; set; }
         public DateTime Date { get; set; }
         public int UserId { get; set; }
+        public int? ReceiverId { get; set; }
 
+        public virtual User Receiver { get; set; }
         public virtual User User { get; set; }
         public virtual ICollection<ChatMessages> ChatMessages { get; set; }
     }

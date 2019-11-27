@@ -46,9 +46,8 @@ namespace BE.Repositories
         public async Task<User> GetUserAsync(string token)
         {
             string cutToken = token.Split(" ")[1];
-            var user = await FindByCondition(o => o.Session.Token == cutToken)
+            var user = await FindByCondition(o => o.AuthenticationSession.Token == cutToken)
                 .SingleOrDefaultAsync();
-
             return user;
         }   
         
@@ -71,7 +70,7 @@ namespace BE.Repositories
         public async Task SetSessionIdAsync(int userId, int sessionId)
         {
             var user = await FindByCondition(o => o.Id == userId).SingleOrDefaultAsync();
-            user.SessionId = sessionId;
+            //user.SessionId = sessionId;
             await SaveAsync();
         }
 

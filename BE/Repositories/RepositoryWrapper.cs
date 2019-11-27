@@ -13,6 +13,7 @@ using BE.Repositories.Interfaces;
 using BE.Repositories.Interfaces.Event;
 using BE.Repositories.RepositoryServices.Interfaces.User;
 using BE.RepositoryServices.User;
+using BE.Services.Global.Interfaces;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Options;
 
@@ -23,7 +24,7 @@ namespace BE.Repositories
         private FriendyContext _friendyContext;
 
         private IUserRepository _user;
-        private ISessionRepository _session;
+        private IAuthenticationSessionRepository _authenticationSession;
         private IPostRepository _post;
         private IUserPostRepository _userPost;
         private IPostLikeRepository _postLike;
@@ -36,17 +37,16 @@ namespace BE.Repositories
         private IChatRepository _chat;
         private IChatMessageRepository _chatMessage;
         private IChatMessagesRepository _chatMessages;
-        private IChatParticipantsRepository _chatParticipants;
+        //private IChatParticipantsRepository _chatParticipants;
         private IFriendRequestRepository _friendRequest;
         private IEventPostRepository _eventPost;
         private IEventParticipantsRepository _eventParticipants;
         private IEventPhotoRepository _eventPhoto;
         private IPhotoRepository _photo;
 
-        private IJwtService _jwtService;
+        private IRowSqlQueryService _rowSqlQueryService;
         private IAvatarConverterService _avatarConverterService;
         private ICustomSqlQueryService _customSqlQueryService;
-        
         private IUserSearchingService _userSearchingService;
         
         public IUserRepository User =>
@@ -54,58 +54,42 @@ namespace BE.Repositories
                 _avatarConverterService,
                 _userSearchingService));
 
-        public ISessionRepository Session => _session ?? (_session = new SessionRepository(_friendyContext));
-        
+        public IAuthenticationSessionRepository AuthenticationSession =>
+            _authenticationSession ?? (_authenticationSession = new AuthenticationSessionRepository(_friendyContext));
         public IPostRepository Post => _post ?? (_post = new PostRepository(_friendyContext));
-        
         public IUserPostRepository UserPost => _userPost ?? (_userPost = new UserPostRepository(_friendyContext));
-
         public IPostLikeRepository PostLike => _postLike ?? (_postLike = new PostLikeRepository(_friendyContext));
-
         public IFriendRepository Friend => _friend ?? (_friend = new FriendRepository(_friendyContext));
-
         public IEventRepository Event => _event ?? (_event = new EventRepository(_friendyContext, _avatarConverterService));
-
         public IUserFriendsRepository UserFriends => _userFriends ?? (_userFriends = new UserFriendsRepository(_friendyContext, _avatarConverterService));
-
         public IUserEventsRepository UserEvents => _userEvents ?? (_userEvents = new UserEventsRepository(_friendyContext));
-
         public IEventAdminsRepository EventAdmins => _eventAdmins ?? (_eventAdmins = new EventAdminsRepository(_friendyContext));
-
         public ICommentRepository Comment => _comment ?? (_comment = new CommentRepository(_friendyContext));
-
         public IChatRepository Chat => _chat ?? (_chat = new ChatRepository(_friendyContext));
-
         public IChatMessageRepository ChatMessage => _chatMessage ?? (_chatMessage = new ChatMessageRepository(_friendyContext));
-
-        public IChatMessagesRepository ChatMessages => _chatMessages ?? (_chatMessages = new ChatMessagesRepository(_friendyContext, _avatarConverterService));
-
+        public IChatMessagesRepository ChatMessages => _chatMessages ?? (_chatMessages = new ChatMessagesRepository(_friendyContext, _rowSqlQueryService));
         public IFriendRequestRepository FriendRequest => _friendRequest ?? (_friendRequest = new FriendRequestRepository(_friendyContext));
         public IEventPostRepository EventPost => _eventPost ?? (_eventPost = new EventPostRepository(_friendyContext));
         public IEventParticipantsRepository EventParticipants => _eventParticipants 
                                                                  ?? (_eventParticipants = new EventParticipantRepository(_friendyContext));
-        
-        public IEventPhotoRepository EventPhoto => _eventPhoto ?? (_eventPhoto = new EventPhotoRepository(_friendyContext));      
-        
+        public IEventPhotoRepository EventPhoto => _eventPhoto ?? (_eventPhoto = new EventPhotoRepository(_friendyContext));
         public IPhotoRepository Photo => _photo ?? (_photo = new PhotoRepository(_friendyContext));
-
-        public IChatParticipantsRepository ChatParticipants =>
+        /*public IChatParticipantsRepository ChatParticipants =>
             _chatParticipants ?? (_chatParticipants = new ChatParticipantsRepository(_friendyContext, 
                 _avatarConverterService, 
-                _customSqlQueryService));
+                _customSqlQueryService));*/
 
 
         public RepositoryWrapper(FriendyContext friendyContext,
-            IJwtService jwtService, 
             IAvatarConverterService avatarConverterService,
             ICustomSqlQueryService customSqlQueryService,
-            IUserSearchingService userSearchingService)
+            IUserSearchingService userSearchingService, IRowSqlQueryService rowSqlQueryService)
         {
             _friendyContext = friendyContext;
-            _jwtService = jwtService;
             _avatarConverterService = avatarConverterService;
             _customSqlQueryService = customSqlQueryService;
             _userSearchingService = userSearchingService;
+            _rowSqlQueryService = rowSqlQueryService;
         }
 
         public void Save()

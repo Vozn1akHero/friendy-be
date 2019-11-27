@@ -99,8 +99,8 @@ namespace BE.Controllers
         public async Task<IActionResult> ConfirmRequest(int id, [FromHeader(Name = "userId")] int userId)
         {
             await _repository.UserFriends.AddNew(id, userId);
-            var newChat = await _repository.Chat.AddNewAfterFriendAdding();
-            await _repository.ChatParticipants.AddNewAfterFriendAdding(newChat.Id, new[] {id, userId});
+            await _repository.Chat.Add(id, userId);
+            //await _repository.ChatParticipants.AddNewAfterFriendAdding(newChat.Id, new[] {id, userId});
             return Ok();
         }
 

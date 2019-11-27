@@ -34,6 +34,7 @@
             <e p="ClientDtos" t="Include">
               <e p="NewMessageDto.cs" t="Include" />
             </e>
+            <e p="LastMessageBuilder.cs" t="Include" />
             <e p="ServerDtos" t="Include">
               <e p="ChatLastMessageDto.cs" t="Include" />
               <e p="ChatMessageDto.cs" t="Include" />
@@ -44,6 +45,7 @@
             </e>
           </e>
           <e p="EventDtos" t="Include">
+            <e p="EventParticipantDetailedDto.cs" t="Include" />
             <e p="EventParticipantForListDto.cs" t="Include" />
             <e p="ExemplaryEventParticipantDto.cs" t="Include" />
             <e p="UserEventDto.cs" t="Include" />
@@ -90,6 +92,7 @@
         </e>
         <e p="Models" t="Include">
           <e p="AlcoholAttitude.cs" t="Include" />
+          <e p="AuthenticationSession.cs" t="Include" />
           <e p="Chat.cs" t="Include" />
           <e p="ChatMessage.cs" t="Include" />
           <e p="ChatMessages.cs" t="Include" />
@@ -156,6 +159,7 @@
               <e p="IFriendRequestRepository.cs" t="Include" />
               <e p="IUserFriendsRepository.cs" t="Include" />
             </e>
+            <e p="IAuthenticationSessionRepository.cs" t="Include" />
             <e p="ICommentRepository.cs" t="Include" />
             <e p="IEventPhotoRepository.cs" t="Include" />
             <e p="IPhotoRepository.cs" t="Include" />
@@ -164,11 +168,11 @@
             <e p="IPostRepository.cs" t="Include" />
             <e p="IRepositoryBase.cs" t="Include" />
             <e p="IRepositoryWrapper.cs" t="Include" />
-            <e p="ISessionRepository.cs" t="Include" />
             <e p="IUserPostRepository.cs" t="Include" />
             <e p="IUserRepository.cs" t="Include" />
           </e>
           <e p="Model" t="Include">
+            <e p="AuthenticationSessionRepository.cs" t="Include" />
             <e p="Chat" t="Include">
               <e p="ChatMessageRepository.cs" t="Include" />
               <e p="ChatMessagesRepository.cs" t="Include" />
@@ -193,7 +197,6 @@
             <e p="PhotoRepository.cs" t="Include" />
             <e p="PostLikeRepository.cs" t="Include" />
             <e p="PostRepository.cs" t="Include" />
-            <e p="SessionRepository.cs" t="Include" />
             <e p="UserPostRepository.cs" t="Include" />
             <e p="UserRepository.cs" t="Include" />
           </e>
@@ -220,17 +223,21 @@
               <e p="ICustomSqlQueryService.cs" t="Include" />
               <e p="IImageProcessingService.cs" t="Include" />
               <e p="IJWTService.cs" t="Include" />
+              <e p="IRowSqlQueryService.cs" t="Include" />
               <e p="IUserAvatarConverterService.cs" t="Include" />
             </e>
             <e p="JwtService.cs" t="Include" />
+            <e p="RowSqlQueryService.cs" t="Include" />
             <e p="UserAvatarConverterService.cs" t="Include" />
           </e>
           <e p="Model" t="Include" />
         </e>
         <e p="SignalR" t="Include">
           <e p="Hubs" t="Include">
+            <e p="ChatHub.cs" t="Include" />
             <e p="PostHub.cs" t="Include" />
             <e p="ProfileHub.cs" t="Include" />
+            <e p="UserStatusHub.cs" t="Include" />
           </e>
         </e>
         <e p="Startup.cs" t="Include" />

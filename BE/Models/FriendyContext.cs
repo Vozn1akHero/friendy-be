@@ -16,6 +16,7 @@ namespace BE.Models
         }
 
         public virtual DbSet<AlcoholAttitude> AlcoholAttitude { get; set; }
+        public virtual DbSet<AuthenticationSession> AuthenticationSession { get; set; }
         public virtual DbSet<Chat> Chat { get; set; }
         public virtual DbSet<ChatMessage> ChatMessage { get; set; }
         public virtual DbSet<ChatMessages> ChatMessages { get; set; }
@@ -72,17 +73,44 @@ namespace BE.Models
                     .IsUnicode(false);
             });
 
+            modelBuilder.Entity<AuthenticationSession>(entity =>
+            {
+                entity.ToTable("authentication_session");
+
+                entity.Property(e => e.Id).HasColumnName("id");
+
+                entity.Property(e => e.Hash)
+                    .IsRequired()
+                    .HasColumnName("hash")
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Token)
+                    .IsRequired()
+                    .HasColumnName("token")
+                    .IsUnicode(false);
+            });
+
             modelBuilder.Entity<Chat>(entity =>
             {
                 entity.ToTable("chat");
 
                 entity.Property(e => e.Id).HasColumnName("id");
 
-                entity.Property(e => e.UrlHash)
-                    .IsRequired()
-                    .HasColumnName("url_hash")
-                    .HasMaxLength(250)
-                    .IsUnicode(false);
+                entity.Property(e => e.FirstParticipantId).HasColumnName("first_participant_id");
+
+                entity.Property(e => e.SecondParticipantId).HasColumnName("second_participant_id");
+
+                entity.HasOne(d => d.FirstParticipant)
+                    .WithMany(p => p.ChatFirstParticipant)
+                    .HasForeignKey(d => d.FirstParticipantId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_chat_user");
+
+                entity.HasOne(d => d.SecondParticipant)
+                    .WithMany(p => p.ChatSecondParticipant)
+                    .HasForeignKey(d => d.SecondParticipantId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_chat_user1");
             });
 
             modelBuilder.Entity<ChatMessage>(entity =>
@@ -106,10 +134,17 @@ namespace BE.Models
                     .HasMaxLength(1000)
                     .IsUnicode(false);
 
+                entity.Property(e => e.ReceiverId).HasColumnName("receiver_id");
+
                 entity.Property(e => e.UserId).HasColumnName("user_id");
 
+                entity.HasOne(d => d.Receiver)
+                    .WithMany(p => p.ChatMessageReceiver)
+                    .HasForeignKey(d => d.ReceiverId)
+                    .HasConstraintName("FK_chat_message_user1");
+
                 entity.HasOne(d => d.User)
-                    .WithMany(p => p.ChatMessage)
+                    .WithMany(p => p.ChatMessageUser)
                     .HasForeignKey(d => d.UserId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_chat_message_user");
@@ -124,6 +159,12 @@ namespace BE.Models
                 entity.Property(e => e.ChatId).HasColumnName("chat_id");
 
                 entity.Property(e => e.MessageId).HasColumnName("message_id");
+
+                entity.HasOne(d => d.Chat)
+                    .WithMany(p => p.ChatMessages)
+                    .HasForeignKey(d => d.ChatId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_chat_messages_chat");
 
                 entity.HasOne(d => d.Message)
                     .WithMany(p => p.ChatMessages)
@@ -507,17 +548,21 @@ namespace BE.Models
 
                 entity.Property(e => e.Id).HasColumnName("id");
 
-                entity.Property(e => e.Hash)
-                    .IsRequired()
-                    .HasColumnName("hash")
-                    .HasMaxLength(500)
-                    .IsUnicode(false);
+                entity.Property(e => e.ConnectionEnd)
+                    .HasColumnName("connection_end")
+                    .HasColumnType("datetime");
 
-                entity.Property(e => e.Token)
-                    .IsRequired()
-                    .HasColumnName("token")
-                    .HasMaxLength(500)
-                    .IsUnicode(false);
+                entity.Property(e => e.ConnectionStart)
+                    .HasColumnName("connection_start")
+                    .HasColumnType("datetime");
+
+                entity.Property(e => e.UserId).HasColumnName("user_id");
+
+                entity.HasOne(d => d.User)
+                    .WithMany(p => p.Session)
+                    .HasForeignKey(d => d.UserId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_session_user");
             });
 
             modelBuilder.Entity<SmokingAttitude>(entity =>
@@ -539,6 +584,8 @@ namespace BE.Models
                 entity.Property(e => e.Id).HasColumnName("id");
 
                 entity.Property(e => e.AdditionalInfoId).HasColumnName("additional_info_id");
+
+                entity.Property(e => e.AuthenticationSessionId).HasColumnName("authentication_session_id");
 
                 entity.Property(e => e.Avatar)
                     .HasColumnName("avatar")
@@ -581,8 +628,6 @@ namespace BE.Models
                     .HasMaxLength(8000)
                     .IsUnicode(false);
 
-                entity.Property(e => e.SessionId).HasColumnName("session_id");
-
                 entity.Property(e => e.Status)
                     .HasColumnName("status")
                     .HasMaxLength(100)
@@ -599,16 +644,16 @@ namespace BE.Models
                     .HasForeignKey(d => d.AdditionalInfoId)
                     .HasConstraintName("FK_user_user_additional_info");
 
+                entity.HasOne(d => d.AuthenticationSession)
+                    .WithMany(p => p.User)
+                    .HasForeignKey(d => d.AuthenticationSessionId)
+                    .HasConstraintName("FK_user_authentication_session");
+
                 entity.HasOne(d => d.Gender)
                     .WithMany(p => p.User)
                     .HasForeignKey(d => d.GenderId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_user_sex");
-
-                entity.HasOne(d => d.Session)
-                    .WithMany(p => p.User)
-                    .HasForeignKey(d => d.SessionId)
-                    .HasConstraintName("FK_user_session");
             });
 
             modelBuilder.Entity<UserAdditionalInfo>(entity =>

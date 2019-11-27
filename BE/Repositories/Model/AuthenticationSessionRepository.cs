@@ -11,18 +11,18 @@ using Microsoft.EntityFrameworkCore;
 
 namespace BE.Repositories
 {
-    public class SessionRepository : RepositoryBase<Session>, ISessionRepository
+    public class AuthenticationSessionRepository : RepositoryBase<AuthenticationSession>, IAuthenticationSessionRepository
     {
-        public SessionRepository(FriendyContext friendyContext) : base(friendyContext)
+        public AuthenticationSessionRepository(FriendyContext friendyContext) : base(friendyContext)
         {
         }
 
-        public Task<Session> GetSession(string hash)
+        public Task<AuthenticationSession> GetSession(string hash)
         {
             throw new NotImplementedException();
         }
 
-        public async Task<Session> CreateSession(string token)
+        public async Task<AuthenticationSession> CreateSession(string token)
         {
             var bytes = new byte[16];
             using (var rng = new RNGCryptoServiceProvider())
@@ -36,7 +36,7 @@ namespace BE.Repositories
 
             if (existingSession == null)
             {
-                var session = new Session()
+                var session = new AuthenticationSession()
                 {
                     Hash = hash,
                     Token = token
@@ -51,12 +51,12 @@ namespace BE.Repositories
             return existingSession;
         }
 
-        public Task UpdateSession(Session session)
+        public Task UpdateSession(AuthenticationSession session)
         {
             throw new NotImplementedException();
         }
 
-        public Task DeleteSession(Session session)
+        public Task DeleteSession(AuthenticationSession session)
         {
             throw new NotImplementedException();
         }

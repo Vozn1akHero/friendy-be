@@ -12,7 +12,7 @@ using Microsoft.Extensions.Configuration;
 
 namespace BE.Repositories.Chat
 {
-    public class ChatParticipantsRepository : RepositoryBase<ChatParticipants>, IChatParticipantsRepository
+    /*public class ChatParticipantsRepository : RepositoryBase<ChatParticipants>, IChatParticipantsRepository
     {
         private readonly IAvatarConverterService _userAvatarConverterService;
         private readonly ICustomSqlQueryService _customSqlQueryService;
@@ -48,50 +48,6 @@ namespace BE.Repositories.Chat
             await SaveAsync();
         }
 
-        public async Task<FriendBasicDataInDialogDto> GetFriendBasicDataInDialogByChatId(int chatId, int userId)
-        {
-            /*string sqlQuery = "select tab.id as FriendId, tab.name as Name, tab.surname as Surname, tab.avatar as Avatar from (select u.id, u.name, u.surname, u.avatar from chat_participants cp join [dbo].[user] u on cp.user_id = u.id where cp.chat_id = @chatId) tab where tab.id <> @userId";
-
-            var friendBasicDataInDialogList = _customSqlQueryService.ExecuteQuery(sqlQuery, new List<object>
-            {
-                new SqlParameter("chatId", chatId),
-                new SqlParameter("userId", userId)
-            });
-            
-            //var chatParticipantCast = friendBasicDataInDialogList.ElementAt(0);
-
-            var friendBasicDataInDialogList = ExecuteSqlQuery(sqlQuery, new List<object>
-            {
-                new SqlParameter("@chatId", chatId),
-                new SqlParameter("@userId", userId)
-            });
-            
-            //byte[] friendAvatar = _userAvatarConverterService.ConvertToByte(chatParticipantCast.GetString(3));
-            var friendBasicDataInDialog = new FriendBasicDataInDialogDto
-            {
-                FriendId = 7
-                Name = chatParticipantCast.GetString(1),
-                Surname = chatParticipantCast.GetString(2),
-                Avatar = friendAvatar
-            };
-            
-            return friendBasicDataInDialog;*/
-            
-            var chatParticipant = await FindByCondition(e => e.ChatId == chatId)
-                .Include(e => e.User)
-                .Where(e => e.UserId != userId)
-                .Select(e => new FriendBasicDataInDialogDto
-                {
-                    FriendId = e.User.Id,
-                    Name = e.User.Name,
-                    Surname = e.User.Surname,
-                    Avatar = _userAvatarConverterService.ConvertToByte(e.User.Avatar)
-                })
-                .SingleOrDefaultAsync();
-
-            return chatParticipant;
-        }
-
         public async Task<List<ParticipantsBasicDataDto>> GetParticipantsBasicDataByChatId(int chatId)
         {
             var participantsBasicData = new List<ParticipantsBasicDataDto>();
@@ -110,5 +66,5 @@ namespace BE.Repositories.Chat
             }
             return participantsBasicData;
         }
-    }
+    }*/
 }

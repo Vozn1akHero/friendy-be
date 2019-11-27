@@ -30,15 +30,12 @@ namespace BE.Services
 
     internal class AuthenticationService : IAuthenticationService
     {
-        private IConfiguration _configuration;
         private FriendyContext _friendyContext;
         private IJwtService _jwtService;
         
-        public AuthenticationService(IConfiguration configuration,
-            FriendyContext friendyContext,
+        public AuthenticationService(FriendyContext friendyContext,
             IJwtService jwtService)
         {
-            _configuration = configuration;
             _friendyContext = friendyContext;
             _jwtService = jwtService;
         }
@@ -97,19 +94,13 @@ namespace BE.Services
 
         public async Task LogOut(string token)
         {
-            var session = await _friendyContext.Session.SingleOrDefaultAsync(e => e.Token == token);
-            var user = await _friendyContext.User.SingleOrDefaultAsync(e => e.SessionId == session.Id);
-            user.SessionId = null;
+            var session = await _friendyContext.AuthenticationSession.SingleOrDefaultAsync(e => e.Token == token);
+            var user = await _friendyContext.User.SingleOrDefaultAsync(e => e.AuthenticationSessionId == session.Id);
+            user.AuthenticationSessionId = null;
             user.Session = null;
-            _friendyContext.Session.Remove(session);
+            _friendyContext.AuthenticationSession.Remove(session);
             await _friendyContext.SaveChangesAsync();
         }
-        
-        public async Task<User> GetUser(string token)
-        {
-            string cutToken = token.Split(" ")[1];
-            var user = await _friendyContext.User.SingleOrDefaultAsync(o => o.Session.Token == cutToken);
-            return user;
-        }
+
     }
 }
