@@ -32,6 +32,7 @@
           </e>
           <e p="ChatDtos" t="Include">
             <e p="ClientDtos" t="Include">
+              <e p="CreatedMessageDto.cs" t="Include" />
               <e p="NewMessageDto.cs" t="Include" />
             </e>
             <e p="LastMessageBuilder.cs" t="Include" />
@@ -122,7 +123,7 @@
           <e p="User.cs" t="Include" />
           <e p="UserAdditionalInfo.cs" t="Include" />
           <e p="UserEvents.cs" t="Include" />
-          <e p="UserFriends.cs" t="Include" />
+          <e p="UserFriendship.cs" t="Include" />
           <e p="UserImage.cs" t="Include" />
           <e p="UserInterests.cs" t="Include" />
           <e p="UserPost.cs" t="Include" />
@@ -234,14 +235,18 @@
         </e>
         <e p="SignalR" t="Include">
           <e p="Hubs" t="Include">
-            <e p="ChatHub.cs" t="Include" />
+            <e p="DialogHub.cs" t="Include" />
             <e p="PostHub.cs" t="Include" />
             <e p="ProfileHub.cs" t="Include" />
             <e p="UserStatusHub.cs" t="Include" />
           </e>
+          <e p="Services" t="Include">
+            <e p="DialogNotifier.cs" t="Include" />
+          </e>
         </e>
         <e p="Startup.cs" t="Include" />
         <e p="wwwroot" t="Include">
+          <e p="ChatPhoto" t="Include" />
           <e p="EventAvatar" t="Include">
             <e p="default-event-avatar.png" t="Include" />
           </e>

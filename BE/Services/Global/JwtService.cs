@@ -9,7 +9,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using BE.Interfaces;
 
-namespace BE.Helpers
+namespace BE.Services.Global
 {
     public class JwtService : IJwtService
     {

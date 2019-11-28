@@ -5,15 +5,15 @@ using BE.Models;
 
 namespace BE.Interfaces.Repositories
 {
-    public interface IUserFriendsRepository : IRepositoryBase<UserFriends>
+    public interface IUserFriendshipRepository : IRepositoryBase<UserFriendship>
     {
-        Task<List<UserFriends>> FindAllByUserId(int userId);
+        //Task<List<UserFriendship>> FindAllByUserId(int userId);
         //Task<List<UserFriends>> GetIndexedByUserId(int userId, int startIndex, int lastIndex);
-        Task<List<FriendDto>> GetIndexedByUserId(int userId, int startIndex, int lastIndex);
-        Task<List<UserFriends>> FilterByKeyword(int userId, string keyword);
-        Task RemoveById(int id);
-        Task<List<ExemplaryFriendDto>> GetExemplaryByUserId(int userId);
-        Task AddNew(int id, int userId);
-        bool CheckIfFriendsByUserIds(int firstUserId, int secondUserId);
+        Task<List<FriendDto>> GetRangeByUserIdAsync(int userId, int startIndex, int length);
+        Task<List<FriendDto>> FilterByKeywordAsync(int userId, string keyword);
+        Task RemoveByIdentifiersAsync(int firstUserId, int secondUserId);
+        Task<List<ExemplaryFriendDto>> GetExemplaryByUserIdAsync(int userId);
+        Task AddNewAsync(int id, int userId);
+        Task<bool> CheckIfFriendsByUserIdsAsync(int firstUserId, int secondUserId);
     }
 }

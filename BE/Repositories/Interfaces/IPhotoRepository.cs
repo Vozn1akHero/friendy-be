@@ -6,6 +6,7 @@ namespace BE.Repositories.Interfaces
 {
     public interface IPhotoRepository : IRepositoryBase<Image>
     {
-        Task<Image> Add(string path);
+        Task<Image> Add(Image image);
+        Task<int> GetAmountWithSpecificPathPattern(string pattern);
     }
 }

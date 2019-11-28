@@ -1,6 +1,8 @@
+using System;
 using System.Threading.Tasks;
 using BE.CustomAttributes;
 using BE.Interfaces;
+using BE.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -43,11 +45,13 @@ namespace BE.Controllers
             {
                 return UnprocessableEntity();
             }
-            int count = await _repository.EventPhoto.GetPicturesAmountByEventId(id);
-            string path = $"wwwroot/EventPhotos/{id}/{count + 1}_{file.FileName}";
-            await _imageProcessingService
-                .SaveWithSpecifiedName(file, path);
-            var createdImage = await _repository.Photo.Add(path);
+            string path = await _imageProcessingService.SaveAndReturnImagePath(file, "EventPhotos", id);
+            var image = new Image
+            {
+                Path = path,
+                PublishDate = DateTime.Now
+            };
+            var createdImage = await _repository.Photo.Add(image);
             await _repository.EventPhoto.Add(id, createdImage.Id);
             return Ok(createdImage);
         }

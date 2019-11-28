@@ -28,9 +28,9 @@ namespace BE.Repositories
         private IPostRepository _post;
         private IUserPostRepository _userPost;
         private IPostLikeRepository _postLike;
-        private IFriendRepository _friend;
+        //private IFriendRepository _friend;
         private IEventRepository _event;
-        private IUserFriendsRepository _userFriends;
+        private IUserFriendshipRepository _userFriendship;
         private IUserEventsRepository _userEvents;
         private IEventAdminsRepository _eventAdmins;
         private ICommentRepository _comment;
@@ -59,13 +59,13 @@ namespace BE.Repositories
         public IPostRepository Post => _post ?? (_post = new PostRepository(_friendyContext));
         public IUserPostRepository UserPost => _userPost ?? (_userPost = new UserPostRepository(_friendyContext));
         public IPostLikeRepository PostLike => _postLike ?? (_postLike = new PostLikeRepository(_friendyContext));
-        public IFriendRepository Friend => _friend ?? (_friend = new FriendRepository(_friendyContext));
+        //public IFriendRepository Friend => _friend ?? (_friend = new FriendRepository(_friendyContext));
         public IEventRepository Event => _event ?? (_event = new EventRepository(_friendyContext, _avatarConverterService));
-        public IUserFriendsRepository UserFriends => _userFriends ?? (_userFriends = new UserFriendsRepository(_friendyContext, _avatarConverterService));
+        public IUserFriendshipRepository UserFriendship => _userFriendship ?? (_userFriendship = new UserFriendshipRepository(_friendyContext, _rowSqlQueryService));
         public IUserEventsRepository UserEvents => _userEvents ?? (_userEvents = new UserEventsRepository(_friendyContext));
         public IEventAdminsRepository EventAdmins => _eventAdmins ?? (_eventAdmins = new EventAdminsRepository(_friendyContext));
         public ICommentRepository Comment => _comment ?? (_comment = new CommentRepository(_friendyContext));
-        public IChatRepository Chat => _chat ?? (_chat = new ChatRepository(_friendyContext));
+        public IChatRepository Chat => _chat ?? (_chat = new ChatRepository(_friendyContext, _rowSqlQueryService));
         public IChatMessageRepository ChatMessage => _chatMessage ?? (_chatMessage = new ChatMessageRepository(_friendyContext));
         public IChatMessagesRepository ChatMessages => _chatMessages ?? (_chatMessages = new ChatMessagesRepository(_friendyContext, _rowSqlQueryService));
         public IFriendRequestRepository FriendRequest => _friendRequest ?? (_friendRequest = new FriendRequestRepository(_friendyContext));

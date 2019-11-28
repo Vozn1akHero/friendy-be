@@ -17,6 +17,7 @@ using BE.Services;
 using BE.Services.Global;
 using BE.Services.Global.Interfaces;
 using BE.SignalR.Hubs;
+using BE.SignalR.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Diagnostics;
@@ -88,6 +89,7 @@ namespace BE
             services.AddScoped<IImageProcessingService, ImageProcessingService>();
             services.AddScoped<IUserSearchingService, UserSearchingService>();
             services.AddScoped<IRowSqlQueryService, RowSqlQueryService>();
+            services.AddScoped<IDialogNotifier, DialogNotifier>();
             
             services.AddMvc().AddJsonOptions(options => {
                 options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;

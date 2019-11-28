@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using System.Threading.Tasks;
 using BE.Models;
 using BE.Repositories.Interfaces;
@@ -11,16 +12,16 @@ namespace BE.Repositories
         {
         }
 
-        public async Task<Image> Add(string path)
+        public async Task<Image> Add(Image image)
         {
-            var image = new Image
-            {
-                Path = path,
-                PublishDate = DateTime.Now
-            };
             Create(image);
             await SaveAsync();
             return image;
+        }
+
+        public async Task<int> GetAmountWithSpecificPathPattern(string pattern)
+        {
+            return await Task.Run(() => FindByCondition(e => e.Path.StartsWith(pattern)).Count());
         }
     }
 }

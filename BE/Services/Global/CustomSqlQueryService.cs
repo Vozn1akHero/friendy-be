@@ -1,15 +1,11 @@
-using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
-using System.Threading.Tasks;
 using BE.Interfaces;
-using BE.Models;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 
-namespace BE.Services
+namespace BE.Services.Global
 {
     public class CustomSqlQueryService : ICustomSqlQueryService
     {

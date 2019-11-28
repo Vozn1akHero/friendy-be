@@ -8,7 +8,6 @@ namespace BE.Models
         public Chat()
         {
             ChatMessages = new HashSet<ChatMessages>();
-            ChatParticipants = new HashSet<ChatParticipants>();
         }
 
         public int Id { get; set; }
@@ -18,6 +17,5 @@ namespace BE.Models
         public virtual User FirstParticipant { get; set; }
         public virtual User SecondParticipant { get; set; }
         public virtual ICollection<ChatMessages> ChatMessages { get; set; }
-        public virtual ICollection<ChatParticipants> ChatParticipants { get; set; }
     }
 }

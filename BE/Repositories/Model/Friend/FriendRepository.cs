@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace BE.Repositories
 {
-    public class FriendRepository : RepositoryBase<Friend>, IFriendRepository
+    /*public class FriendRepository : RepositoryBase<Friend>, IFriendRepository
     {
         public FriendRepository(FriendyContext friendyContext) : base(friendyContext)
         {
@@ -18,5 +18,5 @@ namespace BE.Repositories
             return await FindByCondition(e => e.FriendId == userId)
                 .SingleOrDefaultAsync();
         }
-    }
+    }*/
 }

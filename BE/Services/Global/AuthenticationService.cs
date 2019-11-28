@@ -1,23 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IdentityModel.Tokens.Jwt;
-using System.Linq;
-using System.Net;
-using System.Security.Claims;
-using System.Text;
-using System.Threading.Tasks;
-using BE.Dtos;
-using BE.Helpers;
+﻿using System.Threading.Tasks;
 using BE.Interfaces;
 using BE.Models;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Options;
-using Microsoft.IdentityModel.Tokens;
 
-namespace BE.Services
+namespace BE.Services.Global
 {
     public interface IAuthenticationService
     {
@@ -26,8 +12,7 @@ namespace BE.Services
         Task Create(User user);
         Task LogOut(string token);
     }
-
-
+    
     internal class AuthenticationService : IAuthenticationService
     {
         private FriendyContext _friendyContext;
@@ -48,10 +33,6 @@ namespace BE.Services
             await _friendyContext.User.AddAsync(user);
             await _friendyContext.SaveChangesAsync();
             
-            await _friendyContext.Friend.AddAsync(new Friend
-            {
-                FriendId = user.Id
-            });
             await _friendyContext.SaveChangesAsync();
         }
 

@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -5,96 +6,103 @@ using BE.Dtos.FriendDtos;
 using BE.Interfaces;
 using BE.Interfaces.Repositories;
 using BE.Models;
+using BE.Services.Global.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
 namespace BE.Repositories
 {
-    public class UserFriendsRepository : RepositoryBase<UserFriends>, IUserFriendsRepository
+    public class UserFriendshipRepository : RepositoryBase<UserFriendship>, IUserFriendshipRepository
     {
-        private IAvatarConverterService _userAvatarConverterService;
+        private IRowSqlQueryService _rowSqlQueryService;
         
-        public UserFriendsRepository(FriendyContext friendyContext,
-            IAvatarConverterService userAvatarConverterService) : base(friendyContext)
+        public UserFriendshipRepository(FriendyContext friendyContext, 
+            IRowSqlQueryService rowSqlQueryService) : base(friendyContext)
         {
-            _userAvatarConverterService = userAvatarConverterService;
+            _rowSqlQueryService = rowSqlQueryService;
         }
 
-        public async Task AddNew(int id, int userId)
+        public async Task AddNewAsync(int id, int userId)
         {
-            var newFriend = new UserFriends
+            var newFriend = new UserFriendship
             {
-                UserId = userId,
-                FriendId = id
+                FirstFriendId = userId,
+                SecondFriendId = id
             };
             Create(newFriend);
             await SaveAsync();
         }
         
-        public async Task<List<UserFriends>> FindAllByUserId(int userId)
+/*        public async Task<List<UserFriends>> FindAllByUserId(int userId)
         {
-            var friends = await FindByCondition(e => e.UserId == userId)
-                .Include(e => e.Friend)
+            var friends = await FindByCondition(e => e.FirstFriendId == userId || e.SecondFriendId == userId)
                 .ToListAsync();
             
             return friends;
-        }
+        }*/
 
-        public async Task<List<FriendDto>> GetIndexedByUserId(int userId, int startIndex, int lastIndex)
+        public async Task<List<FriendDto>> GetRangeByUserIdAsync(int userId, int startIndex, int length)
         {
-            var exampleFriendList = await FindByCondition(e => e.UserId == userId && e.Id >= startIndex && e.Id <= lastIndex)
+            var exampleFriendList = await FindByCondition(e => e.FirstFriendId == userId || e.SecondFriendId == userId && e.Id >= startIndex)
                 .Select(e => new FriendDto
                 {
-                    Id = e.Friend.FriendNavigation.Id,
-                    AvatarPath = e.Friend.FriendNavigation.Avatar,
-                    Name = e.Friend.FriendNavigation.Name,
-                    DialogLink = "da2jkd21l34",
-                    OnlineStatus = true,
-                    Surname = e.Friend.FriendNavigation.Surname
+                    Id = e.FirstFriendId == userId ? e.SecondFriendId : e.FirstFriendId,
+                    AvatarPath = e.FirstFriendId == userId ? e.SecondFriend.Avatar : e.FirstFriend.Avatar,
+                    Name = e.FirstFriendId == userId ? e.SecondFriend.Name : e.FirstFriend.Name,
+                    OnlineStatus = e.FirstFriendId == userId ? e.SecondFriend.SessionNavigation.ConnectionEnd == null 
+                        : e.FirstFriend.SessionNavigation.ConnectionEnd == null,
+                    Surname = e.FirstFriendId == userId ? e.SecondFriend.Surname : e.FirstFriend.Surname
                 })
+                .Take(length)
                 .ToListAsync();
             
             return exampleFriendList;
         }
 
-        public async Task<List<UserFriends>> FilterByKeyword(int userId, string keyword)
+        public async Task<List<FriendDto>> FilterByKeywordAsync(int userId, string keyword)
         {
-            var filteredFriends = await FindByCondition(e => e.UserId == userId)
-                .Include(e => e.Friend.FriendNavigation)
-                .Where(e =>
-                    e.Friend.FriendNavigation.Name.Contains(keyword)
-                    || e.Friend.FriendNavigation.Surname.Contains(keyword))
-                .ToListAsync();
+            string query =
+                $"select u.id, u.avatar, u.name, u.surname, s.connection_end from user_friendship uf join [dbo].[user] u on " +
+                $"u.id = ( select case when uf.first_friend_id <> {userId} then uf.first_friend_id when uf.second_friend_id <> {userId} " +
+                $"then uf.second_friend_id end from user_friendship uf) join session s on u.session_id = s.id where u.name + u.surname like '%{keyword}%'";
+            
+            var filteredFriends = _rowSqlQueryService.Execute(query, e => new FriendDto{
+                Id = (int)e[0],
+                AvatarPath = (string)e[1],
+                Name = (string)e[2],
+                Surname = (string)e[3],
+                OnlineStatus = (DateTime)e[4] == null
+            });
             
             return filteredFriends;
         }
 
-        public async Task RemoveById(int id)
+        public async Task RemoveByIdentifiersAsync(int firstUserId, int secondUserId)
         {
-            var friend = await FindByCondition(e => e.Id == id).SingleOrDefaultAsync();
+            var friend = await FindByCondition(e => e.FirstFriendId == firstUserId && e.SecondFriendId == secondUserId 
+                                                    || e.FirstFriendId == secondUserId && e.SecondFriendId == firstUserId).SingleOrDefaultAsync();
             Delete(friend);
             await SaveAsync();
         }
 
-        public async Task<List<ExemplaryFriendDto>> GetExemplaryByUserId(int userId)
+        public async Task<List<ExemplaryFriendDto>> GetExemplaryByUserIdAsync(int userId)
         {
-            var friends = await FindByCondition(e => e.UserId == userId)
-                .Include(e => e.Friend.FriendNavigation)
-                .Take(3)
+            var friends = await FindByCondition(e => e.FirstFriendId == userId || e.SecondFriendId == userId)
                 .Select(e => new ExemplaryFriendDto
                 {
-                    Id = e.FriendId,
-                    AvatarPath = e.Friend.FriendNavigation.Avatar
+                    Id = e.FirstFriendId == userId ? e.SecondFriendId : e.FirstFriendId,
+                    AvatarPath = e.FirstFriendId == userId ? e.SecondFriend.Avatar : e.FirstFriend.Avatar
                 })
+                .Take(3)
                 .ToListAsync();
 
             return friends;
         }
 
-        public bool CheckIfFriendsByUserIds(int firstUserId, int secondUserId)
+        public async Task<bool> CheckIfFriendsByUserIdsAsync(int firstUserId, int secondUserId)
         {
-            return ExistsByCondition(e => (e.UserId == firstUserId && e.Friend.FriendId == secondUserId)
-                                          || (e.Friend.FriendId == firstUserId &&
-                                              e.UserId == secondUserId));
+            return await Task.Run(() => ExistsByCondition(e =>
+                e.FirstFriendId == firstUserId && e.SecondFriendId == secondUserId
+                || e.SecondFriendId == firstUserId && e.FirstFriendId == secondUserId));
         }
     }
 }

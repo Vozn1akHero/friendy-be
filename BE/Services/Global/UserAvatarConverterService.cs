@@ -1,7 +1,7 @@
 using System.IO;
 using BE.Interfaces;
 
-namespace BE.Services
+namespace BE.Services.Global
 {
     public class AvatarConverterService : IAvatarConverterService
     {

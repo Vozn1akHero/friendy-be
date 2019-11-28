@@ -21,8 +21,8 @@ namespace BE.Controllers
         [Route("request/{receiverId}")]
         public async Task<IActionResult> AddNewRequest(int receiverId, [FromHeader(Name = "userId")] int userId)
         {
-            var receiverFriend = await _repository.Friend.GetByUserId(receiverId); 
-            await _repository.FriendRequest.Add(userId, receiverFriend.Id);
+            //var receiverFriend = await _repository.Friend.GetByUserId(receiverId); 
+            await _repository.FriendRequest.Add(userId, receiverId);
             return Ok();
         }
         
@@ -32,8 +32,8 @@ namespace BE.Controllers
         public async Task<IActionResult> DeleteRequest(int receiverId,
             [FromHeader(Name = "userId")] int userId)
         {
-            var receiverFriend = await _repository.Friend.GetByUserId(receiverId);
-            var friendRequest = await _repository.FriendRequest.FindByUserIds(userId, receiverFriend.Id);
+            //var receiverFriend = await _repository.Friend.GetByUserId(receiverId);
+            var friendRequest = await _repository.FriendRequest.FindByUserIds(userId, receiverId);
             if (friendRequest != null)
             {
                 await _repository.FriendRequest.DeleteByEntity(friendRequest);
@@ -51,8 +51,8 @@ namespace BE.Controllers
         public async Task<IActionResult> GetReceivedRequestStatus(int receiverId, 
             [FromHeader(Name = "userId")] int userId)
         {
-            var receiverFriend = await _repository.Friend.GetByUserId(receiverId);
-            bool status = await _repository.FriendRequest.GetStatusByUserIds(receiverFriend.Id, userId);
+            //var receiverFriend = await _repository.Friend.GetByUserId(receiverId);
+            bool status = await _repository.FriendRequest.GetStatusByUserIds(receiverId, userId);
             return Ok(status);
         }
         
@@ -98,7 +98,7 @@ namespace BE.Controllers
         [Route("confirm/{id}")]
         public async Task<IActionResult> ConfirmRequest(int id, [FromHeader(Name = "userId")] int userId)
         {
-            await _repository.UserFriends.AddNew(id, userId);
+            await _repository.UserFriendship.AddNewAsync(id, userId);
             await _repository.Chat.Add(id, userId);
             //await _repository.ChatParticipants.AddNewAfterFriendAdding(newChat.Id, new[] {id, userId});
             return Ok();
@@ -106,12 +106,12 @@ namespace BE.Controllers
 
         [HttpGet]
         [Authorize]
-        [Route("sample/indexed")]
-        public async Task<IActionResult> GetFriends([FromQuery(Name = "startIndex")] int startIndex,
-            [FromQuery(Name = "lastIndex")] int lastIndex, [FromHeader(Name = "userId")] int userId)
+        [Route("range/logged-in")]
+        public async Task<IActionResult> GetLoggedInUserFriendsRange([FromQuery(Name = "startIndex")] int startIndex,
+            [FromQuery(Name = "length")] int length, [FromHeader(Name = "userId")] int userId)
         {
             var friends = await _repository
-                .UserFriends.GetIndexedByUserId(userId, startIndex, lastIndex);
+                .UserFriendship.GetRangeByUserIdAsync(userId, startIndex, length);
 
             return Ok(friends);
         }
@@ -122,16 +122,16 @@ namespace BE.Controllers
         public async Task<IActionResult> FilterFriends([FromQuery(Name = "keyword")] string keyword,
             [FromHeader(Name = "userId")] int userId)
         {
-            var friends = await _repository.UserFriends.FilterByKeyword(userId, keyword);
+            var friends = await _repository.UserFriendship.FilterByKeywordAsync(userId, keyword);
             return Ok(friends);
         }
 
         [HttpDelete]
         [Authorize]
         [Route("remove/{id}")]
-        public async Task<IActionResult> Remove(int id)
+        public async Task<IActionResult> Remove(int id, [FromHeader(Name = "userId")] int userId)
         {
-            await _repository.UserFriends.RemoveById(id);
+            await _repository.UserFriendship.RemoveByIdentifiersAsync(id, userId);
             return Ok();
         }
 
@@ -151,8 +151,8 @@ namespace BE.Controllers
         public async Task<IActionResult> GetExemplaryLoggedInUser([FromHeader(Name = "userId")] int userId)
         {
             var exemplaryFriends = await _repository
-                .UserFriends
-                .GetExemplaryByUserId(userId);
+                .UserFriendship
+                .GetExemplaryByUserIdAsync(userId);
 
             return Ok(exemplaryFriends);
         }
@@ -163,8 +163,8 @@ namespace BE.Controllers
         public async Task<IActionResult> GetExemplaryByUserId(int userId)
         {
             var exemplaryFriends = await _repository
-                .UserFriends
-                .GetExemplaryByUserId(userId);
+                .UserFriendship
+                .GetExemplaryByUserIdAsync(userId);
 
             return Ok(exemplaryFriends);
         }
@@ -175,7 +175,7 @@ namespace BE.Controllers
         public async Task<IActionResult> GetFriendshipStatus([FromQuery(Name = "id")] int id,
             [FromHeader(Name = "userId")] int userId)
         {
-            bool friendshipStatus = _repository.UserFriends.CheckIfFriendsByUserIds(id, userId);
+            bool friendshipStatus = await _repository.UserFriendship.CheckIfFriendsByUserIdsAsync(id, userId);
             return Ok(friendshipStatus);
         }
     }

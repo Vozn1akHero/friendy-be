@@ -54,7 +54,7 @@ namespace BE.Controllers
 
         [HttpGet("{id}/with-selected-fields")]
         [Authorize]
-        public async Task<IActionResult> GetSelectedFields(int id, 
+        public async Task<IActionResult> GetByIdWithSelectedFields(int id, 
             [FromQuery(Name = "selectedFields")] string selectedFields)
         {
             string[] selectedFieldsArr = selectedFields.Split(",");
@@ -64,10 +64,20 @@ namespace BE.Controllers
         
         [HttpGet]
         [Authorize]
-        [Route("logged-in")]
-        public async Task<IActionResult> GetUser([FromHeader(Name = "userId")] int userId)
+        [Route("logged-in/with-selected-fields")]
+        public async Task<IActionResult> GetUser([FromHeader(Name = "userId")] int userId,
+            [FromQuery(Name = "selectedFields")] string selectedFields)
         {
-            //string sessionToken = HttpContext.Request.Cookies["SESSION_TOKEN"];
+            string[] selectedFieldsArr = selectedFields.Split(",");
+            var user = await _repository.User.GetWithSelectedFields(userId, selectedFieldsArr);
+            return Ok(user);
+        }
+        
+        [HttpGet]
+        [Authorize]
+        [Route("logged-in")]
+        public async Task<IActionResult> GetLoggedInUserWithSelectedFields([FromHeader(Name = "userId")] int userId)
+        {
             var user = await _repository.User.GetUserByIdAsync(userId);
             return Ok(user);
         }
@@ -81,7 +91,6 @@ namespace BE.Controllers
             return Ok(avatar);
         }
 
-        
         [HttpGet]
         [Authorize]
         [Route("{userId}/background")]
@@ -99,12 +108,12 @@ namespace BE.Controllers
             return Ok(id == userId);
         }
 
-        [HttpGet("profile-id")]
+/*        [HttpGet("profile-id")]
         [Authorize]
         public IActionResult GetProfileId([FromHeader(Name = "userId")] int userId)
         {
             return Ok(userId);
-        }
+        }*/
         
         [HttpPut]
         [Authorize]

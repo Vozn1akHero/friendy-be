@@ -17,8 +17,8 @@ namespace BE.Interfaces
         IPostRepository Post { get; }
         IUserPostRepository UserPost { get; }
         IPostLikeRepository PostLike { get; }
-        IFriendRepository Friend { get; }
-        IUserFriendsRepository UserFriends { get; }
+        //IFriendRepository Friend { get; }
+        IUserFriendshipRepository UserFriendship { get; }
         IUserEventsRepository UserEvents { get; }
         IEventRepository Event { get; }
         IEventAdminsRepository EventAdmins { get; }

@@ -10,6 +10,6 @@ namespace BE.Models
         public int ReceiverId { get; set; }
 
         public virtual User Author { get; set; }
-        public virtual Friend Receiver { get; set; }
+        public virtual User Receiver { get; set; }
     }
 }

@@ -20,7 +20,6 @@ namespace BE.Models
         public virtual DbSet<Chat> Chat { get; set; }
         public virtual DbSet<ChatMessage> ChatMessage { get; set; }
         public virtual DbSet<ChatMessages> ChatMessages { get; set; }
-        public virtual DbSet<ChatParticipants> ChatParticipants { get; set; }
         public virtual DbSet<Comment> Comment { get; set; }
         public virtual DbSet<Education> Education { get; set; }
         public virtual DbSet<Event> Event { get; set; }
@@ -28,7 +27,6 @@ namespace BE.Models
         public virtual DbSet<EventImage> EventImage { get; set; }
         public virtual DbSet<EventParticipants> EventParticipants { get; set; }
         public virtual DbSet<EventPost> EventPost { get; set; }
-        public virtual DbSet<Friend> Friend { get; set; }
         public virtual DbSet<FriendRequest> FriendRequest { get; set; }
         public virtual DbSet<Gender> Gender { get; set; }
         public virtual DbSet<Image> Image { get; set; }
@@ -42,7 +40,7 @@ namespace BE.Models
         public virtual DbSet<User> User { get; set; }
         public virtual DbSet<UserAdditionalInfo> UserAdditionalInfo { get; set; }
         public virtual DbSet<UserEvents> UserEvents { get; set; }
-        public virtual DbSet<UserFriends> UserFriends { get; set; }
+        public virtual DbSet<UserFriendship> UserFriendship { get; set; }
         public virtual DbSet<UserImage> UserImage { get; set; }
         public virtual DbSet<UserInterests> UserInterests { get; set; }
         public virtual DbSet<UserPost> UserPost { get; set; }
@@ -129,8 +127,8 @@ namespace BE.Models
                     .HasColumnName("date")
                     .HasColumnType("datetime");
 
-                entity.Property(e => e.ImageUrl)
-                    .HasColumnName("image_url")
+                entity.Property(e => e.ImagePath)
+                    .HasColumnName("image_path")
                     .HasMaxLength(1000)
                     .IsUnicode(false);
 
@@ -171,29 +169,6 @@ namespace BE.Models
                     .HasForeignKey(d => d.MessageId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_chat_messages_chat_message");
-            });
-
-            modelBuilder.Entity<ChatParticipants>(entity =>
-            {
-                entity.ToTable("chat_participants");
-
-                entity.Property(e => e.Id).HasColumnName("id");
-
-                entity.Property(e => e.ChatId).HasColumnName("chat_id");
-
-                entity.Property(e => e.UserId).HasColumnName("user_id");
-
-                entity.HasOne(d => d.Chat)
-                    .WithMany(p => p.ChatParticipants)
-                    .HasForeignKey(d => d.ChatId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_chat_participants_chat");
-
-                entity.HasOne(d => d.User)
-                    .WithMany(p => p.ChatParticipants)
-                    .HasForeignKey(d => d.UserId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_chat_participants_user");
             });
 
             modelBuilder.Entity<Comment>(entity =>
@@ -392,21 +367,6 @@ namespace BE.Models
                     .HasConstraintName("FK_event_post_post");
             });
 
-            modelBuilder.Entity<Friend>(entity =>
-            {
-                entity.ToTable("friend");
-
-                entity.Property(e => e.Id).HasColumnName("id");
-
-                entity.Property(e => e.FriendId).HasColumnName("friend_id");
-
-                entity.HasOne(d => d.FriendNavigation)
-                    .WithMany(p => p.Friend)
-                    .HasForeignKey(d => d.FriendId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_friend_user");
-            });
-
             modelBuilder.Entity<FriendRequest>(entity =>
             {
                 entity.ToTable("friend_request");
@@ -418,16 +378,16 @@ namespace BE.Models
                 entity.Property(e => e.ReceiverId).HasColumnName("receiver_id");
 
                 entity.HasOne(d => d.Author)
-                    .WithMany(p => p.FriendRequest)
+                    .WithMany(p => p.FriendRequestAuthor)
                     .HasForeignKey(d => d.AuthorId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_friend_request_user");
+                    .HasConstraintName("FK_friend_request_author");
 
                 entity.HasOne(d => d.Receiver)
-                    .WithMany(p => p.FriendRequest)
+                    .WithMany(p => p.FriendRequestReceiver)
                     .HasForeignKey(d => d.ReceiverId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_friend_request_friend");
+                    .HasConstraintName("FK_friend_request_receiver");
             });
 
             modelBuilder.Entity<Gender>(entity =>
@@ -628,6 +588,8 @@ namespace BE.Models
                     .HasMaxLength(8000)
                     .IsUnicode(false);
 
+                entity.Property(e => e.SessionId).HasColumnName("session_id");
+
                 entity.Property(e => e.Status)
                     .HasColumnName("status")
                     .HasMaxLength(100)
@@ -654,6 +616,11 @@ namespace BE.Models
                     .HasForeignKey(d => d.GenderId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_user_sex");
+
+                entity.HasOne(d => d.SessionNavigation)
+                    .WithMany(p => p.UserNavigation)
+                    .HasForeignKey(d => d.SessionId)
+                    .HasConstraintName("FK_user_session");
             });
 
             modelBuilder.Entity<UserAdditionalInfo>(entity =>
@@ -721,27 +688,27 @@ namespace BE.Models
                     .HasConstraintName("FK_user_events_user");
             });
 
-            modelBuilder.Entity<UserFriends>(entity =>
+            modelBuilder.Entity<UserFriendship>(entity =>
             {
-                entity.ToTable("user_friends");
+                entity.ToTable("user_friendship");
 
                 entity.Property(e => e.Id).HasColumnName("id");
 
-                entity.Property(e => e.FriendId).HasColumnName("friend_id");
+                entity.Property(e => e.FirstFriendId).HasColumnName("first_friend_id");
 
-                entity.Property(e => e.UserId).HasColumnName("user_id");
+                entity.Property(e => e.SecondFriendId).HasColumnName("second_friend_id");
 
-                entity.HasOne(d => d.Friend)
-                    .WithMany(p => p.UserFriends)
-                    .HasForeignKey(d => d.FriendId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_user_friends_friend");
-
-                entity.HasOne(d => d.User)
-                    .WithMany(p => p.UserFriends)
-                    .HasForeignKey(d => d.UserId)
+                entity.HasOne(d => d.FirstFriend)
+                    .WithMany(p => p.UserFriendshipFirstFriend)
+                    .HasForeignKey(d => d.FirstFriendId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_user_friends_user");
+
+                entity.HasOne(d => d.SecondFriend)
+                    .WithMany(p => p.UserFriendshipSecondFriend)
+                    .HasForeignKey(d => d.SecondFriendId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_user_friends_user1");
             });
 
             modelBuilder.Entity<UserImage>(entity =>

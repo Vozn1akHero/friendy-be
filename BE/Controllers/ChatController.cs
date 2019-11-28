@@ -1,12 +1,10 @@
 using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
 using System.Threading.Tasks;
 using BE.Dtos.ChatDtos;
 using BE.Interfaces;
 using BE.Models;
 using BE.SignalR.Hubs;
+using BE.SignalR.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SignalR;
@@ -17,14 +15,19 @@ namespace BE.Controllers
     [Route("api/chat")]
     public class ChatController : ControllerBase
     {
-        private IRepositoryWrapper _repository;
+        private readonly IImageProcessingService _imageProcessingService;
+        private readonly IRepositoryWrapper _repository;
         private IAvatarConverterService _userAvatarConverterService;
+        private IDialogNotifier _dialogNotifier;
         
         public ChatController(IRepositoryWrapper repository,
-            IAvatarConverterService userAvatarConverterService)
+            IAvatarConverterService userAvatarConverterService,
+            IImageProcessingService imageProcessingService, IDialogNotifier dialogNotifier)
         {
             _repository = repository;
             _userAvatarConverterService = userAvatarConverterService;
+            _imageProcessingService = imageProcessingService;
+            _dialogNotifier = dialogNotifier;
         }
 
         [HttpPost]
@@ -38,8 +41,8 @@ namespace BE.Controllers
         [HttpGet]
         [Authorize]
         [Route("last-messages")]
-        public async Task<IActionResult> GetLastMessages([FromQuery(Name = "startIndex")] int startIndex, 
-            [FromQuery(Name = "length")] int length, 
+        public async Task<IActionResult> GetLastMessages([FromQuery(Name = "startIndex")] int startIndex,
+            [FromQuery(Name = "length")] int length,
             [FromHeader(Name = "userId")] int userId)
         {
             var lastMessageList = await _repository
@@ -48,7 +51,7 @@ namespace BE.Controllers
             return Ok(lastMessageList);
         }
 
-        
+
 /*        [HttpGet]
         [Authorize]
         [Route("participants/basic-data/{chatHash}")]
@@ -64,13 +67,14 @@ namespace BE.Controllers
         [Route("data-by-interlocutors/{to}")]
         public async Task<IActionResult> GetByInterlocutorsIdentifiers(int to, [FromHeader(Name = "userId")] int userId)
         {
-            return Ok(await _repository.Chat.GetByInterlocutorsIdentifiers(to, userId));
+            var res = await _repository.Chat.GetByInterlocutorsIdentifiers(to, userId);
+            return Ok(res);
         }
 
         [HttpGet]
         [Authorize]
         [Route("{to}")]
-        public async Task<IActionResult> GetMessageRangeInDialogAsync(int to, 
+        public async Task<IActionResult> GetMessageRangeInDialogAsync(int to,
             [FromQuery(Name = "startIndex")] int startIndex,
             [FromQuery(Name = "length")] int length,
             [FromHeader(Name = "userId")] int userId)
@@ -82,23 +86,49 @@ namespace BE.Controllers
 
         [HttpPost]
         [Authorize]
-        [Route("message/{receiverId}")]
-        public async Task<IActionResult> AddNewMessage(int receiverId, 
+        [Route("message/{chatId}/{receiverId}")]
+        public async Task<IActionResult> AddNewMessage(int receiverId,
+            int chatId,
             [FromBody] NewMessageDto chatMessage,
             [FromHeader(Name = "userId")] int userId)
         {
+            string imagePath = null;
+            
+            /*if (chatMessage.File != null)
+            {
+                imagePath = await _imageProcessingService.SaveAndReturnImagePath(chatMessage.File, "ChatPhoto", chatId);
+                var image = new Image
+                {
+                    Path = imagePath,
+                    PublishDate = DateTime.Now
+                };
+                await _repository.Photo.Add(image);
+            }*/
+            
             var newMessage = new ChatMessage
             {
                 Content = chatMessage.Content,
-                ImageUrl = null,
+                ImagePath = imagePath,
+                UserId = userId,
                 Date = DateTime.Now,
-                UserId = userId
+                ReceiverId = receiverId
             };
-/*            var chatId = await _repository.Chat.GetChatIdByUrlHash(chatHash);
-            await _repository.ChatMessage.Add(newMessage);
-            await _repository.ChatMessages.Add(chatId, newMessage.Id);*/
             
-            return CreatedAtAction("AddNewMessage", chatMessage);
+            /*await _repository.ChatMessage.Add(newMessage);
+
+            var chatMessages = new ChatMessages
+            {
+                ChatId = chatId,
+                MessageId = newMessage.Id
+            };*/
+            
+           // await _repository.ChatMessages.Add(chatMessages);
+            
+            await _dialogNotifier.NewMessageNotifier(Convert.ToString(chatId), newMessage);
+            var obj = await _repository.Chat.GetLastChatMessageByChatId(chatId);
+            await _dialogNotifier.NewMessageExpandedNotifier(Convert.ToString(userId), obj);
+            
+            return CreatedAtAction("AddNewMessage", newMessage);
         }
     }
 }
