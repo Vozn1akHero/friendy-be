@@ -94,7 +94,7 @@ namespace BE.Controllers
         {
             string imagePath = null;
             
-            /*if (chatMessage.File != null)
+            if (chatMessage.File != null)
             {
                 imagePath = await _imageProcessingService.SaveAndReturnImagePath(chatMessage.File, "ChatPhoto", chatId);
                 var image = new Image
@@ -103,7 +103,7 @@ namespace BE.Controllers
                     PublishDate = DateTime.Now
                 };
                 await _repository.Photo.Add(image);
-            }*/
+            }
             
             var newMessage = new ChatMessage
             {
@@ -114,19 +114,26 @@ namespace BE.Controllers
                 ReceiverId = receiverId
             };
             
-            /*await _repository.ChatMessage.Add(newMessage);
+            await _repository.ChatMessage.Add(newMessage);
 
             var chatMessages = new ChatMessages
             {
                 ChatId = chatId,
                 MessageId = newMessage.Id
-            };*/
+            };
             
-           // await _repository.ChatMessages.Add(chatMessages);
+            await _repository.ChatMessages.Add(chatMessages);
             
-            await _dialogNotifier.NewMessageNotifier(Convert.ToString(chatId), newMessage);
+            await _dialogNotifier.NewMessageNotifierAsync(Convert.ToString(chatId), new CreatedMessageDto()
+            {
+                Content = newMessage.Content,
+                Date = newMessage.Date,
+                ImagePath = newMessage.ImagePath,
+                UserId = newMessage.UserId
+            });
+            
             var obj = await _repository.Chat.GetLastChatMessageByChatId(chatId);
-            await _dialogNotifier.NewMessageExpandedNotifier(Convert.ToString(userId), obj);
+            await _dialogNotifier.NewMessageExpandedNotifierAsync(Convert.ToString(receiverId), obj);
             
             return CreatedAtAction("AddNewMessage", newMessage);
         }

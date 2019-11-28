@@ -10,8 +10,8 @@ namespace BE.SignalR.Services
 {
     public interface IDialogNotifier
     {
-        Task NewMessageNotifier(string groupName, ChatMessage chatMessage);
-        Task NewMessageExpandedNotifier(string groupName, ChatLastMessageDto chatMessage);
+        Task NewMessageNotifierAsync(string groupName, CreatedMessageDto chatMessage);
+        Task NewMessageExpandedNotifierAsync(string groupName, ChatLastMessageDto chatMessage);
     }
     
     public class DialogNotifier : IDialogNotifier
@@ -26,12 +26,12 @@ namespace BE.SignalR.Services
             _dialogHub = dialogHub;
         }
         
-        public async Task NewMessageNotifier(string groupName, ChatMessage chatMessage)
+        public async Task NewMessageNotifierAsync(string groupName, CreatedMessageDto chatMessage)
         {
             await _dialogHub.Clients.Group(groupName).SendAsync("SendMessageToUser", chatMessage);
         }
 
-        public async Task NewMessageExpandedNotifier(string groupName, ChatLastMessageDto chatMessage)
+        public async Task NewMessageExpandedNotifierAsync(string groupName, ChatLastMessageDto chatMessage)
         {
             await _dialogHub.Clients.Group(groupName).SendAsync("SendExpandedMessageToUser", chatMessage);
         }

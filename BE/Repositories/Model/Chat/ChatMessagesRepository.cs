@@ -39,7 +39,7 @@ namespace BE.Repositories.Chat
                            $"select top {length} c_chat_id, id, content, image_path, date, sender, senderAvatar, receiver, (select u.avatar from [dbo].[user] u where u.id = receiver) as receiverAvatar, " +
                            $"(select u.id from [dbo].[user] u join chat c on u.id = (select case when first_participant_id <> {receiverId} then first_participant_id when second_participant_id <> {receiverId} then second_participant_id end from chat) where u.id <> {receiverId}) as interlocutor, " +
                            $"(select u.avatar from [dbo].[user] u join chat c on u.id = (select case when first_participant_id <> {receiverId} then first_participant_id when second_participant_id <> {receiverId} then second_participant_id end from chat) where u.id <> {receiverId}) as interlocutorAvatar " +
-                           $"FROM every_chat_last_messages WHERE record_number = 1";
+                           $"from every_chat_last_messages where record_number = 1 order by id desc";
             var messages = _rowSqlQueryService.Execute(query, e => new ChatLastMessageDto
             {
                 ChatId = (int)e[0],
@@ -64,15 +64,18 @@ namespace BE.Repositories.Chat
                                                            && e.Chat.SecondParticipantId == issuerId) 
                                                           || (e.Chat.FirstParticipantId == issuerId 
                                                               && e.Chat.SecondParticipantId == receiverId) 
-                                                          && e.MessageId >= startIndex).Take(length)
+                                                          && e.MessageId >= startIndex)
+                .OrderByDescending(e => e.MessageId)
+                .Take(length)
                 .Select(e => new ChatMessageDto
                 {
                     Content = e.Message.Content,
                     ImagePath = e.Message.ImagePath,
                     UserId = e.Message.UserId,
                     Date = e.Message.Date
-                }).ToListAsync();
-            
+                })
+                .ToListAsync();
+            chatMessages.Reverse();
             return chatMessages;
         }
     }
