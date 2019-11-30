@@ -82,6 +82,15 @@ namespace BE.Controllers
             bool result = await _repository.EventAdmins.IsUserAdminById(id, userId);
             return Ok(result);
         }
+
+        [HttpGet]
+        [Authorize]
+        [Route("search/{keyword}")]
+        public async Task<IActionResult> SearchByKeywordAsync(string keyword, [FromHeader(Name = "userId")] int userId)
+        {
+            var foundEvents =  await  _repository.Event.SearchByKeyword(keyword);
+            return Ok(foundEvents);
+        }
         
         [HttpGet]
         [Authorize]

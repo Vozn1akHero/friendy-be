@@ -29,10 +29,10 @@ namespace BE.Repositories
                 .ToListAsync();
         }
         
-        public async Task<List<UserEventDto>> GetShortenedAdministeredEventsByUserId(int userId)
+        public async Task<List<EventDto>> GetShortenedAdministeredEventsByUserId(int userId)
         {
             var events = await FindByCondition(e => e.UserId == userId)
-                .Select(e => new UserEventDto
+                .Select(e => new EventDto
                 {
                     Id = e.EventId,
                     Title = e.Event.Title,
@@ -41,6 +41,7 @@ namespace BE.Repositories
                     City = e.Event.City,
                     AvatarPath = e.Event.Avatar,
                     ParticipantsAmount = e.Event.ParticipantsAmount,
+                    CurrentParticipantsAmount = e.Event.EventParticipants.Count,
                     Date = e.Event.Date
                 })
                 .ToListAsync();

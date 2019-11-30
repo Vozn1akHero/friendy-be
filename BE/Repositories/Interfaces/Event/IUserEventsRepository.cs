@@ -8,6 +8,6 @@ namespace BE.Interfaces.Repositories
     public interface IUserEventsRepository : IRepositoryBase<UserEvents>
     {
         Task<List<Event>> GetEventsByUserId(int userId);
-        Task<List<UserEventDto>> GetShortenedEventsByUserId(int userId);
+        Task<List<EventDto>> GetShortenedEventsByUserId(int userId);
     }
 }

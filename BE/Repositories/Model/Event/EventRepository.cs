@@ -1,6 +1,8 @@
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
+using BE.Dtos.EventDtos;
 using BE.Helpers;
 using BE.Interfaces;
 using BE.Interfaces.Repositories;
@@ -38,7 +40,25 @@ namespace BE.Repositories
             return await FindByCondition(e => e.Id == id)
                 .SingleOrDefaultAsync();
         }
-        
+
+        public async Task<IEnumerable<EventDto>> SearchByKeyword(string keyword)
+        {
+            return await FindByCondition(e => e.Title.Contains(keyword))
+                .Select(e => new EventDto
+                {
+                    Id = e.Id,
+                    AvatarPath = e.Avatar,
+                    City = e.City,
+                    Date = e.Date,
+                    ParticipantsAmount = e.ParticipantsAmount,
+                    CurrentParticipantsAmount = e.EventParticipants.Count,
+                    Title = e.Title,
+                    Street = e.Street,
+                    StreetNumber = e.StreetNumber
+                })
+                .ToListAsync();
+        }
+
         public async Task<object> GetWithSelectedFields(int id, string[] selectedFields)
         {
             var obj = await FindByCondition(e => e.Id == id).SingleOrDefaultAsync();

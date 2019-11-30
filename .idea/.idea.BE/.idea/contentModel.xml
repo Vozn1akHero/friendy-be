@@ -46,10 +46,10 @@
             </e>
           </e>
           <e p="EventDtos" t="Include">
+            <e p="EventDto.cs" t="Include" />
             <e p="EventParticipantDetailedDto.cs" t="Include" />
             <e p="EventParticipantForListDto.cs" t="Include" />
             <e p="ExemplaryEventParticipantDto.cs" t="Include" />
-            <e p="UserEventDto.cs" t="Include" />
           </e>
           <e p="FriendDtos" t="Include">
             <e p="ExemplaryFriendDto.cs" t="Include" />

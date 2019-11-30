@@ -2,7 +2,7 @@ using System;
 
 namespace BE.Dtos.EventDtos
 {
-    public class UserEventDto
+    public class EventDto
     {
         public int Id { get; set; }
         public string Title { get; set; }
@@ -10,8 +10,8 @@ namespace BE.Dtos.EventDtos
         public string StreetNumber { get; set; }
         public string City { get; set; }
         public string AvatarPath { get; set; }
-        public byte[] Avatar { get; set; }
         public int ParticipantsAmount { get; set; }
+        public int CurrentParticipantsAmount { get; set; }
         public DateTime Date { get; set; }
     }
 }
