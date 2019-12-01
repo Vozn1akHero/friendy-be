@@ -45,6 +45,15 @@ namespace BE.Controllers
             return Ok(newPost);
         }
         
+        [HttpGet("{id}")]
+        [Authorize]
+        public async Task<IActionResult> GetById(int id, 
+            [FromHeader(Name = "userId")] int userId)
+        {
+            var post = await _repository.EventPost.GetByIdAuthedAsync(id, userId);
+            return Ok(post);
+        }
+        
         [HttpGet]
         [Authorize]
         public async Task<IActionResult> GetRangeByEventId([FromQuery(Name = "start")] int startIndex,

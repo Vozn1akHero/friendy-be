@@ -72,6 +72,15 @@ namespace BE.Controllers
             var user = await _repository.User.GetWithSelectedFields(userId, selectedFieldsArr);
             return Ok(user);
         }
+
+        [HttpGet]
+        [Authorize]
+        [Route("logged-in/extended")]
+        public async Task<IActionResult> GetLoggedInExtendedInfo([FromHeader(Name = "userId")] int userId)
+        {
+            var user = await _repository.User.GetExtendedInfoById(userId);
+            return Ok(user);
+        }
         
         [HttpGet]
         [Authorize]

@@ -12,6 +12,7 @@ namespace BE.Interfaces
     {
         Task<IEnumerable<User>> GetAllUsersAsync();
         Task<object> GetWithSelectedFields(int userId, string[] selectedFields);
+        Task<ExtendedUserDto> GetExtendedInfoById(int userId);
         Task<User> GetUserAsync(string token);
         Task<User> GetUserByIdAsync(int id);
         Task<User> GetUserByEmailAsync(string email);

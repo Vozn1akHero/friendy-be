@@ -33,10 +33,10 @@ namespace BE.Repositories
             return await FindByCondition(e => e.Id == id).SingleOrDefaultAsync();
         }
 
-        public async Task<IEnumerable<PostOnWallDto>> GetRangeByIdAsync(int userId, int startIndex, int length)
+        public async Task<IEnumerable<UserPostDto>> GetRangeByIdAsync(int userId, int startIndex, int length)
         {
            var posts = await FindByCondition(e => e.UserId == userId && e.Id >= startIndex)
-               .Select(e => new PostOnWallDto
+               .Select(e => new UserPostDto
                {
                    Id = e.Id,
                    CommentsCount = e.Post.Comment.Count,
@@ -48,6 +48,7 @@ namespace BE.Repositories
                    IsPostLikedByUser = e.Post.PostLike
                        .ToList()
                        .Exists(like => like.PostId == e.PostId && like.UserId == userId),
+                   Avatar = e.User.Avatar,
                    UserId = e.UserId
                })
                .Take(length)

@@ -9,10 +9,8 @@ namespace BE.Dtos
         public string Surname { get; set; }
         public string City { get; set; }
         public int GenderId { get; set; }
-        public int BirthYear { get; set; }
-        public int Birthday { get; set; }
-        public int BirthMonth { get; set; }
-        public byte[] Avatar { get; set; }
+        public DateTime Birthday { get; set; }
+        public string Avatar { get; set; }
         public string Status { get; set; }
     }
 }

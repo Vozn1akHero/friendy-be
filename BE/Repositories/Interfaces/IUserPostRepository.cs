@@ -11,6 +11,6 @@ namespace BE.Repositories
         Task CreateAsync(UserPost post);
         Task RemoveByIdAsync(int id);
         Task<UserPost> GetByIdAsync(int id);
-        Task<IEnumerable<PostOnWallDto>> GetRangeByIdAsync(int userId, int startIndex, int length);
+        Task<IEnumerable<UserPostDto>> GetRangeByIdAsync(int userId, int startIndex, int length);
     }
 }

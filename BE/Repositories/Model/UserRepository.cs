@@ -43,6 +43,29 @@ namespace BE.Repositories
             return DynamicLinqStatement.ExtractSpecifiedFields(user, selectedFields);
         }
 
+        public async Task<ExtendedUserDto> GetExtendedInfoById(int userId)
+        {
+            return await FindByCondition(e => e.Id == userId).Select(e => new ExtendedUserDto {
+                    Id = e.Id,
+                    City = e.City,
+                    Name = e.Name,
+                    Surname = e.Surname,
+                    GenderId = e.Gender.Id,
+                    Birthday = e.Birthday,
+                    Avatar = e.Avatar,
+                    EducationId = e.AdditionalInfo.Education.Id,
+                    MaritalStatusId = e.AdditionalInfo.MaritalStatus.Id,
+                    ReligionId = e.AdditionalInfo.Religion.Id,
+                    AlcoholAttitudeId = e.AdditionalInfo.AlcoholAttitude.Id,
+                    SmokingAttitudeId = e.AdditionalInfo.SmokingAttitude.Id,
+                    UserInterests = e.AdditionalInfo.UserInterests.Select(b => new
+                    {
+                        b.Interest.Id,
+                        b.Interest.Title
+                    })
+                }).SingleOrDefaultAsync();
+        }
+
         public async Task<User> GetUserAsync(string token)
         {
             string cutToken = token.Split(" ")[1];
@@ -105,10 +128,8 @@ namespace BE.Repositories
                 .Select(e => new UserBasicDto
                 {
                     Id = e.Id,
-                    Avatar = _avatarConverterService.ConvertToByte(e.Avatar),
+                    Avatar = e.Avatar,
                     Birthday = e.Birthday,
-                    BirthMonth = e.BirthMonth,
-                    BirthYear = e.BirthYear,
                     City = e.City,
                     GenderId = e.GenderId,
                     Name = e.Name,
@@ -124,10 +145,8 @@ namespace BE.Repositories
                 .Select(e => new UserBasicDto
                 {
                     Id = e.Id,
-                    Avatar = _avatarConverterService.ConvertToByte(e.Avatar),
+                    Avatar = e.Avatar,
                     Birthday = e.Birthday,
-                    BirthMonth = e.BirthMonth,
-                    BirthYear = e.BirthYear,
                     City = e.City,
                     GenderId = e.GenderId,
                     Name = e.Name,

@@ -19,7 +19,26 @@ namespace BE.Repositories
             Create(eventPost);
             await SaveAsync();
         }
-        
+
+        public async Task<EventPostOnWallDto> GetByIdAuthedAsync(int postId, int userId)
+        {
+            return await FindByCondition(e => e.PostId == postId)
+                .Select(e => new EventPostOnWallDto
+                {
+                    Id = e.Id,
+                    CommentsCount = e.Post.Comment.Count,
+                    LikesCount = e.Post.PostLike.Count,
+                    Content = e.Post.Content,
+                    Date = e.Post.Date,
+                    ImagePath = e.Post.ImagePath,
+                    PostId = e.PostId,
+                    IsPostLikedByUser = e.Post.PostLike
+                        .ToList()
+                        .Exists(like => like.PostId == e.PostId && like.UserId == userId),
+                    EventId = e.EventId
+                }).SingleOrDefaultAsync();
+        }
+
         public async Task<IEnumerable<EventPostOnWallDto>> GetRangeByIdAsync(int eventId, int startIndex, int length, int userId)
         {
             var posts = await FindByCondition(e => e.EventId == eventId && e.Id >= startIndex)

@@ -2,7 +2,7 @@ using System;
 
 namespace BE.Dtos
 {
-    public class PostOnWallDto
+    public class UserPostDto
     {
         public int Id { get; set; }
         public int UserId { get; set; }
@@ -12,6 +12,7 @@ namespace BE.Dtos
         public int CommentsCount { get; set; }
         public int PostId { get; set; }
         public bool IsPostLikedByUser { get; set; }
+        public string Avatar { get; set; }
         public DateTime Date { get; set; }
     }
 }

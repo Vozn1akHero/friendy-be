@@ -21,6 +21,9 @@ namespace BE.Models
         public virtual DbSet<ChatMessage> ChatMessage { get; set; }
         public virtual DbSet<ChatMessages> ChatMessages { get; set; }
         public virtual DbSet<Comment> Comment { get; set; }
+        public virtual DbSet<CommentLike> CommentLike { get; set; }
+        public virtual DbSet<CommentRespond> CommentRespond { get; set; }
+        public virtual DbSet<CommentRespondLike> CommentRespondLike { get; set; }
         public virtual DbSet<Education> Education { get; set; }
         public virtual DbSet<Event> Event { get; set; }
         public virtual DbSet<EventAdmins> EventAdmins { get; set; }
@@ -183,6 +186,8 @@ namespace BE.Models
                     .HasMaxLength(500)
                     .IsUnicode(false);
 
+                entity.Property(e => e.Date).HasColumnName("date");
+
                 entity.Property(e => e.PostId).HasColumnName("post_id");
 
                 entity.Property(e => e.UserId).HasColumnName("user_id");
@@ -197,6 +202,83 @@ namespace BE.Models
                     .HasForeignKey(d => d.UserId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_comment_user");
+            });
+
+            modelBuilder.Entity<CommentLike>(entity =>
+            {
+                entity.ToTable("comment_like");
+
+                entity.Property(e => e.Id).HasColumnName("id");
+
+                entity.Property(e => e.CommentId).HasColumnName("comment_id");
+
+                entity.Property(e => e.UserId).HasColumnName("user_id");
+
+                entity.HasOne(d => d.Comment)
+                    .WithMany(p => p.CommentLike)
+                    .HasForeignKey(d => d.CommentId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_comment_like_comment");
+
+                entity.HasOne(d => d.User)
+                    .WithMany(p => p.CommentLike)
+                    .HasForeignKey(d => d.UserId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_comment_like_user");
+            });
+
+            modelBuilder.Entity<CommentRespond>(entity =>
+            {
+                entity.ToTable("comment_respond");
+
+                entity.Property(e => e.Id).HasColumnName("id");
+
+                entity.Property(e => e.CommentId).HasColumnName("comment_id");
+
+                entity.Property(e => e.Content)
+                    .IsRequired()
+                    .HasColumnName("content")
+                    .HasMaxLength(500)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Date).HasColumnName("date");
+
+                entity.Property(e => e.UserId).HasColumnName("user_id");
+
+                entity.HasOne(d => d.Comment)
+                    .WithMany(p => p.CommentRespond)
+                    .HasForeignKey(d => d.CommentId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_comment_respond_comment");
+
+                entity.HasOne(d => d.User)
+                    .WithMany(p => p.CommentRespond)
+                    .HasForeignKey(d => d.UserId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_comment_respond_user");
+            });
+
+            modelBuilder.Entity<CommentRespondLike>(entity =>
+            {
+                entity.ToTable("comment_respond_like");
+
+                entity.Property(e => e.Id).HasColumnName("id");
+
+                entity.Property(e => e.CommentRespondId).HasColumnName("comment_respond_id");
+
+                entity.Property(e => e.UserId).HasColumnName("user_id");
+
+                entity.HasOne(d => d.CommentRespond)
+                    .WithMany(p => p.CommentRespondLike)
+                    .HasForeignKey(d => d.CommentRespondId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_comment_respond_like_comment_respond");
+
+                entity.HasOne(d => d.User)
+                    .WithMany(p => p.CommentRespondLike)
+                    .HasForeignKey(d => d.UserId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_comment_respond_like_user");
             });
 
             modelBuilder.Entity<Education>(entity =>
@@ -508,13 +590,9 @@ namespace BE.Models
 
                 entity.Property(e => e.Id).HasColumnName("id");
 
-                entity.Property(e => e.ConnectionEnd)
-                    .HasColumnName("connection_end")
-                    .HasColumnType("datetime");
+                entity.Property(e => e.ConnectionEnd).HasColumnName("connection_end");
 
-                entity.Property(e => e.ConnectionStart)
-                    .HasColumnName("connection_start")
-                    .HasColumnType("datetime");
+                entity.Property(e => e.ConnectionStart).HasColumnName("connection_start");
 
                 entity.Property(e => e.UserId).HasColumnName("user_id");
 
@@ -551,11 +629,9 @@ namespace BE.Models
                     .HasColumnName("avatar")
                     .IsUnicode(false);
 
-                entity.Property(e => e.BirthMonth).HasColumnName("birth_month");
-
-                entity.Property(e => e.BirthYear).HasColumnName("birth_year");
-
-                entity.Property(e => e.Birthday).HasColumnName("birthday");
+                entity.Property(e => e.Birthday)
+                    .HasColumnName("birthday")
+                    .HasColumnType("date");
 
                 entity.Property(e => e.City)
                     .IsRequired()

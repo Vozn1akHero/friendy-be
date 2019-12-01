@@ -18,6 +18,7 @@
           <e p="EventPhotoController.cs" t="Include" />
           <e p="EventPostController.cs" t="Include" />
           <e p="FriendController.cs" t="Include" />
+          <e p="PostCommentController.cs" t="Include" />
           <e p="PostController.cs" t="Include" />
           <e p="UserController.cs" t="Include" />
           <e p="UserPostController.cs" t="Include" />
@@ -45,6 +46,10 @@
               <e p="ParticipantsBasicDataSqlDto.cs" t="Include" />
             </e>
           </e>
+          <e p="CommentDtos" t="Include">
+            <e p="NewCommentDto.cs" t="Include" />
+            <e p="PostCommentDto.cs" t="Include" />
+          </e>
           <e p="EventDtos" t="Include">
             <e p="EventDto.cs" t="Include" />
             <e p="EventParticipantDetailedDto.cs" t="Include" />
@@ -66,12 +71,11 @@
           <e p="PostDtos" t="Include">
             <e p="EventPostOnWallDto.cs" t="Include" />
             <e p="LikeDto.cs" t="Include" />
-            <e p="PostDto.cs" t="Include" />
-            <e p="PostOnWallDto.cs" t="Include" />
+            <e p="UserPostDto.cs" t="Include" />
           </e>
           <e p="UserDtos" t="Include">
+            <e p="ExtendedUserDto.cs" t="Include" />
             <e p="FoundUserDto.cs" t="Include" />
-            <e p="LoggedInUserEntryDto.cs" t="Include" />
             <e p="UserBasicDto.cs" t="Include" />
             <e p="UserLookUpModelDto.cs" t="Include" />
             <e p="UsersLookUpCriteriaDto.cs" t="Include" />
@@ -99,6 +103,9 @@
           <e p="ChatMessages.cs" t="Include" />
           <e p="ChatParticipants.cs" t="Include" />
           <e p="Comment.cs" t="Include" />
+          <e p="CommentLike.cs" t="Include" />
+          <e p="CommentRespond.cs" t="Include" />
+          <e p="CommentRespondLike.cs" t="Include" />
           <e p="DrugsAttitude.cs" t="Include" />
           <e p="Education.cs" t="Include" />
           <e p="Event.cs" t="Include" />
@@ -164,7 +171,6 @@
             <e p="ICommentRepository.cs" t="Include" />
             <e p="IEventPhotoRepository.cs" t="Include" />
             <e p="IPhotoRepository.cs" t="Include" />
-            <e p="IPostCommentRepository.cs" t="Include" />
             <e p="IPostLikeRepository.cs" t="Include" />
             <e p="IPostRepository.cs" t="Include" />
             <e p="IRepositoryBase.cs" t="Include" />

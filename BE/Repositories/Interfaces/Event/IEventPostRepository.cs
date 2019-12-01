@@ -9,6 +9,7 @@ namespace BE.Repositories.Interfaces
     public interface IEventPostRepository : IRepositoryBase<EventPost>
     {
         Task CreateAsync(EventPost eventPost);
+        Task<EventPostOnWallDto> GetByIdAuthedAsync(int postId, int userId);
         Task<IEnumerable<EventPostOnWallDto>> GetRangeByIdAsync(int eventId, int startIndex, int length, int userId);
     }
 }

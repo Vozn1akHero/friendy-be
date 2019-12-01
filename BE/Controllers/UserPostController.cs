@@ -54,13 +54,24 @@ namespace BE.Controllers
             return Ok(newPost);
         }
 
+/*
         [HttpGet]
         [Authorize]
         [Route("all/{id}")]
-        public async Task<IActionResult> GetById(int id)
+        public async Task<IActionResult> GetAllById(int id)
         {
             var posts = await _repository.UserPost.GetByIdAsync(id);
             return Ok(posts);
+        }
+        */
+
+        [HttpGet]
+        [Authorize]
+        [Route("{id}")]
+        public async Task<IActionResult> GetById(int id)
+        {
+            var post = await _repository.UserPost.GetByIdAsync(id);
+            return Ok(post);
         }
         
 /*        [HttpDelete]
