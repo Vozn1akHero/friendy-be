@@ -60,7 +60,7 @@ namespace BE.Repositories
         public IUserPostRepository UserPost => _userPost ?? (_userPost = new UserPostRepository(_friendyContext));
         public IPostLikeRepository PostLike => _postLike ?? (_postLike = new PostLikeRepository(_friendyContext));
         //public IFriendRepository Friend => _friend ?? (_friend = new FriendRepository(_friendyContext));
-        public IEventRepository Event => _event ?? (_event = new EventRepository(_friendyContext, _avatarConverterService));
+        public IEventRepository Event => _event ?? (_event = new EventRepository(_friendyContext));
         public IUserFriendshipRepository UserFriendship => _userFriendship ?? (_userFriendship = new UserFriendshipRepository(_friendyContext, _rowSqlQueryService));
         public IUserEventsRepository UserEvents => _userEvents ?? (_userEvents = new UserEventsRepository(_friendyContext));
         public IEventAdminsRepository EventAdmins => _eventAdmins ?? (_eventAdmins = new EventAdminsRepository(_friendyContext));

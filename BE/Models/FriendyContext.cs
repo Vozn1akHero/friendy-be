@@ -126,9 +126,7 @@ namespace BE.Models
                     .HasMaxLength(500)
                     .IsUnicode(false);
 
-                entity.Property(e => e.Date)
-                    .HasColumnName("date")
-                    .HasColumnType("datetime");
+                entity.Property(e => e.Date).HasColumnName("date");
 
                 entity.Property(e => e.ImagePath)
                     .HasColumnName("image_path")
@@ -317,9 +315,7 @@ namespace BE.Models
 
                 entity.Property(e => e.CreatorId).HasColumnName("creator_id");
 
-                entity.Property(e => e.Date)
-                    .HasColumnName("date")
-                    .HasColumnType("datetime");
+                entity.Property(e => e.Date).HasColumnName("date");
 
                 entity.Property(e => e.Description)
                     .IsRequired()
@@ -496,9 +492,7 @@ namespace BE.Models
                     .HasColumnName("path")
                     .IsUnicode(false);
 
-                entity.Property(e => e.PublishDate)
-                    .HasColumnName("publish_date")
-                    .HasColumnType("datetime");
+                entity.Property(e => e.PublishDate).HasColumnName("publish_date");
             });
 
             modelBuilder.Entity<Interest>(entity =>
@@ -544,7 +538,7 @@ namespace BE.Models
                     .HasColumnType("datetime");
 
                 entity.Property(e => e.ImagePath)
-                    .HasColumnName("imagePath")
+                    .HasColumnName("image_path")
                     .HasMaxLength(1500)
                     .IsUnicode(false);
             });
@@ -629,9 +623,7 @@ namespace BE.Models
                     .HasColumnName("avatar")
                     .IsUnicode(false);
 
-                entity.Property(e => e.Birthday)
-                    .HasColumnName("birthday")
-                    .HasColumnType("date");
+                entity.Property(e => e.Birthday).HasColumnName("birthday");
 
                 entity.Property(e => e.City)
                     .IsRequired()
@@ -791,14 +783,19 @@ namespace BE.Models
             {
                 entity.ToTable("user_image");
 
-                entity.Property(e => e.Id).HasColumnName("id");
+                entity.Property(e => e.Id)
+                    .HasColumnName("id")
+                    .ValueGeneratedOnAdd();
 
-                entity.Property(e => e.Image)
-                    .IsRequired()
-                    .HasColumnName("image")
-                    .IsUnicode(false);
+                entity.Property(e => e.ImageId).HasColumnName("image_id");
 
                 entity.Property(e => e.UserId).HasColumnName("user_id");
+
+                entity.HasOne(d => d.IdNavigation)
+                    .WithOne(p => p.UserImage)
+                    .HasForeignKey<UserImage>(d => d.Id)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_user_image_image");
 
                 entity.HasOne(d => d.User)
                     .WithMany(p => p.UserImage)

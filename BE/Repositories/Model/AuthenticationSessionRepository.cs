@@ -22,7 +22,7 @@ namespace BE.Repositories
             throw new NotImplementedException();
         }
 
-        public async Task<AuthenticationSession> CreateSession(string token)
+        public async Task<AuthenticationSession> CreateAndReturn(string token)
         {
             var bytes = new byte[16];
             using (var rng = new RNGCryptoServiceProvider())
@@ -51,9 +51,11 @@ namespace BE.Repositories
             return existingSession;
         }
 
-        public Task UpdateSession(AuthenticationSession session)
+        public async Task RefreshTokenByToken(string previousToken, string newToken)
         {
-            throw new NotImplementedException();
+            var session = await FindByCondition(e => e.Token == previousToken).SingleOrDefaultAsync();
+            session.Token = newToken;
+            await SaveAsync();
         }
 
         public Task DeleteSession(AuthenticationSession session)

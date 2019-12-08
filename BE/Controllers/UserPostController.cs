@@ -46,12 +46,11 @@ namespace BE.Controllers
                 Content = content, ImagePath = imagePath, Date = DateTime.Now
             };
             await _repository.Post.CreateAsync(newPost);
-            var newUserPost = new UserPost
+            var newUserPost = await _repository.UserPost.CreateAndReturnAsync(new UserPost
             {
-               UserId = userId, PostId = newPost.Id
-            };
-            await _repository.UserPost.CreateAsync(newUserPost);
-            return Ok(newPost);
+                UserId = userId, PostId = newPost.Id
+            });
+            return Ok(newUserPost);
         }
 
 /*
@@ -91,7 +90,7 @@ namespace BE.Controllers
         public async Task<IActionResult> GetUserPostsByUserId([FromQuery(Name = "start")] int startIndex,
             [FromQuery(Name = "length")] int length, [FromQuery(Name = "userId")] int userId)
         {
-            var entries = await _repository.UserPost.GetRangeByIdAsync(userId ,startIndex, length);
+            var entries = await _repository.UserPost.GetRangeByIdAsync(userId, startIndex, length);
             return Ok(entries);
         }
         

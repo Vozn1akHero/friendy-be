@@ -48,8 +48,8 @@ namespace BE.Repositories
                     Id = e.FirstFriendId == userId ? e.SecondFriendId : e.FirstFriendId,
                     AvatarPath = e.FirstFriendId == userId ? e.SecondFriend.Avatar : e.FirstFriend.Avatar,
                     Name = e.FirstFriendId == userId ? e.SecondFriend.Name : e.FirstFriend.Name,
-                    OnlineStatus = e.FirstFriendId == userId ? e.SecondFriend.SessionNavigation.ConnectionEnd == null 
-                        : e.FirstFriend.SessionNavigation.ConnectionEnd == null,
+                    OnlineStatus = e.FirstFriendId == userId ? e.SecondFriend.SessionNavigation.ConnectionEnd != null 
+                        : e.FirstFriend.SessionNavigation.ConnectionEnd != null,
                     Surname = e.FirstFriendId == userId ? e.SecondFriend.Surname : e.FirstFriend.Surname
                 })
                 .Take(length)

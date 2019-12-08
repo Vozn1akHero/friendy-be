@@ -14,6 +14,7 @@ namespace BE.Models
         public string Path { get; set; }
         public DateTime PublishDate { get; set; }
 
+        public virtual UserImage UserImage { get; set; }
         public virtual ICollection<EventImage> EventImage { get; set; }
     }
 }

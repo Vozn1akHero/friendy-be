@@ -27,6 +27,7 @@ using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Identity.UI.V4.Pages.Internal;
 using Microsoft.AspNetCore.Internal;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.SpaServices.AngularCli;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.FileProviders;
@@ -107,6 +108,10 @@ namespace BE
                 app.UseDeveloperExceptionPage();
             }
             
+            /*if (!env.IsDevelopment())
+            {
+                app.UseSpaStaticFiles();
+            }*/
 /*            app.UseDirectoryBrowser(new DirectoryBrowserOptions
             {
                 FileProvider = new PhysicalFileProvider(
@@ -141,6 +146,16 @@ namespace BE
             });
             
             app.UseEndpointRouting().UseMvc();
+            
+            /*app.UseSpa(spa =>
+            {
+                spa.Options.SourcePath = "Frontend";
+
+                if (env.IsDevelopment())
+                {
+                    spa.UseAngularCliServer(npmScript: "start");
+                }
+            });*/
         }
     }
 }

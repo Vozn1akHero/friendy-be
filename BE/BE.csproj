@@ -40,4 +40,28 @@
     <Folder Include="wwwroot\UserPhotos" />
     <Folder Include="wwwroot\UserPost" />
   </ItemGroup>
+  <ItemGroup>
+    <Compile Remove="Frontend\**" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Remove="Frontend\**" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Remove="Frontend\**" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Remove="Frontend\**" />
+  </ItemGroup>
+  <ItemGroup>
+    <_ContentIncludedByDefault Remove="Frontend\angular.json" />
+    <_ContentIncludedByDefault Remove="Frontend\e2e\tsconfig.e2e.json" />
+    <_ContentIncludedByDefault Remove="Frontend\package-lock.json" />
+    <_ContentIncludedByDefault Remove="Frontend\package.json" />
+    <_ContentIncludedByDefault Remove="Frontend\proxy.conf.json" />
+    <_ContentIncludedByDefault Remove="Frontend\src\tsconfig.app.json" />
+    <_ContentIncludedByDefault Remove="Frontend\src\tsconfig.spec.json" />
+    <_ContentIncludedByDefault Remove="Frontend\src\tslint.json" />
+    <_ContentIncludedByDefault Remove="Frontend\tsconfig.json" />
+    <_ContentIncludedByDefault Remove="Frontend\tslint.json" />
+  </ItemGroup>
 </Project>

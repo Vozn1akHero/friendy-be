@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using BE.Dtos;
 using BE.Dtos.EventDtos;
 using BE.Interfaces.Repositories;
 using BE.Models;
@@ -20,8 +21,34 @@ namespace BE.Repositories
             return await FindByCondition(e => e.UserId == userId)
                 .Select(e => e.Event)
                 .ToListAsync();
-        }  
-        
+        }
+
+        public async Task<List<EventAdminDto>> GetByEventIdAsync(int eventId)
+        {
+            return await FindByCondition(e => e.EventId == eventId)
+                .Select(e => new EventAdminDto
+                    {
+                        Id = e.UserId,
+                        IsEventCreator = e.Event.CreatorId == e.UserId,
+                        Name = e.User.Name,
+                        Surname = e.User.Surname,
+                        City = e.User.City,
+                        GenderId = e.User.GenderId,
+                        Avatar = e.User.Avatar
+                    }).ToListAsync();
+        }
+
+        public async Task DeleteByEventIdAndAdminId(int eventId, int adminId)
+        {
+            var foundEntity = await FindByCondition(e => e.EventId == eventId && e.UserId == adminId)
+                .SingleOrDefaultAsync();
+            if (foundEntity != null)
+            {
+                Delete(foundEntity);
+                await SaveAsync();
+            }
+        }
+
         public async Task<List<Models.Event>> FilterAdministeredEvents(int userId, string keyword)
         {
             return await FindByCondition(e => e.UserId == userId && e.Event.Title.Contains(keyword))

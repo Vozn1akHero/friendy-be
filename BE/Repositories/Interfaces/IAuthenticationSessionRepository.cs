@@ -10,8 +10,8 @@ namespace BE.Interfaces
     public interface IAuthenticationSessionRepository : IRepositoryBase<AuthenticationSession>
     {
         Task<AuthenticationSession> GetSession(string hash);
-        Task<AuthenticationSession> CreateSession(string token);
-        Task UpdateSession(AuthenticationSession session);
+        Task<AuthenticationSession> CreateAndReturn(string token);
+        Task RefreshTokenByToken(string previousToken, string newToken);
         Task DeleteSession(AuthenticationSession session);
     }
 }

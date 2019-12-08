@@ -21,6 +21,28 @@ namespace BE.Repositories
             await SaveAsync();
         }
 
+        public async Task<UserPostDto> CreateAndReturnAsync(UserPost post)
+        {
+            Create(post);
+            await SaveAsync();
+            var newPost = await FindByCondition(e => e.Id == post.Id)
+                .Select(e => new UserPostDto
+                {
+                    Id = e.Id,
+                    CommentsCount = 0,
+                    LikesCount = 0,
+                    Content = e.Post.Content,
+                    Date = e.Post.Date,
+                    ImagePath = e.Post.ImagePath,
+                    PostId = e.PostId,
+                    IsPostLikedByUser = false,
+                    Avatar = e.User.Avatar,
+                    UserId = e.UserId
+                })
+                .SingleOrDefaultAsync();
+            return newPost;
+        }
+
         public async Task RemoveByIdAsync(int id)
         {
             var post = await FindByCondition(e => e.Id == id).SingleOrDefaultAsync();

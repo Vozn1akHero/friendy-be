@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Net;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using BE.Dtos;
 using BE.Helpers;
 using BE.Interfaces;
 using BE.Models;
@@ -43,21 +44,21 @@ namespace BE.Controllers
             await _authenticationService.Create(user);
             return Ok();
         }
-
+        
         [HttpPost]
         [Route("authenticate")]
-        public async Task<IActionResult> Authenticate([FromBody] User user)
+        public async Task<IActionResult> Authenticate([FromBody] AuthDataDto authData)
         {
-            var authenticationRes = await _authenticationService.Authenticate(user.Email, user.Password);
+            bool authenticationRes = await _authenticationService.Authenticate(authData.Email, authData.Password);
             if (!authenticationRes)
                 return Forbid();
-            var userRes = await _repository.User.GetUserByEmailAsync(user.Email);
+            var user = await _repository.User.GetUserByEmailAsync(authData.Email);
             var claims = new List<Claim>
             {
-                new Claim("id", userRes.Id.ToString()),
-                new Claim("email", user.Email)
+                new Claim("id", user.Id.ToString()),
+                new Claim("email", authData.Email)
             };
-            var token = _jwtService.GenerateJwt(claims);
+            string token = _jwtService.GenerateJwt(claims);
             HttpContext.Response.Cookies.Append(
                 "SESSION_TOKEN",
                 "Bearer " + token,
@@ -67,11 +68,9 @@ namespace BE.Controllers
                     HttpOnly = true,
                     Secure = false
                 });
-            var session = await _repository.AuthenticationSession.CreateSession(token);
-            return Ok(new
-            {
-                sessionHash = session.Hash
-            });
+            var session = await _repository.AuthenticationSession.CreateAndReturn(token);
+            await _authenticationService.SetSessionIdByUserId(session.Id, user.Id);
+            return Ok();
         }
 
         [HttpPost]
@@ -97,11 +96,33 @@ namespace BE.Controllers
                 {
                     await _authenticationService.LogOut(cutToken);
                     HttpContext.Response.Cookies.Delete("SESSION_TOKEN");
-                    return Forbid();
+                    return Unauthorized();
                 }
+                int userId = Convert.ToInt32(HttpContext.Request.Headers["userId"]);
+                var user = await _repository.User.GetUserByIdAsync(userId);
+                if (user == null)
+                {
+                    return Conflict();
+                }
+                var claims = new List<Claim>
+                {
+                    new Claim("id", userId.ToString()),
+                    new Claim("email", user.Email)
+                };
+                var newToken = _jwtService.GenerateJwt(claims);
+                await _repository.AuthenticationSession.RefreshTokenByToken(cutToken, newToken);
+                HttpContext.Response.Cookies.Append(
+                    "SESSION_TOKEN",
+                    "Bearer " + newToken,
+                    new CookieOptions
+                    {
+                        Expires = DateTime.Now.AddDays(7),
+                        HttpOnly = true,
+                        Secure = false
+                    });
                 return Ok();
             }
-            return Forbid();
+            return Unauthorized();
         }
     }
 }

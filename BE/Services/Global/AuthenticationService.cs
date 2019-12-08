@@ -9,6 +9,7 @@ namespace BE.Services.Global
     {
         Task<bool> Authenticate(string username, string password);
         Task<bool> CheckIfEmailIsAvailable(string email);
+        Task SetSessionIdByUserId(int id, int userId);
         Task Create(User user);
         Task LogOut(string token);
     }
@@ -31,8 +32,6 @@ namespace BE.Services.Global
             user.Password = BCrypt.Net.BCrypt.HashPassword(plainTextPassword);
 
             await _friendyContext.User.AddAsync(user);
-            await _friendyContext.SaveChangesAsync();
-            
             await _friendyContext.SaveChangesAsync();
         }
 
@@ -66,7 +65,17 @@ namespace BE.Services.Global
 
             return false;
         }
-        
+
+        public async Task SetSessionIdByUserId(int id, int userId)
+        {
+            var user = await _friendyContext.User.SingleOrDefaultAsync(e => e.Id == userId);
+            if (user != null)
+            {
+                user.AuthenticationSessionId = id;
+                await _friendyContext.SaveChangesAsync();
+            }
+        }
+
         public bool CheckUserAuthStatus(string token)
         {
             bool tokenValidityStatus = _jwtService.ValidateJwt(token);

@@ -74,15 +74,7 @@ namespace BE.Controllers
             return Ok(fields);
         }
         
-        [HttpGet]
-        [Authorize]
-        [Route("is-admin/{id}")]
-        public async Task<IActionResult> CheckIfAdmin(int id, [FromHeader(Name = "userId")] int userId)
-        {
-            bool result = await _repository.EventAdmins.IsUserAdminById(id, userId);
-            return Ok(result);
-        }
-
+        
         [HttpGet]
         [Authorize]
         [Route("search/{keyword}")]

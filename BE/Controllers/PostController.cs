@@ -43,7 +43,7 @@ namespace BE.Controllers
                 PostId = id
             };
             await _repository.PostLike.CreateAsync(newLike);
-            return Ok(id);
+            return Ok();
         }
 
         [HttpPut]
@@ -53,7 +53,7 @@ namespace BE.Controllers
             [FromHeader(Name = "userId")] int userId)
         {
             await _repository.PostLike.RemoveByPostIdAsync(id, userId);
-            return Ok(id);
+            return Ok();
         }
 
         [HttpGet("liked-by-user/{userId}")]

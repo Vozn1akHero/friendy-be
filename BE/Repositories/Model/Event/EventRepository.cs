@@ -14,14 +14,7 @@ namespace BE.Repositories
 {
     public class EventRepository : RepositoryBase<Models.Event>, IEventRepository
     {
-        private readonly IAvatarConverterService _userAvatarConverterService;
-        
-        public EventRepository(FriendyContext friendyContext,
-            IAvatarConverterService userAvatarConverterService) : base(friendyContext)
-        {
-            _userAvatarConverterService = userAvatarConverterService;
-        }
-
+        public EventRepository(FriendyContext friendyContext) : base(friendyContext) { }
 
         public async Task<List<Models.Event>> GetExampleEventsByUserId(int userId)
         {
@@ -35,9 +28,21 @@ namespace BE.Repositories
             return null;
         }
 
-        public async Task<Models.Event> GetById(int id)
+        public async Task<EventDto> GetById(int id)
         {
             return await FindByCondition(e => e.Id == id)
+                .Select(e => new EventDto
+                {
+                    Id = e.Id,
+                    AvatarPath = e.Avatar,
+                    City = e.City,
+                    Date = e.Date,
+                    ParticipantsAmount = e.ParticipantsAmount,
+                    CurrentParticipantsAmount = e.EventParticipants.Count,
+                    Title = e.Title,
+                    Street = e.Street,
+                    StreetNumber = e.StreetNumber
+                })
                 .SingleOrDefaultAsync();
         }
 
@@ -57,6 +62,11 @@ namespace BE.Repositories
                     StreetNumber = e.StreetNumber
                 })
                 .ToListAsync();
+        }
+
+        public async Task<bool> IsUserCreatorById(int id, int userId)
+        {
+            return await Task.Run(() => ExistsByCondition(e => e.Id == id && e.CreatorId == userId));
         }
 
         public async Task<object> GetWithSelectedFields(int id, string[] selectedFields)
