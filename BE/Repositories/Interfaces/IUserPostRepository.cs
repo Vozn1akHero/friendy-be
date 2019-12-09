@@ -9,9 +9,10 @@ namespace BE.Repositories
     public interface IUserPostRepository : IRepositoryBase<UserPost>
     {
         Task CreateAsync(UserPost post);
-        Task<UserPostDto> CreateAndReturnAsync(UserPost post);
+        Task<UserPost> CreateAndReturnAsync(UserPost post);
         Task RemoveByIdAsync(int id);
         Task<UserPost> GetByIdAsync(int id);
-        Task<IEnumerable<UserPostDto>> GetRangeByIdAsync(int userId, int startIndex, int length);
+        //Task<IEnumerable<UserPostDto>> GetRangeByIdAsync(int userId, int startIndex, int length);
+        Task<IEnumerable<UserPost>> GetRangeByIdAsync(int userId, int startIndex, int length);
     }
 }

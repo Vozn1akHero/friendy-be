@@ -21,26 +21,11 @@ namespace BE.Repositories
             await SaveAsync();
         }
 
-        public async Task<UserPostDto> CreateAndReturnAsync(UserPost post)
+        public async Task<UserPost> CreateAndReturnAsync(UserPost post)
         {
             Create(post);
             await SaveAsync();
-            var newPost = await FindByCondition(e => e.Id == post.Id)
-                .Select(e => new UserPostDto
-                {
-                    Id = e.Id,
-                    CommentsCount = 0,
-                    LikesCount = 0,
-                    Content = e.Post.Content,
-                    Date = e.Post.Date,
-                    ImagePath = e.Post.ImagePath,
-                    PostId = e.PostId,
-                    IsPostLikedByUser = false,
-                    Avatar = e.User.Avatar,
-                    UserId = e.UserId
-                })
-                .SingleOrDefaultAsync();
-            return newPost;
+            return post;
         }
 
         public async Task RemoveByIdAsync(int id)
@@ -52,29 +37,23 @@ namespace BE.Repositories
 
         public async Task<UserPost> GetByIdAsync(int id)
         {
-            return await FindByCondition(e => e.Id == id).SingleOrDefaultAsync();
+            return await FindByCondition(e => e.Id == id)
+                .Include(e => e.Post)
+                .Include(e => e.Post.PostLike)
+                .Include(e => e.Post.Comment)
+                .Include(e => e.User)
+                .SingleOrDefaultAsync();
         }
 
-        public async Task<IEnumerable<UserPostDto>> GetRangeByIdAsync(int userId, int startIndex, int length)
+        public async Task<IEnumerable<UserPost>> GetRangeByIdAsync(int userId, int startIndex, int length)
         {
            var posts = await FindByCondition(e => e.UserId == userId && e.Id >= startIndex)
-               .Select(e => new UserPostDto
-               {
-                   Id = e.Id,
-                   CommentsCount = e.Post.Comment.Count,
-                   LikesCount = e.Post.PostLike.Count,
-                   Content = e.Post.Content,
-                   Date = e.Post.Date,
-                   ImagePath = e.Post.ImagePath,
-                   PostId = e.PostId,
-                   IsPostLikedByUser = e.Post.PostLike
-                       .ToList()
-                       .Exists(like => like.PostId == e.PostId && like.UserId == userId),
-                   Avatar = e.User.Avatar,
-                   UserId = e.UserId
-               })
+               .Include(e => e.Post)
+               .Include(e => e.Post.PostLike)
+               .Include(e => e.Post.Comment)
+               .Include(e => e.User)
                .Take(length)
-               .OrderByDescending(e => e.Date)
+               .OrderByDescending(e => e.Post.Date)
                .ToListAsync();
            return posts;
         }

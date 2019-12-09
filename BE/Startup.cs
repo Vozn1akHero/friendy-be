@@ -7,6 +7,7 @@ using System.Linq;
 using System.Net;
 using System.Text;
 using System.Threading.Tasks;
+using AutoMapper;
 using BE.CustomAttributes;
 using BE.Helpers;
 using BE.Interfaces;
@@ -16,6 +17,7 @@ using BE.RepositoryServices.User;
 using BE.Services;
 using BE.Services.Global;
 using BE.Services.Global.Interfaces;
+using BE.Services.Model;
 using BE.SignalR.Hubs;
 using BE.SignalR.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -91,11 +93,24 @@ namespace BE
             services.AddScoped<IUserSearchingService, UserSearchingService>();
             services.AddScoped<IRowSqlQueryService, RowSqlQueryService>();
             services.AddScoped<IDialogNotifier, DialogNotifier>();
+
+            services.AddScoped<IUserPostService, UserPostService>();
             
             services.AddMvc().AddJsonOptions(options => {
                 options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
                 options.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
             });
+
+            #region Automapper
+            services.AddAutoMapper(typeof(Startup));
+            var mappingConfig = new MapperConfiguration(mc =>
+            {
+                mc.AddProfile(new UserPostProfile());
+            });
+            IMapper mapper = mappingConfig.CreateMapper();
+            services.AddSingleton(mapper);
+            #endregion
+            
             
             services.ConfigureSqlContext(Configuration);
         }
@@ -144,7 +159,7 @@ namespace BE
                 routes.MapHub<ProfileHub>("/profileHub");
                 routes.MapHub<DialogHub>("/dialogHub");
             });
-            
+
             app.UseEndpointRouting().UseMvc();
             
             /*app.UseSpa(spa =>

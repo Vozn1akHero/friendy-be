@@ -7,6 +7,8 @@ using System.Threading.Tasks;
 using BE.Dtos;
 using BE.Interfaces;
 using BE.Models;
+using BE.Repositories;
+using BE.Services.Model;
 using BE.SignalR.Hubs;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
@@ -23,14 +25,17 @@ namespace BE.Controllers
         private readonly IHubContext<PostHub> _hubContext;
         private readonly IRepositoryWrapper _repository;
         private readonly IImageProcessingService _imageProcessingService;
+        private readonly IUserPostService _userPostService;
 
         public UserPostController(IRepositoryWrapper repository, 
             IHubContext<PostHub> hubContext,
-            IImageProcessingService imageProcessingService)
+            IImageProcessingService imageProcessingService,
+            IUserPostService userPostService)
         {
             _repository = repository;
             _hubContext = hubContext;
             _imageProcessingService = imageProcessingService;
+            _userPostService = userPostService;
         }
 
         [HttpPost]
@@ -46,7 +51,7 @@ namespace BE.Controllers
                 Content = content, ImagePath = imagePath, Date = DateTime.Now
             };
             await _repository.Post.CreateAsync(newPost);
-            var newUserPost = await _repository.UserPost.CreateAndReturnAsync(new UserPost
+            var newUserPost = await _userPostService.CreateAndReturnAsync(new UserPost
             {
                 UserId = userId, PostId = newPost.Id
             });
@@ -90,8 +95,10 @@ namespace BE.Controllers
         public async Task<IActionResult> GetUserPostsByUserId([FromQuery(Name = "start")] int startIndex,
             [FromQuery(Name = "length")] int length, [FromQuery(Name = "userId")] int userId)
         {
-            var entries = await _repository.UserPost.GetRangeByIdAsync(userId, startIndex, length);
-            return Ok(entries);
+            //var entries = await _repository.UserPost.GetRangeByIdAsync(userId, startIndex, length);
+            var posts = await _userPostService
+                .GetRangeByIdAsync(userId, startIndex, length);
+            return Ok(posts);
         }
         
         [HttpGet]
