@@ -2,7 +2,7 @@ using System;
 
 namespace BE.Dtos
 {
-    public class EventPostOnWallDto
+    public class EventPostDto
     {
         public int Id { get; set; }
         public int EventId { get; set; }

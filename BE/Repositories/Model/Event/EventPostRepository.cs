@@ -20,44 +20,23 @@ namespace BE.Repositories
             await SaveAsync();
         }
 
-        public async Task<EventPostOnWallDto> GetByIdAuthedAsync(int postId, int userId)
+        public async Task<EventPost> GetByIdAsync(int id)
         {
-            return await FindByCondition(e => e.PostId == postId)
-                .Select(e => new EventPostOnWallDto
-                {
-                    Id = e.Id,
-                    CommentsCount = e.Post.Comment.Count,
-                    LikesCount = e.Post.PostLike.Count,
-                    Content = e.Post.Content,
-                    Date = e.Post.Date,
-                    ImagePath = e.Post.ImagePath,
-                    PostId = e.PostId,
-                    IsPostLikedByUser = e.Post.PostLike
-                        .ToList()
-                        .Exists(like => like.PostId == e.PostId && like.UserId == userId),
-                    EventId = e.EventId
-                }).SingleOrDefaultAsync();
+            return await FindByCondition(e => e.Id == id)
+                .Include(e => e.Post)
+                .Include(e => e.Post.PostLike)
+                .Include(e => e.Post.Comment)
+                .SingleOrDefaultAsync();
         }
 
-        public async Task<IEnumerable<EventPostOnWallDto>> GetRangeByIdAsync(int eventId, int startIndex, int length, int userId)
+        public async Task<IEnumerable<EventPost>> GetRangeByIdAsync(int eventId, int startIndex, int length)
         {
             var posts = await FindByCondition(e => e.EventId == eventId && e.Id >= startIndex)
-                .Select(e => new EventPostOnWallDto
-                {
-                    Id = e.Id,
-                    CommentsCount = e.Post.Comment.Count,
-                    LikesCount = e.Post.PostLike.Count,
-                    Content = e.Post.Content,
-                    Date = e.Post.Date,
-                    ImagePath = e.Post.ImagePath,
-                    PostId = e.PostId,
-                    IsPostLikedByUser = e.Post.PostLike
-                        .ToList()
-                        .Exists(like => like.PostId == e.PostId && like.UserId == userId),
-                    EventId = e.EventId
-                })
                 .Take(length)
-                .OrderByDescending(e => e.Date)
+                .Include(e => e.Post)
+                .Include(e => e.Post.PostLike)
+                .Include(e => e.Post.Comment)
+                .OrderByDescending(e => e.Post.Date)
                 .ToListAsync();
             return posts;
         }

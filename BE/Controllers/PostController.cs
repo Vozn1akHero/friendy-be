@@ -1,4 +1,5 @@
 using System.Threading.Tasks;
+using BE.CustomAttributes;
 using BE.Interfaces;
 using BE.Models;
 using BE.SignalR.Hubs;
@@ -24,18 +25,50 @@ namespace BE.Controllers
         
         [HttpDelete]
         [Authorize]
-        [Route("{id}")]
-        public async Task<IActionResult> RemoveById([FromRoute] int id)
+        [Route("{id}/user-post")]
+        public async Task<IActionResult> RemoveUserPostById([FromRoute] int id)
+        {
+            await RemovePostById(id);
+            return Ok();
+        }
+        
+        [HttpDelete]
+        [Authorize]
+        [AuthorizeEventAdminInPostController]
+        [Route("{id}/event-post/{eventId}")]
+        public async Task<IActionResult> RemoveEventPostById([FromRoute] int id)
+        {
+            await RemovePostById(id);
+            return Ok();
+        }
+        
+        public async Task RemovePostById(int id)
         {
             await _repository.Post.RemoveByIdAsync(id);
+        }
+        
+        [HttpPut]
+        [Authorize]
+        [Route("like/{id}/user-post")]
+        public async Task<IActionResult> LikeUserPostById([FromRoute] int id,
+            [FromHeader(Name = "userId")] int userId)
+        {
+            await LikePostById(id, userId);
             return Ok();
         }
         
         [HttpPut]
         [Authorize]
-        [Route("like/{id}")]
-        public async Task<IActionResult> LikeUserPostById([FromRoute] int id,
+        [AuthorizeEventParticipant]
+        [Route("like/{id}/event-post/{eventId}")]
+        public async Task<IActionResult> LikeEventPostById([FromRoute] int id,
             [FromHeader(Name = "userId")] int userId)
+        {
+            await LikePostById(id, userId);
+            return Ok();
+        }
+
+        public async Task LikePostById(int id, int userId)
         {
             var newLike = new PostLike
             {
@@ -43,26 +76,41 @@ namespace BE.Controllers
                 PostId = id
             };
             await _repository.PostLike.CreateAsync(newLike);
-            return Ok();
         }
 
         [HttpPut]
         [Authorize]
-        [Route("unlike/{id}")]
-        public async Task<IActionResult> UnlikePostById(int id,
+        [AuthorizeEventCreator]
+        [Route("unlike/{id}/event-post/${eventId}")]
+        public async Task<IActionResult> UnlikeEventPostById(int id,
             [FromHeader(Name = "userId")] int userId)
         {
-            await _repository.PostLike.RemoveByPostIdAsync(id, userId);
+            await UnlikePostById(id, userId);
             return Ok();
         }
-
-        [HttpGet("liked-by-user/{userId}")]
+        
+        [HttpPut]
         [Authorize]
-        public IActionResult GetLikedByUser(int postId,
+        [Route("unlike/{id}/user-post")]
+        public async Task<IActionResult> UnlikeUserPostById(int id,
             [FromHeader(Name = "userId")] int userId)
         {
-            bool status = _repository.PostLike.GetPostLikedByUser(postId, userId);
-            return Ok(status);
+            await UnlikePostById(id, userId);
+            return Ok();
         }
+        
+        public async Task UnlikePostById(int id, int userId)
+        {
+            await _repository.PostLike.RemoveByPostIdAsync(id, userId);
+        }
+        
+        /*[HttpGet("{id}/liked-by-user/{userId}")]
+        [Authorize]
+        public IActionResult GetLikedByUser(int id,
+            [FromHeader(Name = "userId")] int userId)
+        {
+            bool status = _repository.PostLike.GetPostLikedByUser(id, userId);
+            return Ok(status);
+        }*/
     }
 }

@@ -5,18 +5,17 @@ using BE.Models;
 
 namespace BE
 {
-    public class UserPostProfile : Profile
+    public class EventPostProfile: Profile
     {
-        public UserPostProfile()
+        public EventPostProfile()
         {
-            CreateMap<UserPost, UserPostDto>()
+            CreateMap<EventPost, EventPostDto>()
                 .ForMember(dest => dest.Content, opt => opt.MapFrom(src => src.Post.Content))
                 .ForMember(dest => dest.Date, opt => opt.MapFrom(src => src.Post.Date))
                 .ForMember(dest => dest.ImagePath, opt => opt.MapFrom(src => src.Post.ImagePath))
                 .ForMember(dest => dest.CommentsCount, opt => opt.MapFrom(src => src.Post.Comment.Count))
                 .ForMember(dest => dest.LikesCount, opt => opt.MapFrom(src => src.Post.PostLike.Count))
-                .ForMember(dest => dest.IsPostLikedByUser, opt => opt.MapFrom(new IsUserPostLikedByUserResolver()))
-                .ForMember(dest => dest.Avatar, opt => opt.MapFrom(src => src.User.Avatar));
+                .ForMember(dest => dest.IsPostLikedByUser, opt => opt.MapFrom(new IsEventPostLikedByUserResolver()));
         }
     }
 }

@@ -24,15 +24,5 @@ namespace BE.Repositories
             Delete(post);
             await SaveAsync();
         }
-        
-        public async Task<List<UserPost>> GetByIdAsync(int id)
-        {
-            /*var posts = await FindByCondition(e => e.UserId == id)
-                 .Include("UserPostLikes")
-                 .Include("UserPostComments")
-                 .OrderByDescending(e => e.Date)
-                 .ToListAsync();*/
-            return null;
-        }
     }
 }

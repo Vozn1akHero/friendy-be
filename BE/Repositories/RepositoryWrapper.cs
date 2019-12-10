@@ -11,6 +11,7 @@ using BE.Repositories.Chat;
 using BE.Repositories.Event;
 using BE.Repositories.Interfaces;
 using BE.Repositories.Interfaces.Event;
+using BE.Repositories.Model.Event;
 using BE.Repositories.RepositoryServices.Interfaces.User;
 using BE.RepositoryServices.User;
 using BE.Services.Global.Interfaces;
@@ -43,6 +44,7 @@ namespace BE.Repositories
         private IEventParticipantsRepository _eventParticipants;
         private IEventPhotoRepository _eventPhoto;
         private IPhotoRepository _photo;
+        private IEventParticipationRequestRepository _eventParticipationRequest;
 
         private IRowSqlQueryService _rowSqlQueryService;
         private IAvatarConverterService _avatarConverterService;
@@ -74,6 +76,10 @@ namespace BE.Repositories
                                                                  ?? (_eventParticipants = new EventParticipantRepository(_friendyContext));
         public IEventPhotoRepository EventPhoto => _eventPhoto ?? (_eventPhoto = new EventPhotoRepository(_friendyContext));
         public IPhotoRepository Photo => _photo ?? (_photo = new PhotoRepository(_friendyContext));
+        
+        public IEventParticipationRequestRepository EventParticipationRequest => _eventParticipationRequest ?? (_eventParticipationRequest = new EventParticipationRequestRepository(_friendyContext));
+        
+        
         /*public IChatParticipantsRepository ChatParticipants =>
             _chatParticipants ?? (_chatParticipants = new ChatParticipantsRepository(_friendyContext, 
                 _avatarConverterService, 

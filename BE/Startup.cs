@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.IdentityModel.Tokens.Jwt;
 using System.IO;
 using System.Linq;
 using System.Net;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using AutoMapper;
@@ -12,6 +14,7 @@ using BE.CustomAttributes;
 using BE.Helpers;
 using BE.Interfaces;
 using BE.Middlewares;
+using BE.Queries.EventPost;
 using BE.Repositories.RepositoryServices.Interfaces.User;
 using BE.RepositoryServices.User;
 using BE.Services;
@@ -20,6 +23,7 @@ using BE.Services.Global.Interfaces;
 using BE.Services.Model;
 using BE.SignalR.Hubs;
 using BE.SignalR.Services;
+using MediatR;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Diagnostics;
@@ -106,12 +110,14 @@ namespace BE
             var mappingConfig = new MapperConfiguration(mc =>
             {
                 mc.AddProfile(new UserPostProfile());
+                mc.AddProfile(new EventPostProfile());
             });
             IMapper mapper = mappingConfig.CreateMapper();
             services.AddSingleton(mapper);
             #endregion
-            
-            
+
+            services.AddMediatR(typeof(Startup));
+
             services.ConfigureSqlContext(Configuration);
         }
 

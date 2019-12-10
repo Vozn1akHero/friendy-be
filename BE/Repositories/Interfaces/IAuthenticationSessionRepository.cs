@@ -11,7 +11,6 @@ namespace BE.Interfaces
     {
         Task<AuthenticationSession> GetSession(string hash);
         Task<AuthenticationSession> CreateAndReturn(string token);
-        Task RefreshTokenByToken(string previousToken, string newToken);
         Task DeleteSession(AuthenticationSession session);
     }
 }

@@ -98,28 +98,6 @@ namespace BE.Controllers
                     HttpContext.Response.Cookies.Delete("SESSION_TOKEN");
                     return Unauthorized();
                 }
-                int userId = Convert.ToInt32(HttpContext.Request.Headers["userId"]);
-                var user = await _repository.User.GetUserByIdAsync(userId);
-                if (user == null)
-                {
-                    return Conflict();
-                }
-                var claims = new List<Claim>
-                {
-                    new Claim("id", userId.ToString()),
-                    new Claim("email", user.Email)
-                };
-                var newToken = _jwtService.GenerateJwt(claims);
-                await _repository.AuthenticationSession.RefreshTokenByToken(cutToken, newToken);
-                HttpContext.Response.Cookies.Append(
-                    "SESSION_TOKEN",
-                    "Bearer " + newToken,
-                    new CookieOptions
-                    {
-                        Expires = DateTime.Now.AddDays(7),
-                        HttpOnly = true,
-                        Secure = false
-                    });
                 return Ok();
             }
             return Unauthorized();

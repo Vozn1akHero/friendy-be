@@ -1,8 +1,12 @@
 using System;
 using System.IO;
 using System.Threading.Tasks;
+using BE.Commands.EventPost;
+using BE.CustomAttributes;
 using BE.Interfaces;
 using BE.Models;
+using BE.Queries.EventPost;
+using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -15,19 +19,22 @@ namespace BE.Controllers
     {
         private readonly IRepositoryWrapper _repository;
         private readonly IImageProcessingService _imageProcessingService;
-
+        private readonly IMediator _mediator;
+        
         public EventPostController(IRepositoryWrapper repository,
-            IImageProcessingService imageProcessingService)
+            IImageProcessingService imageProcessingService, IMediator mediator)
         {
             _repository = repository;
             _imageProcessingService = imageProcessingService;
+            _mediator = mediator;
         }
         
-        [HttpPost("{id}")]
+        [HttpPost("{eventId}")]
+        [AuthorizeEventAdmin]
         [Authorize]
         public async Task<IActionResult> CreateEventPost([FromForm(Name = "image")] IFormFile image,
             [FromForm(Name = "content")] string content,
-            [FromQuery(Name = "id")] int eventId,
+            [FromRoute(Name = "eventId")] int eventId,
             [FromHeader(Name = "userId")] int userId)
         {
             string imagePath = await _imageProcessingService
@@ -37,41 +44,45 @@ namespace BE.Controllers
                 Content = content, ImagePath = imagePath, Date = DateTime.Now
             };
             await _repository.Post.CreateAsync(newPost);
-            var newUserPost = new EventPost
+            var newEventPost = new EventPost
             {
                 EventId = eventId, PostId = newPost.Id
             };
-            await _repository.EventPost.CreateAsync(newUserPost);
-            return Ok(newPost);
+            var newPostDto = await _mediator.Send(new CreateEventPostAndReturnDtoCommand
+            {
+                EventPost = newEventPost
+            });
+            return Ok(newPostDto);
         }
         
-        [HttpGet("{id}")]
+        [HttpGet("{id}/{eventId}")]
         [Authorize]
         public async Task<IActionResult> GetById(int id, 
             [FromHeader(Name = "userId")] int userId)
         {
-            var post = await _repository.EventPost.GetByIdAuthedAsync(id, userId);
-            return Ok(post);
+            var eventPost = await _mediator.Send(new GetEventPostById
+            {
+                PostId = id,
+                UserId = userId
+            });
+            return Ok(eventPost);
         }
-        
-        [HttpGet]
+
+        [HttpGet("{eventId}")]
         [Authorize]
         public async Task<IActionResult> GetRangeByEventId([FromQuery(Name = "start")] int startIndex,
             [FromQuery(Name = "length")] int length, 
-            [FromQuery(Name = "eventId")] int eventId, 
+            [FromRoute(Name = "eventId")] int eventId, 
             [FromHeader(Name = "userId")] int userId)
         {
-            var entries = await _repository.EventPost.GetRangeByIdAsync(eventId, startIndex, length, userId);
-            return Ok(entries);
-        }
-        
-        [HttpDelete]
-        [Authorize]
-        [Route("{id}")]
-        public async Task<IActionResult> RemoveUserPostById([FromRoute] int id)
-        {
-            await _repository.Post.RemoveByIdAsync(id);
-            return Ok();
+            var eventPostRange = await _mediator.Send(new GetEventPostRangeById
+            {
+                EventId = eventId,
+                StartIndex = startIndex,
+                Length = length,
+                UserId = userId
+            });
+            return Ok(eventPostRange);
         }
     }
 }

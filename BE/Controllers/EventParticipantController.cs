@@ -19,6 +19,7 @@ namespace BE.Controllers
         }
 
         [HttpGet("exemplary/{eventId}")]
+        [AuthorizeEventParticipant]
         public async Task<IActionResult> GetExemplary(int eventId)
         {
             return Ok(await _repository
@@ -26,6 +27,7 @@ namespace BE.Controllers
         }
 
         [HttpGet("range")]
+        [AuthorizeEventParticipant]
         public async Task<IActionResult> GetRange([FromQuery(Name = "start")] int startIndex,
             [FromQuery(Name = "length")] int length, 
             [FromQuery(Name = "eventId")] int eventId)
@@ -55,10 +57,20 @@ namespace BE.Controllers
             return Ok(filteredList);
         }
 
+        [HttpGet("{eventId}/current-user-status")]
+        [Authorize]
+        public async Task<IActionResult> IsLoggedInUserEventParticipant(int eventId, [FromHeader(Name = "userId")] int userId)
+        {
+            var res = await _repository.EventParticipants.IsEventParticipant(userId, eventId);
+            return Ok(res);
+        }
+
         [HttpPost("{id}/ban/{eventId}")]
         [Authorize]
         [AuthorizeEventAdmin]
-        public async Task<IActionResult> BanParticipant(int id, int eventId, [FromHeader(Name = "userId")] int userId)
+        public async Task<IActionResult> BanParticipant(int id,
+            int eventId,
+            [FromHeader(Name = "userId")] int userId)
         {
             if (id == userId)
             {
@@ -67,12 +79,22 @@ namespace BE.Controllers
 
             return Ok();
         }
-        
+
+        [HttpDelete("{id}/leave/{eventId}")]
+        [Authorize]
+        [AuthorizeEventParticipant]
+        public async Task<IActionResult> Leave(int id, int eventId)
+        {
+            await _repository.EventParticipants.Leave(id, eventId);
+            return Ok();
+        }
         
         [HttpDelete("{id}/remove/{eventId}")]
         [Authorize]
         [AuthorizeEventAdmin]
-        public async Task<IActionResult> RemoveParticipant(int id, int eventId, [FromHeader(Name = "userId")] int userId)
+        public async Task<IActionResult> RemoveParticipant(int id,
+            int eventId,
+            [FromHeader(Name = "userId")] int userId)
         {
             if (id == userId)
             {

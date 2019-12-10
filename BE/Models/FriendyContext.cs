@@ -29,6 +29,7 @@ namespace BE.Models
         public virtual DbSet<EventAdmins> EventAdmins { get; set; }
         public virtual DbSet<EventImage> EventImage { get; set; }
         public virtual DbSet<EventParticipants> EventParticipants { get; set; }
+        public virtual DbSet<EventParticipationRequest> EventParticipationRequest { get; set; }
         public virtual DbSet<EventPost> EventPost { get; set; }
         public virtual DbSet<FriendRequest> FriendRequest { get; set; }
         public virtual DbSet<Gender> Gender { get; set; }
@@ -421,6 +422,29 @@ namespace BE.Models
                     .HasForeignKey(d => d.ParticipantId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_event_participants_user");
+            });
+
+            modelBuilder.Entity<EventParticipationRequest>(entity =>
+            {
+                entity.ToTable("event_participation_request");
+
+                entity.Property(e => e.Id).HasColumnName("id");
+
+                entity.Property(e => e.EventId).HasColumnName("event_id");
+
+                entity.Property(e => e.IssuerId).HasColumnName("issuer_id");
+
+                entity.HasOne(d => d.Event)
+                    .WithMany(p => p.EventParticipationRequest)
+                    .HasForeignKey(d => d.EventId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_event_participation_request_event");
+
+                entity.HasOne(d => d.Issuer)
+                    .WithMany(p => p.EventParticipationRequest)
+                    .HasForeignKey(d => d.IssuerId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_event_participation_request_user");
             });
 
             modelBuilder.Entity<EventPost>(entity =>

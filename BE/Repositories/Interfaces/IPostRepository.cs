@@ -8,6 +8,5 @@ namespace BE.Repositories.Interfaces
     {
         Task CreateAsync(Post post);
         Task RemoveByIdAsync(int id);
-        Task<List<UserPost>> GetByIdAsync(int id);
     }
 }

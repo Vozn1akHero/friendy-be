@@ -23,6 +23,22 @@ namespace BE.Repositories.Event
                 AvatarPath = e.Participant.Avatar
             }).ToListAsync();
         }
+
+        public async Task<bool> IsEventParticipant(int userId, int eventId)
+        {
+            return await Task.Run(() => ExistsByCondition(e => e.ParticipantId == userId && e.EventId == eventId));
+        }
+
+        public async Task Leave(int userId, int eventId)
+        {
+            var foundParticipant = await FindByCondition(e => e.ParticipantId == userId && e.EventId == eventId)
+                .SingleOrDefaultAsync();
+            if (foundParticipant != null)
+            {
+                Delete(foundParticipant);
+                await SaveAsync();
+            }
+        }
         
         public async Task<IEnumerable<EventParticipantForListDto>> GetRangeAsync(int eventId, int startIndex, int length)
         {
