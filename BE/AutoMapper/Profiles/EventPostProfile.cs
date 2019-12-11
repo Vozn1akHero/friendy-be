@@ -11,6 +11,7 @@ namespace BE
         {
             CreateMap<EventPost, EventPostDto>()
                 .ForMember(dest => dest.Content, opt => opt.MapFrom(src => src.Post.Content))
+                .ForMember(dest => dest.AvatarPath, opt => opt.MapFrom(src => src.Event.Avatar))
                 .ForMember(dest => dest.Date, opt => opt.MapFrom(src => src.Post.Date))
                 .ForMember(dest => dest.ImagePath, opt => opt.MapFrom(src => src.Post.ImagePath))
                 .ForMember(dest => dest.CommentsCount, opt => opt.MapFrom(src => src.Post.Comment.Count))

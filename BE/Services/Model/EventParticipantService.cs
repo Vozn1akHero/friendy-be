@@ -1,11 +1,14 @@
 using System.Threading.Tasks;
 using AutoMapper;
+using BE.Dtos.EventDtos;
 using BE.Interfaces;
+using Microsoft.AspNetCore.Mvc;
 
 namespace BE.Services.Model
 {
     public interface IEventParticipantService
     {
+        
         
     }
     public class EventParticipantService : IEventParticipantService
@@ -13,7 +16,8 @@ namespace BE.Services.Model
         private readonly IRepositoryWrapper _repository;
         private readonly IMapper _mapper;
 
-        public EventParticipantService(IRepositoryWrapper repository, IMapper mapper)
+        public EventParticipantService(IRepositoryWrapper repository,
+            IMapper mapper)
         {
             _repository = repository;
             _mapper = mapper;
@@ -23,5 +27,6 @@ namespace BE.Services.Model
         {
             
         }
+
     }
 }

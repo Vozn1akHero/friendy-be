@@ -99,6 +99,9 @@ namespace BE
             services.AddScoped<IDialogNotifier, DialogNotifier>();
 
             services.AddScoped<IUserPostService, UserPostService>();
+            services.AddScoped<IEventParticipantService, EventParticipantService>();
+            services.AddScoped<IEventDataService, EventDataService>();
+            services.AddScoped<IEventSearchService, EventSearchService>();
             
             services.AddMvc().AddJsonOptions(options => {
                 options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
@@ -111,6 +114,7 @@ namespace BE
             {
                 mc.AddProfile(new UserPostProfile());
                 mc.AddProfile(new EventPostProfile());
+                mc.AddProfile(new EventDataProfile());
             });
             IMapper mapper = mappingConfig.CreateMapper();
             services.AddSingleton(mapper);

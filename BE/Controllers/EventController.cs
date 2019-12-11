@@ -1,6 +1,7 @@
 using System.Threading.Tasks;
 using BE.CustomAttributes;
 using BE.Interfaces;
+using BE.Services.Model;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -13,12 +14,16 @@ namespace BE.Controllers
     {
         private IRepositoryWrapper _repository;
         private IImageProcessingService _imageProcessingService;
+        private IEventDataService _eventDataService;
+
         
         public EventController(IRepositoryWrapper repository, 
-            IImageProcessingService imageProcessingService)
+            IImageProcessingService imageProcessingService, IEventDataService eventDataService)
         {
             _repository = repository;
             _imageProcessingService = imageProcessingService;
+            _eventDataService = eventDataService;
+            _eventDataService = eventDataService;
         }
 
         [HttpGet]
@@ -43,24 +48,14 @@ namespace BE.Controllers
                 .GetShortenedAdministeredEventsByUserId(userId);
             return Ok(events);
         }
-        
-        [HttpGet]
-        [Authorize]
-        [Route("filter/administered")]
-        public async Task<IActionResult> FilterAdministeredEvents([FromQuery(Name = "keyword")] string keyword,
-            [FromHeader(Name = "userId")] int userId)
-        {
-            var events = await _repository.EventAdmins.FilterAdministeredEvents(userId, keyword);
-            
-            return Ok(events);
-        }
 
         [HttpGet]
         [Authorize]
         [Route("{id}")]
         public async Task<IActionResult> GetById(int id)
         {
-            var eventData = await _repository.Event.GetById(id);
+            //var eventData = await _repository.Event.GetById(id);
+            var eventData = await _eventDataService.GetDtoById(id);
             return Ok(eventData);
         }
         
@@ -75,16 +70,7 @@ namespace BE.Controllers
         }
         
         
-        [HttpGet]
-        [Authorize]
-        [Route("search/{keyword}")]
-        public async Task<IActionResult> SearchByKeywordAsync(string keyword, [FromHeader(Name = "userId")] int userId)
-        {
-            var foundEvents =  await  _repository.Event.SearchByKeyword(keyword);
-            return Ok(foundEvents);
-        }
-        
-        [HttpGet]
+        /*[HttpGet]
         [Authorize]
         [Route("{id}/avatar")]
         public async Task<IActionResult> GetAvatar(int id)
@@ -92,7 +78,8 @@ namespace BE.Controllers
             string path = await _repository.Event.GetAvatarPathByEventIdAsync(id);
             return Ok(path);
         }
-        
+        */
+
         [HttpPut]
         [Authorize]
         [AuthorizeEventAdmin]
@@ -110,7 +97,7 @@ namespace BE.Controllers
             return Ok(path);
         }
         
-        [HttpGet]
+        /*[HttpGet]
         [Authorize]
         [Route("{id}/background")]
         public async Task<IActionResult> GetBackground(int id)
@@ -118,7 +105,8 @@ namespace BE.Controllers
             string path = await _repository.Event.GetAvatarPathByEventIdAsync(id);
             return Ok(path);
         }
-        
+        */
+
         [HttpPut]
         [Authorize]
         [AuthorizeEventAdmin]

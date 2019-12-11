@@ -1,6 +1,7 @@
 using System.Threading.Tasks;
 using BE.Models;
 using BE.Repositories.Interfaces.Event;
+using Microsoft.EntityFrameworkCore;
 
 namespace BE.Repositories.Model.Event
 {
@@ -18,8 +19,13 @@ namespace BE.Repositories.Model.Event
 
         public async Task DeleteAsync(EventParticipationRequest eventParticipationRequest)
         {
-            Delete(eventParticipationRequest);
-            await SaveAsync();
+            var found = await FindByCondition(e =>
+                e.EventId == eventParticipationRequest.EventId && e.IssuerId == eventParticipationRequest.IssuerId).SingleOrDefaultAsync();
+            if (found != null)
+            {
+                Delete(found);
+                await SaveAsync();
+            }
         }
 
         public async Task<bool> GetStatus(int issuerId, int eventId)

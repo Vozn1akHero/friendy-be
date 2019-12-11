@@ -12,6 +12,7 @@ namespace BE.Repositories.Interfaces.Event
         Task<IEnumerable<EventParticipantForListDto>> GetRangeAsync(int eventId, int startIndex, int length);
         Task<IEnumerable<EventParticipantDetailedDto>> GetRangeDetailedAsync(int eventId, int startIndex, int length);
         Task<IEnumerable<EventParticipantDetailedDto>> FilterByKeywordAsync(string keyword);
+        
         Task<bool> IsEventParticipant(int userId, int eventId);
         Task Leave(int userId, int eventId);
     }

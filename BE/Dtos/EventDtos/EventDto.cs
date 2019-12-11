@@ -10,6 +10,7 @@ namespace BE.Dtos.EventDtos
         public string StreetNumber { get; set; }
         public string City { get; set; }
         public string AvatarPath { get; set; }
+        public string BackgroundPath { get; set; }
         public int ParticipantsAmount { get; set; }
         public int CurrentParticipantsAmount { get; set; }
         public DateTime Date { get; set; }

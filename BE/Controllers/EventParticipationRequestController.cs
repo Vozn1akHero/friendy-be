@@ -1,7 +1,7 @@
 using System.Threading.Tasks;
 using BE.Dtos.EventDtos;
+using BE.Interfaces;
 using BE.Models;
-using BE.Repositories;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -11,9 +11,9 @@ namespace BE.Controllers
     [Route("api/event-participation-request")]
     public class EventParticipationRequestController : ControllerBase
     {
-        private RepositoryWrapper _repository;
+        private IRepositoryWrapper _repository;
 
-        public EventParticipationRequestController(RepositoryWrapper repository)
+        public EventParticipationRequestController(IRepositoryWrapper repository)
         {
             _repository = repository;
         }

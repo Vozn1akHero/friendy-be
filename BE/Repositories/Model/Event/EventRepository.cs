@@ -9,6 +9,7 @@ using BE.Interfaces.Repositories;
 using BE.Models;
 using BE.Services;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Internal;
 
 namespace BE.Repositories
 {
@@ -28,21 +29,10 @@ namespace BE.Repositories
             return null;
         }
 
-        public async Task<EventDto> GetById(int id)
+        public async Task<Models.Event> GetById(int id)
         {
             return await FindByCondition(e => e.Id == id)
-                .Select(e => new EventDto
-                {
-                    Id = e.Id,
-                    AvatarPath = e.Avatar,
-                    City = e.City,
-                    Date = e.Date,
-                    ParticipantsAmount = e.ParticipantsAmount,
-                    CurrentParticipantsAmount = e.EventParticipants.Count,
-                    Title = e.Title,
-                    Street = e.Street,
-                    StreetNumber = e.StreetNumber
-                })
+                .Include(e => e.EventParticipants)
                 .SingleOrDefaultAsync();
         }
 
@@ -92,6 +82,23 @@ namespace BE.Repositories
             var obj = await FindByCondition(e => e.Id == id).SingleOrDefaultAsync();
             obj.Background = path;
             await SaveAsync();
+        }
+
+        public async Task<IEnumerable<Models.Event>> FilterParticipatingByKeywordAndUserId(int userId, string keyword)
+        {
+            var events = await FindByCondition(e =>
+                e.EventParticipants.Any(d => d.ParticipantId == userId) && e.Title.ToLower().Contains(keyword.ToLower()))
+                .ToListAsync();
+            return events;
+        }
+        
+        
+        public async Task<IEnumerable<Models.Event>> FilterAdministeredByKeywordAndUserId(int userId, string keyword)
+        {
+            var events = await FindByCondition(e =>
+                    e.EventAdmins.Any(d => d.UserId == userId) && e.Title.ToLower().Contains(keyword.ToLower()))
+                .ToListAsync();
+            return events;
         }
     }
 }

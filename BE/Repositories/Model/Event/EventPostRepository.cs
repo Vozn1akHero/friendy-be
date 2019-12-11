@@ -23,6 +23,7 @@ namespace BE.Repositories
         public async Task<EventPost> GetByIdAsync(int id)
         {
             return await FindByCondition(e => e.Id == id)
+                .Include(e => e.Event)
                 .Include(e => e.Post)
                 .Include(e => e.Post.PostLike)
                 .Include(e => e.Post.Comment)
@@ -33,6 +34,7 @@ namespace BE.Repositories
         {
             var posts = await FindByCondition(e => e.EventId == eventId && e.Id >= startIndex)
                 .Take(length)
+                .Include(e => e.Event)
                 .Include(e => e.Post)
                 .Include(e => e.Post.PostLike)
                 .Include(e => e.Post.Comment)

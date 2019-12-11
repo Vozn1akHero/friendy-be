@@ -2,6 +2,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using BE.CustomAttributes;
 using BE.Interfaces;
+using BE.Services.Model;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
