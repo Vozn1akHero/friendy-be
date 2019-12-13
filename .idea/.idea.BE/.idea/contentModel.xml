@@ -82,6 +82,7 @@
           <e p="EventDtos" t="Include">
             <e p="EventAdminDto.cs" t="Include" />
             <e p="EventDto.cs" t="Include" />
+            <e p="EventSearchDto.cs" t="Include" />
           </e>
           <e p="EventParticipant" t="Include">
             <e p="EventParticipantDetailedDto.cs" t="Include" />
@@ -113,6 +114,10 @@
             <e p="UserLookUpModelDto.cs" t="Include" />
             <e p="UsersLookUpCriteriaDto.cs" t="Include" />
           </e>
+        </e>
+        <e p="Elasticsearch" t="Include">
+          <e p="ElasticClientProvider.cs" t="Include" />
+          <e p="ElasticConnectionSettings.cs" t="Include" />
         </e>
         <e p="Frontend\node_modules\@angular\animations" t="IncludeRecursive" />
         <e p="Frontend\node_modules\@angular\cli" t="IncludeRecursive" />
@@ -312,6 +317,10 @@
         </e>
         <e p="ServiceExtensions.cs" t="Include" />
         <e p="Services" t="Include">
+          <e p="Elasticsearch" t="Include">
+            <e p="EventDataIndexing.cs" t="Include" />
+            <e p="EventDetailedSearch.cs" t="Include" />
+          </e>
           <e p="Global" t="Include">
             <e p="AuthenticationService.cs" t="Include" />
             <e p="CustomSqlQueryService.cs" t="Include" />

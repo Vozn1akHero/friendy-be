@@ -1,4 +1,5 @@
 using System.Threading.Tasks;
+using BE.Dtos.EventDtos;
 using BE.Interfaces;
 using BE.Services.Model;
 using Microsoft.AspNetCore.Authorization;
@@ -11,13 +12,10 @@ namespace BE.Controllers
     public class EventSearchController : ControllerBase
     {
         private IEventSearchService _eventSearchService;
-        private IRepositoryWrapper _repository;
         
-        public EventSearchController(IEventSearchService eventSearchService,
-            IRepositoryWrapper repository)
+        public EventSearchController(IEventSearchService eventSearchService)
         {
             _eventSearchService = eventSearchService;
-            _repository = repository;
         }
 
         [HttpGet]
@@ -46,8 +44,21 @@ namespace BE.Controllers
             [FromHeader(Name = "userId")] int userId)
         {
             var events = await _eventSearchService.FilterAdministeredByKeywordAndUserId(userId, keyword);
-            
             return Ok(events);
         }
+
+        [HttpGet]
+        [Authorize]
+        [Route("with-criteria")]
+        public IActionResult SearchByCriteria([FromQuery(Name = "title")] string title)
+        {
+            var eventSearchDto = new EventSearchDto
+            {
+                Title = title
+            };
+            var events = _eventSearchService.FilterByCriteria(eventSearchDto);
+            return Ok(events);
+        }
+        
     }
 }

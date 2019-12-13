@@ -37,6 +37,21 @@
           "lib/netstandard2.0/BCrypt.Net-Core.dll": {}
         }
       },
+      "Elasticsearch.Net/7.4.2": {
+        "type": "package",
+        "dependencies": {
+          "System.Buffers": "4.5.0",
+          "System.Diagnostics.DiagnosticSource": "4.5.1",
+          "System.Reflection.Emit": "4.3.0",
+          "System.Reflection.Emit.Lightweight": "4.3.0"
+        },
+        "compile": {
+          "lib/netstandard2.0/Elasticsearch.Net.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/Elasticsearch.Net.dll": {}
+        }
+      },
       "LazyCache/2.0.1": {
         "type": "package",
         "dependencies": {
@@ -2956,6 +2971,18 @@
           }
         }
       },
+      "NEST/7.4.2": {
+        "type": "package",
+        "dependencies": {
+          "Elasticsearch.Net": "[7.4.2, 8.0.0)"
+        },
+        "compile": {
+          "lib/netstandard2.0/Nest.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/Nest.dll": {}
+        }
+      },
       "NETStandard.Library/2.0.3": {
         "type": "package",
         "dependencies": {
@@ -3514,7 +3541,7 @@
           "ref/netstandard1.3/System.Diagnostics.Debug.dll": {}
         }
       },
-      "System.Diagnostics.DiagnosticSource/4.5.0": {
+      "System.Diagnostics.DiagnosticSource/4.5.1": {
         "type": "package",
         "compile": {
           "lib/netstandard1.3/System.Diagnostics.DiagnosticSource.dll": {}
@@ -4036,7 +4063,7 @@
           "System.Runtime": "4.3.0"
         },
         "compile": {
-          "ref/netstandard1.0/_._": {}
+          "ref/netstandard1.0/System.Reflection.Emit.Lightweight.dll": {}
         },
         "runtime": {
           "lib/netstandard1.3/System.Reflection.Emit.Lightweight.dll": {}
@@ -4887,6 +4914,25 @@
         "lib/netstandard1.3/BCrypt.Net-Core.pdb",
         "lib/netstandard2.0/BCrypt.Net-Core.dll",
         "lib/netstandard2.0/BCrypt.Net-Core.pdb"
+      ]
+    },
+    "Elasticsearch.Net/7.4.2": {
+      "sha512": "UoYJ4DihRktNYsp6cOvMabMJrT2IDDwZLa/HjIItLhsm0V+SBPD0R7Ml53qVzRiVE3q6Lw4uxSRWNK7011QedQ==",
+      "type": "package",
+      "path": "elasticsearch.net/7.4.2",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "elasticsearch.net.7.4.2.nupkg.sha512",
+        "elasticsearch.net.nuspec",
+        "images/nuget-icon.png",
+        "lib/net461/Elasticsearch.Net.dll",
+        "lib/net461/Elasticsearch.Net.pdb",
+        "lib/net461/Elasticsearch.Net.xml",
+        "lib/netstandard2.0/Elasticsearch.Net.dll",
+        "lib/netstandard2.0/Elasticsearch.Net.pdb",
+        "lib/netstandard2.0/Elasticsearch.Net.xml",
+        "license.txt"
       ]
     },
     "LazyCache/2.0.1": {
@@ -8150,6 +8196,25 @@
         "version.txt"
       ]
     },
+    "NEST/7.4.2": {
+      "sha512": "JBEVlCIYfOErkACtbW9u1iOp48RhQoPemZAAkJxrM5hvEC8FIalkyIFK/s/VICuclE8D2Sw4yW4+AQ0fhTjiBQ==",
+      "type": "package",
+      "path": "nest/7.4.2",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "images/nuget-icon.png",
+        "lib/net461/Nest.dll",
+        "lib/net461/Nest.pdb",
+        "lib/net461/Nest.xml",
+        "lib/netstandard2.0/Nest.dll",
+        "lib/netstandard2.0/Nest.pdb",
+        "lib/netstandard2.0/Nest.xml",
+        "license.txt",
+        "nest.7.4.2.nupkg.sha512",
+        "nest.nuspec"
+      ]
+    },
     "NETStandard.Library/2.0.3": {
       "sha512": "st47PosZSHrjECdjeIzZQbzivYBJFv6P2nv4cj2ypdI204DO+vZ7l5raGMiX4eXMJ53RfOIg+/s4DHVZ54Nu2A==",
       "type": "package",
@@ -9357,10 +9422,10 @@
         "system.diagnostics.debug.nuspec"
       ]
     },
-    "System.Diagnostics.DiagnosticSource/4.5.0": {
-      "sha512": "eIHRELiYDQvsMToML81QFkXEEYXUSUT2F28t1SGrevWqP+epFdw80SyAXIKTXOHrIEXReFOEnEr7XlGiC2GgOg==",
+    "System.Diagnostics.DiagnosticSource/4.5.1": {
+      "sha512": "/tu8MfTToEdI+I0L10NkGXqGuLDIvmkWqjnaSit3o8i5SZz8A0kz9YLxfZltFKbxmsOpYqnyoysPvPlQMZVwxg==",
       "type": "package",
-      "path": "system.diagnostics.diagnosticsource/4.5.0",
+      "path": "system.diagnostics.diagnosticsource/4.5.1",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -9376,7 +9441,7 @@
         "lib/netstandard1.3/System.Diagnostics.DiagnosticSource.xml",
         "lib/portable-net45+win8+wpa81/System.Diagnostics.DiagnosticSource.dll",
         "lib/portable-net45+win8+wpa81/System.Diagnostics.DiagnosticSource.xml",
-        "system.diagnostics.diagnosticsource.4.5.0.nupkg.sha512",
+        "system.diagnostics.diagnosticsource.4.5.1.nupkg.sha512",
         "system.diagnostics.diagnosticsource.nuspec",
         "useSharedDesignerContext.txt",
         "version.txt"
@@ -13172,6 +13237,7 @@
     ".NETCoreApp,Version=v2.2": [
       "AutoMapper.Extensions.Microsoft.DependencyInjection >= 7.0.0",
       "BCrypt.Net-Core >= 1.6.0",
+      "Elasticsearch.Net >= 7.4.2",
       "LazyCache.AspNetCore >= 2.0.1",
       "MediatR.Extensions.Microsoft.DependencyInjection >= 7.0.0",
       "Microsoft.AspNetCore.App >= 2.2.0",
@@ -13183,7 +13249,8 @@
       "Microsoft.EntityFrameworkCore.SqlServer.Design >= 2.0.0-preview1-final",
       "Microsoft.EntityFrameworkCore.Tools >= 2.2.6",
       "Microsoft.NETCore.App >= 2.2.0",
-      "Microsoft.VisualStudio.Web.CodeGeneration.Design >= 2.2.3"
+      "Microsoft.VisualStudio.Web.CodeGeneration.Design >= 2.2.3",
+      "NEST >= 7.4.2"
     ]
   },
   "packageFolders": {
@@ -13234,6 +13301,10 @@
           "BCrypt.Net-Core": {
             "target": "Package",
             "version": "[1.6.0, )"
+          },
+          "Elasticsearch.Net": {
+            "target": "Package",
+            "version": "[7.4.2, )"
           },
           "LazyCache.AspNetCore": {
             "target": "Package",
@@ -13289,6 +13360,10 @@
           "Microsoft.VisualStudio.Web.CodeGeneration.Design": {
             "target": "Package",
             "version": "[2.2.3, )"
+          },
+          "NEST": {
+            "target": "Package",
+            "version": "[7.4.2, )"
           }
         },
         "imports": [

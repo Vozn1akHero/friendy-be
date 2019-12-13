@@ -1,6 +1,9 @@
 using System.Threading.Tasks;
 using BE.CustomAttributes;
+using BE.Dtos.EventDtos;
 using BE.Interfaces;
+using BE.Models;
+using BE.Services.Elasticsearch;
 using BE.Services.Model;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
@@ -15,15 +18,28 @@ namespace BE.Controllers
         private IRepositoryWrapper _repository;
         private IImageProcessingService _imageProcessingService;
         private IEventDataService _eventDataService;
-
+        private IEventDataIndexing _eventDataIndexing;
         
         public EventController(IRepositoryWrapper repository, 
-            IImageProcessingService imageProcessingService, IEventDataService eventDataService)
+            IImageProcessingService imageProcessingService,
+            IEventDataService eventDataService, 
+            IEventDataIndexing eventDataIndexing)
         {
             _repository = repository;
             _imageProcessingService = imageProcessingService;
             _eventDataService = eventDataService;
+            _eventDataIndexing = eventDataIndexing;
             _eventDataService = eventDataService;
+        }
+
+        [HttpPost]
+        [Authorize]
+        public async Task<IActionResult> Create([FromBody] Event @event, 
+            [FromHeader(Name = "userId")] int userId)
+        {
+            var eventData = await _repository.Event.CreateAndReturn(@event);
+            _eventDataIndexing.Create(eventData);
+            return Created("api/event", @event);
         }
 
         [HttpGet]

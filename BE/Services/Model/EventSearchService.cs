@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using AutoMapper;
 using BE.Dtos.EventDtos;
 using BE.Interfaces;
+using BE.Services.Elasticsearch;
 
 namespace BE.Services.Model
 {
@@ -12,17 +13,20 @@ namespace BE.Services.Model
         Task<IEnumerable<EventDto>> FilterParticipatingByKeywordAndUserId(int userId, string keyword);
         Task<IEnumerable<EventDto>> FilterAdministeredByKeywordAndUserId(int userId, string keyword);
         Task<IEnumerable<EventDto>> FilterByKeyword(string keyword);
+        IEnumerable<EventDto> FilterByCriteria(EventSearchDto eventSearchDto);
     }
     
     public class EventSearchService : IEventSearchService
     {
         private readonly IRepositoryWrapper _repository;
         private readonly IMapper _mapper;
-        
-        public EventSearchService(IRepositoryWrapper repository, IMapper mapper)
+        private readonly IEventDetailedSearch _eventDetailedSearch;
+
+        public EventSearchService(IRepositoryWrapper repository, IMapper mapper, IEventDetailedSearch eventDetailedSearch)
         {
             _repository = repository;
             _mapper = mapper;
+            _eventDetailedSearch = eventDetailedSearch;
         }
 
         public async Task<IEnumerable<EventDto>> FilterParticipatingByKeywordAndUserId(int userId, string keyword)
@@ -45,5 +49,11 @@ namespace BE.Services.Model
             var eventDtos = _mapper.Map<IEnumerable<EventDto>>(events);
             return eventDtos;
         }
+
+         public IEnumerable<EventDto> FilterByCriteria(EventSearchDto eventSearchDto)
+         {
+             var events = _eventDetailedSearch.SearchByCriteria(eventSearchDto);
+             return events;
+         }
     }
 }

@@ -17,6 +17,13 @@ namespace BE.Repositories
     {
         public EventRepository(FriendyContext friendyContext) : base(friendyContext) { }
 
+        public async Task<Models.Event> CreateAndReturn(Models.Event @event)
+        {
+            Create(@event);
+            await SaveAsync();
+            return @event;
+        }
+
         public async Task<List<Models.Event>> GetExampleEventsByUserId(int userId)
         {
 /*
@@ -36,21 +43,10 @@ namespace BE.Repositories
                 .SingleOrDefaultAsync();
         }
 
-        public async Task<IEnumerable<EventDto>> SearchByKeyword(string keyword)
+        public async Task<IEnumerable<Models.Event>> SearchByKeyword(string keyword)
         {
             return await FindByCondition(e => e.Title.Contains(keyword))
-                .Select(e => new EventDto
-                {
-                    Id = e.Id,
-                    AvatarPath = e.Avatar,
-                    City = e.City,
-                    Date = e.Date,
-                    ParticipantsAmount = e.ParticipantsAmount,
-                    CurrentParticipantsAmount = e.EventParticipants.Count,
-                    Title = e.Title,
-                    Street = e.Street,
-                    StreetNumber = e.StreetNumber
-                })
+                .Include(e => e.EventParticipants)
                 .ToListAsync();
         }
 
@@ -88,6 +84,7 @@ namespace BE.Repositories
         {
             var events = await FindByCondition(e =>
                 e.EventParticipants.Any(d => d.ParticipantId == userId) && e.Title.ToLower().Contains(keyword.ToLower()))
+                .Include(e => e.EventParticipants)
                 .ToListAsync();
             return events;
         }
@@ -97,6 +94,7 @@ namespace BE.Repositories
         {
             var events = await FindByCondition(e =>
                     e.EventAdmins.Any(d => d.UserId == userId) && e.Title.ToLower().Contains(keyword.ToLower()))
+                .Include(e => e.EventParticipants)
                 .ToListAsync();
             return events;
         }

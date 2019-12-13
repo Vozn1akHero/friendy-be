@@ -11,6 +11,7 @@ using System.Text;
 using System.Threading.Tasks;
 using AutoMapper;
 using BE.CustomAttributes;
+using BE.ElasticSearch;
 using BE.Helpers;
 using BE.Interfaces;
 using BE.Middlewares;
@@ -18,6 +19,7 @@ using BE.Queries.EventPost;
 using BE.Repositories.RepositoryServices.Interfaces.User;
 using BE.RepositoryServices.User;
 using BE.Services;
+using BE.Services.Elasticsearch;
 using BE.Services.Global;
 using BE.Services.Global.Interfaces;
 using BE.Services.Model;
@@ -102,6 +104,8 @@ namespace BE
             services.AddScoped<IEventParticipantService, EventParticipantService>();
             services.AddScoped<IEventDataService, EventDataService>();
             services.AddScoped<IEventSearchService, EventSearchService>();
+
+            services.AddScoped<IEventDataIndexing, EventDataIndexing>();
             
             services.AddMvc().AddJsonOptions(options => {
                 options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
@@ -121,7 +125,10 @@ namespace BE
             #endregion
 
             services.AddMediatR(typeof(Startup));
-
+            
+            services.Configure<ElasticConnectionSettings>(Configuration.GetSection("ElasticConnectionSettings"));
+            services.AddSingleton(typeof(ElasticClientProvider));
+            
             services.ConfigureSqlContext(Configuration);
         }
 
