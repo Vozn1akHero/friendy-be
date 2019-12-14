@@ -104,6 +104,9 @@ namespace BE
             services.AddScoped<IEventParticipantService, EventParticipantService>();
             services.AddScoped<IEventDataService, EventDataService>();
             services.AddScoped<IEventSearchService, EventSearchService>();
+            services.AddScoped<IEventDetailedSearch, EventDetailedSearch>();
+            services.AddScoped<IUserSearchService, UserSearchService>();
+            services.AddScoped<IUserDetailedSearch, UserDetailedSearch>();
 
             services.AddScoped<IEventDataIndexing, EventDataIndexing>();
             
@@ -125,10 +128,12 @@ namespace BE
             #endregion
 
             services.AddMediatR(typeof(Startup));
-            
-            services.Configure<ElasticConnectionSettings>(Configuration.GetSection("ElasticConnectionSettings"));
+
+            services.AddOptions();
+            services.Configure<ElasticConnectionSettings>(Configuration
+                .GetSection("ElasticConnectionSettings"));
             services.AddSingleton(typeof(ElasticClientProvider));
-            
+
             services.ConfigureSqlContext(Configuration);
         }
 

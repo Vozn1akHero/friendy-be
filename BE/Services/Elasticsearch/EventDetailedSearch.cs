@@ -1,8 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using BE.Dtos.EventDtos;
 using BE.ElasticSearch;
+using BE.Models;
 using Nest;
 
 namespace BE.Services.Elasticsearch
@@ -19,17 +21,14 @@ namespace BE.Services.Elasticsearch
             _client = provider.Client;
         }   
         private readonly ElasticClient _client;
-
-
+        
         public IEnumerable<EventDto> SearchByCriteria(EventSearchDto eventSearchDto)
         {
             var searchResponse = _client.Search<EventDto>(s => s
-                .From(0)
-                .Size(10)
                 .Query(q => q
-                    .Match(m => m
+                    .Wildcard(m => m
                         .Field(f => f.Title)
-                        .Query(eventSearchDto.Title)
+                        .Value(eventSearchDto.Title+"*")
                     )
                 )
             );

@@ -80,6 +80,7 @@
             <e p="PostCommentDto.cs" t="Include" />
           </e>
           <e p="EventDtos" t="Include">
+            <e p="ElasticEventDto.cs" t="Include" />
             <e p="EventAdminDto.cs" t="Include" />
             <e p="EventDto.cs" t="Include" />
             <e p="EventSearchDto.cs" t="Include" />
@@ -320,6 +321,7 @@
           <e p="Elasticsearch" t="Include">
             <e p="EventDataIndexing.cs" t="Include" />
             <e p="EventDetailedSearch.cs" t="Include" />
+            <e p="UserDetailedSearch.cs" t="Include" />
           </e>
           <e p="Global" t="Include">
             <e p="AuthenticationService.cs" t="Include" />
@@ -342,6 +344,7 @@
             <e p="EventPostService.cs" t="Include" />
             <e p="EventSearchService.cs" t="Include" />
             <e p="UserPostService.cs" t="Include" />
+            <e p="UserSearchService.cs" t="Include" />
           </e>
         </e>
         <e p="SignalR" t="Include">

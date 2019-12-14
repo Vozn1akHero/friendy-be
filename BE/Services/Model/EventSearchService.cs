@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using AutoMapper;
 using BE.Dtos.EventDtos;
 using BE.Interfaces;
+using BE.Models;
 using BE.Services.Elasticsearch;
 
 namespace BE.Services.Model
@@ -53,6 +54,7 @@ namespace BE.Services.Model
          public IEnumerable<EventDto> FilterByCriteria(EventSearchDto eventSearchDto)
          {
              var events = _eventDetailedSearch.SearchByCriteria(eventSearchDto);
+             //var eventDtos = _mapper.Map<IEnumerable<EventDto>>(events);
              return events;
          }
     }

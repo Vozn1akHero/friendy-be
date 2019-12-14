@@ -20,7 +20,7 @@ namespace BE.Services.Elasticsearch
 
         public void Create(Event @event)
         {
-            var ndexResponse = _client.IndexDocument(@event);
+            var ndexResponse = _client.CreateDocument(@event);
         }
     }
 }
