@@ -65,10 +65,15 @@ namespace BE.Repositories
         {
             FriendyContext.SaveChanges();
         } 
+        
+        public IQueryable<TType> Get<TType>(Expression<Func<T, bool>> statement, Expression<Func<T, TType>> select)
+        {
+            return FriendyContext.Set<T>().Where(statement).Select(select);
+        }
 
-        public IQueryable<T> ExecuteSqlQuery(string query, List<object> parameters)
+        /*public IQueryable<T> ExecuteSqlQuery(string query, List<object> parameters)
         {
             return FriendyContext.Set<T>().FromSql(query, parameters);
-        }
+        }*/
     }
 }

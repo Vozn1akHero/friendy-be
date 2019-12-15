@@ -14,6 +14,7 @@
           <e p="Profiles" t="Include">
             <e p="EventDataProfile.cs" t="Include" />
             <e p="EventPostProfile.cs" t="Include" />
+            <e p="UserExtendedDataProfile.cs" t="Include" />
             <e p="UserPostProfile.cs" t="Include" />
           </e>
           <e p="Resolvers" t="Include">
@@ -321,6 +322,8 @@
           <e p="Elasticsearch" t="Include">
             <e p="EventDataIndexing.cs" t="Include" />
             <e p="EventDetailedSearch.cs" t="Include" />
+            <e p="UserDataIndexing.cs" t="Include" />
+            <e p="UserDataUpdating.cs" t="Include" />
             <e p="UserDetailedSearch.cs" t="Include" />
           </e>
           <e p="Global" t="Include">
@@ -343,6 +346,7 @@
             <e p="EventParticipantService.cs" t="Include" />
             <e p="EventPostService.cs" t="Include" />
             <e p="EventSearchService.cs" t="Include" />
+            <e p="UserDataService.cs" t="Include" />
             <e p="UserPostService.cs" t="Include" />
             <e p="UserSearchService.cs" t="Include" />
           </e>

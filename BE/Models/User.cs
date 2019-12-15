@@ -27,6 +27,7 @@ namespace BE.Models
             UserFriendshipFirstFriend = new HashSet<UserFriendship>();
             UserFriendshipSecondFriend = new HashSet<UserFriendship>();
             UserImage = new HashSet<UserImage>();
+            UserInterests = new HashSet<UserInterests>();
             UserPost = new HashSet<UserPost>();
         }
 
@@ -37,6 +38,7 @@ namespace BE.Models
         public int GenderId { get; set; }
         public string Email { get; set; }
         public string Password { get; set; }
+        public int? EducationId { get; set; }
         public DateTime Birthday { get; set; }
         public string Avatar { get; set; }
         public string ProfileBg { get; set; }
@@ -47,6 +49,7 @@ namespace BE.Models
 
         public virtual UserAdditionalInfo AdditionalInfo { get; set; }
         public virtual AuthenticationSession AuthenticationSession { get; set; }
+        public virtual Education Education { get; set; }
         public virtual Gender Gender { get; set; }
         public virtual Session SessionNavigation { get; set; }
         public virtual ICollection<Chat> ChatFirstParticipant { get; set; }
@@ -69,6 +72,7 @@ namespace BE.Models
         public virtual ICollection<UserFriendship> UserFriendshipFirstFriend { get; set; }
         public virtual ICollection<UserFriendship> UserFriendshipSecondFriend { get; set; }
         public virtual ICollection<UserImage> UserImage { get; set; }
+        public virtual ICollection<UserInterests> UserInterests { get; set; }
         public virtual ICollection<UserPost> UserPost { get; set; }
     }
 }

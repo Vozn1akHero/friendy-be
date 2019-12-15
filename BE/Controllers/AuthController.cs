@@ -52,7 +52,7 @@ namespace BE.Controllers
             bool authenticationRes = await _authenticationService.Authenticate(authData.Email, authData.Password);
             if (!authenticationRes)
                 return Forbid();
-            var user = await _repository.User.GetUserByEmailAsync(authData.Email);
+            var user = await _repository.User.GetByEmailAsync(authData.Email);
             var claims = new List<Claim>
             {
                 new Claim("id", user.Id.ToString()),

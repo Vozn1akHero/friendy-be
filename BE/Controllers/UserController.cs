@@ -12,6 +12,8 @@ using BE.Helpers;
 using BE.Interfaces;
 using BE.Models;
 using BE.Services;
+using BE.Services.Elasticsearch;
+using BE.Services.Model;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -26,19 +28,21 @@ namespace BE.Controllers
     public class UserController : ControllerBase
     {
         private IRepositoryWrapper _repository;
-        private IAvatarConverterService _userAvatarConverterService;
-        public UserController(IRepositoryWrapper repository,
-            IAvatarConverterService userAvatarConverterService)
+        private IUserDataIndexing _userDataIndexing;
+        private IUserDataService _userDataService;
+        
+        public UserController(IRepositoryWrapper repository, IUserDataIndexing userDataIndexing, IUserDataService userDataService)
         {
             _repository = repository;
-            _userAvatarConverterService = userAvatarConverterService;
+            _userDataIndexing = userDataIndexing;
+            _userDataService = userDataService;
         }
 
         [HttpGet]
         [Route("all")]
         public async Task<IActionResult> GetAllUsers()
         {
-            var users = await _repository.User.GetAllUsersAsync();
+            var users = await _repository.User.GetAllAsync();
             return Ok(users);
         }
         
@@ -47,7 +51,7 @@ namespace BE.Controllers
         [Route("{id}")]
         public async Task<IActionResult> GetById(int id)
         {
-            var user = await _repository.User.GetUserByIdAsync(id);
+            var user = await _repository.User.GetByIdAsync(id);
             if(user != null) return Ok(user);
             return NotFound();
         }
@@ -78,7 +82,16 @@ namespace BE.Controllers
         [Route("logged-in/extended")]
         public async Task<IActionResult> GetLoggedInExtendedInfo([FromHeader(Name = "userId")] int userId)
         {
-            var user = await _repository.User.GetExtendedInfoById(userId);
+            //var user = await _repository.User.GetExtendedInfoById(userId);
+            var user = await _userDataService.GetExtendedById(userId);
+            return Ok(user);
+        }
+        
+        [HttpGet]
+        [Route("{userId}/extended")]
+        public async Task<IActionResult> GetExtendedInfo(int userId)
+        {
+            var user = await _userDataService.GetExtendedById(userId);
             return Ok(user);
         }
         
@@ -87,7 +100,7 @@ namespace BE.Controllers
         [Route("logged-in")]
         public async Task<IActionResult> GetLoggedInUserWithSelectedFields([FromHeader(Name = "userId")] int userId)
         {
-            var user = await _repository.User.GetUserByIdAsync(userId);
+            var user = await _repository.User.GetByIdAsync(userId);
             return Ok(user);
         }
 
@@ -157,6 +170,14 @@ namespace BE.Controllers
             }
             await _repository.User.UpdateProfileBackgroundAsync(path, userId);
             return Ok(path);
+        }
+
+        [HttpPut]
+        [Authorize]
+        public async Task<IActionResult> UpdateBasic([FromBody] ExtendedUserDto extendedUserDto,
+            [FromHeader(Name = "userId")] int userId)
+        {
+            return Ok();
         }
     }
 }

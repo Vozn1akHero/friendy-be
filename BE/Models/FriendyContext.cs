@@ -316,7 +316,9 @@ namespace BE.Models
 
                 entity.Property(e => e.CreatorId).HasColumnName("creator_id");
 
-                entity.Property(e => e.Date).HasColumnName("date");
+                entity.Property(e => e.Date)
+                    .HasColumnName("date")
+                    .HasColumnType("datetime2(0)");
 
                 entity.Property(e => e.Description)
                     .IsRequired()
@@ -647,13 +649,17 @@ namespace BE.Models
                     .HasColumnName("avatar")
                     .IsUnicode(false);
 
-                entity.Property(e => e.Birthday).HasColumnName("birthday");
+                entity.Property(e => e.Birthday)
+                    .HasColumnName("birthday")
+                    .HasColumnType("date");
 
                 entity.Property(e => e.City)
                     .IsRequired()
                     .HasColumnName("city")
                     .HasMaxLength(50)
                     .IsUnicode(false);
+
+                entity.Property(e => e.EducationId).HasColumnName("education_id");
 
                 entity.Property(e => e.Email)
                     .IsRequired()
@@ -677,7 +683,6 @@ namespace BE.Models
 
                 entity.Property(e => e.ProfileBg)
                     .HasColumnName("profile_bg")
-                    .HasMaxLength(8000)
                     .IsUnicode(false);
 
                 entity.Property(e => e.SessionId).HasColumnName("session_id");
@@ -703,6 +708,11 @@ namespace BE.Models
                     .HasForeignKey(d => d.AuthenticationSessionId)
                     .HasConstraintName("FK_user_authentication_session");
 
+                entity.HasOne(d => d.Education)
+                    .WithMany(p => p.User)
+                    .HasForeignKey(d => d.EducationId)
+                    .HasConstraintName("FK_user_education");
+
                 entity.HasOne(d => d.Gender)
                     .WithMany(p => p.User)
                     .HasForeignKey(d => d.GenderId)
@@ -723,8 +733,6 @@ namespace BE.Models
 
                 entity.Property(e => e.AlcoholAttitudeId).HasColumnName("alcohol_attitude_id");
 
-                entity.Property(e => e.EducationId).HasColumnName("education_id");
-
                 entity.Property(e => e.MaritalStatusId).HasColumnName("marital_status_id");
 
                 entity.Property(e => e.ReligionId).HasColumnName("religion_id");
@@ -735,11 +743,6 @@ namespace BE.Models
                     .WithMany(p => p.UserAdditionalInfo)
                     .HasForeignKey(d => d.AlcoholAttitudeId)
                     .HasConstraintName("FK_user_additional_info_alcohol_attitude");
-
-                entity.HasOne(d => d.Education)
-                    .WithMany(p => p.UserAdditionalInfo)
-                    .HasForeignKey(d => d.EducationId)
-                    .HasConstraintName("FK_user_additional_info_education");
 
                 entity.HasOne(d => d.MaritalStatus)
                     .WithMany(p => p.UserAdditionalInfo)
@@ -834,21 +837,21 @@ namespace BE.Models
 
                 entity.Property(e => e.Id).HasColumnName("id");
 
-                entity.Property(e => e.AdditionalInfoId).HasColumnName("additional_info_id");
-
                 entity.Property(e => e.InterestId).HasColumnName("interest_id");
 
-                entity.HasOne(d => d.AdditionalInfo)
-                    .WithMany(p => p.UserInterests)
-                    .HasForeignKey(d => d.AdditionalInfoId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_user_interests_user_additional_info");
+                entity.Property(e => e.UserId).HasColumnName("user_id");
 
                 entity.HasOne(d => d.Interest)
                     .WithMany(p => p.UserInterests)
                     .HasForeignKey(d => d.InterestId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_user_interests_interest");
+
+                entity.HasOne(d => d.User)
+                    .WithMany(p => p.UserInterests)
+                    .HasForeignKey(d => d.UserId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_user_interests_user");
             });
 
             modelBuilder.Entity<UserPost>(entity =>

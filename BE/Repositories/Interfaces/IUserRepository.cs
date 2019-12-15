@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
 using BE.Dtos;
 using BE.Models;
@@ -10,19 +11,23 @@ namespace BE.Interfaces
 {
     public interface IUserRepository : IRepositoryBase<User>
     {
-        Task<IEnumerable<User>> GetAllUsersAsync();
+        Task<IEnumerable<User>> GetAllAsync();
         Task<object> GetWithSelectedFields(int userId, string[] selectedFields);
-        Task<ExtendedUserDto> GetExtendedInfoById(int userId);
-        Task<User> GetUserAsync(string token);
-        Task<User> GetUserByIdAsync(int id);
-        Task<User> GetUserByEmailAsync(string email);
-        Task<IEnumerable<UserBasicDto>> GetUsersByCriteriaAsync(UsersLookUpCriteriaDto usersLookUpCriteriaDto);
+        //Task<ExtendedUserDto> GetExtendedInfoById(int userId);
+        Task<TType> GetSelectedFieldsById<TType>(int userId, Expression<Func<User, TType>> select);
+        Task<User> GetAsync(string token);
+        Task<User> GetByIdAsync(int id);
+        Task<User> GetByEmailAsync(string email);
+        Task<IEnumerable<UserBasicDto>> GetByCriteriaAsync(UsersLookUpCriteriaDto usersLookUpCriteriaDto);
         Task<IEnumerable<UserBasicDto>> GetByRangeAsync(int firstIndex, int lastIndex);
         Task SetSessionIdAsync(int userId, int id);
         Task UpdateAvatarAsync(string path, int userId);
         Task UpdateProfileBackgroundAsync(string path, int userId);
         Task<string> GetAvatarByIdAsync(int userId);
         Task<string> GetProfileBackgroundByIdAsync(int userId);
+        Task UpdateBasicDataById(int id, string name, string surname, DateTime birthday);
+        Task UpdateEducationDataById(int id, Education education);
+        Task UpdateInterestsById(int id, IEnumerable<UserInterests> userInterests);
         //Task UpdateUserAsync(User dbUser);
     }
 }

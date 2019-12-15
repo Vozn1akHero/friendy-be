@@ -12,6 +12,7 @@ using BE.Interfaces;
 using BE.Models;
 using BE.Repositories.RepositoryServices.Interfaces.User;
 using Microsoft.EntityFrameworkCore;
+using Nest;
 
 
 namespace BE.Repositories
@@ -30,7 +31,7 @@ namespace BE.Repositories
             _avatarConverterService = avatarConverterService;
         }
 
-        public async Task<IEnumerable<User>> GetAllUsersAsync()
+        public async Task<IEnumerable<User>> GetAllAsync()
         {
             return await FindAll()
                 .OrderBy(x => x.Name)
@@ -43,30 +44,12 @@ namespace BE.Repositories
             return DynamicLinqStatement.ExtractSpecifiedFields(user, selectedFields);
         }
 
-        public async Task<ExtendedUserDto> GetExtendedInfoById(int userId)
+        public async Task<TType> GetSelectedFieldsById<TType>(int userId, Expression<Func<User, TType>> select)
         {
-            return await FindByCondition(e => e.Id == userId).Select(e => new ExtendedUserDto {
-                    Id = e.Id,
-                    City = e.City,
-                    Name = e.Name,
-                    Surname = e.Surname,
-                    GenderId = e.Gender.Id,
-                    Birthday = e.Birthday,
-                    Avatar = e.Avatar,
-                    EducationId = e.AdditionalInfo.Education.Id,
-                    MaritalStatusId = e.AdditionalInfo.MaritalStatus.Id,
-                    ReligionId = e.AdditionalInfo.Religion.Id,
-                    AlcoholAttitudeId = e.AdditionalInfo.AlcoholAttitude.Id,
-                    SmokingAttitudeId = e.AdditionalInfo.SmokingAttitude.Id,
-                    UserInterests = e.AdditionalInfo.UserInterests.Select(b => new
-                    {
-                        b.Interest.Id,
-                        b.Interest.Title
-                    })
-                }).SingleOrDefaultAsync();
+            return await Get<TType>(e => e.Id == userId, select).SingleOrDefaultAsync();
         }
 
-        public async Task<User> GetUserAsync(string token)
+        public async Task<User> GetAsync(string token)
         {
             string cutToken = token.Split(" ")[1];
             var user = await FindByCondition(o => o.AuthenticationSession.Token == cutToken)
@@ -74,7 +57,7 @@ namespace BE.Repositories
             return user;
         }   
         
-        public async Task<User> GetUserByIdAsync(int id)
+        public async Task<User> GetByIdAsync(int id)
         {
             var user = await FindByCondition(o => o.Id == id)
                 .SingleOrDefaultAsync();
@@ -82,7 +65,7 @@ namespace BE.Repositories
             return user;
         }      
         
-        public async Task<User> GetUserByEmailAsync(string email)
+        public async Task<User> GetByEmailAsync(string email)
         {
             var user = await FindByCondition(o => o.Email == email)
                 .SingleOrDefaultAsync();
@@ -97,12 +80,12 @@ namespace BE.Repositories
             await SaveAsync();
         }
 
-        public async Task<IEnumerable<UserBasicDto>> GetUsersByCriteriaAsync(UsersLookUpCriteriaDto usersLookUpCriteriaDto)
+        public async Task<IEnumerable<UserBasicDto>> GetByCriteriaAsync(UsersLookUpCriteriaDto usersLookUpCriteriaDto)
         {
             var users = await FindAll()
                 .Include(e => e.AdditionalInfo)
                 .Include(e => e.AdditionalInfo.AlcoholAttitude)
-                .Include(e => e.AdditionalInfo.Education)
+                .Include(e => e.EducationId)
                 .Include(e => e.AdditionalInfo.MaritalStatus)
                 .Include(e => e.AdditionalInfo.Religion)
                 .Include(e => e.AdditionalInfo.SmokingAttitude)
@@ -112,13 +95,13 @@ namespace BE.Repositories
                     Name = e.Name,
                     Surname = e.Surname,
                     City = e.City,
-                    EducationId = e.AdditionalInfo.EducationId,
+                    EducationId = e.EducationId,
                     GenderId = e.GenderId,
                     MaritalStatusId = e.AdditionalInfo.MaritalStatusId,
                     ReligionId = e.AdditionalInfo.ReligionId,
                     AlcoholAttitudeId = e.AdditionalInfo.AlcoholAttitudeId,
                     SmokingAttitudeId = e.AdditionalInfo.SmokingAttitudeId,
-                    UserInterests = e.AdditionalInfo.UserInterests.Select(interest => interest.Interest.Title)
+                    UserInterests = e.UserInterests.Select(interest => interest.Interest.Title)
                 })
                 .ToListAsync();
             
@@ -185,6 +168,37 @@ namespace BE.Repositories
             return await FindByCondition(e => e.Id == userId)
                 .Select(e => e.ProfileBg)
                 .SingleOrDefaultAsync();
+        }
+
+        public async Task UpdateBasicDataById(int id, string name, string surname, DateTime birthday)
+        {
+            var actUser = await FindByCondition(e => e.Id == id).SingleOrDefaultAsync();
+            if (actUser != null)
+            {
+                actUser.Name = name;
+                actUser.Surname = surname;
+                actUser.Birthday = birthday;
+                await SaveAsync();
+            }
+        }
+
+        public async Task UpdateEducationDataById(int id, Education education)
+        {
+            var actUser = await FindByCondition(e => e.Id == id).SingleOrDefaultAsync();
+            if (actUser != null)
+            {
+                actUser.Education = education;
+                await SaveAsync();
+            }
+        }
+
+        public async Task UpdateInterestsById(int id, IEnumerable<UserInterests> userInterests){
+            var actUser = await FindByCondition(e => e.Id == id).SingleOrDefaultAsync();
+            if (actUser != null)
+            {
+                actUser.UserInterests = userInterests.ToList();
+                await SaveAsync();
+            }
         }
 
         public async Task DeleteUserAsync(User user)

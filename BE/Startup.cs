@@ -68,7 +68,7 @@ namespace BE
                     Path.Combine(Directory.GetCurrentDirectory(), "wwwroot")));
 
             //services.AddDirectoryBrowser();
-            services.AddDirectoryBrowser();
+            
             
             var key = Encoding.ASCII.GetBytes(Configuration.GetValue<string>("AppSettings:JWTSecret"));
             
@@ -105,8 +105,11 @@ namespace BE
             services.AddScoped<IEventDataService, EventDataService>();
             services.AddScoped<IEventSearchService, EventSearchService>();
             services.AddScoped<IEventDetailedSearch, EventDetailedSearch>();
+            
             services.AddScoped<IUserSearchService, UserSearchService>();
+            services.AddScoped<IUserDataService, UserDataService>();
             services.AddScoped<IUserDetailedSearch, UserDetailedSearch>();
+            services.AddScoped<IUserDataIndexing, UserDataIndexing>();
 
             services.AddScoped<IEventDataIndexing, EventDataIndexing>();
             
@@ -163,7 +166,7 @@ namespace BE
                 FileProvider = new PhysicalFileProvider(
                     Path.Combine(Directory.GetCurrentDirectory(), "wwwroot")),
                 RequestPath = "/wwwroot",
-                EnableDirectoryBrowsing = true
+                EnableDirectoryBrowsing = false
             });
             
             app.UseCors(builder => builder.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin().AllowCredentials());
