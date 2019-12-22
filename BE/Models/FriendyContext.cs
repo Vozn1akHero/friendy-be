@@ -818,7 +818,7 @@ namespace BE.Models
 
                 entity.Property(e => e.UserId).HasColumnName("user_id");
 
-                entity.HasOne(d => d.IdNavigation)
+                entity.HasOne(d => d.Image)
                     .WithOne(p => p.UserImage)
                     .HasForeignKey<UserImage>(d => d.Id)
                     .OnDelete(DeleteBehavior.ClientSetNull)

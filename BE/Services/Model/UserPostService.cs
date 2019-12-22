@@ -13,7 +13,8 @@ namespace BE.Services.Model
 {
     public interface IUserPostService
     {
-        Task<IEnumerable<UserPostDto>> GetRangeByIdAsync(int userId, int startIndex, int length);
+        Task<IEnumerable<UserPostDto>> GetRangeByUserIdAsync(int userId, int startIndex, int length);
+        Task<UserPostDto> GetById(int id, int userId);
         Task<UserPostDto> CreateAndReturnAsync(UserPost userPost);
     }
     
@@ -27,6 +28,13 @@ namespace BE.Services.Model
             _repository = repository;
             _mapper = mapper;
         }
+        
+        public async Task<IEnumerable<UserPostDto>> GetRangeByUserIdAsync(int userId, int startIndex, int length)
+        {
+            var userPosts = await _repository.UserPost.GetRangeByIdAsync(userId, startIndex, length);
+            var userPostsDtos = _mapper.Map<IEnumerable<UserPostDto>>(userPosts, opt => opt.Items["userId"] = userId);
+            return userPostsDtos;
+        }
 
         public async Task<UserPostDto> CreateAndReturnAsync(UserPost userPost)
         {
@@ -35,12 +43,12 @@ namespace BE.Services.Model
             var userPostDto = _mapper.Map<UserPostDto>(post);
             return userPostDto;
         }
-        
-        public async Task<IEnumerable<UserPostDto>> GetRangeByIdAsync(int userId, int startIndex, int length)
+
+        public async Task<UserPostDto> GetById(int id, int userId)
         {
-            var userPosts = await _repository.UserPost.GetRangeByIdAsync(userId, startIndex, length);
-            var userPostsDtos = _mapper.Map<IEnumerable<UserPostDto>>(userPosts, opt => opt.Items["userId"] = userId);
-            return userPostsDtos;
+            var post = await _repository.UserPost.GetByIdAsync(id);
+            var userPostDto = _mapper.Map<UserPostDto>(post, opt => opt.Items["userId"] = userId);
+            return userPostDto;
         }
     }
 }

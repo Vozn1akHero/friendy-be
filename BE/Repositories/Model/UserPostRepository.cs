@@ -14,7 +14,20 @@ namespace BE.Repositories
     {
         public UserPostRepository(FriendyContext friendyContext)
             : base(friendyContext) { }
-
+        
+        public async Task<IEnumerable<UserPost>> GetRangeByIdAsync(int userId, int startIndex, int length)
+        {
+            var posts = await FindByCondition(e => e.UserId == userId && e.Id >= startIndex)
+                .Include(e => e.Post)
+                .Include(e => e.Post.PostLike)
+                .Include(e => e.Post.Comment)
+                .Include(e => e.User)
+                .Take(length)
+                .OrderByDescending(e => e.Post.Date)
+                .ToListAsync();
+            return posts;
+        }
+        
         public async Task CreateAsync(UserPost post)
         {
             Create(post);
@@ -43,19 +56,6 @@ namespace BE.Repositories
                 .Include(e => e.Post.Comment)
                 .Include(e => e.User)
                 .SingleOrDefaultAsync();
-        }
-
-        public async Task<IEnumerable<UserPost>> GetRangeByIdAsync(int userId, int startIndex, int length)
-        {
-           var posts = await FindByCondition(e => e.UserId == userId && e.Id >= startIndex)
-               .Include(e => e.Post)
-               .Include(e => e.Post.PostLike)
-               .Include(e => e.Post.Comment)
-               .Include(e => e.User)
-               .Take(length)
-               .OrderByDescending(e => e.Post.Date)
-               .ToListAsync();
-           return posts;
         }
     }
 }

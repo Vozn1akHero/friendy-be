@@ -17,43 +17,52 @@ namespace BE.Repositories
 {
     public abstract class RepositoryBase<T> : IRepositoryBase<T> where T : class
     {
-        //protected RepositoryContext RepositoryContext { get; set; }
-        private FriendyContext FriendyContext { get; }
-
+        public FriendyContext FriendyContext { get; }
+        
         protected RepositoryBase(FriendyContext friendyContext)
         {
             FriendyContext = friendyContext;
         }
-
-        public IQueryable<T> FindAll()
+        
+        public IQueryable<TType> Get<TType>(Expression<Func<T, bool>> st, Expression<Func<T, TType>> sl)
         {
-            return FriendyContext.Set<T>();
-        }
-
-        public IQueryable<T> FindByCondition(Expression<Func<T, bool>> expression)
-        {
-            return FriendyContext.Set<T>()
-                .Where(expression);
+            return FriendyContext
+                .Set<T>()
+                .Where(st)
+                .Select(sl);
         }
         
-        public bool ExistsByCondition(Expression<Func<T, bool>> expression)
+        public IQueryable<T> FindByCondition(Expression<Func<T, bool>> exp)
         {
-            return FindAll().Any(expression);
+            return FriendyContext.Set<T>()
+                .Where(exp).AsNoTracking();
+        }
+        
+        public IQueryable<T> FindAll()
+        {
+            return FriendyContext
+                .Set<T>()
+                .AsNoTracking();
         }
 
-        public void Create(T entity)
+        public bool ExistsByCondition(Expression<Func<T, bool>> exp)
         {
-            FriendyContext.Set<T>().Add(entity);
+            return FindAll().Any(exp);
         }
 
-        public void Update(T entity)
+        public void Create(T ent)
         {
-            FriendyContext.Set<T>().Update(entity);
+            FriendyContext.Set<T>().Add(ent);
         }
 
-        public void Delete(T entity)
+        public void Update(T ent)
         {
-            FriendyContext.Set<T>().Remove(entity);
+            FriendyContext.Set<T>().Update(ent);
+        }
+
+        public void Delete(T ent)
+        {
+            FriendyContext.Set<T>().Remove(ent);
         }
 
         public async Task SaveAsync()
@@ -64,16 +73,6 @@ namespace BE.Repositories
         public void Save()
         {
             FriendyContext.SaveChanges();
-        } 
-        
-        public IQueryable<TType> Get<TType>(Expression<Func<T, bool>> statement, Expression<Func<T, TType>> select)
-        {
-            return FriendyContext.Set<T>().Where(statement).Select(select);
         }
-
-        /*public IQueryable<T> ExecuteSqlQuery(string query, List<object> parameters)
-        {
-            return FriendyContext.Set<T>().FromSql(query, parameters);
-        }*/
     }
 }

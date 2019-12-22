@@ -15,13 +15,10 @@ namespace BE.Repositories
         {
         }
 
-        public async Task<IEnumerable<PhotoDto>> GetRange(int eventId, int startIndex, int length)
+        public async Task<IEnumerable<EventImage>> GetRange(int eventId, int 
+        startIndex, int length)
         {
             return await FindByCondition(e => e.EventId == eventId && e.Id >= startIndex)
-                .Select(e => new PhotoDto
-                {
-                    Path = e.Image.Path
-                })
                 .Take(length)
                 .ToListAsync();
         }

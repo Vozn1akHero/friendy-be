@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using BE.Dtos.ChatDtos;
 using BE.Interfaces;
 using BE.Models;
+using BE.Services.Global;
 using BE.SignalR.Hubs;
 using BE.SignalR.Services;
 using Microsoft.AspNetCore.Authorization;
@@ -15,18 +16,16 @@ namespace BE.Controllers
     [Route("api/chat")]
     public class ChatController : ControllerBase
     {
-        private readonly IImageProcessingService _imageProcessingService;
+        private readonly IImageSaver _imageSaver;
         private readonly IRepositoryWrapper _repository;
-        private IAvatarConverterService _userAvatarConverterService;
         private IDialogNotifier _dialogNotifier;
         
         public ChatController(IRepositoryWrapper repository,
-            IAvatarConverterService userAvatarConverterService,
-            IImageProcessingService imageProcessingService, IDialogNotifier dialogNotifier)
+            IImageSaver imageSaver, 
+            IDialogNotifier dialogNotifier)
         {
             _repository = repository;
-            _userAvatarConverterService = userAvatarConverterService;
-            _imageProcessingService = imageProcessingService;
+            _imageSaver = imageSaver;
             _dialogNotifier = dialogNotifier;
         }
 
@@ -96,7 +95,8 @@ namespace BE.Controllers
             
             if (chatMessage.File != null)
             {
-                imagePath = await _imageProcessingService.SaveAndReturnImagePath(chatMessage.File, "ChatPhoto", chatId);
+                imagePath = await _imageSaver.SaveAndReturnImagePath(chatMessage.File, 
+                "ChatPhoto", chatId);
                 var image = new Image
                 {
                     Path = imagePath,

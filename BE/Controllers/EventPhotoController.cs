@@ -1,8 +1,6 @@
-using System;
 using System.Threading.Tasks;
 using BE.CustomAttributes;
-using BE.Interfaces;
-using BE.Models;
+using BE.Services.Model;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -13,46 +11,40 @@ namespace BE.Controllers
     [Route("api/event-photo")]
     public class EventPhotoController : ControllerBase
     {
-        private IRepositoryWrapper _repository;
-        private IImageProcessingService _imageProcessingService;
+        private readonly IPhotoService _photoService;
 
-        public EventPhotoController(IRepositoryWrapper repository,
-            IImageProcessingService imageProcessingService)
+        public EventPhotoController(IPhotoService photoService)
         {
-            _repository = repository;
-            _imageProcessingService = imageProcessingService;
-        }  
-        
+            _photoService = photoService;
+        }
+
         [HttpGet]
         [Authorize]
         [Route("range")]
-        public async Task<IActionResult> GetRange([FromQuery(Name = "startIndex")] int startIndex,
-            [FromQuery(Name = "length")] int length, 
+        public async Task<IActionResult> GetRangeAsync([FromQuery(Name =
+                "startIndex")]
+            int startIndex,
+            [FromQuery(Name = "length")] int length,
             [FromQuery(Name = "eventId")] int eventId)
         {
-            return Ok(await _repository.EventPhoto.GetRange(eventId, startIndex, length));
+            var photos =
+                await _photoService.GetEventPhotoRangeAsync(eventId, startIndex,
+                    length);
+            return Ok(photos);
         }
 
         [HttpPost]
         [Authorize]
         [AuthorizeEventAdmin]
         [Route("{id}")]
-        public async Task<IActionResult> AddPhoto([FromRoute(Name = "id")] int id, 
-        [FromForm(Name = "image")] IFormFile file, 
-        [FromHeader(Name = "userId")] int userId)
+        public async Task<IActionResult> AddPhotoAsync(
+            [FromRoute(Name = "id")] int id,
+            [FromForm(Name = "image")] IFormFile file,
+            [FromHeader(Name = "userId")] int userId)
         {
-            if (file == null)
-            {
-                return UnprocessableEntity();
-            }
-            string path = await _imageProcessingService.SaveAndReturnImagePath(file, "EventPhotos", id);
-            var image = new Image
-            {
-                Path = path,
-                PublishDate = DateTime.Now
-            };
-            var createdImage = await _repository.Photo.Add(image);
-            await _repository.EventPhoto.Add(id, createdImage.Id);
+            if (file == null) return UnprocessableEntity();
+            var createdImage = await _photoService.AddEventPhotoAsync
+                (id, file);
             return Ok(createdImage);
         }
     }

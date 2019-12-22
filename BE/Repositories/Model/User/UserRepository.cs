@@ -17,21 +17,27 @@ using Nest;
 
 namespace BE.Repositories
 {
-    public class UserRepository : RepositoryBase<User>, IUserRepository
+    public class UserRepository : RepositoryBase<Models.User>, IUserRepository
     {
         private IUserSearchingService _userSearchingService;
-        private IAvatarConverterService _avatarConverterService;
         
         public UserRepository(FriendyContext friendyContext,
-            IAvatarConverterService avatarConverterService,
             IUserSearchingService userSearchingService)
             : base(friendyContext)
         {
             _userSearchingService = userSearchingService;
-            _avatarConverterService = avatarConverterService;
         }
 
-        public async Task<IEnumerable<User>> GetAllAsync()
+        public async Task CreateAsync(Models.User user)
+        {
+            if (user != null)
+            {
+                Create(user);
+                await SaveAsync();
+            }
+        }
+
+        public async Task<IEnumerable<Models.User>> GetAllAsync()
         {
             return await FindAll()
                 .OrderBy(x => x.Name)
@@ -44,12 +50,12 @@ namespace BE.Repositories
             return DynamicLinqStatement.ExtractSpecifiedFields(user, selectedFields);
         }
 
-        public async Task<TType> GetSelectedFieldsById<TType>(int userId, Expression<Func<User, TType>> select)
+        public async Task<TType> GetSelectedFieldsById<TType>(int userId, Expression<Func<Models.User, TType>> select)
         {
             return await Get<TType>(e => e.Id == userId, select).SingleOrDefaultAsync();
         }
 
-        public async Task<User> GetAsync(string token)
+        public async Task<Models.User> GetAsync(string token)
         {
             string cutToken = token.Split(" ")[1];
             var user = await FindByCondition(o => o.AuthenticationSession.Token == cutToken)
@@ -57,7 +63,7 @@ namespace BE.Repositories
             return user;
         }   
         
-        public async Task<User> GetByIdAsync(int id)
+        public async Task<Models.User> GetByIdAsync(int id)
         {
             var user = await FindByCondition(o => o.Id == id)
                 .SingleOrDefaultAsync();
@@ -65,7 +71,7 @@ namespace BE.Repositories
             return user;
         }      
         
-        public async Task<User> GetByEmailAsync(string email)
+        public async Task<Models.User> GetByEmailAsync(string email)
         {
             var user = await FindByCondition(o => o.Email == email)
                 .SingleOrDefaultAsync();
@@ -80,7 +86,7 @@ namespace BE.Repositories
             await SaveAsync();
         }
 
-        public async Task<IEnumerable<UserBasicDto>> GetByCriteriaAsync(UsersLookUpCriteriaDto usersLookUpCriteriaDto)
+        /*public async Task<IEnumerable<UserBasicDto>> GetByCriteriaAsync(UsersLookUpCriteriaDto usersLookUpCriteriaDto)
         {
             var users = await FindAll()
                 .Include(e => e.AdditionalInfo)
@@ -120,7 +126,7 @@ namespace BE.Repositories
                     Status = e.Status
                 })
                 .ToListAsync();
-        }
+        }*/
 
         public async Task<IEnumerable<UserBasicDto>> GetByRangeAsync(int firstIndex, int lastIndex)
         {
@@ -201,7 +207,7 @@ namespace BE.Repositories
             }
         }
 
-        public async Task DeleteUserAsync(User user)
+        public async Task DeleteUserAsync(Models.User user)
         {
             Delete(user);
             await SaveAsync();

@@ -7,11 +7,17 @@ using Microsoft.AspNetCore.Http;
 
 namespace BE.Services.Global
 {
-    public class ImageProcessingService : IImageProcessingService
+    public interface IImageSaver
+    {
+        Task<string> SaveAndReturnImagePath(IFormFile image, string basePath, int baseId);
+        Task<string> SaveWithSpecifiedName(IFormFile image, string imagePath);
+    }
+    
+    public class ImageSaver : IImageSaver
     {
         private IRepositoryWrapper _repositoryWrapper;
 
-        public ImageProcessingService(IRepositoryWrapper repositoryWrapper)
+        public ImageSaver(IRepositoryWrapper repositoryWrapper)
         {
             _repositoryWrapper = repositoryWrapper;
         }
@@ -45,10 +51,8 @@ namespace BE.Services.Global
                 {  
                     await image.CopyToAsync(stream);
                 }
-
                 return imagePath;
             }
-
             return null;
         }
     }

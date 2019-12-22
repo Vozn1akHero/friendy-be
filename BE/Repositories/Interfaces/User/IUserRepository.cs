@@ -11,6 +11,7 @@ namespace BE.Interfaces
 {
     public interface IUserRepository : IRepositoryBase<User>
     {
+        Task CreateAsync(User user);
         Task<IEnumerable<User>> GetAllAsync();
         Task<object> GetWithSelectedFields(int userId, string[] selectedFields);
         //Task<ExtendedUserDto> GetExtendedInfoById(int userId);
@@ -18,7 +19,7 @@ namespace BE.Interfaces
         Task<User> GetAsync(string token);
         Task<User> GetByIdAsync(int id);
         Task<User> GetByEmailAsync(string email);
-        Task<IEnumerable<UserBasicDto>> GetByCriteriaAsync(UsersLookUpCriteriaDto usersLookUpCriteriaDto);
+        //Task<IEnumerable<UserBasicDto>> GetByCriteriaAsync(UsersLookUpCriteriaDto usersLookUpCriteriaDto);
         Task<IEnumerable<UserBasicDto>> GetByRangeAsync(int firstIndex, int lastIndex);
         Task SetSessionIdAsync(int userId, int id);
         Task UpdateAvatarAsync(string path, int userId);

@@ -33,14 +33,15 @@ namespace BE.Controllers
 
         [HttpPost]
         [Route("create")]
-        public async Task<IActionResult> CreateNewUser([FromBody] User user)
+        public async Task<IActionResult> CreateNewUser([FromBody] 
+            NewUserDto user)
         {
-            bool emailAvailability = await _authenticationService.CheckIfEmailIsAvailable(user.Email);
+            bool emailAvailability = await _authenticationService
+                .CheckIfEmailIsAvailable(user.Email);
             if (!emailAvailability)
             {
-                return HTTPHelpers.TextResult(HttpStatusCode.Conflict, "Email is already taken");
+                return Conflict("Email is already taken");
             }
-            user.Avatar = "wwwroot/UserAvatar/default-user-avatar.png";
             await _authenticationService.Create(user);
             return Ok();
         }

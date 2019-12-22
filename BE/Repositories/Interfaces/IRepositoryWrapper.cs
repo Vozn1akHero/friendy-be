@@ -7,6 +7,7 @@ using BE.Interfaces.Repositories.Chat;
 using BE.Repositories;
 using BE.Repositories.Interfaces;
 using BE.Repositories.Interfaces.Event;
+using BE.Repositories.Interfaces.User;
 
 namespace BE.Interfaces
 {
@@ -16,6 +17,7 @@ namespace BE.Interfaces
         IAuthenticationSessionRepository AuthenticationSession { get; }
         IPostRepository Post { get; }
         IUserPostRepository UserPost { get; }
+        IUserPhotoRepository UserPhoto { get; }
         IPostLikeRepository PostLike { get; }
         //IFriendRepository Friend { get; }
         IUserFriendshipRepository UserFriendship { get; }
@@ -33,6 +35,5 @@ namespace BE.Interfaces
         IEventPhotoRepository EventPhoto { get; }
         IPhotoRepository Photo { get; }
         IEventParticipationRequestRepository EventParticipationRequest { get; }
-        void Save();
     }
 }

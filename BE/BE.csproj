@@ -31,9 +31,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Cache" />
-    <Folder Include="Interfaces\Repositories" />
-    <Folder Include="Interfaces\Services" />
-    <Folder Include="Repositories\Interfaces\Post" />
+    <Folder Include="CQRS" />
     <Folder Include="wwwroot\ChatPhoto" />
     <Folder Include="wwwroot\EventPhotos" />
     <Folder Include="wwwroot\EventPost\1" />

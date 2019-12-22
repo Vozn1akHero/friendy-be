@@ -4,6 +4,7 @@ using BE.Dtos.EventDtos;
 using BE.Interfaces;
 using BE.Models;
 using BE.Services.Elasticsearch;
+using BE.Services.Global;
 using BE.Services.Model;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
@@ -16,17 +17,17 @@ namespace BE.Controllers
     public class EventController : ControllerBase
     {
         private IRepositoryWrapper _repository;
-        private IImageProcessingService _imageProcessingService;
+        private IImageSaver _imageSaver;
         private IEventDataService _eventDataService;
         private IEventDataIndexing _eventDataIndexing;
         
         public EventController(IRepositoryWrapper repository, 
-            IImageProcessingService imageProcessingService,
+            IImageSaver imageSaver,
             IEventDataService eventDataService, 
             IEventDataIndexing eventDataIndexing)
         {
             _repository = repository;
-            _imageProcessingService = imageProcessingService;
+            _imageSaver = imageSaver;
             _eventDataService = eventDataService;
             _eventDataIndexing = eventDataIndexing;
             _eventDataService = eventDataService;
@@ -107,7 +108,7 @@ namespace BE.Controllers
                 return UnprocessableEntity();
             }
             string path = $"wwwroot/EventAvatar/{id}/{newAvatar.FileName}";
-            await _imageProcessingService
+            await _imageSaver
                 .SaveWithSpecifiedName(newAvatar, path);
             await _repository.Event.UpdateAvatarAsync(path, id);
             return Ok(path);
@@ -134,7 +135,7 @@ namespace BE.Controllers
                 return UnprocessableEntity();
             }
             string path = $"wwwroot/EventBackground/{id}/{newBackground.FileName}";
-            await _imageProcessingService
+            await _imageSaver
                 .SaveWithSpecifiedName(newBackground, path);
             await _repository.Event.UpdateBackgroundAsync(path, id);
             return Ok(path);

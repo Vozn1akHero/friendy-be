@@ -8,6 +8,7 @@ using BE.Dtos;
 using BE.Interfaces;
 using BE.Models;
 using BE.Repositories;
+using BE.Services.Global;
 using BE.Services.Model;
 using BE.SignalR.Hubs;
 using Microsoft.AspNetCore.Authorization;
@@ -22,29 +23,37 @@ namespace BE.Controllers
     [Route("api/user-post")]
     public class UserPostController : Controller
     {
-        private readonly IHubContext<PostHub> _hubContext;
         private readonly IRepositoryWrapper _repository;
-        private readonly IImageProcessingService _imageProcessingService;
+        private readonly IImageSaver _imageSaver;
         private readonly IUserPostService _userPostService;
         
         public UserPostController(IRepositoryWrapper repository, 
-            IHubContext<PostHub> hubContext,
-            IImageProcessingService imageProcessingService,
+            IImageSaver imageSaverService,
             IUserPostService userPostService)
         {
             _repository = repository;
-            _hubContext = hubContext;
-            _imageProcessingService = imageProcessingService;
+            _imageSaver = imageSaverService;
             _userPostService = userPostService;
         }
 
+        [HttpGet]
+        [Authorize]
+        public async Task<IActionResult> GetRangeByUserId([FromQuery(Name = "userId")] int userId,
+            [FromQuery(Name = "start")] int startIndex,
+            [FromQuery(Name = "length")] int length)
+        {
+            var posts = await _userPostService
+                .GetRangeByUserIdAsync(userId, startIndex, length);
+            return Ok(posts);
+        }
+        
         [HttpPost]
         [Authorize]
         public async Task<IActionResult> CreateUserPost([FromForm(Name = "image")] IFormFile image,
             [FromForm(Name = "content")] string content,
             [FromHeader(Name = "userId")] int userId)
         {
-            string imagePath = await _imageProcessingService
+            string imagePath = await _imageSaver
                 .SaveAndReturnImagePath(image, "EventPost", userId);
             var newPost = new Post
             {
@@ -72,9 +81,9 @@ namespace BE.Controllers
         [HttpGet]
         [Authorize]
         [Route("{id}")]
-        public async Task<IActionResult> GetById(int id)
+        public async Task<IActionResult> GetById(int id, [FromHeader(Name = "userId")] int userId)
         {
-            var post = await _repository.UserPost.GetByIdAsync(id);
+            var post = await _userPostService.GetById(id, userId);
             return Ok(post);
         }
         
@@ -90,26 +99,6 @@ namespace BE.Controllers
             return Ok();
         }*/
         
-        [HttpGet]
-        [Authorize]
-        public async Task<IActionResult> GetUserPostsByUserId([FromQuery(Name = "start")] int startIndex,
-            [FromQuery(Name = "length")] int length, [FromQuery(Name = "userId")] int userId)
-        {
-            //var entries = await _repository.UserPost.GetRangeByIdAsync(userId, startIndex, length);
-            var posts = await _userPostService
-                .GetRangeByIdAsync(userId, startIndex, length);
-            return Ok(posts);
-        }
         
-        [HttpGet]
-        [Authorize]
-        [Route("current")]
-        public async Task<IActionResult> GetLoggedInUserPosts([FromQuery(Name = "start")] int startIndex,
-            [FromQuery(Name = "length")] int length,
-            [FromHeader(Name = "userId")] int userId)
-        {
-            var entries = await _repository.UserPost.GetRangeByIdAsync(userId ,startIndex, length);
-            return Ok(entries);
-        }
     }
 }

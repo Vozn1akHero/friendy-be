@@ -6,6 +6,7 @@ using BE.CustomAttributes;
 using BE.Interfaces;
 using BE.Models;
 using BE.Queries.EventPost;
+using BE.Services.Global;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
@@ -18,14 +19,14 @@ namespace BE.Controllers
     public class EventPostController : ControllerBase
     {
         private readonly IRepositoryWrapper _repository;
-        private readonly IImageProcessingService _imageProcessingService;
+        private readonly IImageSaver _imageSaver;
         private readonly IMediator _mediator;
         
         public EventPostController(IRepositoryWrapper repository,
-            IImageProcessingService imageProcessingService, IMediator mediator)
+            IImageSaver imageSaver, IMediator mediator)
         {
             _repository = repository;
-            _imageProcessingService = imageProcessingService;
+            _imageSaver = imageSaver;
             _mediator = mediator;
         }
         
@@ -37,7 +38,7 @@ namespace BE.Controllers
             [FromRoute(Name = "eventId")] int eventId,
             [FromHeader(Name = "userId")] int userId)
         {
-            string imagePath = await _imageProcessingService
+            string imagePath = await _imageSaver
                 .SaveAndReturnImagePath(image, "EventPost", userId);
             var newPost = new Post
             {
@@ -70,6 +71,7 @@ namespace BE.Controllers
 
         [HttpGet("{eventId}")]
         [Authorize]
+        [AuthorizeEventParticipant]
         public async Task<IActionResult> GetRangeByEventId([FromQuery(Name = "start")] int startIndex,
             [FromQuery(Name = "length")] int length, 
             [FromRoute(Name = "eventId")] int eventId, 

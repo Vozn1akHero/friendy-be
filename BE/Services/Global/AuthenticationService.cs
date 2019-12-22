@@ -1,6 +1,9 @@
 ﻿using System.Threading.Tasks;
+using AutoMapper;
+using BE.Dtos;
 using BE.Interfaces;
 using BE.Models;
+using BE.Repositories;
 using Microsoft.EntityFrameworkCore;
 
 namespace BE.Services.Global
@@ -10,7 +13,7 @@ namespace BE.Services.Global
         Task<bool> Authenticate(string username, string password);
         Task<bool> CheckIfEmailIsAvailable(string email);
         Task SetSessionIdByUserId(int id, int userId);
-        Task Create(User user);
+        Task Create(NewUserDto user);
         Task LogOut(string token);
     }
     
@@ -18,21 +21,24 @@ namespace BE.Services.Global
     {
         private FriendyContext _friendyContext;
         private IJwtService _jwtService;
+        private IRepositoryWrapper _repository;
+        private IMapper _mapper;
         
         public AuthenticationService(FriendyContext friendyContext,
-            IJwtService jwtService)
+            IJwtService jwtService, IRepositoryWrapper repository, IMapper mapper)
         {
             _friendyContext = friendyContext;
             _jwtService = jwtService;
+            _repository = repository;
+            _mapper = mapper;
         }
         
-        public async Task Create(User user)
+        public async Task Create(NewUserDto user)
         {
             string plainTextPassword = user.Password;
             user.Password = BCrypt.Net.BCrypt.HashPassword(plainTextPassword);
-
-            await _friendyContext.User.AddAsync(user);
-            await _friendyContext.SaveChangesAsync();
+            var newUser = _mapper.Map<User>(user);
+            await _repository.User.CreateAsync(newUser);
         }
 
         public async Task<bool> CheckIfEmailIsAvailable(string email)
