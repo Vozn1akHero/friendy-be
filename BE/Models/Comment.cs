@@ -8,7 +8,9 @@ namespace BE.Models
         public Comment()
         {
             CommentLike = new HashSet<CommentLike>();
-            CommentRespond = new HashSet<CommentRespond>();
+            MainComment = new HashSet<MainComment>();
+            ResponseToCommentComment = new HashSet<ResponseToComment>();
+            ResponseToCommentResponseToCommentNavigation = new HashSet<ResponseToComment>();
         }
 
         public int Id { get; set; }
@@ -20,6 +22,8 @@ namespace BE.Models
         public virtual Post Post { get; set; }
         public virtual User User { get; set; }
         public virtual ICollection<CommentLike> CommentLike { get; set; }
-        public virtual ICollection<CommentRespond> CommentRespond { get; set; }
+        public virtual ICollection<MainComment> MainComment { get; set; }
+        public virtual ICollection<ResponseToComment> ResponseToCommentComment { get; set; }
+        public virtual ICollection<ResponseToComment> ResponseToCommentResponseToCommentNavigation { get; set; }
     }
 }

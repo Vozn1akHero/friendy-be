@@ -83,7 +83,7 @@ namespace BE.Controllers
         [Route("{id}")]
         public async Task<IActionResult> GetById(int id, [FromHeader(Name = "userId")] int userId)
         {
-            var post = await _userPostService.GetById(id, userId);
+            var post = await _userPostService.GetByPostId(id, userId);
             return Ok(post);
         }
         

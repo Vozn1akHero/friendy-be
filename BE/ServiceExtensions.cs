@@ -31,6 +31,7 @@ namespace BE
             EventParticipantService>();
             services.AddTransient<IEventDataService, EventDataService>();
             services.AddTransient<IPhotoService, PhotoService>();
+            services.AddTransient<IPostCommentService, PostCommentService>();
         }
 
         public static void ConfigureAutoMapper(this IServiceCollection services)

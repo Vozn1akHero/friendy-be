@@ -6,7 +6,7 @@ namespace BE.Repositories.Interfaces
 {
     public interface IPostRepository
     {
-        Task CreateAsync(Post post);
+        Task CreateAsync(Models.Post post);
         Task RemoveByIdAsync(int id);
     }
 }

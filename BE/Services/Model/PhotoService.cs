@@ -40,7 +40,7 @@ namespace BE.Services.Model
                 startIndex, length);
             var photoDtos = images.Select(e => new PhotoDto
             {
-                Path = e.Image.Path
+                Path = e.IdNavigation.Path
             }).ToList();
             return photoDtos;
         }

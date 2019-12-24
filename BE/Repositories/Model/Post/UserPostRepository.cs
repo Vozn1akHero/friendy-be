@@ -57,5 +57,15 @@ namespace BE.Repositories
                 .Include(e => e.User)
                 .SingleOrDefaultAsync();
         }
+
+        public async Task<UserPost> GetByPostIdAsync(int postId)
+        {
+            return await FindByCondition(e => e.PostId == postId)
+                .Include(e => e.Post)
+                .Include(e => e.Post.PostLike)
+                .Include(e => e.Post.Comment)
+                .Include(e => e.User)
+                .SingleOrDefaultAsync();
+        }
     }
 }

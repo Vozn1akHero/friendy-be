@@ -14,5 +14,6 @@ namespace BE.Repositories
         Task<UserPost> GetByIdAsync(int id);
         //Task<IEnumerable<UserPostDto>> GetRangeByIdAsync(int userId, int startIndex, int length);
         Task<IEnumerable<UserPost>> GetRangeByIdAsync(int userId, int startIndex, int length);
+        Task<UserPost> GetByPostIdAsync(int postId);
     }
 }

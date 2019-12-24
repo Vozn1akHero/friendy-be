@@ -2,6 +2,7 @@ using System.Threading.Tasks;
 using BE.Dtos.CommentDtos;
 using BE.Interfaces;
 using BE.Models;
+using BE.Services.Model;
 using BE.SignalR.Hubs;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -13,30 +14,43 @@ namespace BE.Controllers
     [Route("api/post-comment")]
     public class PostCommentController : ControllerBase
     {
-        private readonly IRepositoryWrapper _repository;
         private readonly IHubContext<PostHub> _hubContext;
-        
-        public PostCommentController(IRepositoryWrapper repository, 
-            IHubContext<PostHub> hubContext)
+        private readonly IRepositoryWrapper _repository;
+        private IPostCommentService _postCommentService;
+
+        public PostCommentController(IRepositoryWrapper repository,
+            IHubContext<PostHub> hubContext, IPostCommentService postCommentService)
         {
             _repository = repository;
             _hubContext = hubContext;
+            _postCommentService = postCommentService;
         }
 
-        [HttpGet("range/{postId}")]
+        [HttpGet("all/{postId}")]
         [Authorize]
         public async Task<IActionResult> GetAllByPostId(int postId,
-            [FromQuery(Name = "startIndex")] int startIndex,
-            [FromQuery(Name = "length")] int length,
             [FromHeader(Name = "userId")] int userId)
         {
-            var posts = await _repository.Comment.GetRangeByPostIdAuthedAsync(postId, startIndex, length, userId);
+            var posts =
+                await _postCommentService.GetAllMainByPostIdAuthedAsync(postId, userId);
             return Ok(posts);
+        }
+        
+        [HttpGet("response/all/{commentId}")]
+        [Authorize]
+        public async Task<IActionResult> GetAllResponsesByCommentIdAsync(int commentId,
+            [FromHeader(Name = "userId")] int userId)
+        {
+            var responses =
+                await _postCommentService.GetAllCommentResponsesAsync(commentId, userId);
+            return Ok(responses);
         }
         
         [HttpPost]
         [Authorize]
-        public async Task<IActionResult> GetAllByPostId([FromHeader(Name = "userId")] int userId, [FromBody] NewCommentDto newCommentDto)
+        public async Task<IActionResult> Create(
+            [FromHeader(Name = "userId")] int userId,
+            [FromBody] NewCommentDto newCommentDto)
         {
             var newComment = new Comment
             {
@@ -47,6 +61,5 @@ namespace BE.Controllers
             await _repository.Comment.AddAsync(newComment);
             return Ok();
         }
-        
     }
 }

@@ -7,6 +7,7 @@ using BE.Interfaces.Repositories.Chat;
 using BE.Repositories;
 using BE.Repositories.Interfaces;
 using BE.Repositories.Interfaces.Event;
+using BE.Repositories.Interfaces.Post;
 using BE.Repositories.Interfaces.User;
 
 namespace BE.Interfaces
@@ -25,6 +26,9 @@ namespace BE.Interfaces
         IEventRepository Event { get; }
         IEventAdminsRepository EventAdmins { get; }
         ICommentRepository Comment { get; }
+        IMainCommentRepository MainComment { get; }
+        //IMainCommentResponseRepository MainCommentResponse { get; }
+        IResponseToCommentRepository ResponseToComment { get; }
         IChatRepository Chat { get; }
         IChatMessageRepository ChatMessage { get; }
         IChatMessagesRepository ChatMessages { get; }

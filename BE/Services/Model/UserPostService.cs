@@ -14,7 +14,7 @@ namespace BE.Services.Model
     public interface IUserPostService
     {
         Task<IEnumerable<UserPostDto>> GetRangeByUserIdAsync(int userId, int startIndex, int length);
-        Task<UserPostDto> GetById(int id, int userId);
+        Task<UserPostDto> GetByPostId(int postId, int userId);
         Task<UserPostDto> CreateAndReturnAsync(UserPost userPost);
     }
     
@@ -44,9 +44,9 @@ namespace BE.Services.Model
             return userPostDto;
         }
 
-        public async Task<UserPostDto> GetById(int id, int userId)
+        public async Task<UserPostDto> GetByPostId(int postId, int userId)
         {
-            var post = await _repository.UserPost.GetByIdAsync(id);
+            var post = await _repository.UserPost.GetByPostIdAsync(postId);
             var userPostDto = _mapper.Map<UserPostDto>(post, opt => opt.Items["userId"] = userId);
             return userPostDto;
         }

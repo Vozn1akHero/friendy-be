@@ -91,7 +91,10 @@
           </e>
           <e p="CommentDtos" t="Include">
             <e p="NewCommentDto.cs" t="Include" />
+            <e p="NewMainCommentDto.cs" t="Include" />
             <e p="PostCommentDto.cs" t="Include" />
+            <e p="PostCommentResponseDto.cs" t="Include" />
+            <e p="ResponseToPostCommentResponseDto.cs" t="Include" />
           </e>
           <e p="EventDtos" t="Include">
             <e p="ElasticEventDto.cs" t="Include" />
@@ -216,10 +219,14 @@
           <e p="Gender.cs" t="Include" />
           <e p="Image.cs" t="Include" />
           <e p="Interest.cs" t="Include" />
+          <e p="MainComment.cs" t="Include" />
+          <e p="MainCommentResponse.cs" t="Include" />
           <e p="MaritalStatus.cs" t="Include" />
           <e p="Post.cs" t="Include" />
           <e p="PostLike.cs" t="Include" />
           <e p="Religion.cs" t="Include" />
+          <e p="ResponseToComment.cs" t="Include" />
+          <e p="ResponseToMainCommentResponse.cs" t="Include" />
           <e p="Session.cs" t="Include" />
           <e p="SmokingAttitude.cs" t="Include" />
           <e p="User.cs" t="Include" />
@@ -271,8 +278,11 @@
             </e>
             <e p="Post" t="Include">
               <e p="ICommentRepository.cs" t="Include" />
+              <e p="ICommentResponse.cs" t="Include" />
+              <e p="IMainCommentRepository.cs" t="Include" />
               <e p="IPostLikeRepository.cs" t="Include" />
               <e p="IPostRepository.cs" t="Include" />
+              <e p="IResponseToCommentRepository.cs" t="Include" />
               <e p="IUserPostRepository.cs" t="Include" />
             </e>
             <e p="User" t="Include">
@@ -288,12 +298,10 @@
               <e p="ChatParticipantsRepository.cs" t="Include" />
               <e p="ChatRepository.cs" t="Include" />
             </e>
-            <e p="CommentRepository.cs" t="Include" />
             <e p="Event" t="Include">
               <e p="EventAdminsRepository.cs" t="Include" />
               <e p="EventParticipantsRepository.cs" t="Include" />
               <e p="EventParticipationRequestRepository.cs" t="Include" />
-              <e p="EventPostRepository.cs" t="Include" />
               <e p="EventRepository.cs" t="Include" />
               <e p="UserEventsRepository.cs" t="Include" />
             </e>
@@ -303,15 +311,21 @@
               <e p="FriendRequestRepository.cs" t="Include" />
               <e p="UserFriendsRepository.cs" t="Include" />
             </e>
-            <e p="LikeRepository.cs" t="Include" />
             <e p="PhotoRepository.cs" t="Include" />
-            <e p="PostLikeRepository.cs" t="Include" />
-            <e p="PostRepository.cs" t="Include" />
+            <e p="Post" t="Include">
+              <e p="CommentRepository.cs" t="Include" />
+              <e p="CommentResponse.cs" t="Include" />
+              <e p="EventPostRepository.cs" t="Include" />
+              <e p="MainCommentRepository.cs" t="Include" />
+              <e p="PostLikeRepository.cs" t="Include" />
+              <e p="PostRepository.cs" t="Include" />
+              <e p="ResponseToCommentRepository.cs" t="Include" />
+              <e p="UserPostRepository.cs" t="Include" />
+            </e>
             <e p="User" t="Include">
               <e p="UserPhotoRepository.cs" t="Include" />
               <e p="UserRepository.cs" t="Include" />
             </e>
-            <e p="UserPostRepository.cs" t="Include" />
           </e>
           <e p="RepositoryBase.cs" t="Include" />
           <e p="RepositoryServices" t="Include">
@@ -353,6 +367,7 @@
             <e p="EventPostService.cs" t="Include" />
             <e p="EventSearchService.cs" t="Include" />
             <e p="PhotoService.cs" t="Include" />
+            <e p="PostCommentService.cs" t="Include" />
             <e p="UserDataService.cs" t="Include" />
             <e p="UserPostService.cs" t="Include" />
             <e p="UserSearchService.cs" t="Include" />

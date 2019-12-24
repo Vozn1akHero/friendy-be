@@ -68,7 +68,7 @@ namespace BE.Controllers
             return Ok();
         }
 
-        public async Task LikePostById(int id, int userId)
+        private async Task LikePostById(int id, int userId)
         {
             var newLike = new PostLike
             {
@@ -99,7 +99,7 @@ namespace BE.Controllers
             return Ok();
         }
         
-        public async Task UnlikePostById(int id, int userId)
+        private async Task UnlikePostById(int id, int userId)
         {
             await _repository.PostLike.RemoveByPostIdAsync(id, userId);
         }

@@ -6,6 +6,7 @@ using BE.Repositories.Chat;
 using BE.Repositories.Event;
 using BE.Repositories.Interfaces;
 using BE.Repositories.Interfaces.Event;
+using BE.Repositories.Interfaces.Post;
 using BE.Repositories.Interfaces.User;
 using BE.Repositories.Model.Event;
 using BE.Repositories.RepositoryServices.Interfaces.User;
@@ -23,18 +24,18 @@ namespace BE.Repositories
         private IAuthenticationSessionRepository _authenticationSession;
         private IPostRepository _post;
         private IUserPostRepository _userPost;
-
         private IPostLikeRepository _postLike;
-
         //private IFriendRepository _friend;
         private IEventRepository _event;
         private IUserFriendshipRepository _userFriendship;
         private IUserEventsRepository _userEvents;
         private IEventAdminsRepository _eventAdmins;
         private ICommentRepository _comment;
+        private IResponseToCommentRepository _responseToComment;
         private IChatRepository _chat;
         private IChatMessageRepository _chatMessage;
-
+        private IMainCommentRepository _mainComment;
+        
         private IChatMessagesRepository _chatMessages;
 
         //private IChatParticipantsRepository _chatParticipants;
@@ -49,6 +50,14 @@ namespace BE.Repositories
         private ICustomSqlQueryService _customSqlQueryService;
         private readonly IUserSearchingService _userSearchingService;
 
+        public IMainCommentRepository MainComment =>
+            _mainComment ?? (_mainComment = new MainCommentRepository
+            (_friendyContext));
+        
+        public IResponseToCommentRepository ResponseToComment =>
+            _responseToComment ?? (_responseToComment = new ResponseToCommentRepository
+            (_friendyContext));
+        
         public IUserRepository User =>
             _user ?? (_user = new UserRepository(_friendyContext,
                 _userSearchingService));
