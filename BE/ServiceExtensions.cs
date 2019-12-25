@@ -17,6 +17,7 @@ namespace BE
             var connectionString = config.GetConnectionString("connectionString");
             services.AddDbContext<FriendyContext>(o => o.UseSqlServer(connectionString));
         }
+
         public static void ConfigureRepositoryWrapper(this IServiceCollection services)
         {
             services.AddScoped<IRepositoryWrapper, RepositoryWrapper>();
@@ -32,6 +33,9 @@ namespace BE
             services.AddTransient<IEventDataService, EventDataService>();
             services.AddTransient<IPhotoService, PhotoService>();
             services.AddTransient<IPostCommentService, PostCommentService>();
+            services
+                .AddTransient<IFriendshipRecommendationService,
+                    FriendshipRecommendationService>();
         }
 
         public static void ConfigureAutoMapper(this IServiceCollection services)

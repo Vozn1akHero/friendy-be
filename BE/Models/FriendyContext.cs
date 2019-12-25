@@ -17,6 +17,7 @@ namespace BE.Models
 
         public virtual DbSet<AlcoholAttitude> AlcoholAttitude { get; set; }
         public virtual DbSet<AuthenticationSession> AuthenticationSession { get; set; }
+        public virtual DbSet<BasicSearchHistory> BasicSearchHistory { get; set; }
         public virtual DbSet<Chat> Chat { get; set; }
         public virtual DbSet<ChatMessage> ChatMessage { get; set; }
         public virtual DbSet<ChatMessages> ChatMessages { get; set; }
@@ -37,6 +38,7 @@ namespace BE.Models
         public virtual DbSet<MaritalStatus> MaritalStatus { get; set; }
         public virtual DbSet<Post> Post { get; set; }
         public virtual DbSet<PostLike> PostLike { get; set; }
+        public virtual DbSet<RecVisitedProfile> RecVisitedProfile { get; set; }
         public virtual DbSet<Religion> Religion { get; set; }
         public virtual DbSet<ResponseToComment> ResponseToComment { get; set; }
         public virtual DbSet<Session> Session { get; set; }
@@ -90,6 +92,33 @@ namespace BE.Models
                     .IsRequired()
                     .HasColumnName("token")
                     .IsUnicode(false);
+            });
+
+            modelBuilder.Entity<BasicSearchHistory>(entity =>
+            {
+                entity.ToTable("basic_search_history");
+
+                entity.Property(e => e.Id).HasColumnName("id");
+
+                entity.Property(e => e.InsertedUserName)
+                    .IsRequired()
+                    .HasColumnName("inserted_user_name")
+                    .HasMaxLength(150)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.InsertedUserSurname)
+                    .IsRequired()
+                    .HasColumnName("inserted_user_surname")
+                    .HasMaxLength(150)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.UserId).HasColumnName("user_id");
+
+                entity.HasOne(d => d.User)
+                    .WithMany(p => p.BasicSearchHistory)
+                    .HasForeignKey(d => d.UserId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_basic_search_history_user");
             });
 
             modelBuilder.Entity<Chat>(entity =>
@@ -550,6 +579,29 @@ namespace BE.Models
                     .HasForeignKey(d => d.UserId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_post_like_user");
+            });
+
+            modelBuilder.Entity<RecVisitedProfile>(entity =>
+            {
+                entity.ToTable("rec_visited_profile");
+
+                entity.Property(e => e.Id).HasColumnName("id");
+
+                entity.Property(e => e.UserId).HasColumnName("user_id");
+
+                entity.Property(e => e.VisitedUserProfileId).HasColumnName("visited_user_profile_id");
+
+                entity.HasOne(d => d.User)
+                    .WithMany(p => p.RecVisitedProfileUser)
+                    .HasForeignKey(d => d.UserId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_rec_visited_profile_user");
+
+                entity.HasOne(d => d.VisitedUserProfile)
+                    .WithMany(p => p.RecVisitedProfileVisitedUserProfile)
+                    .HasForeignKey(d => d.VisitedUserProfileId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_rec_visited_profile_profile");
             });
 
             modelBuilder.Entity<Religion>(entity =>

@@ -7,6 +7,7 @@ namespace BE.Models
     {
         public User()
         {
+            BasicSearchHistory = new HashSet<BasicSearchHistory>();
             ChatFirstParticipant = new HashSet<Chat>();
             ChatMessageReceiver = new HashSet<ChatMessage>();
             ChatMessageUser = new HashSet<ChatMessage>();
@@ -20,6 +21,8 @@ namespace BE.Models
             FriendRequestAuthor = new HashSet<FriendRequest>();
             FriendRequestReceiver = new HashSet<FriendRequest>();
             PostLike = new HashSet<PostLike>();
+            RecVisitedProfileUser = new HashSet<RecVisitedProfile>();
+            RecVisitedProfileVisitedUserProfile = new HashSet<RecVisitedProfile>();
             Session = new HashSet<Session>();
             UserEvents = new HashSet<UserEvents>();
             UserFriendshipFirstFriend = new HashSet<UserFriendship>();
@@ -50,6 +53,7 @@ namespace BE.Models
         public virtual Education Education { get; set; }
         public virtual Gender Gender { get; set; }
         public virtual Session SessionNavigation { get; set; }
+        public virtual ICollection<BasicSearchHistory> BasicSearchHistory { get; set; }
         public virtual ICollection<Chat> ChatFirstParticipant { get; set; }
         public virtual ICollection<ChatMessage> ChatMessageReceiver { get; set; }
         public virtual ICollection<ChatMessage> ChatMessageUser { get; set; }
@@ -63,6 +67,8 @@ namespace BE.Models
         public virtual ICollection<FriendRequest> FriendRequestAuthor { get; set; }
         public virtual ICollection<FriendRequest> FriendRequestReceiver { get; set; }
         public virtual ICollection<PostLike> PostLike { get; set; }
+        public virtual ICollection<RecVisitedProfile> RecVisitedProfileUser { get; set; }
+        public virtual ICollection<RecVisitedProfile> RecVisitedProfileVisitedUserProfile { get; set; }
         public virtual ICollection<Session> Session { get; set; }
         public virtual ICollection<UserEvents> UserEvents { get; set; }
         public virtual ICollection<UserFriendship> UserFriendshipFirstFriend { get; set; }
