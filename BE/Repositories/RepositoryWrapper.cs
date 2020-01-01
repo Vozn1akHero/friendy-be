@@ -123,7 +123,7 @@ namespace BE.Repositories
         public IEventParticipantsRepository EventParticipants =>
             _eventParticipants
             ?? (_eventParticipants =
-                new EventParticipantRepository(_friendyContext));
+                new EventParticipantsRepository(_friendyContext));
 
         public IEventPhotoRepository EventPhoto =>
             _eventPhoto ??

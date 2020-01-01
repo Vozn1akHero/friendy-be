@@ -9,10 +9,16 @@ using Microsoft.EntityFrameworkCore;
 
 namespace BE.Repositories.Event
 {
-    public class EventParticipantRepository : RepositoryBase<EventParticipants>, IEventParticipantsRepository
+    public class EventParticipantsRepository : RepositoryBase<EventParticipants>, IEventParticipantsRepository
     {
-        public EventParticipantRepository(FriendyContext friendyContext) : base(friendyContext)
+        public EventParticipantsRepository(FriendyContext friendyContext) : base(friendyContext)
         {
+        }
+
+        public async Task Add(EventParticipants eventParticipants)
+        {
+            Create(eventParticipants);
+            await SaveAsync();
         }
 
         public async Task<IEnumerable<ExemplaryEventParticipantDto>> GetExemplaryAsync(int eventId)

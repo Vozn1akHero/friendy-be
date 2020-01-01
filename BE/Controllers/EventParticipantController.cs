@@ -20,7 +20,6 @@ namespace BE.Controllers
         }
 
         [HttpGet("exemplary/{eventId}")]
-        [AuthorizeEventParticipant]
         public async Task<IActionResult> GetExemplary(int eventId)
         {
             return Ok(await _repository
@@ -28,7 +27,6 @@ namespace BE.Controllers
         }
 
         [HttpGet("range")]
-        [AuthorizeEventParticipant]
         public async Task<IActionResult> GetRange([FromQuery(Name = "start")] int startIndex,
             [FromQuery(Name = "length")] int length, 
             [FromQuery(Name = "eventId")] int eventId)

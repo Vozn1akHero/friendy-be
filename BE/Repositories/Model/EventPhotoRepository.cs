@@ -19,6 +19,7 @@ namespace BE.Repositories
         startIndex, int length)
         {
             return await FindByCondition(e => e.EventId == eventId && e.Id >= startIndex)
+                .Include(e => e.Image)
                 .Take(length)
                 .ToListAsync();
         }

@@ -80,7 +80,7 @@ namespace BE
             services.AddScoped<IImageSaver, ImageSaver>();
             services.AddScoped<IUserSearchingService, UserSearchingService>();
             services.AddScoped<IRowSqlQueryService, RowSqlQueryService>();
-            services.AddScoped<IDialogNotifier, DialogNotifier>();
+            services.AddScoped<IDialogNotifierService, DialogNotifierService>();
 
             services.AddScoped<IEventSearchService, EventSearchService>();
             services.AddScoped<IEventDetailedSearch, EventDetailedSearch>();
@@ -147,7 +147,7 @@ namespace BE
 
             app.UseSignalR(routes =>
             {
-                routes.MapHub<PostHub>("/entryHub");
+                routes.MapHub<PostHub>("/postHub");
                 routes.MapHub<ProfileHub>("/profileHub");
                 routes.MapHub<DialogHub>("/dialogHub");
             });

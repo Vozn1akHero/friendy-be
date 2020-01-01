@@ -8,6 +8,7 @@ namespace BE.Repositories.Interfaces.Event
 {
     public interface IEventParticipantsRepository : IRepositoryBase<EventParticipants>
     {
+        Task Add(EventParticipants eventParticipants);
         Task<IEnumerable<ExemplaryEventParticipantDto>> GetExemplaryAsync(int eventId);
         Task<IEnumerable<EventParticipantForListDto>> GetRangeAsync(int eventId, int startIndex, int length);
         Task<IEnumerable<EventParticipantDetailedDto>> GetRangeDetailedAsync(int eventId, int startIndex, int length);

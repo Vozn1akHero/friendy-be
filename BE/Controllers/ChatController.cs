@@ -18,15 +18,15 @@ namespace BE.Controllers
     {
         private readonly IImageSaver _imageSaver;
         private readonly IRepositoryWrapper _repository;
-        private IDialogNotifier _dialogNotifier;
+        private IDialogNotifierService _dialogNotifierService;
         
         public ChatController(IRepositoryWrapper repository,
             IImageSaver imageSaver, 
-            IDialogNotifier dialogNotifier)
+            IDialogNotifierService dialogNotifierService)
         {
             _repository = repository;
             _imageSaver = imageSaver;
-            _dialogNotifier = dialogNotifier;
+            _dialogNotifierService = dialogNotifierService;
         }
 
         [HttpPost]
@@ -124,7 +124,8 @@ namespace BE.Controllers
             
             await _repository.ChatMessages.Add(chatMessages);
             
-            await _dialogNotifier.NewMessageNotifierAsync(Convert.ToString(chatId), new CreatedMessageDto()
+            await _dialogNotifierService.SendNewMessageAsync(Convert.ToString(chatId), new 
+            CreatedMessageDto
             {
                 Content = newMessage.Content,
                 Date = newMessage.Date,
@@ -133,7 +134,7 @@ namespace BE.Controllers
             });
             
             var obj = await _repository.Chat.GetLastChatMessageByChatId(chatId);
-            await _dialogNotifier.NewMessageExpandedNotifierAsync(Convert.ToString(receiverId), obj);
+            await _dialogNotifierService.SendNewExpandedMessageAsync(Convert.ToString(receiverId), obj);
             
             return CreatedAtAction("AddNewMessage", newMessage);
         }

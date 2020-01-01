@@ -1,4 +1,5 @@
 using System.Threading.Tasks;
+using BE.CQRS.Commands.Event.EventCreation;
 using BE.CustomAttributes;
 using BE.Dtos.EventDtos;
 using BE.Interfaces;
@@ -6,6 +7,7 @@ using BE.Models;
 using BE.Services.Elasticsearch;
 using BE.Services.Global;
 using BE.Services.Model;
+using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -20,16 +22,18 @@ namespace BE.Controllers
         private IImageSaver _imageSaver;
         private IEventDataService _eventDataService;
         private IEventDataIndexing _eventDataIndexing;
+        private IMediator _mediator;
         
         public EventController(IRepositoryWrapper repository, 
             IImageSaver imageSaver,
             IEventDataService eventDataService, 
-            IEventDataIndexing eventDataIndexing)
+            IEventDataIndexing eventDataIndexing, IMediator mediator)
         {
             _repository = repository;
             _imageSaver = imageSaver;
             _eventDataService = eventDataService;
             _eventDataIndexing = eventDataIndexing;
+            _mediator = mediator;
             _eventDataService = eventDataService;
         }
 
@@ -38,8 +42,12 @@ namespace BE.Controllers
         public async Task<IActionResult> Create([FromBody] Event @event, 
             [FromHeader(Name = "userId")] int userId)
         {
-            var eventData = await _repository.Event.CreateAndReturn(@event);
-            _eventDataIndexing.Create(eventData);
+            //_eventDataIndexing.Create(eventData);
+            await _mediator.Send(new EventCreationCommand
+            {
+                Event = @event,
+                CreatorId = userId
+            });
             return Created("api/event", @event);
         }
 

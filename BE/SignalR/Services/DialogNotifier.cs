@@ -8,32 +8,39 @@ using Microsoft.AspNetCore.SignalR;
 
 namespace BE.SignalR.Services
 {
-    public interface IDialogNotifier
+    public interface IDialogNotifierService
     {
-        Task NewMessageNotifierAsync(string groupName, CreatedMessageDto chatMessage);
-        Task NewMessageExpandedNotifierAsync(string groupName, ChatLastMessageDto chatMessage);
+        Task SendNewMessageAsync(string groupName, CreatedMessageDto 
+        chatMessage);
+        Task SendNewExpandedMessageAsync(string groupName, 
+        ChatLastMessageDto 
+        chatMessage);
     }
     
-    public class DialogNotifier : IDialogNotifier
+    public class DialogNotifierService : IDialogNotifierService
     {
-        private IRepositoryWrapper _repository;
         private IHubContext<DialogHub> _dialogHub;
         
-        public DialogNotifier(IRepositoryWrapper repository, 
-            IHubContext<DialogHub> dialogHub)
+        public DialogNotifierService(IHubContext<DialogHub> dialogHub)
         {
-            _repository = repository;
             _dialogHub = dialogHub;
         }
         
-        public async Task NewMessageNotifierAsync(string groupName, CreatedMessageDto chatMessage)
+        public async Task SendNewMessageAsync(string groupName, 
+        CreatedMessageDto 
+        chatMessage)
         {
-            await _dialogHub.Clients.Group(groupName).SendAsync("SendMessageToUser", chatMessage);
+            await _dialogHub.Clients.Group(groupName).SendAsync("SendMessageToUser",
+                chatMessage);
         }
 
-        public async Task NewMessageExpandedNotifierAsync(string groupName, ChatLastMessageDto chatMessage)
+        public async Task SendNewExpandedMessageAsync(string groupName, 
+        ChatLastMessageDto 
+        chatMessage)
         {
-            await _dialogHub.Clients.Group(groupName).SendAsync("SendExpandedMessageToUser", chatMessage);
+            await _dialogHub.Clients.Group(groupName).SendAsync("SendExpandedMessageToUser",
+                chatMessage);
         }
     }
 }
+

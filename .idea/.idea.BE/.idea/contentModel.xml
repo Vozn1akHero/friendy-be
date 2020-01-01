@@ -24,7 +24,9 @@
         </e>
         <e p="BE.csproj" t="IncludeRecursive" />
         <e p="bin" t="ExcludeRecursive" />
-        <e p="Cache" t="Include" />
+        <e p="Cache" t="Include">
+          <e p="RedisClient.cs" t="Include" />
+        </e>
         <e p="Controllers" t="Include">
           <e p="AuthController.cs" t="Include" />
           <e p="ChatController.cs" t="Include" />
@@ -36,6 +38,7 @@
           <e p="EventPostController.cs" t="Include" />
           <e p="EventSearchController.cs" t="Include" />
           <e p="FriendController.cs" t="Include" />
+          <e p="FriendshipRecommendationController.cs" t="Include" />
           <e p="PostCommentController.cs" t="Include" />
           <e p="PostController.cs" t="Include" />
           <e p="UserController.cs" t="Include" />
@@ -45,10 +48,16 @@
         </e>
         <e p="CQRS" t="Include">
           <e p="Commands" t="Include">
-            <e p="EventPost" t="Include">
-              <e p="CreateAndReturnCommand.cs" t="Include" />
-              <e p="Handlers" t="Include">
-                <e p="CreateEventPostAndReturnDtoCommandHandler.cs" t="Include" />
+            <e p="Event" t="Include">
+              <e p="EventCreation" t="Include">
+                <e p="EventCreationCommand.cs" t="Include" />
+                <e p="EventCreationCommandHandler.cs" t="Include" />
+              </e>
+              <e p="EventPost" t="Include">
+                <e p="CreateEventPostAndReturnDtoCommand.cs" t="Include" />
+                <e p="Handlers" t="Include">
+                  <e p="CreateEventPostAndReturnDtoCommandHandler.cs" t="Include" />
+                </e>
               </e>
             </e>
           </e>
@@ -195,6 +204,7 @@
         <e p="Models" t="Include">
           <e p="AlcoholAttitude.cs" t="Include" />
           <e p="AuthenticationSession.cs" t="Include" />
+          <e p="BasicSearchHistory.cs" t="Include" />
           <e p="Chat.cs" t="Include" />
           <e p="ChatMessage.cs" t="Include" />
           <e p="ChatMessages.cs" t="Include" />
@@ -224,6 +234,7 @@
           <e p="MaritalStatus.cs" t="Include" />
           <e p="Post.cs" t="Include" />
           <e p="PostLike.cs" t="Include" />
+          <e p="RecVisitedProfile.cs" t="Include" />
           <e p="Religion.cs" t="Include" />
           <e p="ResponseToComment.cs" t="Include" />
           <e p="ResponseToMainCommentResponse.cs" t="Include" />
@@ -366,6 +377,7 @@
             <e p="EventParticipantService.cs" t="Include" />
             <e p="EventPostService.cs" t="Include" />
             <e p="EventSearchService.cs" t="Include" />
+            <e p="FriendshipRecommendationService.cs" t="Include" />
             <e p="PhotoService.cs" t="Include" />
             <e p="PostCommentService.cs" t="Include" />
             <e p="UserDataService.cs" t="Include" />
@@ -430,6 +442,9 @@
       <e p="BE.UnitTests" t="IncludeRecursive">
         <e p="BE.UnitTests.csproj" t="IncludeRecursive" />
         <e p="bin" t="ExcludeRecursive" />
+        <e p="CQRS" t="Include">
+          <e p="Queries.cs" t="Include" />
+        </e>
         <e p="obj" t="ExcludeRecursive">
           <e p="Debug" t="Include">
             <e p="netcoreapp2.2" t="Include">

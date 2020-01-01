@@ -71,7 +71,6 @@ namespace BE.Controllers
 
         [HttpGet("{eventId}")]
         [Authorize]
-        [AuthorizeEventParticipant]
         public async Task<IActionResult> GetRangeByEventId([FromQuery(Name = "start")] int startIndex,
             [FromQuery(Name = "length")] int length, 
             [FromRoute(Name = "eventId")] int eventId, 
