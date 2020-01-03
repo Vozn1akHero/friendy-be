@@ -12,9 +12,7 @@ namespace BE.Services.Global
     {
         Task<bool> Authenticate(string username, string password);
         Task<bool> CheckIfEmailIsAvailable(string email);
-        Task SetSessionIdByUserId(int id, int userId);
         Task Create(NewUserDto user);
-        Task LogOut(string token);
     }
     
     internal class AuthenticationService : IAuthenticationService
@@ -72,31 +70,12 @@ namespace BE.Services.Global
             return false;
         }
 
-        public async Task SetSessionIdByUserId(int id, int userId)
-        {
-            var user = await _friendyContext.User.SingleOrDefaultAsync(e => e.Id == userId);
-            if (user != null)
-            {
-                user.AuthenticationSessionId = id;
-                await _friendyContext.SaveChangesAsync();
-            }
-        }
-
         public bool CheckUserAuthStatus(string token)
         {
             bool tokenValidityStatus = _jwtService.ValidateJwt(token);
             return tokenValidityStatus;
         }
 
-        public async Task LogOut(string token)
-        {
-            var session = await _friendyContext.AuthenticationSession.SingleOrDefaultAsync(e => e.Token == token);
-            var user = await _friendyContext.User.SingleOrDefaultAsync(e => e.AuthenticationSessionId == session.Id);
-            user.AuthenticationSessionId = null;
-            user.Session = null;
-            _friendyContext.AuthenticationSession.Remove(session);
-            await _friendyContext.SaveChangesAsync();
-        }
 
     }
 }

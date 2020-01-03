@@ -23,6 +23,7 @@ using Microsoft.Extensions.FileProviders;
 using Microsoft.IdentityModel.Tokens;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
+using RecommendationAlgorithm;
 
 namespace BE
 {
@@ -88,6 +89,8 @@ namespace BE
             services.AddScoped<IUserDetailedSearch, UserDetailedSearch>();
             services.AddScoped<IUserDataIndexing, UserDataIndexing>();
             services.AddScoped<IEventDataIndexing, EventDataIndexing>();
+            
+            services.AddScoped<ICosSim, CosSim>();
 
             services.ConfigureRepositoryServices();
 

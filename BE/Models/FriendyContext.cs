@@ -16,7 +16,6 @@ namespace BE.Models
         }
 
         public virtual DbSet<AlcoholAttitude> AlcoholAttitude { get; set; }
-        public virtual DbSet<AuthenticationSession> AuthenticationSession { get; set; }
         public virtual DbSet<BasicSearchHistory> BasicSearchHistory { get; set; }
         public virtual DbSet<Chat> Chat { get; set; }
         public virtual DbSet<ChatMessage> ChatMessage { get; set; }
@@ -31,6 +30,7 @@ namespace BE.Models
         public virtual DbSet<EventParticipationRequest> EventParticipationRequest { get; set; }
         public virtual DbSet<EventPost> EventPost { get; set; }
         public virtual DbSet<FriendRequest> FriendRequest { get; set; }
+        public virtual DbSet<FriendshipRecommendation> FriendshipRecommendation { get; set; }
         public virtual DbSet<Gender> Gender { get; set; }
         public virtual DbSet<Image> Image { get; set; }
         public virtual DbSet<Interest> Interest { get; set; }
@@ -74,23 +74,6 @@ namespace BE.Models
                     .IsRequired()
                     .HasColumnName("title")
                     .HasMaxLength(150)
-                    .IsUnicode(false);
-            });
-
-            modelBuilder.Entity<AuthenticationSession>(entity =>
-            {
-                entity.ToTable("authentication_session");
-
-                entity.Property(e => e.Id).HasColumnName("id");
-
-                entity.Property(e => e.Hash)
-                    .IsRequired()
-                    .HasColumnName("hash")
-                    .IsUnicode(false);
-
-                entity.Property(e => e.Token)
-                    .IsRequired()
-                    .HasColumnName("token")
                     .IsUnicode(false);
             });
 
@@ -469,6 +452,33 @@ namespace BE.Models
                     .HasConstraintName("FK_friend_request_receiver");
             });
 
+            modelBuilder.Entity<FriendshipRecommendation>(entity =>
+            {
+                entity.ToTable("friendship_recommendation");
+
+                entity.Property(e => e.Id).HasColumnName("id");
+
+                entity.Property(e => e.IssuerId).HasColumnName("issuer_id");
+
+                entity.Property(e => e.LastCheckupTime)
+                    .HasColumnName("last_checkup_time")
+                    .HasColumnType("datetime");
+
+                entity.Property(e => e.PotentialFriendId).HasColumnName("potential_friend_id");
+
+                entity.HasOne(d => d.Issuer)
+                    .WithMany(p => p.FriendshipRecommendationIssuer)
+                    .HasForeignKey(d => d.IssuerId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_friendship_recommendation_issuer");
+
+                entity.HasOne(d => d.PotentialFriend)
+                    .WithMany(p => p.FriendshipRecommendationPotentialFriend)
+                    .HasForeignKey(d => d.PotentialFriendId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_friendship_recommendation_potential_friend");
+            });
+
             modelBuilder.Entity<Gender>(entity =>
             {
                 entity.ToTable("gender");
@@ -686,8 +696,6 @@ namespace BE.Models
 
                 entity.Property(e => e.AdditionalInfoId).HasColumnName("additional_info_id");
 
-                entity.Property(e => e.AuthenticationSessionId).HasColumnName("authentication_session_id");
-
                 entity.Property(e => e.Avatar)
                     .HasColumnName("avatar")
                     .IsUnicode(false)
@@ -708,7 +716,7 @@ namespace BE.Models
                 entity.Property(e => e.Email)
                     .IsRequired()
                     .HasColumnName("email")
-                    .HasMaxLength(50)
+                    .HasMaxLength(250)
                     .IsUnicode(false);
 
                 entity.Property(e => e.GenderId).HasColumnName("gender_id");
@@ -746,11 +754,6 @@ namespace BE.Models
                     .WithMany(p => p.User)
                     .HasForeignKey(d => d.AdditionalInfoId)
                     .HasConstraintName("FK_user_user_additional_info");
-
-                entity.HasOne(d => d.AuthenticationSession)
-                    .WithMany(p => p.User)
-                    .HasForeignKey(d => d.AuthenticationSessionId)
-                    .HasConstraintName("FK_user_authentication_session");
 
                 entity.HasOne(d => d.Education)
                     .WithMany(p => p.User)
@@ -884,6 +887,8 @@ namespace BE.Models
                 entity.Property(e => e.InterestId).HasColumnName("interest_id");
 
                 entity.Property(e => e.UserId).HasColumnName("user_id");
+
+                entity.Property(e => e.Wage).HasColumnName("wage");
 
                 entity.HasOne(d => d.Interest)
                     .WithMany(p => p.UserInterests)

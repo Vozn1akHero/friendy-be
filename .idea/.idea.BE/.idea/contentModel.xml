@@ -196,6 +196,9 @@
           <e p="HTTPHelpers.cs" t="Include" />
           <e p="IndexedForeachLoop.cs" t="Include" />
         </e>
+        <e p="HostedServices" t="Include">
+          <e p="FriendshipRecommendationHostedService.cs" t="Include" />
+        </e>
         <e p="Middlewares" t="Include">
           <e p="ExceptionMiddleware.cs" t="Include" />
           <e p="JWTInHeaderMiddleware.cs" t="Include" />
@@ -203,7 +206,6 @@
         </e>
         <e p="Models" t="Include">
           <e p="AlcoholAttitude.cs" t="Include" />
-          <e p="AuthenticationSession.cs" t="Include" />
           <e p="BasicSearchHistory.cs" t="Include" />
           <e p="Chat.cs" t="Include" />
           <e p="ChatMessage.cs" t="Include" />
@@ -225,6 +227,7 @@
           <e p="FamilyStatus.cs" t="Include" />
           <e p="Friend.cs" t="Include" />
           <e p="FriendRequest.cs" t="Include" />
+          <e p="FriendshipRecommendation.cs" t="Include" />
           <e p="FriendyContext.cs" t="Include" />
           <e p="Gender.cs" t="Include" />
           <e p="Image.cs" t="Include" />
@@ -259,6 +262,10 @@
         <e p="Properties" t="Include">
           <e p="launchSettings.json" t="Include" />
         </e>
+        <e p="RecommendationAlgorithm" t="Include">
+          <e p="CosSim.cs" t="Include" />
+          <e p="Output.cs" t="Include" />
+        </e>
         <e p="Repositories" t="Include">
           <e p="Interfaces" t="Include">
             <e p="Chat" t="Include">
@@ -279,9 +286,9 @@
             <e p="Friend" t="Include">
               <e p="IFriendRepository.cs" t="Include" />
               <e p="IFriendRequestRepository.cs" t="Include" />
+              <e p="IFriendshipRecommendationRepository.cs" t="Include" />
               <e p="IUserFriendsRepository.cs" t="Include" />
             </e>
-            <e p="IAuthenticationSessionRepository.cs" t="Include" />
             <e p="IRepositoryBase.cs" t="Include" />
             <e p="IRepositoryWrapper.cs" t="Include" />
             <e p="Photo" t="Include">
@@ -302,7 +309,6 @@
             </e>
           </e>
           <e p="Model" t="Include">
-            <e p="AuthenticationSessionRepository.cs" t="Include" />
             <e p="Chat" t="Include">
               <e p="ChatMessageRepository.cs" t="Include" />
               <e p="ChatMessagesRepository.cs" t="Include" />
@@ -320,6 +326,7 @@
             <e p="Friend" t="Include">
               <e p="FriendRepository.cs" t="Include" />
               <e p="FriendRequestRepository.cs" t="Include" />
+              <e p="FriendshipRecommendationRepository.cs" t="Include" />
               <e p="UserFriendsRepository.cs" t="Include" />
             </e>
             <e p="PhotoRepository.cs" t="Include" />

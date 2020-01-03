@@ -15,7 +15,6 @@ namespace BE.Interfaces
     public interface IRepositoryWrapper
     {
         IUserRepository User { get; }
-        IAuthenticationSessionRepository AuthenticationSession { get; }
         IPostRepository Post { get; }
         IUserPostRepository UserPost { get; }
         IUserPhotoRepository UserPhoto { get; }
@@ -39,5 +38,6 @@ namespace BE.Interfaces
         IEventPhotoRepository EventPhoto { get; }
         IPhotoRepository Photo { get; }
         IEventParticipationRequestRepository EventParticipationRequest { get; }
+        IFriendshipRecommendationRepository FriendshipRecommendation { get; }
     }
 }

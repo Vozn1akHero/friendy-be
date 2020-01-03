@@ -1,8 +1,14 @@
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using BE.Interfaces;
+using BE.Models;
+using BE.Repositories;
 using BE.Services.Model;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore.Internal;
+using RecommendationAlgorithm;
 
 namespace BE.Controllers
 {
@@ -12,10 +18,15 @@ namespace BE.Controllers
     {
         private readonly IFriendshipRecommendationService
             _friendshipRecommendationService;
-
-        public FriendshipRecommendationController(IFriendshipRecommendationService friendshipRecommendationService)
+        private readonly IRepositoryWrapper _repository;
+        private readonly ICosSim _cosSim;
+        
+        public FriendshipRecommendationController(IFriendshipRecommendationService friendshipRecommendationService,
+            IRepositoryWrapper repository, ICosSim cosSim)
         {
             _friendshipRecommendationService = friendshipRecommendationService;
+            _repository = repository;
+            _cosSim = cosSim;
         }
 
         [HttpPost("profile-visit/{profileId}")]
@@ -39,6 +50,32 @@ namespace BE.Controllers
             await _friendshipRecommendationService.CreateSearchDataAsync(userId,
                 name, surname);
             return Ok();
+        }
+
+        [HttpGet("recommendations")]
+        [Authorize]
+        public async Task<IActionResult> GetAll([FromHeader(Name = "userId")] int userId)
+        {
+            bool refreshNeed = await _repository.FriendshipRecommendation
+                .RefreshNeedByIssuerId(userId);
+            if (refreshNeed)
+            {
+                var issuerInterests = await _repository.User
+                    .GetInterestsById(userId);
+                if (issuerInterests.Any())
+                {
+                    var recommendations = await _cosSim.CalculateAsync(userId, issuerInterests);
+                    return Ok(recommendations);
+                }
+            }
+            else
+            {
+                var recommendations = await _repository.FriendshipRecommendation
+                    .FindPotentialFriendsByIssuerId(userId);
+                return Ok(recommendations);
+            }
+
+            return UnprocessableEntity("INTEREST LIST IS EMPTY");
         }
     }
 }

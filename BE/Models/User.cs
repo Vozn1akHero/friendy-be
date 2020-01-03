@@ -20,6 +20,8 @@ namespace BE.Models
             EventParticipationRequest = new HashSet<EventParticipationRequest>();
             FriendRequestAuthor = new HashSet<FriendRequest>();
             FriendRequestReceiver = new HashSet<FriendRequest>();
+            FriendshipRecommendationIssuer = new HashSet<FriendshipRecommendation>();
+            FriendshipRecommendationPotentialFriend = new HashSet<FriendshipRecommendation>();
             PostLike = new HashSet<PostLike>();
             RecVisitedProfileUser = new HashSet<RecVisitedProfile>();
             RecVisitedProfileVisitedUserProfile = new HashSet<RecVisitedProfile>();
@@ -39,17 +41,15 @@ namespace BE.Models
         public int GenderId { get; set; }
         public string Email { get; set; }
         public string Password { get; set; }
-        public int? EducationId { get; set; }
         public DateTime Birthday { get; set; }
         public string Avatar { get; set; }
         public string ProfileBg { get; set; }
         public string Status { get; set; }
+        public int? EducationId { get; set; }
         public int? AdditionalInfoId { get; set; }
-        public int? AuthenticationSessionId { get; set; }
         public int? SessionId { get; set; }
 
         public virtual UserAdditionalInfo AdditionalInfo { get; set; }
-        public virtual AuthenticationSession AuthenticationSession { get; set; }
         public virtual Education Education { get; set; }
         public virtual Gender Gender { get; set; }
         public virtual Session SessionNavigation { get; set; }
@@ -66,6 +66,8 @@ namespace BE.Models
         public virtual ICollection<EventParticipationRequest> EventParticipationRequest { get; set; }
         public virtual ICollection<FriendRequest> FriendRequestAuthor { get; set; }
         public virtual ICollection<FriendRequest> FriendRequestReceiver { get; set; }
+        public virtual ICollection<FriendshipRecommendation> FriendshipRecommendationIssuer { get; set; }
+        public virtual ICollection<FriendshipRecommendation> FriendshipRecommendationPotentialFriend { get; set; }
         public virtual ICollection<PostLike> PostLike { get; set; }
         public virtual ICollection<RecVisitedProfile> RecVisitedProfileUser { get; set; }
         public virtual ICollection<RecVisitedProfile> RecVisitedProfileVisitedUserProfile { get; set; }

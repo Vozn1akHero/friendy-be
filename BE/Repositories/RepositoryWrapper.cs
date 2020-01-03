@@ -21,7 +21,6 @@ namespace BE.Repositories
 
         private IUserRepository _user;
         private IUserPhotoRepository _userPhoto;
-        private IAuthenticationSessionRepository _authenticationSession;
         private IPostRepository _post;
         private IUserPostRepository _userPost;
         private IPostLikeRepository _postLike;
@@ -45,6 +44,7 @@ namespace BE.Repositories
         private IEventPhotoRepository _eventPhoto;
         private IPhotoRepository _photo;
         private IEventParticipationRequestRepository _eventParticipationRequest;
+        private IFriendshipRecommendationRepository _friendshipRecommendation;
 
         private readonly IRowSqlQueryService _rowSqlQueryService;
         private ICustomSqlQueryService _customSqlQueryService;
@@ -65,10 +65,6 @@ namespace BE.Repositories
         public IUserPhotoRepository UserPhoto => _userPhoto ?? (_userPhoto =
                                                      new UserPhotoRepository(
                                                          _friendyContext));
-
-        public IAuthenticationSessionRepository AuthenticationSession =>
-            _authenticationSession ?? (_authenticationSession =
-                new AuthenticationSessionRepository(_friendyContext));
 
         public IPostRepository Post =>
             _post ?? (_post = new PostRepository(_friendyContext));
@@ -135,6 +131,10 @@ namespace BE.Repositories
         public IEventParticipationRequestRepository EventParticipationRequest =>
             _eventParticipationRequest ?? (_eventParticipationRequest =
                 new EventParticipationRequestRepository(_friendyContext));
+        
+        public IFriendshipRecommendationRepository FriendshipRecommendation =>
+            _friendshipRecommendation ?? (_friendshipRecommendation =
+                new FriendshipRecommendationRepository(_friendyContext));
 
 
         /*public IChatParticipantsRepository ChatParticipants =>

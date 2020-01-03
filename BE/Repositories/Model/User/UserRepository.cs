@@ -12,6 +12,7 @@ using BE.Interfaces;
 using BE.Models;
 using BE.Repositories.RepositoryServices.Interfaces.User;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Internal;
 using Nest;
 
 
@@ -43,6 +44,14 @@ namespace BE.Repositories
                 .OrderBy(x => x.Name)
                 .ToListAsync();
         }
+        
+        public async Task<IEnumerable<Models.User>> GetAllWithInterestsAsync()
+        {
+            return await FindAll()
+                .OrderBy(x => x.Name)
+                .Include(e => e.UserInterests)
+                .ToListAsync();
+        }
 
         public async Task<object> GetWithSelectedFields(int userId, string[] selectedFields)
         {
@@ -54,14 +63,6 @@ namespace BE.Repositories
         {
             return await Get<TType>(e => e.Id == userId, select).SingleOrDefaultAsync();
         }
-
-        public async Task<Models.User> GetAsync(string token)
-        {
-            string cutToken = token.Split(" ")[1];
-            var user = await FindByCondition(o => o.AuthenticationSession.Token == cutToken)
-                .SingleOrDefaultAsync();
-            return user;
-        }   
         
         public async Task<Models.User> GetByIdAsync(int id)
         {
@@ -85,48 +86,6 @@ namespace BE.Repositories
             //user.SessionId = sessionId;
             await SaveAsync();
         }
-
-        /*public async Task<IEnumerable<UserBasicDto>> GetByCriteriaAsync(UsersLookUpCriteriaDto usersLookUpCriteriaDto)
-        {
-            var users = await FindAll()
-                .Include(e => e.AdditionalInfo)
-                .Include(e => e.AdditionalInfo.AlcoholAttitude)
-                .Include(e => e.EducationId)
-                .Include(e => e.AdditionalInfo.MaritalStatus)
-                .Include(e => e.AdditionalInfo.Religion)
-                .Include(e => e.AdditionalInfo.SmokingAttitude)
-                .Select(e => new UserLookUpModelDto
-                {
-                    Id = e.Id,
-                    Name = e.Name,
-                    Surname = e.Surname,
-                    City = e.City,
-                    EducationId = e.EducationId,
-                    GenderId = e.GenderId,
-                    MaritalStatusId = e.AdditionalInfo.MaritalStatusId,
-                    ReligionId = e.AdditionalInfo.ReligionId,
-                    AlcoholAttitudeId = e.AdditionalInfo.AlcoholAttitudeId,
-                    SmokingAttitudeId = e.AdditionalInfo.SmokingAttitudeId,
-                    UserInterests = e.UserInterests.Select(interest => interest.Interest.Title)
-                })
-                .ToListAsync();
-            
-            var filteredUsers = _userSearchingService.Filter(users, usersLookUpCriteriaDto);
-            var filteredUsersIds = filteredUsers.Select(e => e.Id);
-            return await FindByCondition(e => filteredUsersIds.Contains(e.Id))
-                .Select(e => new UserBasicDto
-                {
-                    Id = e.Id,
-                    Avatar = e.Avatar,
-                    Birthday = e.Birthday,
-                    City = e.City,
-                    GenderId = e.GenderId,
-                    Name = e.Name,
-                    Surname = e.Surname,
-                    Status = e.Status
-                })
-                .ToListAsync();
-        }*/
 
         public async Task<IEnumerable<UserBasicDto>> GetByRangeAsync(int firstIndex, int lastIndex)
         {
@@ -205,6 +164,22 @@ namespace BE.Repositories
                 actUser.UserInterests = userInterests.ToList();
                 await SaveAsync();
             }
+        }
+
+        public async Task<IEnumerable<UserInterests>> GetInterestsById(int id)
+        {
+            return await FindByCondition(e => e.Id == id)
+                .Select(e => e.UserInterests)
+                .SingleOrDefaultAsync();
+        }
+
+        public async Task<IEnumerable<IEnumerable<UserInterests>>> 
+        GetAllUserInterestsWithExceptionOfId(int id)
+        {
+            var ints = await FindByCondition(e => e.Id != id)
+                .Select(e => e.UserInterests)
+                .ToListAsync();
+            return ints;
         }
 
         public async Task DeleteUserAsync(Models.User user)
