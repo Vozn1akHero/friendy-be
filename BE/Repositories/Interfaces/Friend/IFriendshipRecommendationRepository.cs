@@ -8,10 +8,8 @@ namespace BE.Interfaces.Repositories
         : IRepositoryBase<FriendshipRecommendation>
     {
         Task Add(FriendshipRecommendation friendshipRecommendation);
-
-        Task<IEnumerable<FriendshipRecommendation>>
-            FindPotentialFriendsByIssuerId(int id);
-
+        Task AddRange(IEnumerable<FriendshipRecommendation> friendshipRecommendations);
+        Task<IEnumerable<FriendshipRecommendation>> FindPotentialFriendsByIssuerId(int id);
         Task<bool> RefreshNeedByIssuerId(int id);
     }
 }

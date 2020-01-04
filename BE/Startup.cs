@@ -153,6 +153,7 @@ namespace BE
                 routes.MapHub<PostHub>("/postHub");
                 routes.MapHub<ProfileHub>("/profileHub");
                 routes.MapHub<DialogHub>("/dialogHub");
+                routes.MapHub<UserStatusHub>("/userStatusHub");
             });
 
             app.UseEndpointRouting().UseMvc();

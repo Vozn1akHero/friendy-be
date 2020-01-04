@@ -19,6 +19,12 @@ namespace BE.Repositories
             Create(eventPost);
             await SaveAsync();
         }
+        
+        public async Task CreateExAsync(int id, EventPost eventPost, Post post)
+        {
+            Create(eventPost);
+            await SaveAsync();
+        }
 
         public async Task<EventPost> GetByIdAsync(int id)
         {

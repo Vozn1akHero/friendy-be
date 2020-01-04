@@ -39,5 +39,6 @@ namespace BE.Interfaces
         IPhotoRepository Photo { get; }
         IEventParticipationRequestRepository EventParticipationRequest { get; }
         IFriendshipRecommendationRepository FriendshipRecommendation { get; }
+        ISessionRepository Session { get; }
     }
 }

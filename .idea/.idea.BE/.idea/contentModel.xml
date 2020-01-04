@@ -304,6 +304,7 @@
               <e p="IUserPostRepository.cs" t="Include" />
             </e>
             <e p="User" t="Include">
+              <e p="ISessionRepository.cs" t="Include" />
               <e p="IUserPhotoRepository.cs" t="Include" />
               <e p="IUserRepository.cs" t="Include" />
             </e>
@@ -327,7 +328,7 @@
               <e p="FriendRepository.cs" t="Include" />
               <e p="FriendRequestRepository.cs" t="Include" />
               <e p="FriendshipRecommendationRepository.cs" t="Include" />
-              <e p="UserFriendsRepository.cs" t="Include" />
+              <e p="UserFriendshipRepository.cs" t="Include" />
             </e>
             <e p="PhotoRepository.cs" t="Include" />
             <e p="Post" t="Include">
@@ -341,6 +342,7 @@
               <e p="UserPostRepository.cs" t="Include" />
             </e>
             <e p="User" t="Include">
+              <e p="SessionRepository.cs" t="Include" />
               <e p="UserPhotoRepository.cs" t="Include" />
               <e p="UserRepository.cs" t="Include" />
             </e>
@@ -390,6 +392,7 @@
             <e p="UserDataService.cs" t="Include" />
             <e p="UserPostService.cs" t="Include" />
             <e p="UserSearchService.cs" t="Include" />
+            <e p="UserStatusService.cs" t="Include" />
           </e>
         </e>
         <e p="SignalR" t="Include">

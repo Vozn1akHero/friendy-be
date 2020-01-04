@@ -179,5 +179,14 @@ namespace BE.Controllers
         {
             return Ok();
         }
+
+        [HttpGet("is-online/{id}")]
+        [Authorize]
+        public async Task<IActionResult> IsUserOnlineAsync(int id)
+        {
+            var session = await _repository.Session.GetByUserId(id);
+            var status = session.ConnectionStart != null && session.ConnectionEnd == null;
+            return Ok(status);
+        }
     }
 }

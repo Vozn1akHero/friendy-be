@@ -33,8 +33,8 @@ namespace BE
             services.AddTransient<IEventDataService, EventDataService>();
             services.AddTransient<IPhotoService, PhotoService>();
             services.AddTransient<IPostCommentService, PostCommentService>();
-            services
-                .AddTransient<IFriendshipRecommendationService,
+            services.AddTransient<IUserStatusService, UserStatusService>();
+            services.AddTransient<IFriendshipRecommendationService,
                     FriendshipRecommendationService>();
         }
 

@@ -665,6 +665,11 @@ namespace BE.Models
 
                 entity.Property(e => e.ConnectionEnd).HasColumnName("connection_end");
 
+                entity.Property(e => e.ConnectionId)
+                    .IsRequired()
+                    .HasColumnName("connection_id")
+                    .IsUnicode(false);
+
                 entity.Property(e => e.ConnectionStart).HasColumnName("connection_start");
 
                 entity.Property(e => e.UserId).HasColumnName("user_id");

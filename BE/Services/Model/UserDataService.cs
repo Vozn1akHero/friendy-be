@@ -35,6 +35,10 @@ namespace BE.Services.Model
                 GenderId = e.Gender.Id,
                 Birthday = e.Birthday,
                 Avatar = e.Avatar,
+                ProfileBg = e.ProfileBg,
+                Status = e.Status,
+                IsOnline = e.SessionNavigation.ConnectionStart != null & e
+                .SessionNavigation.ConnectionEnd == null,
                 EducationId = e.EducationId,
                 MaritalStatusId = e.AdditionalInfo.MaritalStatus.Id,
                 ReligionId = e.AdditionalInfo.Religion.Id,

@@ -27,14 +27,14 @@ namespace BE.Controllers
         public EventController(IRepositoryWrapper repository, 
             IImageSaver imageSaver,
             IEventDataService eventDataService, 
-            IEventDataIndexing eventDataIndexing, IMediator mediator)
+            IEventDataIndexing eventDataIndexing,
+            IMediator mediator)
         {
             _repository = repository;
             _imageSaver = imageSaver;
             _eventDataService = eventDataService;
             _eventDataIndexing = eventDataIndexing;
             _mediator = mediator;
-            _eventDataService = eventDataService;
         }
 
         [HttpPost]
@@ -118,7 +118,7 @@ namespace BE.Controllers
             string path = $"wwwroot/EventAvatar/{id}/{newAvatar.FileName}";
             await _imageSaver
                 .SaveWithSpecifiedName(newAvatar, path);
-            await _repository.Event.UpdateAvatarAsync(path, id);
+            await _eventDataService.UpdateAvatarAsync(id, path);
             return Ok(path);
         }
         
@@ -145,7 +145,7 @@ namespace BE.Controllers
             string path = $"wwwroot/EventBackground/{id}/{newBackground.FileName}";
             await _imageSaver
                 .SaveWithSpecifiedName(newBackground, path);
-            await _repository.Event.UpdateBackgroundAsync(path, id);
+            await _eventDataService.UpdateBackgroundAsync(id, path);
             return Ok(path);
         }
     }

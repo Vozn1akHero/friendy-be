@@ -54,6 +54,11 @@ namespace BE.Repositories
         {
             FriendyContext.Set<T>().Add(ent);
         }
+        
+        public void CreateAll(IEnumerable<T> ent)
+        {
+            FriendyContext.Set<T>().AddRange(ent);
+        }
 
         public void Update(T ent)
         {
@@ -65,6 +70,12 @@ namespace BE.Repositories
             FriendyContext.Set<T>().Remove(ent);
         }
 
+        public void DeleteAll(Expression<Func<T, bool>> exp)
+        {
+            var entities = FriendyContext.Set<T>().Where(exp).AsNoTracking();
+            FriendyContext.Set<T>().RemoveRange(entities);
+        }
+        
         public async Task SaveAsync()
         {
             await FriendyContext.SaveChangesAsync();

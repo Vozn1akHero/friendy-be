@@ -14,6 +14,7 @@ namespace BE.Models
         public int UserId { get; set; }
         public DateTime ConnectionStart { get; set; }
         public DateTime? ConnectionEnd { get; set; }
+        public string ConnectionId { get; set; }
 
         public virtual User User { get; set; }
         public virtual ICollection<User> UserNavigation { get; set; }

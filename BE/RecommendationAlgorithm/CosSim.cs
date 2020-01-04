@@ -50,24 +50,31 @@ namespace RecommendationAlgorithm
                 .OrderByDescending(e => e.SimilarityScore)
                 .Take(5)
                 .ToList();
-            var users = new List<User>();
-            foreach (var value in mostSim)
+            await AddRecommendationsByOutputsToDatabase(issuerId, mostSim);
+            var friendshipsRecommendations = await _repository.FriendshipRecommendation
+                .FindPotentialFriendsByIssuerId(issuerId);
+            return friendshipsRecommendations;
+        }
+
+        private async Task AddRecommendationsByOutputsToDatabase(int issuerId, List<Output> outputs)
+        {
+            var friendshipRecommendations = new List<FriendshipRecommendation>();
+            foreach (var value in outputs)
             {
-                await _repository.FriendshipRecommendation.Add(
-                    new FriendshipRecommendation
+                var friendshipStatus = await _repository.UserFriendship
+                    .CheckIfFriendsByUserIdsAsync(issuerId, value.UserId);
+                if (!friendshipStatus)
+                {
+                    friendshipRecommendations.Add(new FriendshipRecommendation
                     {
                         IssuerId = issuerId,
                         PotentialFriendId = value.UserId,
                         LastCheckupTime = DateTime.Now
                     });
-                var user = await _repository.User.GetByIdAsync(value.UserId);
-                users.Add(user);
+                }
             }
-
-            var friendshipsRecommendations = await _repository.FriendshipRecommendation
-                .FindPotentialFriendsByIssuerId(issuerId);
-            
-            return friendshipsRecommendations;
+            await _repository.FriendshipRecommendation.AddRange(
+                friendshipRecommendations);
         }
 
         private static double CalculateForEntity(IEnumerable<UserInterests> issuerInterests,
@@ -78,13 +85,10 @@ namespace RecommendationAlgorithm
             {
                 var otherUserInterest = otherUserInterests.SingleOrDefault(e =>
                     e.InterestId == issuerInterest.InterestId);
-                int otherUserInterestWage = otherUserInterest != null
-                    ? otherUserInterest.Wage
-                    : 0;
+                int otherUserInterestWage = otherUserInterest?.Wage ?? 0;
                 int issuerInterestWage = issuerInterest.Wage;
                 wages.Add(new List<int>{ issuerInterestWage, otherUserInterestWage });
             }
-            //zakładając, że wzór wygląda następująco A/sqrt(A1)*sqrt(A2)
             double A = wages.Sum(e => e[0] * e[1]);
             double A1 = Math.Sqrt(wages.Sum(e => Math.Pow(e[0], 2)));
             double A2 = Math.Sqrt(wages.Sum(e => Math.Pow(e[1], 2)));

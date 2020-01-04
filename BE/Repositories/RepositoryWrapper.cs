@@ -9,6 +9,7 @@ using BE.Repositories.Interfaces.Event;
 using BE.Repositories.Interfaces.Post;
 using BE.Repositories.Interfaces.User;
 using BE.Repositories.Model.Event;
+using BE.Repositories.Model.User;
 using BE.Repositories.RepositoryServices.Interfaces.User;
 using BE.Repositories.User;
 using BE.Services.Global.Interfaces;
@@ -34,9 +35,7 @@ namespace BE.Repositories
         private IChatRepository _chat;
         private IChatMessageRepository _chatMessage;
         private IMainCommentRepository _mainComment;
-        
         private IChatMessagesRepository _chatMessages;
-
         //private IChatParticipantsRepository _chatParticipants;
         private IFriendRequestRepository _friendRequest;
         private IEventPostRepository _eventPost;
@@ -45,6 +44,7 @@ namespace BE.Repositories
         private IPhotoRepository _photo;
         private IEventParticipationRequestRepository _eventParticipationRequest;
         private IFriendshipRecommendationRepository _friendshipRecommendation;
+        private ISessionRepository _session;
 
         private readonly IRowSqlQueryService _rowSqlQueryService;
         private ICustomSqlQueryService _customSqlQueryService;
@@ -134,7 +134,10 @@ namespace BE.Repositories
         
         public IFriendshipRecommendationRepository FriendshipRecommendation =>
             _friendshipRecommendation ?? (_friendshipRecommendation =
-                new FriendshipRecommendationRepository(_friendyContext));
+                new FriendshipRecommendationRepository(_friendyContext));  
+        
+        public ISessionRepository Session => _session ?? (_session =
+                new SessionRepository(_friendyContext));
 
 
         /*public IChatParticipantsRepository ChatParticipants =>

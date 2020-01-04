@@ -24,18 +24,6 @@ namespace BE.Repositories
             return @event;
         }
 
-        public async Task<List<Models.Event>> GetExampleEventsByUserId(int userId)
-        {
-/*
-            var events = await FindByCondition(e => e.EventParticipants.Part)
-                .Include(e => e.UserEvents)
-                .ToListAsync();
-            
-            */
-
-            return null;
-        }
-
         public async Task<Models.Event> GetById(int id)
         {
             return await FindByCondition(e => e.Id == id)
@@ -61,39 +49,23 @@ namespace BE.Repositories
             return DynamicLinqStatement.ExtractSpecifiedFields<Models.Event>(obj, selectedFields);
         }
 
-        public async Task<string> GetAvatarPathByEventIdAsync(int id)
-        {
-            return await FindByCondition(e => e.Id == id).Select(e => e.Avatar).SingleOrDefaultAsync();
-        }
-        
-        public async Task UpdateAvatarAsync(string path, int id)
-        {
-            var obj = await FindByCondition(e => e.Id == id).SingleOrDefaultAsync();
-            obj.Avatar = path;
-            await SaveAsync();
-        }
-
-        public async Task UpdateBackgroundAsync(string path, int id)
-        {
-            var obj = await FindByCondition(e => e.Id == id).SingleOrDefaultAsync();
-            obj.Background = path;
-            await SaveAsync();
-        }
-
-        public async Task<IEnumerable<Models.Event>> FilterParticipatingByKeywordAndUserId(int userId, string keyword)
+        public async Task<IEnumerable<Models.Event>> 
+            FilterParticipatingByKeywordAndUserId(int userId, string keyword)
         {
             var events = await FindByCondition(e =>
-                e.EventParticipants.Any(d => d.ParticipantId == userId) && e.Title.ToLower().Contains(keyword.ToLower()))
+                e.EventParticipants.Any(d => d.ParticipantId == userId) 
+                && e.Title.ToLower().Contains(keyword.ToLower()))
                 .Include(e => e.EventParticipants)
                 .ToListAsync();
             return events;
         }
         
-        
-        public async Task<IEnumerable<Models.Event>> FilterAdministeredByKeywordAndUserId(int userId, string keyword)
+        public async Task<IEnumerable<Models.Event>> 
+            FilterAdministeredByKeywordAndUserId(int userId, string keyword)
         {
             var events = await FindByCondition(e =>
-                    e.EventAdmins.Any(d => d.UserId == userId) && e.Title.ToLower().Contains(keyword.ToLower()))
+                    e.EventAdmins.Any(d => d.UserId == userId) 
+                    && e.Title.ToLower().Contains(keyword.ToLower()))
                 .Include(e => e.EventParticipants)
                 .ToListAsync();
             return events;

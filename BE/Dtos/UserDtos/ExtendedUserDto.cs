@@ -14,8 +14,11 @@ namespace BE.Dtos
         public int GenderId { get; set; }
         public DateTime Birthday { get; set; }
         public string Avatar { get; set; }
+        public string ProfileBg { get; set; }
+        public string Status { get; set; }
         public int? EducationId { get; set; }
         public string School { get; set; }
+        public bool IsOnline { get; set; }
         public int? MaritalStatusId { get; set; }
         public int? ReligionId { get; set; }
         public int? AlcoholAttitudeId { get; set; }

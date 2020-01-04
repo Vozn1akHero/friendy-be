@@ -60,8 +60,7 @@ namespace BE.Controllers
                 .RefreshNeedByIssuerId(userId);
             if (refreshNeed)
             {
-                var issuerInterests = await _repository.User
-                    .GetInterestsById(userId);
+                var issuerInterests = await _repository.User.GetInterestsById(userId);
                 if (issuerInterests.Any())
                 {
                     var recommendations = await _cosSim.CalculateAsync(userId, issuerInterests);
