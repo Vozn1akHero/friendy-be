@@ -24,6 +24,7 @@ namespace RecommendationAlgorithm
     public class CosSim : ICosSim
     {
         private IRepositoryWrapper _repository;
+        
         public CosSim(IRepositoryWrapper repository)
         {
             _repository = repository;

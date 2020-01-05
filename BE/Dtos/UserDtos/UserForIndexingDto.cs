@@ -1,29 +1,22 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
-using BE.Models;
 
 namespace BE.Dtos
 {
-    public class ExtendedUserDto
+    public class UserForIndexingDto
     {
         public int Id { get; set; }
         public string Name { get; set; }
         public string Surname { get; set; }
-        public string Email { get; set; }
         public string City { get; set; }
-        public int GenderId { get; set; }
-        public DateTime Birthday { get; set; }
         public string Avatar { get; set; }
-        public string ProfileBg { get; set; }
-        public string Status { get; set; }
+        public DateTime Birthday { get; set; }
         public int? EducationId { get; set; }
-        public string School { get; set; }
-        public bool IsOnline { get; set; }
+        public int GenderId { get; set; }
         public int? MaritalStatusId { get; set; }
         public int? ReligionId { get; set; }
         public int? AlcoholAttitudeId { get; set; }
         public int? SmokingAttitudeId { get; set; }
-        public IEnumerable<object> UserInterests { get; set; }
+        public IEnumerable<UserInterestForElasticsearchDto> UserInterests { get; set; }
     }
 }

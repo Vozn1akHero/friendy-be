@@ -12,7 +12,7 @@ namespace BE.Services.Global
     {
         Task<bool> Authenticate(string username, string password);
         Task<bool> CheckIfEmailIsAvailable(string email);
-        Task Create(NewUserDto user);
+        Task<User> CreateAndReturnAsync(NewUserDto user);
     }
     
     internal class AuthenticationService : IAuthenticationService
@@ -31,17 +31,20 @@ namespace BE.Services.Global
             _mapper = mapper;
         }
         
-        public async Task Create(NewUserDto user)
+        public async Task<User> CreateAndReturnAsync(NewUserDto user)
         {
             string plainTextPassword = user.Password;
             user.Password = BCrypt.Net.BCrypt.HashPassword(plainTextPassword);
             var newUser = _mapper.Map<User>(user);
-            await _repository.User.CreateAsync(newUser);
+            var createdUser = await _repository.User.CreateAndReturnAsync(newUser);
+            return createdUser;
         }
 
         public async Task<bool> CheckIfEmailIsAvailable(string email)
         {
-            var emailAvailabilityStatus = await _friendyContext.User.SingleOrDefaultAsync(e => e.Email == email);
+            var emailAvailabilityStatus = await _friendyContext
+                .User
+                .SingleOrDefaultAsync(e => e.Email == email);
             return emailAvailabilityStatus == null;
         }
         

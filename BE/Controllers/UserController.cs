@@ -145,13 +145,13 @@ namespace BE.Controllers
         {
             int rand = new Random().Next();
             string fileName = Convert.ToString(userId) + "_" + rand + newAvatar.FileName;
-           // string path = "wwwroot/UserPost/" + fileName;
             var path = Path.Combine("wwwroot/UserAvatar", fileName);
             using (var stream = new FileStream(path, FileMode.OpenOrCreate))  
             {  
                 await newAvatar.CopyToAsync(stream);
             }
             await _repository.User.UpdateAvatarAsync(path, userId);
+            await _userDataIndexing.UpdateAvatar(userId, path);
             return Ok(path);
         }
         
@@ -172,21 +172,18 @@ namespace BE.Controllers
             return Ok(path);
         }
 
-        [HttpPut]
-        [Authorize]
-        public async Task<IActionResult> UpdateBasic([FromBody] ExtendedUserDto extendedUserDto,
-            [FromHeader(Name = "userId")] int userId)
-        {
-            return Ok();
-        }
-
         [HttpGet("is-online/{id}")]
         [Authorize]
         public async Task<IActionResult> IsUserOnlineAsync(int id)
         {
             var session = await _repository.Session.GetByUserId(id);
-            var status = session.ConnectionStart != null && session.ConnectionEnd == null;
-            return Ok(status);
+            var status = session.ConnectionEnd == null;
+            return Ok(new
+            {
+                Status = status,
+                session.ConnectionStart,
+                session.ConnectionEnd
+            });
         }
     }
 }

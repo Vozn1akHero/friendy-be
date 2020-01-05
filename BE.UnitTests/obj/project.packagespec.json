@@ -18,7 +18,11 @@
     },
     "frameworks": {
       "netcoreapp2.2": {
-        "projectReferences": {}
+        "projectReferences": {
+          "D:\\Projects\\Praca dyplomowa\\BE\\BE\\BE.csproj": {
+            "projectPath": "D:\\Projects\\Praca dyplomowa\\BE\\BE\\BE.csproj"
+          }
+        }
       }
     },
     "warningProperties": {

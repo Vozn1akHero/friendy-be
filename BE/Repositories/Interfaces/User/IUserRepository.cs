@@ -12,7 +12,7 @@ namespace BE.Interfaces
 {
     public interface IUserRepository : IRepositoryBase<User>
     {
-        Task CreateAsync(User user);
+        Task<User> CreateAndReturnAsync(User user);
         Task<IEnumerable<User>> GetAllAsync();
         Task<IEnumerable<Models.User>> GetAllWithInterestsAsync();
         Task<object> GetWithSelectedFields(int userId, string[] selectedFields);

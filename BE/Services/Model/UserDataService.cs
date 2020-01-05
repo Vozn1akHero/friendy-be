@@ -13,15 +13,24 @@ namespace BE.Services.Model
     public interface IUserDataService
     {
         Task<ExtendedUserDto> GetExtendedById(int id);
+        Task UpdateEducationDataById(int id, int? educationId);
+        Task UpdateBasicDataById(int id, string name, string surname, DateTime birthday);
+
+        Task UpdateAdditionalDataById(int id, int? religionId, int? alcoholAttitudeId,
+            int? maritalStatusId, int? smokingAttitudeId);
+        Task UpdateEmailByIdAsync(int id, string email);
+        Task UpdatePasswordByIdAsync(int id, string password);
     }
     
     public class UserDataService : IUserDataService
     {
         private IRepositoryWrapper _repository;
+        private FriendyContext _friendyContext;
 
-        public UserDataService(IRepositoryWrapper repository)
+        public UserDataService(IRepositoryWrapper repository, FriendyContext friendyContext)
         {
             _repository = repository;
+            _friendyContext = friendyContext;
         }
 
         public async Task<ExtendedUserDto> GetExtendedById(int id)
@@ -32,6 +41,7 @@ namespace BE.Services.Model
                 City = e.City,
                 Name = e.Name,
                 Surname = e.Surname,
+                Email = e.Email,
                 GenderId = e.Gender.Id,
                 Birthday = e.Birthday,
                 Avatar = e.Avatar,
@@ -53,18 +63,50 @@ namespace BE.Services.Model
             return userEx;
         }
         
-        public async Task UpdateBasicById(int id, string name, string surname, DateTime birthday)
+        public async Task UpdateBasicDataById(int id, string name, string surname, DateTime birthday)
         {
-            await _repository.User.UpdateBasicDataById(id, name, surname, birthday);
-            //es
+            var user = await _repository.User.GetByIdAsync(id);
+            user.Name = name;
+            user.Surname = surname;
+            user.Birthday = birthday;
+            await _friendyContext.SaveChangesAsync();
         }
 
-        public async Task UpdateEducationData(int id, Education education)
+        public async Task UpdateEducationDataById(int id, int? educationId)
         {
-            await _repository.User.UpdateEducationDataById(id, education);
-            //es
+            var user = await _repository.User.GetByIdAsync(id);
+            user.EducationId = educationId;
+            await _friendyContext.SaveChangesAsync();
+        }
+        
+        public async Task UpdateAdditionalDataById(int id, int? religionId, int? alcoholAttitudeId, 
+            int? maritalStatusId, int? smokingAttitudeId)
+        {
+            var user = await _repository.User.GetByIdAsync(id);
+            user.AdditionalInfo.ReligionId = religionId;
+            user.AdditionalInfo.AlcoholAttitudeId = alcoholAttitudeId;
+            user.AdditionalInfo.MaritalStatusId = maritalStatusId;
+            user.AdditionalInfo.SmokingAttitudeId = smokingAttitudeId;
+            await _friendyContext.SaveChangesAsync();
         }
 
+        public async Task UpdateEmailByIdAsync(int id, string email)
+        {
+            var userCur = await _repository.User.GetByIdAsync(id);
+            userCur.Email = email;
+            await _friendyContext.SaveChangesAsync();
+        }
+        
+        public async Task UpdatePasswordByIdAsync(int id, string password)
+        {
+            if (password != null)
+            {
+                var userCur = await _repository.User.GetByIdAsync(id);
+                userCur.Password = BCrypt.Net.BCrypt.HashPassword(password);
+                await _friendyContext.SaveChangesAsync();
+            }
+        }
+        
         public async Task UpdateInterestsById(int id, IEnumerable<UserInterests> userInterests)
         {
             await _repository.User.UpdateInterestsById(id, userInterests);

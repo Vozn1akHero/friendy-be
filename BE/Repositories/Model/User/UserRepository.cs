@@ -29,13 +29,12 @@ namespace BE.Repositories
             _userSearchingService = userSearchingService;
         }
 
-        public async Task CreateAsync(Models.User user)
+        public async Task<Models.User> CreateAndReturnAsync(Models.User user)
         {
-            if (user != null)
-            {
-                Create(user);
-                await SaveAsync();
-            }
+            if (user == null) return null;
+            Create(user);
+            await SaveAsync();
+            return user;
         }
 
         public async Task<IEnumerable<Models.User>> GetAllAsync()

@@ -42,6 +42,7 @@
           <e p="PostCommentController.cs" t="Include" />
           <e p="PostController.cs" t="Include" />
           <e p="UserController.cs" t="Include" />
+          <e p="UserDataUpdateController.cs" t="Include" />
           <e p="UserPhotoController.cs" t="Include" />
           <e p="UserPostController.cs" t="Include" />
           <e p="UserSearchController.cs" t="Include" />
@@ -139,6 +140,8 @@
             <e p="FoundUserDto.cs" t="Include" />
             <e p="NewUserDto.cs" t="Include" />
             <e p="UserBasicDto.cs" t="Include" />
+            <e p="UserForIndexingDto.cs" t="Include" />
+            <e p="UserInterestForElasticsearchDto.cs" t="Include" />
             <e p="UserLookUpModelDto.cs" t="Include" />
             <e p="UsersLookUpCriteriaDto.cs" t="Include" />
           </e>

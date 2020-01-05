@@ -8,6 +8,7 @@ using BE.Helpers;
 using BE.Interfaces;
 using BE.Models;
 using BE.Services;
+using BE.Services.Elasticsearch;
 using BE.Services.Global;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
@@ -24,16 +25,19 @@ namespace BE.Controllers
         private ILogger<AuthController> _logger;
         private IRepositoryWrapper _repository;
         private IJwtService _jwtService;
-
+        private IUserDataIndexing _userDataIndexing;
+        
         public AuthController(IAuthenticationService authenticationService, 
         ILogger<AuthController> logger,
         IRepositoryWrapper repository, 
-        IJwtService jwtService)
+        IJwtService jwtService,
+        IUserDataIndexing userDataIndexing)
         {
             _authenticationService = authenticationService;
             _logger = logger;
             _repository = repository;
             _jwtService = jwtService;
+            _userDataIndexing = userDataIndexing;
         }
 
         [HttpPost]
@@ -47,7 +51,7 @@ namespace BE.Controllers
             {
                 return Conflict("Email is already taken");
             }
-            await _authenticationService.Create(user);
+            var createdUser = await _authenticationService.CreateAndReturnAsync(user);
             return Ok();
         }
         

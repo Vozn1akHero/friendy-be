@@ -3,6 +3,7 @@ using BE.Dtos;
 using BE.Interfaces;
 using BE.Models;
 using BE.Repositories;
+using BE.Services.Global;
 using BE.Services.Model;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -26,6 +27,7 @@ namespace BE
         public static void ConfigureRepositoryServices(this
             IServiceCollection services)
         {
+            services.AddScoped<IAuthenticationService, AuthenticationService>();
             services.AddTransient<IUserDataService, UserDataService>();
             services.AddTransient<IUserPostService, UserPostService>();
             services.AddTransient<IEventParticipantService, 

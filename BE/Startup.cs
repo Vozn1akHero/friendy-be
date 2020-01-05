@@ -77,19 +77,16 @@ namespace BE
 
             services.AddScoped<IJwtService, JwtService>();
             services.AddScoped<ICustomSqlQueryService, CustomSqlQueryService>();
-            services.AddScoped<IAuthenticationService, AuthenticationService>();
             services.AddScoped<IImageSaver, ImageSaver>();
             services.AddScoped<IUserSearchingService, UserSearchingService>();
             services.AddScoped<IRowSqlQueryService, RowSqlQueryService>();
             services.AddScoped<IDialogNotifierService, DialogNotifierService>();
-
             services.AddScoped<IEventSearchService, EventSearchService>();
             services.AddScoped<IEventDetailedSearch, EventDetailedSearch>();
             services.AddScoped<IUserSearchService, UserSearchService>();
             services.AddScoped<IUserDetailedSearch, UserDetailedSearch>();
             services.AddScoped<IUserDataIndexing, UserDataIndexing>();
             services.AddScoped<IEventDataIndexing, EventDataIndexing>();
-            
             services.AddScoped<ICosSim, CosSim>();
 
             services.ConfigureRepositoryServices();
