@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
@@ -68,6 +69,34 @@ namespace BE.Repositories
                     && e.Title.ToLower().Contains(keyword.ToLower()))
                 .Include(e => e.EventParticipants)
                 .ToListAsync();
+            return events;
+        }
+
+        public async Task<IEnumerable<Models.Event>> GetParticipatingByUserIdAsync(int userId)
+        {
+            var events =
+                await FindByCondition(e => e.EventParticipants.Any(d => d.ParticipantId == userId))
+                    .Include(e => e.EventParticipants)
+                    .ToListAsync();
+            return events;
+        }
+        public async Task<IEnumerable<Models.Event>> GetAdministeredByUserIdAsync(int userId)
+        {
+            var events =
+                await FindByCondition(e => e.EventAdmins.Any(d => d.UserId == userId))
+                    .Include(e => e.EventParticipants)
+                    .ToListAsync();
+            return events;
+        }  
+        
+        public async Task<IEnumerable<Models.Event>> GetClosestAsync(string city, int 
+        length)
+        {
+            var events =
+                await FindByCondition(e => e.City == city)
+                    .Include(e => e.EventParticipants)
+                    .Take(length)
+                    .ToListAsync();
             return events;
         }
     }

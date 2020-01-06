@@ -20,6 +20,8 @@ namespace BE.Services.Elasticsearch
         Task UpdateAdditionalDataByIdAsync(int id,
             int? religionId, int? alcoholAttitudeId,
             int? maritalStatusId, int? smokingAttitudeId);
+
+        Task Bulk(IEnumerable<UserForIndexingDto> userForIndexingDtos);
     }
 
     public class UserDataIndexing : IUserDataIndexing
@@ -118,6 +120,16 @@ namespace BE.Services.Elasticsearch
                     .Doc(new { Avatar = path })
                     .RetryOnConflict(3)
             );
+        }
+
+        public async Task Bulk(IEnumerable<UserForIndexingDto> userForIndexingDtos)
+        {
+            foreach (var userForIndexingDto in userForIndexingDtos)
+            {
+                await _client.IndexAsync(userForIndexingDto, e => e
+                    .Index("users")
+                    .Id(userForIndexingDto.Id));
+            }
         }
     }
 }

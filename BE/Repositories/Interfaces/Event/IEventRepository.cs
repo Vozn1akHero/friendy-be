@@ -15,5 +15,8 @@ namespace BE.Interfaces.Repositories
         Task<object> GetWithSelectedFields(int id, string[] selectedFields);
         Task<IEnumerable<Event>> FilterParticipatingByKeywordAndUserId(int userId, string keyword);
         Task<IEnumerable<Event>> FilterAdministeredByKeywordAndUserId(int userId, string keyword);
+        Task<IEnumerable<Event>> GetParticipatingByUserIdAsync(int userId);
+        Task<IEnumerable<Models.Event>> GetAdministeredByUserIdAsync(int userId);
+        Task<IEnumerable<Models.Event>> GetClosestAsync(string city, int length);
     }
 }

@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -15,12 +16,15 @@ namespace BE.Repositories
         public EventAdminsRepository(FriendyContext friendyContext) : base(friendyContext)
         {
         }
-        
-        public async Task<List<Models.Event>> GetUserAdministeredEvents(int userId)
+
+        public async Task CreateAndReturn(int eventId, int userId)
         {
-            return await FindByCondition(e => e.UserId == userId)
-                .Select(e => e.Event)
-                .ToListAsync();
+            Create(new EventAdmins()
+            {
+                EventId = eventId,
+                UserId = userId
+            });
+            await SaveAsync();
         }
 
         public async Task<List<EventAdminDto>> GetByEventIdAsync(int eventId)

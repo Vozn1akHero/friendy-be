@@ -185,5 +185,13 @@ namespace BE.Controllers
                 session.ConnectionEnd
             });
         }
+
+        [HttpGet("index")]
+        public async Task<IActionResult> GetDataForEsCluster()
+        {
+            var users = await _userDataService.GetDataForElasticsearchIndex();
+            await _userDataIndexing.Bulk(users);
+            return Ok(users);
+        }
     }
 }

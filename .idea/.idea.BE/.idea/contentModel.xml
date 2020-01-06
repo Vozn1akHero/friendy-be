@@ -14,6 +14,7 @@
           <e p="Profiles" t="Include">
             <e p="EventDataProfile.cs" t="Include" />
             <e p="EventPostProfile.cs" t="Include" />
+            <e p="UserDataForEsIndexingProfile.cs" t="Include" />
             <e p="UserExtendedDataProfile.cs" t="Include" />
             <e p="UserPostProfile.cs" t="Include" />
           </e>
@@ -393,6 +394,7 @@
             <e p="PhotoService.cs" t="Include" />
             <e p="PostCommentService.cs" t="Include" />
             <e p="UserDataService.cs" t="Include" />
+            <e p="UserEventsService.cs" t="Include" />
             <e p="UserPostService.cs" t="Include" />
             <e p="UserSearchService.cs" t="Include" />
             <e p="UserStatusService.cs" t="Include" />

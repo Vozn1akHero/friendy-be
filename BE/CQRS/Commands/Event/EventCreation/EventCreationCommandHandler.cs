@@ -21,12 +21,16 @@ namespace BE.CQRS.Commands.Event.EventCreation
         CancellationToken cancellationToken)
         {
             request.Event.CreatorId = request.CreatorId;
+            request.Event.Avatar = "wwwroot/EventAvatar/default-event-avatar.png";
+            request.Event.Background = "wwwroot/EventBackground/default-event-background.png";
             var eventData = await _repository.Event.CreateAndReturn(request.Event);
-            await _repository.EventParticipants.Add(new EventParticipants()
+            await _repository.EventParticipants.Add(new EventParticipants
             {
                 EventId = eventData.Id,
                 ParticipantId = request.CreatorId
             });
+            await _repository.EventAdmins.CreateAndReturn(eventData.Id,
+                request.CreatorId);
             return Unit.Value;
         }
     }

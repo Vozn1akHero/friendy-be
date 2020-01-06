@@ -40,7 +40,9 @@ namespace BE.Repositories
         public async Task<IEnumerable<Models.User>> GetAllAsync()
         {
             return await FindAll()
-                .OrderBy(x => x.Name)
+                .Include(e=>e.AdditionalInfo)
+                .Include(e=>e.UserInterests)
+                .ThenInclude(e=>e.Interest)
                 .ToListAsync();
         }
         

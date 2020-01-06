@@ -36,6 +36,7 @@ namespace BE
             services.AddTransient<IPhotoService, PhotoService>();
             services.AddTransient<IPostCommentService, PostCommentService>();
             services.AddTransient<IUserStatusService, UserStatusService>();
+            services.AddTransient<IUserEventsService, UserEventsService>();
             services.AddTransient<IFriendshipRecommendationService,
                     FriendshipRecommendationService>();
         }
@@ -48,6 +49,7 @@ namespace BE
                 mc.AddProfile(new UserPostProfile());
                 mc.AddProfile(new EventPostProfile());
                 mc.AddProfile(new EventDataProfile());
+                mc.AddProfile(new UserDataForEsIndexingProfile());
                 mc.CreateMap<NewUserDto, User>();
             });
             IMapper mapper = mappingConfig.CreateMapper();

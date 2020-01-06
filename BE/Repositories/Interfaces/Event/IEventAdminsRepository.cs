@@ -8,7 +8,7 @@ namespace BE.Interfaces.Repositories
 {
     public interface IEventAdminsRepository: IRepositoryBase<EventAdmins>
     {
-        Task<List<Event>> GetUserAdministeredEvents(int userId);
+        Task CreateAndReturn(int eventId, int userId);
         Task<List<EventAdminDto>> GetByEventIdAsync(int eventId);
         Task DeleteByEventIdAndAdminId(int eventId, int adminId);
         Task<List<EventDto>> GetShortenedAdministeredEventsByUserId(int userId);

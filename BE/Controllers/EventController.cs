@@ -23,18 +23,20 @@ namespace BE.Controllers
         private IEventDataService _eventDataService;
         private IEventDataIndexing _eventDataIndexing;
         private IMediator _mediator;
+        private IUserEventsService _eventsService;
         
         public EventController(IRepositoryWrapper repository, 
             IImageSaver imageSaver,
             IEventDataService eventDataService, 
             IEventDataIndexing eventDataIndexing,
-            IMediator mediator)
+            IMediator mediator, IUserEventsService eventsService)
         {
             _repository = repository;
             _imageSaver = imageSaver;
             _eventDataService = eventDataService;
             _eventDataIndexing = eventDataIndexing;
             _mediator = mediator;
+            _eventsService = eventsService;
         }
 
         [HttpPost]
@@ -42,7 +44,6 @@ namespace BE.Controllers
         public async Task<IActionResult> Create([FromBody] Event @event, 
             [FromHeader(Name = "userId")] int userId)
         {
-            //_eventDataIndexing.Create(eventData);
             await _mediator.Send(new EventCreationCommand
             {
                 Event = @event,
@@ -56,10 +57,7 @@ namespace BE.Controllers
         [Route("user/loggedin")]
         public async Task<IActionResult> GetLoggedInUserEvents([FromHeader(Name = "userId")] int userId)
         {
-            var events = await _repository
-                .UserEvents
-                .GetShortenedEventsByUserId(userId);
-            
+            var events = await _eventsService.GetParticipatingByIdAsync(userId);
             return Ok(events);
         }
 
@@ -68,9 +66,17 @@ namespace BE.Controllers
         [Route("user/loggedin/administered")]
         public async Task<IActionResult> GetLoggedInUserAdministeredEvents([FromHeader(Name = "userId")] int userId)
         {
-            var events = await _repository
-                .EventAdmins
-                .GetShortenedAdministeredEventsByUserId(userId);
+            var events = await _eventsService.GetAdministeredByIdAsync(userId);
+            return Ok(events);
+        }
+        
+        [HttpGet]
+        [Authorize]
+        [Route("closest")]
+        public async Task<IActionResult> GetClosestEvents([FromHeader(Name = "userId")]
+         int userId, [FromQuery(Name = "length")] int length)
+        {
+            var events = await _eventsService.GetClosestByUserIdAsync(userId, length);
             return Ok(events);
         }
 
