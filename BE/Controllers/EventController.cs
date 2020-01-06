@@ -19,20 +19,18 @@ namespace BE.Controllers
     public class EventController : ControllerBase
     {
         private IRepositoryWrapper _repository;
-        private IImageSaver _imageSaver;
         private IEventDataService _eventDataService;
         private IEventDataIndexing _eventDataIndexing;
         private IMediator _mediator;
         private IUserEventsService _eventsService;
         
         public EventController(IRepositoryWrapper repository, 
-            IImageSaver imageSaver,
             IEventDataService eventDataService, 
             IEventDataIndexing eventDataIndexing,
-            IMediator mediator, IUserEventsService eventsService)
+            IMediator mediator,
+            IUserEventsService eventsService)
         {
             _repository = repository;
-            _imageSaver = imageSaver;
             _eventDataService = eventDataService;
             _eventDataIndexing = eventDataIndexing;
             _mediator = mediator;
@@ -54,7 +52,7 @@ namespace BE.Controllers
 
         [HttpGet]
         [Authorize]
-        [Route("user/loggedin")]
+        [Route("user/active")]
         public async Task<IActionResult> GetLoggedInUserEvents([FromHeader(Name = "userId")] int userId)
         {
             var events = await _eventsService.GetParticipatingByIdAsync(userId);
@@ -63,7 +61,7 @@ namespace BE.Controllers
 
         [HttpGet]
         [Authorize]
-        [Route("user/loggedin/administered")]
+        [Route("user/active/administered")]
         public async Task<IActionResult> GetLoggedInUserAdministeredEvents([FromHeader(Name = "userId")] int userId)
         {
             var events = await _eventsService.GetAdministeredByIdAsync(userId);
@@ -98,61 +96,6 @@ namespace BE.Controllers
             string[] selectedFieldsArr = selectedFields.Split(",");
             var fields = await _repository.Event.GetWithSelectedFields(id, selectedFieldsArr);
             return Ok(fields);
-        }
-        
-        
-        /*[HttpGet]
-        [Authorize]
-        [Route("{id}/avatar")]
-        public async Task<IActionResult> GetAvatar(int id)
-        {
-            string path = await _repository.Event.GetAvatarPathByEventIdAsync(id);
-            return Ok(path);
-        }
-        */
-
-        [HttpPut]
-        [Authorize]
-        [AuthorizeEventAdmin]
-        [Route("{id}/avatar")]
-        public async Task<IActionResult> UpdateAvatar(int id, [FromForm(Name = "newAvatar")] IFormFile newAvatar)
-        {
-            if (newAvatar == null)
-            {
-                return UnprocessableEntity();
-            }
-            string path = $"wwwroot/EventAvatar/{id}/{newAvatar.FileName}";
-            await _imageSaver
-                .SaveWithSpecifiedName(newAvatar, path);
-            await _eventDataService.UpdateAvatarAsync(id, path);
-            return Ok(path);
-        }
-        
-        /*[HttpGet]
-        [Authorize]
-        [Route("{id}/background")]
-        public async Task<IActionResult> GetBackground(int id)
-        {
-            string path = await _repository.Event.GetAvatarPathByEventIdAsync(id);
-            return Ok(path);
-        }
-        */
-
-        [HttpPut]
-        [Authorize]
-        [AuthorizeEventAdmin]
-        [Route("{id}/background")]
-        public async Task<IActionResult> UpdateBackground(int id, [FromForm(Name = "newBackground")] IFormFile newBackground)
-        {
-            if (newBackground == null)
-            {
-                return UnprocessableEntity();
-            }
-            string path = $"wwwroot/EventBackground/{id}/{newBackground.FileName}";
-            await _imageSaver
-                .SaveWithSpecifiedName(newBackground, path);
-            await _eventDataService.UpdateBackgroundAsync(id, path);
-            return Ok(path);
         }
     }
 }

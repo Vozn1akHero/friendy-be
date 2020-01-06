@@ -29,7 +29,7 @@ namespace BE.Controllers
             _cosSim = cosSim;
         }
 
-        [HttpPost("profile-visit/{profileId}")]
+        /*[HttpPost("profile-visit/{profileId}")]
         [Authorize]
         public async Task<IActionResult> SetPageVisitedAsync(int profileId,
             [FromHeader(Name = "userId")] int userId)
@@ -51,6 +51,7 @@ namespace BE.Controllers
                 name, surname);
             return Ok();
         }
+*/
 
         [HttpGet("recommendations")]
         [Authorize]

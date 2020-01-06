@@ -33,6 +33,7 @@
           <e p="ChatController.cs" t="Include" />
           <e p="EventAdminsController.cs" t="Include" />
           <e p="EventController.cs" t="Include" />
+          <e p="EventDataController.cs" t="Include" />
           <e p="EventParticipantController.cs" t="Include" />
           <e p="EventParticipationRequestController.cs" t="Include" />
           <e p="EventPhotoController.cs" t="Include" />
@@ -210,7 +211,6 @@
         </e>
         <e p="Models" t="Include">
           <e p="AlcoholAttitude.cs" t="Include" />
-          <e p="BasicSearchHistory.cs" t="Include" />
           <e p="Chat.cs" t="Include" />
           <e p="ChatMessage.cs" t="Include" />
           <e p="ChatMessages.cs" t="Include" />
@@ -241,7 +241,6 @@
           <e p="MaritalStatus.cs" t="Include" />
           <e p="Post.cs" t="Include" />
           <e p="PostLike.cs" t="Include" />
-          <e p="RecVisitedProfile.cs" t="Include" />
           <e p="Religion.cs" t="Include" />
           <e p="ResponseToComment.cs" t="Include" />
           <e p="ResponseToMainCommentResponse.cs" t="Include" />

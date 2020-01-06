@@ -82,7 +82,6 @@ namespace BE.Controllers
         [Route("logged-in/extended")]
         public async Task<IActionResult> GetLoggedInExtendedInfo([FromHeader(Name = "userId")] int userId)
         {
-            //var user = await _repository.User.GetExtendedInfoById(userId);
             var user = await _userDataService.GetExtendedById(userId);
             return Ok(user);
         }
@@ -129,13 +128,7 @@ namespace BE.Controllers
         {
             return Ok(id == userId);
         }
-
-/*        [HttpGet("profile-id")]
-        [Authorize]
-        public IActionResult GetProfileId([FromHeader(Name = "userId")] int userId)
-        {
-            return Ok(userId);
-        }*/
+        
         
         [HttpPut]
         [Authorize]

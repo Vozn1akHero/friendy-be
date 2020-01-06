@@ -21,7 +21,7 @@ namespace BE.CustomAttributes
         public async Task OnAuthorizationAsync(AuthorizationFilterContext context)
         {
             IRepositoryWrapper repository = (IRepositoryWrapper)context.HttpContext.RequestServices.GetService(typeof(IRepositoryWrapper));
-            int eventId = Convert.ToInt32(context.HttpContext.GetRouteData().Values.GetValueOrDefault("id"));
+            int eventId = Convert.ToInt32(context.HttpContext.GetRouteData().Values.GetValueOrDefault("eventId"));
             int userId = Convert.ToInt32(context.HttpContext.Request.Headers["userId"]);
             bool res = await repository.EventAdmins.IsUserAdminById(eventId, userId);
             if (!res)

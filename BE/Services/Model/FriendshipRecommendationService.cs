@@ -5,10 +5,10 @@ namespace BE.Services.Model
 {
     public interface IFriendshipRecommendationService
     {
-        Task CreateVisitAsync(int visitedProfileId, int visitorId);
+        /*Task CreateVisitAsync(int visitedProfileId, int visitorId);
 
         Task CreateSearchDataAsync(int issuerId, string name,
-            string surname);
+            string surname);*/
     }
     
     public class FriendshipRecommendationService : IFriendshipRecommendationService
@@ -20,7 +20,7 @@ namespace BE.Services.Model
             _friendyContext = friendyContext;
         }
         
-        public async Task CreateVisitAsync(int visitedProfileId, int visitorId)
+/*        public async Task CreateVisitAsync(int visitedProfileId, int visitorId)
         {
             _friendyContext.RecVisitedProfile.Add(new RecVisitedProfile()
             {
@@ -40,6 +40,6 @@ namespace BE.Services.Model
                 InsertedUserSurname = surname
             });
             await _friendyContext.SaveChangesAsync();
-        }
+        }*/
     }
 }
