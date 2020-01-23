@@ -15,6 +15,9 @@ namespace BE.Services.Model
         Task<IEnumerable<ChatLastMessageDto>>
             GetLastChatMessageRangeByReceiverId
             (int receiverId, int startIndex, int length);
+
+        Task<IEnumerable<ChatMessageDto>> GetMessageRangeByReceiverId(
+            int receiverId, int issuerId, int startIndex, int length);
     }
 
     public class ChatService : IChatService
