@@ -7,11 +7,16 @@ using Microsoft.Extensions.Configuration;
 
 namespace BE.Services.Global
 {
-    public class CustomSqlQueryService : ICustomSqlQueryService
+    public interface ICustomSqlQuery
+    {
+        IQueryable<object> ExecuteQuery(string sqlQuery, List<object> parameters);
+    }
+    
+    public class CustomSqlQuery : ICustomSqlQuery
     {
         private IConfiguration _configuration;
 
-        public CustomSqlQueryService(IConfiguration configuration)
+        public CustomSqlQuery(IConfiguration configuration)
         {
             _configuration = configuration;
         }

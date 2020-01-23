@@ -10,19 +10,6 @@
       <e p="BE" t="IncludeRecursive">
         <e p="appsettings.Development.json" t="Include" />
         <e p="appsettings.json" t="Include" />
-        <e p="Automapper" t="Include">
-          <e p="Profiles" t="Include">
-            <e p="EventDataProfile.cs" t="Include" />
-            <e p="EventPostProfile.cs" t="Include" />
-            <e p="UserDataForEsIndexingProfile.cs" t="Include" />
-            <e p="UserExtendedDataProfile.cs" t="Include" />
-            <e p="UserPostProfile.cs" t="Include" />
-          </e>
-          <e p="Resolvers" t="Include">
-            <e p="IsEventPostLikedByUserResolver.cs" t="Include" />
-            <e p="IsUserPostLikedByUserResolver.cs" t="Include" />
-          </e>
-        </e>
         <e p="BE.csproj" t="IncludeRecursive" />
         <e p="bin" t="ExcludeRecursive" />
         <e p="Cache" t="Include">
@@ -91,7 +78,6 @@
               <e p="CreatedMessageDto.cs" t="Include" />
               <e p="NewMessageDto.cs" t="Include" />
             </e>
-            <e p="LastMessageBuilder.cs" t="Include" />
             <e p="ServerDtos" t="Include">
               <e p="ChatLastMessageDto.cs" t="Include" />
               <e p="ChatMessageDto.cs" t="Include" />
@@ -114,7 +100,8 @@
             <e p="EventDto.cs" t="Include" />
             <e p="EventSearchDto.cs" t="Include" />
           </e>
-          <e p="EventParticipant" t="Include">
+          <e p="EventParticipantDtos" t="Include">
+            <e p="BannedEventParticipantDto.cs" t="Include" />
             <e p="EventParticipantDetailedDto.cs" t="Include" />
             <e p="EventParticipantForListDto.cs" t="Include" />
             <e p="EventParticipationRequestDto.cs" t="Include" />
@@ -140,6 +127,7 @@
           <e p="UserDtos" t="Include">
             <e p="ExtendedUserDto.cs" t="Include" />
             <e p="FoundUserDto.cs" t="Include" />
+            <e p="NewPasswordDto.cs" t="Include" />
             <e p="NewUserDto.cs" t="Include" />
             <e p="UserBasicDto.cs" t="Include" />
             <e p="UserForIndexingDto.cs" t="Include" />
@@ -151,6 +139,11 @@
         <e p="Elasticsearch" t="Include">
           <e p="ElasticClientProvider.cs" t="Include" />
           <e p="ElasticConnectionSettings.cs" t="Include" />
+          <e p="EventDataIndexing.cs" t="Include" />
+          <e p="EventDetailedSearch.cs" t="Include" />
+          <e p="UserDataIndexing.cs" t="Include" />
+          <e p="UserDataUpdating.cs" t="Include" />
+          <e p="UserDetailedSearch.cs" t="Include" />
         </e>
         <e p="Frontend\node_modules\@angular\animations" t="IncludeRecursive" />
         <e p="Frontend\node_modules\@angular\cli" t="IncludeRecursive" />
@@ -197,12 +190,29 @@
         <e p="Frontend\node_modules\tslint" t="IncludeRecursive" />
         <e p="Frontend\node_modules\zone.js" t="IncludeRecursive" />
         <e p="Helpers" t="Include">
+          <e p="CustomSqlQuery.cs" t="Include" />
           <e p="DynamicLinqStatement.cs" t="Include" />
           <e p="HTTPHelpers.cs" t="Include" />
+          <e p="IImageSaver.cs" t="Include" />
           <e p="IndexedForeachLoop.cs" t="Include" />
+          <e p="JwtService.cs" t="Include" />
+          <e p="RawSqlQuery.cs" t="Include" />
         </e>
         <e p="HostedServices" t="Include">
           <e p="FriendshipRecommendationHostedService.cs" t="Include" />
+        </e>
+        <e p="Mapping" t="Include">
+          <e p="Profiles" t="Include">
+            <e p="EventDataProfile.cs" t="Include" />
+            <e p="EventPostProfile.cs" t="Include" />
+            <e p="UserDataForEsIndexingProfile.cs" t="Include" />
+            <e p="UserExtendedDataProfile.cs" t="Include" />
+            <e p="UserPostProfile.cs" t="Include" />
+          </e>
+          <e p="Resolvers" t="Include">
+            <e p="IsEventPostLikedByUserResolver.cs" t="Include" />
+            <e p="IsUserPostLikedByUserResolver.cs" t="Include" />
+          </e>
         </e>
         <e p="Middlewares" t="Include">
           <e p="ExceptionMiddleware.cs" t="Include" />
@@ -223,6 +233,7 @@
           <e p="Education.cs" t="Include" />
           <e p="Event.cs" t="Include" />
           <e p="EventAdmins.cs" t="Include" />
+          <e p="EventBannedUsers.cs" t="Include" />
           <e p="EventImage.cs" t="Include" />
           <e p="EventParticipants.cs" t="Include" />
           <e p="EventParticipationRequest.cs" t="Include" />
@@ -270,6 +281,7 @@
           <e p="Output.cs" t="Include" />
         </e>
         <e p="Repositories" t="Include">
+          <e p="EntityDatabaseTransaction.cs" t="Include" />
           <e p="Interfaces" t="Include">
             <e p="Chat" t="Include">
               <e p="IChatMessageRepository.cs" t="Include" />
@@ -279,6 +291,7 @@
             </e>
             <e p="Event" t="Include">
               <e p="IEventAdminsRepository.cs" t="Include" />
+              <e p="IEventBannedUsersRepository.cs" t="Include" />
               <e p="IEventParticipantsRepository.cs" t="Include" />
               <e p="IEventParticipationRequestRepository.cs" t="Include" />
               <e p="IEventPhotoRepository.cs" t="Include" />
@@ -321,6 +334,7 @@
             </e>
             <e p="Event" t="Include">
               <e p="EventAdminsRepository.cs" t="Include" />
+              <e p="EventBannedUsersRepository.cs" t="Include" />
               <e p="EventParticipantsRepository.cs" t="Include" />
               <e p="EventParticipationRequestRepository.cs" t="Include" />
               <e p="EventRepository.cs" t="Include" />
@@ -362,29 +376,13 @@
             </e>
           </e>
           <e p="RepositoryWrapper.cs" t="Include" />
+          <e p="UnitOfWork.cs" t="Include" />
         </e>
         <e p="ServiceExtensions.cs" t="Include" />
         <e p="Services" t="Include">
-          <e p="Elasticsearch" t="Include">
-            <e p="EventDataIndexing.cs" t="Include" />
-            <e p="EventDetailedSearch.cs" t="Include" />
-            <e p="UserDataIndexing.cs" t="Include" />
-            <e p="UserDataUpdating.cs" t="Include" />
-            <e p="UserDetailedSearch.cs" t="Include" />
-          </e>
-          <e p="Global" t="Include">
-            <e p="AuthenticationService.cs" t="Include" />
-            <e p="CustomSqlQueryService.cs" t="Include" />
-            <e p="ImageProcessingService.cs" t="Include" />
-            <e p="Interfaces" t="Include">
-              <e p="ICustomSqlQueryService.cs" t="Include" />
-              <e p="IJWTService.cs" t="Include" />
-              <e p="IRowSqlQueryService.cs" t="Include" />
-            </e>
-            <e p="JwtService.cs" t="Include" />
-            <e p="RowSqlQueryService.cs" t="Include" />
-          </e>
           <e p="Model" t="Include">
+            <e p="AuthenticationService.cs" t="Include" />
+            <e p="ChatService.cs" t="Include" />
             <e p="EventDataService.cs" t="Include" />
             <e p="EventParticipantService.cs" t="Include" />
             <e p="EventPostService.cs" t="Include" />
@@ -394,6 +392,7 @@
             <e p="PostCommentService.cs" t="Include" />
             <e p="UserDataService.cs" t="Include" />
             <e p="UserEventsService.cs" t="Include" />
+            <e p="UserFriendshipService.cs" t="Include" />
             <e p="UserPostService.cs" t="Include" />
             <e p="UserSearchService.cs" t="Include" />
             <e p="UserStatusService.cs" t="Include" />

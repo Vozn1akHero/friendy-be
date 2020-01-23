@@ -11,11 +11,18 @@ using BE.Interfaces;
 
 namespace BE.Services.Global
 {
-    public class JwtService : IJwtService
+    public interface IJwtConf
+    {
+        string GenerateJwt(List<Claim> claims);
+        bool ValidateJwt(string token);
+        int GetUserIdFromJwt(string token);
+    }
+    
+    public class JwtConf : IJwtConf
     {
         private IConfiguration _configuration;
 
-        public JwtService(IConfiguration configuration)
+        public JwtConf(IConfiguration configuration)
         {
             _configuration = configuration;
         }

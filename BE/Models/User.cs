@@ -15,6 +15,7 @@ namespace BE.Models
             CommentLike = new HashSet<CommentLike>();
             Event = new HashSet<Event>();
             EventAdmins = new HashSet<EventAdmins>();
+            EventBannedUsers = new HashSet<EventBannedUsers>();
             EventParticipants = new HashSet<EventParticipants>();
             EventParticipationRequest = new HashSet<EventParticipationRequest>();
             FriendRequestAuthor = new HashSet<FriendRequest>();
@@ -58,6 +59,7 @@ namespace BE.Models
         public virtual ICollection<CommentLike> CommentLike { get; set; }
         public virtual ICollection<Event> Event { get; set; }
         public virtual ICollection<EventAdmins> EventAdmins { get; set; }
+        public virtual ICollection<EventBannedUsers> EventBannedUsers { get; set; }
         public virtual ICollection<EventParticipants> EventParticipants { get; set; }
         public virtual ICollection<EventParticipationRequest> EventParticipationRequest { get; set; }
         public virtual ICollection<FriendRequest> FriendRequestAuthor { get; set; }

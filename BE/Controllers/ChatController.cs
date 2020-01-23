@@ -4,6 +4,7 @@ using BE.Dtos.ChatDtos;
 using BE.Interfaces;
 using BE.Models;
 using BE.Services.Global;
+using BE.Services.Model;
 using BE.SignalR.Hubs;
 using BE.SignalR.Services;
 using Microsoft.AspNetCore.Authorization;
@@ -18,15 +19,17 @@ namespace BE.Controllers
     {
         private readonly IImageSaver _imageSaver;
         private readonly IRepositoryWrapper _repository;
-        private IDialogNotifierService _dialogNotifierService;
+        private readonly IDialogNotifier _dialogNotifier;
+        private readonly IChatService _chatService;
         
         public ChatController(IRepositoryWrapper repository,
             IImageSaver imageSaver, 
-            IDialogNotifierService dialogNotifierService)
+            IDialogNotifier dialogNotifier, IChatService chatService)
         {
             _repository = repository;
             _imageSaver = imageSaver;
-            _dialogNotifierService = dialogNotifierService;
+            _dialogNotifier = dialogNotifier;
+            _chatService = chatService;
         }
 
         [HttpPost]
@@ -44,8 +47,7 @@ namespace BE.Controllers
             [FromQuery(Name = "length")] int length,
             [FromHeader(Name = "userId")] int userId)
         {
-            var lastMessageList = await _repository
-                .ChatMessages
+            var lastMessageList = await _chatService
                 .GetLastChatMessageRangeByReceiverId(userId, startIndex, length);
             return Ok(lastMessageList);
         }
@@ -124,7 +126,7 @@ namespace BE.Controllers
             
             await _repository.ChatMessages.Add(chatMessages);
             
-            await _dialogNotifierService.SendNewMessageAsync(Convert.ToString(chatId), new 
+            await _dialogNotifier.SendNewMessageAsync(Convert.ToString(chatId), new 
             CreatedMessageDto
             {
                 Content = newMessage.Content,
@@ -133,8 +135,9 @@ namespace BE.Controllers
                 UserId = newMessage.UserId
             });
             
-            var obj = await _repository.Chat.GetLastChatMessageByChatId(chatId);
-            await _dialogNotifierService.SendNewExpandedMessageAsync(Convert.ToString(receiverId), obj);
+            var obj = await _chatService.GetLastChatMessageByChatId(chatId);
+            await _dialogNotifier.SendNewExpandedMessageAsync(Convert.ToString
+            (receiverId), obj);
             
             return CreatedAtAction("AddNewMessage", newMessage);
         }

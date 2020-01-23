@@ -35,14 +35,14 @@ namespace BE.Repositories.Event
             return await Task.Run(() => ExistsByCondition(e => e.ParticipantId == userId && e.EventId == eventId));
         }
 
-        public async Task Leave(int userId, int eventId)
+        public void DeleteByUserIdAndEventId(int userId, int eventId)
         {
-            var foundParticipant = await FindByCondition(e => e.ParticipantId == userId && e.EventId == eventId)
-                .SingleOrDefaultAsync();
+            var foundParticipant = FindByCondition(e => e.ParticipantId == userId
+                                                              && e.EventId == eventId)
+                .SingleOrDefault();
             if (foundParticipant != null)
             {
                 Delete(foundParticipant);
-                await SaveAsync();
             }
         }
         

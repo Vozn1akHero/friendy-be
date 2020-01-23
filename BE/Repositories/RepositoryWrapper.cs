@@ -12,7 +12,7 @@ using BE.Repositories.Model.Event;
 using BE.Repositories.Model.User;
 using BE.Repositories.RepositoryServices.Interfaces.User;
 using BE.Repositories.User;
-using BE.Services.Global.Interfaces;
+using BE.Services.Global;
 
 namespace BE.Repositories
 {
@@ -45,10 +45,8 @@ namespace BE.Repositories
         private IEventParticipationRequestRepository _eventParticipationRequest;
         private IFriendshipRecommendationRepository _friendshipRecommendation;
         private ISessionRepository _session;
-
-        private readonly IRowSqlQueryService _rowSqlQueryService;
-        private ICustomSqlQueryService _customSqlQueryService;
-        private readonly IUserSearchingService _userSearchingService;
+        private IEventBannedUsersRepository _eventBannedUsers;
+        
 
         public IMainCommentRepository MainComment =>
             _mainComment ?? (_mainComment = new MainCommentRepository
@@ -59,8 +57,7 @@ namespace BE.Repositories
             (_friendyContext));
         
         public IUserRepository User =>
-            _user ?? (_user = new UserRepository(_friendyContext,
-                _userSearchingService));
+            _user ?? (_user = new UserRepository(_friendyContext));
 
         public IUserPhotoRepository UserPhoto => _userPhoto ?? (_userPhoto =
                                                      new UserPhotoRepository(
@@ -81,8 +78,7 @@ namespace BE.Repositories
 
         public IUserFriendshipRepository UserFriendship =>
             _userFriendship ?? (_userFriendship =
-                new UserFriendshipRepository(_friendyContext,
-                    _rowSqlQueryService));
+                new UserFriendshipRepository(_friendyContext));
 
         public IUserEventsRepository UserEvents =>
             _userEvents ??
@@ -97,7 +93,7 @@ namespace BE.Repositories
 
         public IChatRepository Chat =>
             _chat ?? (_chat =
-                new ChatRepository(_friendyContext, _rowSqlQueryService));
+                new ChatRepository(_friendyContext));
 
         public IChatMessageRepository ChatMessage =>
             _chatMessage ?? (_chatMessage =
@@ -105,8 +101,7 @@ namespace BE.Repositories
 
         public IChatMessagesRepository ChatMessages =>
             _chatMessages ?? (_chatMessages =
-                new ChatMessagesRepository(_friendyContext,
-                    _rowSqlQueryService));
+                new ChatMessagesRepository(_friendyContext));
 
         public IFriendRequestRepository FriendRequest =>
             _friendRequest ?? (_friendRequest =
@@ -137,24 +132,39 @@ namespace BE.Repositories
                 new FriendshipRecommendationRepository(_friendyContext));  
         
         public ISessionRepository Session => _session ?? (_session =
-                new SessionRepository(_friendyContext));
+                new SessionRepository(_friendyContext));  
+        
+        public IEventBannedUsersRepository EventBannedUsers => _eventBannedUsers ?? (_eventBannedUsers =
+                new EventBannedUsersRepository(_friendyContext));
 
 
         /*public IChatParticipantsRepository ChatParticipants =>
             _chatParticipants ?? (_chatParticipants = new ChatParticipantsRepository(_friendyContext, 
-                _avatarConverterService, 
-                _customSqlQueryService));*/
+                _avatarConverter, 
+                _customSqlQuery));*/
 
 
-        public RepositoryWrapper(FriendyContext friendyContext,
-            ICustomSqlQueryService customSqlQueryService,
-            IUserSearchingService userSearchingService,
-            IRowSqlQueryService rowSqlQueryService)
+        public RepositoryWrapper() : this(new FriendyContext())
+        { }
+        
+        public RepositoryWrapper(FriendyContext friendyContext)
         {
             _friendyContext = friendyContext;
-            _customSqlQueryService = customSqlQueryService;
-            _userSearchingService = userSearchingService;
-            _rowSqlQueryService = rowSqlQueryService;
+        }
+        
+        public IDatabaseTransaction BeginTransaction()
+        {
+            return new EntityDatabaseTransaction(_friendyContext);
+        }
+
+        public int Save()
+        {
+            return _friendyContext.SaveChanges();
+        }
+        
+        public void Dispose()
+        {
+            _friendyContext.Dispose();
         }
     }
 }

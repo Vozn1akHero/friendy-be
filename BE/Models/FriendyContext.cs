@@ -24,6 +24,7 @@ namespace BE.Models
         public virtual DbSet<Education> Education { get; set; }
         public virtual DbSet<Event> Event { get; set; }
         public virtual DbSet<EventAdmins> EventAdmins { get; set; }
+        public virtual DbSet<EventBannedUsers> EventBannedUsers { get; set; }
         public virtual DbSet<EventImage> EventImage { get; set; }
         public virtual DbSet<EventParticipants> EventParticipants { get; set; }
         public virtual DbSet<EventParticipationRequest> EventParticipationRequest { get; set; }
@@ -307,6 +308,29 @@ namespace BE.Models
                     .HasForeignKey(d => d.UserId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_event_admin_user");
+            });
+
+            modelBuilder.Entity<EventBannedUsers>(entity =>
+            {
+                entity.ToTable("event_banned_users");
+
+                entity.Property(e => e.Id).HasColumnName("id");
+
+                entity.Property(e => e.EventId).HasColumnName("event_id");
+
+                entity.Property(e => e.UserId).HasColumnName("user_id");
+
+                entity.HasOne(d => d.Event)
+                    .WithMany(p => p.EventBannedUsers)
+                    .HasForeignKey(d => d.EventId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_event_banned_users_event");
+
+                entity.HasOne(d => d.User)
+                    .WithMany(p => p.EventBannedUsers)
+                    .HasForeignKey(d => d.UserId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_event_banned_users_user");
             });
 
             modelBuilder.Entity<EventImage>(entity =>

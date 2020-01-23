@@ -2,16 +2,19 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Common;
-using BE.Helpers;
 using BE.Models;
-using BE.Services.Global.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
 namespace BE.Services.Global
 {
-    public class RowSqlQueryService : IRowSqlQueryService
+    public interface IRawSqlQuery
     {
-        public RowSqlQueryService(FriendyContext friendyContext)
+        List<T> Execute<T>(string query, Func<DbDataReader, T> map);
+    }
+    
+    public class RawSqlQuery : IRawSqlQuery
+    {
+        public RawSqlQuery(FriendyContext friendyContext)
         {
             FriendyContext = friendyContext;
         }

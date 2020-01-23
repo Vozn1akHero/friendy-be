@@ -7,7 +7,6 @@ using BE.Repositories.RepositoryServices.Interfaces.User;
 using BE.RepositoryServices.User;
 using BE.Services.Elasticsearch;
 using BE.Services.Global;
-using BE.Services.Global.Interfaces;
 using BE.Services.Model;
 using BE.SignalR.Hubs;
 using BE.SignalR.Services;
@@ -75,12 +74,12 @@ namespace BE
                     };
                 });
 
-            services.AddScoped<IJwtService, JwtService>();
-            services.AddScoped<ICustomSqlQueryService, CustomSqlQueryService>();
+            services.AddScoped<IJwtConf, JwtConf>();
+            services.AddScoped<ICustomSqlQuery, CustomSqlQuery>();
             services.AddScoped<IImageSaver, ImageSaver>();
             services.AddScoped<IUserSearchingService, UserSearchingService>();
-            services.AddScoped<IRowSqlQueryService, RowSqlQueryService>();
-            services.AddScoped<IDialogNotifierService, DialogNotifierService>();
+            services.AddScoped<IRawSqlQuery, RawSqlQuery>();
+            services.AddScoped<IDialogNotifier, DialogNotifier>();
             services.AddScoped<IEventSearchService, EventSearchService>();
             services.AddScoped<IEventDetailedSearch, EventDetailedSearch>();
             services.AddScoped<IUserSearchService, UserSearchService>();

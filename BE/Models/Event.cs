@@ -8,6 +8,7 @@ namespace BE.Models
         public Event()
         {
             EventAdmins = new HashSet<EventAdmins>();
+            EventBannedUsers = new HashSet<EventBannedUsers>();
             EventImage = new HashSet<EventImage>();
             EventParticipants = new HashSet<EventParticipants>();
             EventParticipationRequest = new HashSet<EventParticipationRequest>();
@@ -30,6 +31,7 @@ namespace BE.Models
 
         public virtual User Creator { get; set; }
         public virtual ICollection<EventAdmins> EventAdmins { get; set; }
+        public virtual ICollection<EventBannedUsers> EventBannedUsers { get; set; }
         public virtual ICollection<EventImage> EventImage { get; set; }
         public virtual ICollection<EventParticipants> EventParticipants { get; set; }
         public virtual ICollection<EventParticipationRequest> EventParticipationRequest { get; set; }

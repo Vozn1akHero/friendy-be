@@ -12,8 +12,10 @@ using BE.Repositories.Interfaces.User;
 
 namespace BE.Interfaces
 {
-    public interface IRepositoryWrapper
+    public interface IRepositoryWrapper : IDisposable
     {
+        IDatabaseTransaction BeginTransaction();
+        int Save();
         IUserRepository User { get; }
         IPostRepository Post { get; }
         IUserPostRepository UserPost { get; }
@@ -40,5 +42,6 @@ namespace BE.Interfaces
         IEventParticipationRequestRepository EventParticipationRequest { get; }
         IFriendshipRecommendationRepository FriendshipRecommendation { get; }
         ISessionRepository Session { get; }
+        IEventBannedUsersRepository EventBannedUsers { get; }
     }
 }

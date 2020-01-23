@@ -65,8 +65,7 @@ namespace BE.Services.Elasticsearch
             );
         }
 
-        public async Task UpdateBasicData(int id,
-            User user)
+        public async Task UpdateBasicData(int id, User user)
         {
             await _client.UpdateAsync(new
                     DocumentPath<UserForIndexingDto>(id), e => e
@@ -75,7 +74,7 @@ namespace BE.Services.Elasticsearch
                     {
                         Name = user.Name,
                         Surname = user.Surname,
-                        Birthday = user.Birthday,
+                        Birthday = user.Birthday
                     })
                     .RetryOnConflict(3)
             );

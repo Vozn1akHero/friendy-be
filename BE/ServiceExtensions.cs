@@ -37,6 +37,8 @@ namespace BE
             services.AddTransient<IPostCommentService, PostCommentService>();
             services.AddTransient<IUserStatusService, UserStatusService>();
             services.AddTransient<IUserEventsService, UserEventsService>();
+            services.AddTransient<IUserFriendshipService, UserFriendshipService>();
+            services.AddTransient<IChatService, ChatService>();
             services.AddTransient<IFriendshipRecommendationService,
                     FriendshipRecommendationService>();
         }

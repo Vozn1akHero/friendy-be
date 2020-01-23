@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.SignalR;
 
 namespace BE.SignalR.Services
 {
-    public interface IDialogNotifierService
+    public interface IDialogNotifier
     {
         Task SendNewMessageAsync(string groupName, CreatedMessageDto 
         chatMessage);
@@ -17,11 +17,11 @@ namespace BE.SignalR.Services
         chatMessage);
     }
     
-    public class DialogNotifierService : IDialogNotifierService
+    public class DialogNotifier : IDialogNotifier
     {
         private IHubContext<DialogHub> _dialogHub;
         
-        public DialogNotifierService(IHubContext<DialogHub> dialogHub)
+        public DialogNotifier(IHubContext<DialogHub> dialogHub)
         {
             _dialogHub = dialogHub;
         }

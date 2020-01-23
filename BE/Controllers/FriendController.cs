@@ -1,5 +1,6 @@
 using System.Threading.Tasks;
 using BE.Interfaces;
+using BE.Services.Model;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -10,10 +11,12 @@ namespace BE.Controllers
     public class FriendController : ControllerBase
     {
         private readonly IRepositoryWrapper _repository;
+        private readonly IUserFriendshipService _userFriendshipService;
 
-        public FriendController(IRepositoryWrapper repository)
+        public FriendController(IRepositoryWrapper repository, IUserFriendshipService userFriendshipService)
         {
             _repository = repository;
+            _userFriendshipService = userFriendshipService;
         }
 
         [HttpPost]
@@ -73,25 +76,6 @@ namespace BE.Controllers
             return Ok(requests);
         }
         
-        /*
-        [HttpGet]
-        [Authorize]
-        [Route("requests/received")]
-        public async Task<IActionResult> GetReceivedRequests([FromHeader(Name = "userId")] int userId)
-        {
-            var requests = await _repository.FriendRequest.GetReceivedByUserId(userId);
-            return Ok(requests);
-        }
-
-        [HttpGet]
-        [Authorize]
-        [Route("requests/sent")]
-        public async Task<IActionResult> GetSentRequests([FromHeader(Name = "userId")] int userId)
-        {
-            var requests = await _repository.FriendRequest.GetSentByUserId(userId);
-            return Ok(requests);
-        }
-        */
 
         [HttpPost]
         [Authorize]
@@ -122,7 +106,7 @@ namespace BE.Controllers
         public async Task<IActionResult> FilterFriends([FromQuery(Name = "keyword")] string keyword,
             [FromHeader(Name = "userId")] int userId)
         {
-            var friends = await _repository.UserFriendship.FilterByKeywordAsync(userId, keyword);
+            var friends = await _userFriendshipService.FilterByKeywordAsync(userId, keyword);
             return Ok(friends);
         }
 
@@ -150,8 +134,7 @@ namespace BE.Controllers
         [Route("exemplary/logged-in")]
         public async Task<IActionResult> GetExemplaryLoggedInUser([FromHeader(Name = "userId")] int userId)
         {
-            var exemplaryFriends = await _repository
-                .UserFriendship
+            var exemplaryFriends = await _userFriendshipService
                 .GetExemplaryByUserIdAsync(userId);
 
             return Ok(exemplaryFriends);
@@ -162,8 +145,7 @@ namespace BE.Controllers
         [Route("exemplary/{userId}")]
         public async Task<IActionResult> GetExemplaryByUserId(int userId)
         {
-            var exemplaryFriends = await _repository
-                .UserFriendship
+            var exemplaryFriends = await _userFriendshipService
                 .GetExemplaryByUserIdAsync(userId);
 
             return Ok(exemplaryFriends);

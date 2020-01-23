@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Dynamic;
-using System.Globalization;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
@@ -10,24 +7,14 @@ using BE.Dtos;
 using BE.Helpers;
 using BE.Interfaces;
 using BE.Models;
-using BE.Repositories.RepositoryServices.Interfaces.User;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Internal;
-using Nest;
-
 
 namespace BE.Repositories
 {
     public class UserRepository : RepositoryBase<Models.User>, IUserRepository
     {
-        private IUserSearchingService _userSearchingService;
-        
-        public UserRepository(FriendyContext friendyContext,
-            IUserSearchingService userSearchingService)
-            : base(friendyContext)
-        {
-            _userSearchingService = userSearchingService;
-        }
+        public UserRepository(FriendyContext friendyContext)
+            : base(friendyContext) { }
 
         public async Task<Models.User> CreateAndReturnAsync(Models.User user)
         {

@@ -18,12 +18,12 @@ namespace BE.Services.Global
     internal class AuthenticationService : IAuthenticationService
     {
         private FriendyContext _friendyContext;
-        private IJwtService _jwtService;
+        private IJwtConf _jwtService;
         private IRepositoryWrapper _repository;
         private IMapper _mapper;
         
         public AuthenticationService(FriendyContext friendyContext,
-            IJwtService jwtService, IRepositoryWrapper repository, IMapper mapper)
+            IJwtConf jwtService, IRepositoryWrapper repository, IMapper mapper)
         {
             _friendyContext = friendyContext;
             _jwtService = jwtService;

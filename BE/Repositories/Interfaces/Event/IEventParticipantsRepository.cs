@@ -15,6 +15,6 @@ namespace BE.Repositories.Interfaces.Event
         Task<IEnumerable<EventParticipantDetailedDto>> FilterByKeywordAsync(string keyword);
         
         Task<bool> IsEventParticipant(int userId, int eventId);
-        Task Leave(int userId, int eventId);
+        void DeleteByUserIdAndEventId(int userId, int eventId);
     }
 }

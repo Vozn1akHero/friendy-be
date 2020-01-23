@@ -186,5 +186,13 @@ namespace BE.Controllers
             await _userDataIndexing.Bulk(users);
             return Ok(users);
         }
+
+        [HttpGet("interests/find/{title}")]
+        public async Task<IActionResult> FindInterestsByTitle(string title)
+        {
+            var interests = await _userDataService.FindInterestsByTitle(title);
+            if (interests == null) return NotFound();
+            return Ok(interests);
+        }
     }
 }

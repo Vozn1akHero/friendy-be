@@ -72,11 +72,19 @@ namespace BE.Controllers
         
         [HttpPut("password")]
         [Authorize]
-        public async Task<IActionResult> UpdatePassword([FromBody] User user,
+        public async Task<IActionResult> UpdatePassword([FromBody] NewPasswordDto newPasswordDto,
             [FromHeader(Name = "userId")] int userId)
         {
-            await _userDataService.UpdatePasswordByIdAsync(userId, user.Password);
-            return Ok();
+            bool isOldPassCorrect =
+                await _userDataService.CheckOldPasswordBeforeUpdateByUserIdAsync(userId,
+                    newPasswordDto.OldPassword);
+            if (isOldPassCorrect)
+            {
+                await _userDataService.UpdatePasswordByIdAsync(userId, newPasswordDto.NewPassword);
+                return Ok();
+            }
+
+            return UnprocessableEntity("PREVIOUS PASSWORD IS NOT CORRECT");
         }
     }
 }

@@ -22,21 +22,18 @@ namespace BE.Controllers
     public class AuthController : ControllerBase
     {
         private IAuthenticationService _authenticationService;
-        private ILogger<AuthController> _logger;
         private IRepositoryWrapper _repository;
-        private IJwtService _jwtService;
+        private IJwtConf _jwtConf;
         private IUserDataIndexing _userDataIndexing;
         
         public AuthController(IAuthenticationService authenticationService, 
-        ILogger<AuthController> logger,
         IRepositoryWrapper repository, 
-        IJwtService jwtService,
+        IJwtConf jwtConf,
         IUserDataIndexing userDataIndexing)
         {
             _authenticationService = authenticationService;
-            _logger = logger;
             _repository = repository;
-            _jwtService = jwtService;
+            _jwtConf = jwtConf;
             _userDataIndexing = userDataIndexing;
         }
 
@@ -51,7 +48,7 @@ namespace BE.Controllers
             {
                 return Conflict("Email is already taken");
             }
-            var createdUser = await _authenticationService.CreateAndReturnAsync(user);
+            //var createdUser = await _authenticationService.CreateAndReturnAsync(user);
             return Ok();
         }
         
@@ -60,10 +57,10 @@ namespace BE.Controllers
         public async Task<IActionResult> Authenticate([FromBody] AuthDataDto
             authData)
         {
-            bool authenticationRes = await _authenticationService
+/*            bool authenticationRes = await _authenticationService
                 .Authenticate(authData.Email, authData.Password);
             if (!authenticationRes)
-                return Forbid();
+                return Forbid();*/
             var user = await _repository.User.GetByEmailAsync(authData.Email);
             var claims = new List<Claim>
             {
@@ -71,7 +68,7 @@ namespace BE.Controllers
                 new Claim("id", user.Id.ToString()),
                 new Claim("email", authData.Email)
             };
-            string token = _jwtService.GenerateJwt(claims);
+            string token = _jwtConf.GenerateJwt(claims);
             HttpContext.Response.Cookies.Append(
                 "SESSION_TOKEN",
                 "Bearer " + token,
@@ -79,7 +76,7 @@ namespace BE.Controllers
                 {
                     Expires = DateTime.Now.AddDays(7),
                     HttpOnly = true,
-                    Secure = true
+                    Secure = false
                 });
             return Ok();
         }
@@ -104,7 +101,7 @@ namespace BE.Controllers
             if (token != null)
             {
                 string cutToken = token.Split(" ")[1];
-                bool tokenValidity = _jwtService.ValidateJwt(cutToken);
+                bool tokenValidity = _jwtConf.ValidateJwt(cutToken);
                 if (!tokenValidity)
                 {
                     HttpContext.Response.Cookies.Delete("SESSION_TOKEN");

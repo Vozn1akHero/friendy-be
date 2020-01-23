@@ -1,6 +1,7 @@
 using System;
 using System.Threading.Tasks;
 using BE.Interfaces;
+using BE.Services.Global;
 using Microsoft.AspNetCore.Http;
 
 namespace BE.Middlewares
@@ -14,16 +15,16 @@ namespace BE.Middlewares
             _next = next;
         }
 
-        public async Task Invoke(HttpContext context, IJwtService jwtService)
+        public async Task Invoke(HttpContext context, IJwtConf jwtConf)
         {
             string token = context.Request.Cookies["SESSION_TOKEN"];
 
             if (token != null)
             {
-                bool tokenValidity = jwtService.ValidateJwt(token.Split(" ")[1]);
+                bool tokenValidity = jwtConf.ValidateJwt(token.Split(" ")[1]);
                 if (tokenValidity)
                 {
-                    int userId = jwtService.GetUserIdFromJwt(token);
+                    int userId = jwtConf.GetUserIdFromJwt(token);
                     context.Request.Headers.Append("UserId", Convert.ToString(userId));
                 }
             }

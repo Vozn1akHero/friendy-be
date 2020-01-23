@@ -8,6 +8,7 @@ using BE.Dtos;
 using BE.Interfaces;
 using BE.Models;
 using BE.Repositories;
+using Microsoft.EntityFrameworkCore;
 
 namespace BE.Services.Model
 {
@@ -21,7 +22,11 @@ namespace BE.Services.Model
             int? maritalStatusId, int? smokingAttitudeId);
         Task UpdateEmailByIdAsync(int id, string email);
         Task UpdatePasswordByIdAsync(int id, string password);
+
+        Task<bool> CheckOldPasswordBeforeUpdateByUserIdAsync(int id,
+            string password);
         Task<IEnumerable<UserForIndexingDto>> GetDataForElasticsearchIndex();
+        Task<IEnumerable<Interest>> FindInterestsByTitle(string title);
     }
 
     public class UserDataService : IUserDataService
@@ -76,13 +81,15 @@ namespace BE.Services.Model
             user.Name = name;
             user.Surname = surname;
             user.Birthday = birthday;
+            _friendyContext.Entry(user).State = EntityState.Modified;
             await _friendyContext.SaveChangesAsync();
         }
 
         public async Task UpdateEducationDataById(int id, int? educationId)
         {
-            var user = await _repository.User.GetByIdAsync(id);
-            user.EducationId = educationId;
+            var userCur = await _repository.User.GetByIdAsync(id);
+            userCur.EducationId = educationId;
+            _friendyContext.Entry(userCur).State = EntityState.Modified;
             await _friendyContext.SaveChangesAsync();
         }
 
@@ -90,11 +97,12 @@ namespace BE.Services.Model
             int? alcoholAttitudeId,
             int? maritalStatusId, int? smokingAttitudeId)
         {
-            var user = await _repository.User.GetByIdAsync(id);
-            user.AdditionalInfo.ReligionId = religionId;
-            user.AdditionalInfo.AlcoholAttitudeId = alcoholAttitudeId;
-            user.AdditionalInfo.MaritalStatusId = maritalStatusId;
-            user.AdditionalInfo.SmokingAttitudeId = smokingAttitudeId;
+            var userCur = await _repository.User.GetByIdAsync(id);
+            userCur.AdditionalInfo.ReligionId = religionId;
+            userCur.AdditionalInfo.AlcoholAttitudeId = alcoholAttitudeId;
+            userCur.AdditionalInfo.MaritalStatusId = maritalStatusId;
+            userCur.AdditionalInfo.SmokingAttitudeId = smokingAttitudeId;
+            _friendyContext.Entry(userCur).State = EntityState.Modified;
             await _friendyContext.SaveChangesAsync();
         }
 
@@ -102,6 +110,7 @@ namespace BE.Services.Model
         {
             var userCur = await _repository.User.GetByIdAsync(id);
             userCur.Email = email;
+            _friendyContext.Entry(userCur).State = EntityState.Modified;
             await _friendyContext.SaveChangesAsync();
         }
 
@@ -111,8 +120,18 @@ namespace BE.Services.Model
             {
                 var userCur = await _repository.User.GetByIdAsync(id);
                 userCur.Password = BCrypt.Net.BCrypt.HashPassword(password);
+                _friendyContext.Entry(userCur).State = EntityState.Modified;
                 await _friendyContext.SaveChangesAsync();
             }
+        }
+
+        public async Task<bool> CheckOldPasswordBeforeUpdateByUserIdAsync(int id,
+            string password)
+        {
+            dynamic user =
+                await _repository.User.GetWithSelectedFields(id, new[] {"Password"});
+            var isOldPassCorrect = BCrypt.Net.BCrypt.Verify(password, user.Password);
+            return isOldPassCorrect;
         }
 
         public async Task UpdateInterestsById(int id,
@@ -127,6 +146,14 @@ namespace BE.Services.Model
             var users = await _repository.User.GetAllAsync();
             var usersDtos = _mapper.Map<List<UserForIndexingDto>>(users);
             return usersDtos;
+        }
+
+        public async Task<IEnumerable<Interest>> FindInterestsByTitle(string title)
+        {
+            var userInterests = await _friendyContext.Interest.Where(e => e.Title
+            .ToLower().StartsWith(title.ToLower()))
+                .ToListAsync();
+            return userInterests;
         }
     }
 }
