@@ -99,6 +99,17 @@ namespace BE.Controllers
 
             return Ok(friends);
         }
+        
+        [HttpGet]
+        [Authorize]
+        [Route("paginate/logged-in/{page}")]
+        public async Task<IActionResult> GetLoggedInUserFriendsWithPagination([FromQuery(Name = "page")] int page,
+            [FromHeader(Name = "userId")] int userId)
+        {
+            var friends = await _userFriendshipService.GetLastRangeByIdWithPaginationAsync(userId, page);
+
+            return Ok(friends);
+        }
 
         [HttpGet]
         [Authorize]

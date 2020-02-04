@@ -14,5 +14,6 @@ namespace BE.Interfaces.Repositories.Chat
         Task<IEnumerable<ChatMessages>> GetMessageRangeByReceiverId(int
             receiverId, int
             issuerId, int startIndex, int length);
+        Task<IEnumerable<ChatMessages>> GetMessageByReceiverIdWithPaginationAsync(int receiverId, int issuerId, int page);
     }
 }

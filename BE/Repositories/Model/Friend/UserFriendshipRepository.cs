@@ -64,6 +64,19 @@ namespace BE.Repositories
             return friends;
         }
 
+        public async Task<IEnumerable<UserFriendship>> GetLastRangeByIdWithPaginationAsync(int id, int page)
+        {
+            int length = 2;
+            var res = await FindByCondition(e => e.FirstFriendId == id || e.SecondFriendId == id)
+                .Include(e => e.FirstFriend)
+                .Include(e => e.SecondFriend)
+                .ThenInclude(e => e.SessionNavigation)
+                .OrderByDescending(e => e.Id)
+                .Skip((page - 1) * length)
+                .Take(length)
+                .ToListAsync();
+            return res;
+        }
         public async Task<bool> CheckIfFriendsByUserIdsAsync(int firstUserId,
             int secondUserId)
         {

@@ -85,5 +85,20 @@ namespace BE.Controllers
             });
             return Ok(eventPostRange);
         }
+        
+        [HttpGet("paginate/{eventId}/{page}")]
+        [Authorize]
+        public async Task<IActionResult> GetRangeWithPaginationByEventId([FromRoute(Name = "page")] int page,
+            [FromRoute(Name = "eventId")] int eventId, 
+            [FromHeader(Name = "userId")] int userId)
+        {
+            var posts = await _mediator.Send(new GetEventPostsRangeWithPaginationQuery
+            {
+                EventId = eventId,
+                Page = page,
+                UserId = userId
+            });
+            return Ok(posts);
+        }
     }
 }

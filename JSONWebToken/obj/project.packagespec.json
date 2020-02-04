@@ -1,19 +1,18 @@
 ﻿{
   "version": "1.0.0",
   "restore": {
-    "projectUniqueName": "D:\\Projects\\Praca dyplomowa\\BE\\JSONWebToken\\JSONWebToken.csproj",
+    "projectUniqueName": "/home/dimitr/Documents/pd/be/friendy-be/JSONWebToken/JSONWebToken.csproj",
     "projectName": "JSONWebToken",
-    "projectPath": "D:\\Projects\\Praca dyplomowa\\BE\\JSONWebToken\\JSONWebToken.csproj",
-    "outputPath": "D:\\Projects\\Praca dyplomowa\\BE\\JSONWebToken\\obj\\",
+    "projectPath": "/home/dimitr/Documents/pd/be/friendy-be/JSONWebToken/JSONWebToken.csproj",
+    "outputPath": "/home/dimitr/Documents/pd/be/friendy-be/JSONWebToken/obj/",
     "projectStyle": "PackageReference",
     "fallbackFolders": [
-      "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+      "/usr/share/dotnet/sdk/NuGetFallbackFolder"
     ],
     "originalTargetFrameworks": [
       "netcoreapp2.2"
     ],
     "sources": {
-      "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
       "https://api.nuget.org/v3/index.json": {}
     },
     "frameworks": {

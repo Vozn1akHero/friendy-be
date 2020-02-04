@@ -85,6 +85,18 @@ namespace BE.Controllers
             var res = await _chatService.GetMessageRangeByReceiverId(to, userId, startIndex, length);
             return Ok(res);
         }
+        
+        [HttpGet]
+        [Authorize]
+        [Route("{to}/page/{page}")]
+        public async Task<IActionResult> GetMessageInDialogWithPaginationAsync(int to, int page,
+            [FromHeader(Name = "userId")] int userId)
+        {
+            //var chatId = await _repository.Chat.GetChatIdByUrlHash(hashUrl);
+            //var messages = await _repository.ChatMessages.GetMessageRangeByReceiverId(to, userId, startIndex, length);
+            var res = await _chatService.GetMessageByReceiverIdWithPagination(to, userId, page);
+            return Ok(res);
+        }
 
         [HttpPost]
         [Authorize]

@@ -1,0 +1,67 @@
+{
+  "format": 1,
+  "restore": {
+    "/home/dimitr/Documents/pd/be/friendy-be/JSONWebToken/JSONWebToken.csproj": {}
+  },
+  "projects": {
+    "/home/dimitr/Documents/pd/be/friendy-be/JSONWebToken/JSONWebToken.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/home/dimitr/Documents/pd/be/friendy-be/JSONWebToken/JSONWebToken.csproj",
+        "projectName": "JSONWebToken",
+        "projectPath": "/home/dimitr/Documents/pd/be/friendy-be/JSONWebToken/JSONWebToken.csproj",
+        "packagesPath": "/home/dimitr/.nuget/packages/",
+        "outputPath": "/home/dimitr/Documents/pd/be/friendy-be/JSONWebToken/obj/",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "/usr/share/dotnet/sdk/NuGetFallbackFolder"
+        ],
+        "configFilePaths": [
+          "/home/dimitr/.config/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "netcoreapp2.2"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netcoreapp2.2": {
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netcoreapp2.2": {
+          "dependencies": {
+            "Microsoft.NETCore.App": {
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[2.2.0, )",
+              "autoReferenced": true
+            },
+            "Newtonsoft.Json": {
+              "target": "Package",
+              "version": "[9.0.1, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true
+        }
+      }
+    }
+  }
+}

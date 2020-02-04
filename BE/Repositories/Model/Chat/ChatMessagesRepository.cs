@@ -34,5 +34,20 @@ namespace BE.Repositories.Chat
                 .ToListAsync();
             return chatMessages;
         }
+
+        public async Task<IEnumerable<ChatMessages>> GetMessageByReceiverIdWithPaginationAsync(int receiverId, int issuerId, int page)
+        {
+            int length = 20;
+            var chatMessages = await FindByCondition(e =>
+                    (e.Chat.FirstParticipantId == receiverId
+                     && e.Chat.SecondParticipantId == issuerId)
+                    || (e.Chat.FirstParticipantId == issuerId
+                        && e.Chat.SecondParticipantId == receiverId))
+                .Include(e => e.Message)
+                .Skip((page - 1) * length)
+                .Take(length)
+                .ToListAsync();
+            return chatMessages;
+        }
     }
 }

@@ -1,19 +1,18 @@
 ﻿{
   "version": "1.0.0",
   "restore": {
-    "projectUniqueName": "D:\\Projects\\Praca dyplomowa\\BE\\BE\\BE.csproj",
+    "projectUniqueName": "/home/dimitr/Documents/pd/be/friendy-be/BE/BE.csproj",
     "projectName": "BE",
-    "projectPath": "D:\\Projects\\Praca dyplomowa\\BE\\BE\\BE.csproj",
-    "outputPath": "D:\\Projects\\Praca dyplomowa\\BE\\BE\\obj\\",
+    "projectPath": "/home/dimitr/Documents/pd/be/friendy-be/BE/BE.csproj",
+    "outputPath": "/home/dimitr/Documents/pd/be/friendy-be/BE/obj/",
     "projectStyle": "PackageReference",
     "fallbackFolders": [
-      "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+      "/usr/share/dotnet/sdk/NuGetFallbackFolder"
     ],
     "originalTargetFrameworks": [
       "netcoreapp2.2"
     ],
     "sources": {
-      "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
       "https://api.nuget.org/v3/index.json": {}
     },
     "frameworks": {
@@ -86,7 +85,7 @@
           "version": "[2.0.0-preview1-final, )"
         },
         "Microsoft.EntityFrameworkCore.Tools": {
-          "include": "Runtime, Build, Native, ContentFiles, Analyzers",
+          "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
           "suppressParent": "All",
           "target": "Package",
           "version": "[2.2.6, )"

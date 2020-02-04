@@ -44,7 +44,35 @@ namespace BE.Repositories
                 .Include(e => e.Post)
                 .Include(e => e.Post.PostLike)
                 .Include(e => e.Post.Comment)
-                .OrderByDescending(e => e.Post.Date)
+                .OrderByDescending(e => e.Id)
+                .ToListAsync();
+            return posts;
+        }
+        
+        public async Task<IEnumerable<EventPost>> GetLastRangeByIdAsync(int eventId, int lastIndex, int length)
+        {
+            var posts = await FindByCondition(e => e.EventId == eventId && e.Id < lastIndex)
+                .Take(length)
+                .Include(e => e.Event)
+                .Include(e => e.Post)
+                .Include(e => e.Post.PostLike)
+                .Include(e => e.Post.Comment)
+                .OrderByDescending(e => e.Id)
+                .ToListAsync();
+            return posts;
+        }
+
+        public async Task<IEnumerable<EventPost>> GetLastRangeByIdWithPaginationAsync(int eventId, int page)
+        {
+            int length = 5;
+            var posts = await FindByCondition(e => e.EventId == eventId)
+                .OrderByDescending(e => e.Id)
+                .Skip((page - 1) * length)
+                .Take(length)
+                .Include(e => e.Event)
+                .Include(e => e.Post)
+                .Include(e => e.Post.PostLike)
+                .Include(e => e.Post.Comment)
                 .ToListAsync();
             return posts;
         }

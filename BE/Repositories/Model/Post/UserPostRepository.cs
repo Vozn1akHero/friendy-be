@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
@@ -17,7 +18,20 @@ namespace BE.Repositories
         
         public async Task<IEnumerable<UserPost>> GetRangeByIdAsync(int userId, int startIndex, int length)
         {
-            var posts = await FindByCondition(e => e.UserId == userId && e.Id >= startIndex)
+            var posts = await FindByCondition(e => e.UserId == userId && e.Id < startIndex)
+                .Include(e => e.Post)
+                .Include(e => e.Post.PostLike)
+                .Include(e => e.Post.Comment)
+                .Include(e => e.User)
+                .Take(length)
+                .OrderByDescending(e => e.Id)
+                .ToListAsync();
+            return posts;
+        }
+
+        public async Task<IEnumerable<UserPost>> GetRangeByMinDateAsync(int userId, DateTime date, int length)
+        {
+            var posts = await FindByCondition(e => e.UserId == userId && e.Post.Date >= date)
                 .Include(e => e.Post)
                 .Include(e => e.Post.PostLike)
                 .Include(e => e.Post.Comment)
@@ -27,7 +41,20 @@ namespace BE.Repositories
                 .ToListAsync();
             return posts;
         }
-        
+
+        public async Task<IEnumerable<UserPost>> GetLastByUserIdAsync(int userId, int length)
+        {
+            var posts = await FindByCondition(e => e.UserId == userId)
+                .Include(e => e.Post)
+                .Include(e => e.Post.PostLike)
+                .Include(e => e.Post.Comment)
+                .Include(e => e.User)
+                .Take(length)
+                .OrderByDescending(e => e.Id)
+                .ToListAsync();
+            return posts;
+        }
+
         public async Task CreateAsync(UserPost post)
         {
             Create(post);

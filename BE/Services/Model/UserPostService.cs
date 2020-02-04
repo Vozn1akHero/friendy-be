@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,6 +15,8 @@ namespace BE.Services.Model
     public interface IUserPostService
     {
         Task<IEnumerable<UserPostDto>> GetRangeByUserIdAsync(int userId, int startIndex, int length);
+        Task<IEnumerable<UserPostDto>> GetLastByUserIdAsync(int userId, int length);
+        Task<IEnumerable<UserPostDto>> GetRangeByMinDateAsync(int userId, DateTime date, int length);
         Task<UserPostDto> GetByPostId(int postId, int userId);
         Task<UserPostDto> CreateAndReturnAsync(UserPost userPost);
     }
@@ -32,6 +35,20 @@ namespace BE.Services.Model
         public async Task<IEnumerable<UserPostDto>> GetRangeByUserIdAsync(int userId, int startIndex, int length)
         {
             var userPosts = await _repository.UserPost.GetRangeByIdAsync(userId, startIndex, length);
+            var userPostsDtos = _mapper.Map<IEnumerable<UserPostDto>>(userPosts, opt => opt.Items["userId"] = userId);
+            return userPostsDtos;
+        }
+
+        public async Task<IEnumerable<UserPostDto>> GetLastByUserIdAsync(int userId, int length)
+        {
+            var userPosts = await _repository.UserPost.GetLastByUserIdAsync(userId, length);
+            var userPostsDtos = _mapper.Map<IEnumerable<UserPostDto>>(userPosts, opt => opt.Items["userId"] = userId);
+            return userPostsDtos;
+        }
+
+        public async Task<IEnumerable<UserPostDto>> GetRangeByMinDateAsync(int userId, DateTime date, int length)
+        {
+            var userPosts = await _repository.UserPost.GetRangeByMinDateAsync(userId, date, length);
             var userPostsDtos = _mapper.Map<IEnumerable<UserPostDto>>(userPosts, opt => opt.Items["userId"] = userId);
             return userPostsDtos;
         }

@@ -13,7 +13,7 @@ namespace BE.Services.Model
     {
         Task<IEnumerable<FriendDto>> GetRangeByUserIdAsync(int userId,
             int startIndex, int length);
-
+        Task<IEnumerable<FriendDto>> GetLastRangeByIdWithPaginationAsync(int id, int page);
         Task<IEnumerable<FriendDto>> FilterByKeywordAsync(int userId, string keyword);
         Task<IEnumerable<ExemplaryFriendDto>> GetExemplaryByUserIdAsync(int userId);
     }
@@ -29,6 +29,8 @@ namespace BE.Services.Model
             _repository = repository;
             _rawSqlQuery = rawSqlQuery;
         }
+        
+        
 
         public async Task<IEnumerable<FriendDto>> GetRangeByUserIdAsync(int userId,
             int startIndex, int length)
@@ -53,7 +55,29 @@ namespace BE.Services.Model
             });
             return res;
         }
-        
+
+        public async Task<IEnumerable<FriendDto>> GetLastRangeByIdWithPaginationAsync(int id, int page)
+        {
+            var fr = await _repository.UserFriendship.GetLastRangeByIdWithPaginationAsync(id, page);
+            var res = fr.Select(e => new FriendDto
+            {
+                Id = e.FirstFriendId == id ? e.SecondFriendId : e.FirstFriendId,
+                AvatarPath = e.FirstFriendId == id
+                    ? e.SecondFriend.Avatar
+                    : e.FirstFriend.Avatar,
+                Name = e.FirstFriendId == id
+                    ? e.SecondFriend.Name
+                    : e.FirstFriend.Name,
+                OnlineStatus = e.FirstFriendId == id
+                    ? e.SecondFriend.SessionNavigation.ConnectionEnd != null
+                    : e.FirstFriend.SessionNavigation.ConnectionEnd != null,
+                Surname = e.FirstFriendId == id
+                    ? e.SecondFriend.Surname
+                    : e.FirstFriend.Surname
+            });
+            return res;
+        }
+
         public async Task<IEnumerable<FriendDto>> FilterByKeywordAsync(int userId, string keyword)
         {
             string query =

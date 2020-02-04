@@ -39,11 +39,32 @@ namespace BE.Controllers
         [HttpGet]
         [Authorize]
         public async Task<IActionResult> GetRangeByUserId([FromQuery(Name = "userId")] int userId,
-            [FromQuery(Name = "start")] int startIndex,
+            [FromQuery(Name = "startIndex")] int startIndex,
             [FromQuery(Name = "length")] int length)
         {
             var posts = await _userPostService
                 .GetRangeByUserIdAsync(userId, startIndex, length);
+            return Ok(posts);
+        }
+        
+        [HttpGet("with-min-date")]
+        [Authorize]
+        public async Task<IActionResult> GetRangeByDate([FromQuery(Name = "userId")] int userId,
+            [FromQuery(Name = "minDate")] DateTime date,
+            [FromQuery(Name = "length")] int length)
+        {
+            var posts = await _userPostService
+                .GetRangeByMinDateAsync(userId, date, length);
+            return Ok(posts);
+        }
+        
+        [HttpGet("last")]
+        [Authorize]
+        public async Task<IActionResult> GetLastByUserId([FromQuery(Name = "userId")] int userId,
+            [FromQuery(Name = "length")] int length)
+        {
+            var posts = await _userPostService
+                .GetLastByUserIdAsync(userId, length);
             return Ok(posts);
         }
         

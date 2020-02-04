@@ -18,6 +18,8 @@ namespace BE.Services.Model
 
         Task<IEnumerable<ChatMessageDto>> GetMessageRangeByReceiverId(
             int receiverId, int issuerId, int startIndex, int length);
+        Task<IEnumerable<ChatMessageDto>> GetMessageByReceiverIdWithPagination(
+            int receiverId, int issuerId, int page);
     }
 
     public class ChatService : IChatService
@@ -98,6 +100,20 @@ namespace BE.Services.Model
         {
             var chatMessages = await _repository.ChatMessages
                 .GetMessageRangeByReceiverId(receiverId, issuerId, startIndex, length);
+            var res = chatMessages.Select(e => new ChatMessageDto
+            {
+                Content = e.Message.Content,
+                ImagePath = e.Message.ImagePath,
+                UserId = e.Message.UserId,
+                Date = e.Message.Date
+            }).Reverse();
+            return res;
+        }
+
+        public async Task<IEnumerable<ChatMessageDto>> GetMessageByReceiverIdWithPagination(int receiverId, int issuerId, int page)
+        {
+            var chatMessages = await _repository.ChatMessages
+                .GetMessageByReceiverIdWithPaginationAsync(receiverId, issuerId, page);
             var res = chatMessages.Select(e => new ChatMessageDto
             {
                 Content = e.Message.Content,
