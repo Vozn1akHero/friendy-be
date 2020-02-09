@@ -15,7 +15,7 @@ namespace BE.Models
         public string ImagePath { get; set; }
         public DateTime Date { get; set; }
         public int UserId { get; set; }
-        public int? ReceiverId { get; set; }
+        public int ReceiverId { get; set; }
 
         public virtual User Receiver { get; set; }
         public virtual User User { get; set; }

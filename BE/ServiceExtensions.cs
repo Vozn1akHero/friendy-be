@@ -53,6 +53,7 @@ namespace BE
                 mc.AddProfile(new EventDataProfile());
                 mc.AddProfile(new UserDataForEsIndexingProfile());
                 mc.CreateMap<NewUserDto, User>();
+                mc.AddProfile(new ChatLastMessageProfileProfile());
             });
             IMapper mapper = mappingConfig.CreateMapper();
             services.AddSingleton(mapper);

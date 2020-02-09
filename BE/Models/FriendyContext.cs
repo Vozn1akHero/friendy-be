@@ -125,6 +125,7 @@ namespace BE.Models
                 entity.HasOne(d => d.Receiver)
                     .WithMany(p => p.ChatMessageReceiver)
                     .HasForeignKey(d => d.ReceiverId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_chat_message_user1");
 
                 entity.HasOne(d => d.User)

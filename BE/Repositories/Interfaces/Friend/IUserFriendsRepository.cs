@@ -17,5 +17,8 @@ namespace BE.Interfaces.Repositories
         Task<IEnumerable<UserFriendship>> GetExemplaryByUserIdAsync(int userId);
         Task AddNewAsync(int id, int userId);
         Task<bool> CheckIfFriendsByUserIdsAsync(int firstUserId, int secondUserId);
+
+        Task<IEnumerable<UserFriendship>> FindByName(int id,
+            string keyword);
     }
 }

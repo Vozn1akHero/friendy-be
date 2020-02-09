@@ -3272,28 +3272,30 @@
     ]
   },
   "packageFolders": {
-    "/home/dimitr/.nuget/packages/": {},
-    "/usr/share/dotnet/sdk/NuGetFallbackFolder": {}
+    "C:\\Users\\chlenix\\.nuget\\packages\\": {},
+    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/home/dimitr/Documents/pd/be/friendy-be/JSONWebToken/JSONWebToken.csproj",
+      "projectUniqueName": "D:\\Projects\\Praca dyplomowa\\BE\\JSONWebToken\\JSONWebToken.csproj",
       "projectName": "JSONWebToken",
-      "projectPath": "/home/dimitr/Documents/pd/be/friendy-be/JSONWebToken/JSONWebToken.csproj",
-      "packagesPath": "/home/dimitr/.nuget/packages/",
-      "outputPath": "/home/dimitr/Documents/pd/be/friendy-be/JSONWebToken/obj/",
+      "projectPath": "D:\\Projects\\Praca dyplomowa\\BE\\JSONWebToken\\JSONWebToken.csproj",
+      "packagesPath": "C:\\Users\\chlenix\\.nuget\\packages\\",
+      "outputPath": "D:\\Projects\\Praca dyplomowa\\BE\\JSONWebToken\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
-        "/usr/share/dotnet/sdk/NuGetFallbackFolder"
+        "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
       ],
       "configFilePaths": [
-        "/home/dimitr/.config/NuGet/NuGet.Config"
+        "C:\\Users\\chlenix\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
         "netcoreapp2.2"
       ],
       "sources": {
+        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {

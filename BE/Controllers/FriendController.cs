@@ -94,16 +94,15 @@ namespace BE.Controllers
         public async Task<IActionResult> GetLoggedInUserFriendsRange([FromQuery(Name = "startIndex")] int startIndex,
             [FromQuery(Name = "length")] int length, [FromHeader(Name = "userId")] int userId)
         {
-            var friends = await _repository
-                .UserFriendship.GetRangeByUserIdAsync(userId, startIndex, length);
-
+            var friends = await _userFriendshipService
+                .GetRangeByUserIdAsync(userId, startIndex, length);
             return Ok(friends);
         }
         
         [HttpGet]
         [Authorize]
         [Route("paginate/logged-in/{page}")]
-        public async Task<IActionResult> GetLoggedInUserFriendsWithPagination([FromQuery(Name = "page")] int page,
+        public async Task<IActionResult> GetLoggedInUserFriendsWithPagination(int page,
             [FromHeader(Name = "userId")] int userId)
         {
             var friends = await _userFriendshipService.GetLastRangeByIdWithPaginationAsync(userId, page);

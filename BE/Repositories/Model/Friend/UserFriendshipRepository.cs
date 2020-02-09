@@ -11,7 +11,9 @@ namespace BE.Repositories
         IUserFriendshipRepository
     {
         public UserFriendshipRepository(FriendyContext friendyContext) : base(
-            friendyContext) {}
+            friendyContext)
+        {
+        }
 
         public async Task AddNewAsync(int id, int userId)
         {
@@ -25,16 +27,16 @@ namespace BE.Repositories
         }
 
         public async Task<IEnumerable<UserFriendship>> GetRangeByUserIdAsync(int userId,
-            int
-                startIndex, int length)
+            int startIndex, int length)
         {
             var exampleFriendList = await FindByCondition(e => e.FirstFriendId == userId
                                                                || e.SecondFriendId ==
                                                                userId &&
                                                                e.Id >= startIndex)
                 .Include(e => e.FirstFriend)
+                .ThenInclude(e => e.Session)
                 .Include(e => e.SecondFriend)
-                .ThenInclude(e => e.SessionNavigation)
+                .ThenInclude(e => e.Session)
                 .Take(length)
                 .ToListAsync();
 
@@ -64,25 +66,52 @@ namespace BE.Repositories
             return friends;
         }
 
-        public async Task<IEnumerable<UserFriendship>> GetLastRangeByIdWithPaginationAsync(int id, int page)
+        public async Task<IEnumerable<UserFriendship>>
+            GetLastRangeByIdWithPaginationAsync(int id, int page)
         {
-            int length = 2;
-            var res = await FindByCondition(e => e.FirstFriendId == id || e.SecondFriendId == id)
-                .Include(e => e.FirstFriend)
-                .Include(e => e.SecondFriend)
-                .ThenInclude(e => e.SessionNavigation)
-                .OrderByDescending(e => e.Id)
-                .Skip((page - 1) * length)
-                .Take(length)
-                .ToListAsync();
+            var length = 20;
+            var res =
+                await FindByCondition(
+                        e => e.FirstFriendId == id || e.SecondFriendId == id)
+                    .Include(e => e.FirstFriend)
+                    .ThenInclude(e => e.Session)
+                    .Include(e => e.SecondFriend)
+                    .ThenInclude(e => e.Session)
+                    .OrderByDescending(e => e.Id)
+                    .Skip((page - 1) * length)
+                    .Take(length)
+                    .ToListAsync();
             return res;
         }
+
         public async Task<bool> CheckIfFriendsByUserIdsAsync(int firstUserId,
             int secondUserId)
         {
             return await Task.Run(() => ExistsByCondition(e =>
                 e.FirstFriendId == firstUserId && e.SecondFriendId == secondUserId
                 || e.SecondFriendId == firstUserId && e.FirstFriendId == secondUserId));
+        }
+
+        public async Task<IEnumerable<UserFriendship>> FindByName(int id,
+            string keyword)
+        {
+            var res = await FindByCondition(e => e.FirstFriendId == id && (e.SecondFriend
+                                                                               .Name +
+                                                                           " " +
+                                                                           e.SecondFriend
+                                                                               .Surname)
+                                                 .StartsWith(keyword) || e
+                                                     .SecondFriendId == id &&
+                                                 (e.FirstFriend
+                                                      .Name + " " +
+                                                  e.FirstFriend.Surname)
+                                                 .StartsWith(keyword))
+                .Include(e => e.FirstFriend)
+                .ThenInclude(e => e.Session)
+                .Include(e => e.SecondFriend)
+                .ThenInclude(e => e.Session)
+                .ToListAsync();
+            return res;
         }
     }
 }

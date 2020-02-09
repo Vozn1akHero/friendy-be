@@ -135,7 +135,7 @@ namespace BE
             });
 
             app.UseCors(builder => builder.AllowAnyHeader().AllowAnyMethod()
-                .AllowAnyOrigin().AllowCredentials());
+                .AllowAnyOrigin());
             //app.UseHttpsRedirection();
 
             app.UseMiddleware<JWTInHeaderMiddleware>();

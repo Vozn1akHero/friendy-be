@@ -53,17 +53,18 @@ namespace BE.Controllers
         public async Task<IActionResult> LikeUserPostById([FromRoute] int id,
             [FromHeader(Name = "userId")] int userId)
         {
+            if (LikeExistsByPostId(id, userId)) return UnprocessableEntity(); 
             await LikePostById(id, userId);
             return Ok();
         }
         
         [HttpPut]
         [Authorize]
-        [AuthorizeEventParticipant]
         [Route("like/{id}/event-post/{eventId}")]
-        public async Task<IActionResult> LikeEventPostById([FromRoute] int id,
+        public async Task<IActionResult> LikeEventPostById(int id,
             [FromHeader(Name = "userId")] int userId)
         {
+            if (LikeExistsByPostId(id, userId)) return UnprocessableEntity(); 
             await LikePostById(id, userId);
             return Ok();
         }
@@ -80,11 +81,11 @@ namespace BE.Controllers
 
         [HttpPut]
         [Authorize]
-        [AuthorizeEventCreator]
-        [Route("unlike/{id}/event-post/${eventId}")]
+        [Route("unlike/{id}/event-post/{eventId}")]
         public async Task<IActionResult> UnlikeEventPostById(int id,
             [FromHeader(Name = "userId")] int userId)
         {
+            if (!LikeExistsByPostId(id, userId)) return UnprocessableEntity();
             await UnlikePostById(id, userId);
             return Ok();
         }
@@ -95,6 +96,7 @@ namespace BE.Controllers
         public async Task<IActionResult> UnlikeUserPostById(int id,
             [FromHeader(Name = "userId")] int userId)
         {
+            if (!LikeExistsByPostId(id, userId)) return UnprocessableEntity();
             await UnlikePostById(id, userId);
             return Ok();
         }
@@ -103,14 +105,10 @@ namespace BE.Controllers
         {
             await _repository.PostLike.RemoveByPostIdAsync(id, userId);
         }
-        
-        /*[HttpGet("{id}/liked-by-user/{userId}")]
-        [Authorize]
-        public IActionResult GetLikedByUser(int id,
-            [FromHeader(Name = "userId")] int userId)
+
+        private bool LikeExistsByPostId(int id, int userId)
         {
-            bool status = _repository.PostLike.GetPostLikedByUser(id, userId);
-            return Ok(status);
-        }*/
+            return _repository.PostLike.GetPostLikedByUser(id, userId);
+        }
     }
 }

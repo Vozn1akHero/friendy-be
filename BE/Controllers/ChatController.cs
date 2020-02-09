@@ -40,28 +40,17 @@ namespace BE.Controllers
             return Ok();
         }
 
+
         [HttpGet]
         [Authorize]
-        [Route("last-messages")]
-        public async Task<IActionResult> GetLastMessages([FromQuery(Name = "startIndex")] int startIndex,
-            [FromQuery(Name = "length")] int length,
-            [FromHeader(Name = "userId")] int userId)
+        [Route("last-messages/paginate")]
+        public async Task<IActionResult> GetLastMessagesWithPagination([FromQuery(Name = 
+        "page")] int page, [FromHeader(Name = "userId")] int userId)
         {
             var lastMessageList = await _chatService
-                .GetLastChatMessageRangeByReceiverId(userId, startIndex, length);
+                .GetLastMessageByReceiverIdWithPagination(userId, page);
             return Ok(lastMessageList);
         }
-
-
-/*        [HttpGet]
-        [Authorize]
-        [Route("participants/basic-data/{chatHash}")]
-        public async Task<IActionResult> GetDialogParticipantsBasicData(string chatHash)
-        {
-            var chatId = await _repository.Chat.GetChatIdByUrlHash(chatHash);
-            var participantsData = await _repository.ChatParticipants.GetParticipantsBasicDataByChatId(chatId);
-            return Ok(participantsData);
-        }*/
 
         [HttpGet]
         [Authorize]
@@ -74,27 +63,14 @@ namespace BE.Controllers
 
         [HttpGet]
         [Authorize]
-        [Route("{to}")]
-        public async Task<IActionResult> GetMessageRangeInDialogAsync(int to,
-            [FromQuery(Name = "startIndex")] int startIndex,
-            [FromQuery(Name = "length")] int length,
-            [FromHeader(Name = "userId")] int userId)
-        {
-            //var chatId = await _repository.Chat.GetChatIdByUrlHash(hashUrl);
-            //var messages = await _repository.ChatMessages.GetMessageRangeByReceiverId(to, userId, startIndex, length);
-            var res = await _chatService.GetMessageRangeByReceiverId(to, userId, startIndex, length);
-            return Ok(res);
-        }
-        
-        [HttpGet]
-        [Authorize]
         [Route("{to}/page/{page}")]
         public async Task<IActionResult> GetMessageInDialogWithPaginationAsync(int to, int page,
             [FromHeader(Name = "userId")] int userId)
         {
             //var chatId = await _repository.Chat.GetChatIdByUrlHash(hashUrl);
             //var messages = await _repository.ChatMessages.GetMessageRangeByReceiverId(to, userId, startIndex, length);
-            var res = await _chatService.GetMessageByReceiverIdWithPagination(to, userId, page);
+            var res = await _chatService
+                .GetMessageByReceiverIdWithPagination(to, userId, page);
             return Ok(res);
         }
 
@@ -148,7 +124,7 @@ namespace BE.Controllers
                 UserId = newMessage.UserId
             });
             
-            var obj = await _chatService.GetLastChatMessageByChatId(chatId);
+            var obj = await _chatService.GetLastChatMessageByChatId(chatId, receiverId);
             await _dialogNotifier.SendNewExpandedMessageAsync(Convert.ToString
             (receiverId), obj);
             

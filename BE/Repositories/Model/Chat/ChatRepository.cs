@@ -14,7 +14,7 @@ namespace BE.Repositories.Chat
 
         public async Task Add(int firstParticipantId, int secondParticipantId)
         {
-            var newChat = new Models.Chat()
+            var newChat = new Models.Chat
             {
                 FirstParticipantId = firstParticipantId,
                 SecondParticipantId = secondParticipantId

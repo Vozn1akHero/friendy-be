@@ -11,7 +11,7 @@ namespace BE.Controllers
     [Route("api/event-search")]
     public class EventSearchController : ControllerBase
     {
-        private IEventSearchService _eventSearchService;
+        private readonly IEventSearchService _eventSearchService;
         
         public EventSearchController(IEventSearchService eventSearchService)
         {
@@ -21,7 +21,8 @@ namespace BE.Controllers
         [HttpGet]
         [Authorize]
         [Route("{keyword}")]
-        public async Task<IActionResult> SearchByKeywordAsync(string keyword, [FromHeader(Name = "userId")] int userId)
+        public async Task<IActionResult> SearchByKeywordAsync(string keyword,
+            [FromHeader(Name = "userId")] int userId)
         {
             var foundEvents = await _eventSearchService.FilterByKeyword(keyword);
             return Ok(foundEvents);

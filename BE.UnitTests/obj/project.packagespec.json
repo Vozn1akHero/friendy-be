@@ -1,25 +1,26 @@
 ﻿{
   "version": "1.0.0",
   "restore": {
-    "projectUniqueName": "/home/dimitr/Documents/pd/be/friendy-be/BE.UnitTests/BE.UnitTests.csproj",
+    "projectUniqueName": "D:\\Projects\\Praca dyplomowa\\BE\\BE.UnitTests\\BE.UnitTests.csproj",
     "projectName": "BE.UnitTests",
-    "projectPath": "/home/dimitr/Documents/pd/be/friendy-be/BE.UnitTests/BE.UnitTests.csproj",
-    "outputPath": "/home/dimitr/Documents/pd/be/friendy-be/BE.UnitTests/obj/",
+    "projectPath": "D:\\Projects\\Praca dyplomowa\\BE\\BE.UnitTests\\BE.UnitTests.csproj",
+    "outputPath": "D:\\Projects\\Praca dyplomowa\\BE\\BE.UnitTests\\obj\\",
     "projectStyle": "PackageReference",
     "fallbackFolders": [
-      "/usr/share/dotnet/sdk/NuGetFallbackFolder"
+      "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
     ],
     "originalTargetFrameworks": [
       "netcoreapp2.2"
     ],
     "sources": {
+      "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
       "https://api.nuget.org/v3/index.json": {}
     },
     "frameworks": {
       "netcoreapp2.2": {
         "projectReferences": {
-          "/home/dimitr/Documents/pd/be/friendy-be/BE/BE.csproj": {
-            "projectPath": "/home/dimitr/Documents/pd/be/friendy-be/BE/BE.csproj"
+          "D:\\Projects\\Praca dyplomowa\\BE\\BE\\BE.csproj": {
+            "projectPath": "D:\\Projects\\Praca dyplomowa\\BE\\BE\\BE.csproj"
           }
         }
       }
