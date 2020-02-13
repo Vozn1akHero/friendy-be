@@ -21,6 +21,7 @@ namespace BE.Models
         public virtual DbSet<ChatMessages> ChatMessages { get; set; }
         public virtual DbSet<Comment> Comment { get; set; }
         public virtual DbSet<CommentLike> CommentLike { get; set; }
+        public virtual DbSet<CommentResponseLike> CommentResponseLike { get; set; }
         public virtual DbSet<Education> Education { get; set; }
         public virtual DbSet<Event> Event { get; set; }
         public virtual DbSet<EventAdmins> EventAdmins { get; set; }
@@ -209,6 +210,29 @@ namespace BE.Models
                     .HasForeignKey(d => d.UserId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_comment_like_user");
+            });
+
+            modelBuilder.Entity<CommentResponseLike>(entity =>
+            {
+                entity.ToTable("comment_response_like");
+
+                entity.Property(e => e.Id).HasColumnName("id");
+
+                entity.Property(e => e.CommentResponseId).HasColumnName("comment_response_id");
+
+                entity.Property(e => e.UserId).HasColumnName("user_id");
+
+                entity.HasOne(d => d.CommentResponse)
+                    .WithMany(p => p.CommentResponseLike)
+                    .HasForeignKey(d => d.CommentResponseId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_comment_response_like_comment");
+
+                entity.HasOne(d => d.User)
+                    .WithMany(p => p.CommentResponseLike)
+                    .HasForeignKey(d => d.UserId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_comment_response_like_user");
             });
 
             modelBuilder.Entity<Education>(entity =>

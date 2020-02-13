@@ -31,9 +31,7 @@ namespace BE.Services.Model
             int receiverId)
         {
             var msg = await _repository.ChatMessages
-                .GetLastMessageByChatIdWithPaginationAsync(chatId,
-                    e => _mapper.Map<ChatLastMessageDto>(e, opt => opt.Items.Add
-                        ("receiverId", receiverId)));
+                .GetLastMessageByChatIdWithPaginationAsync(chatId, ChatLastMessageDto.Selector(receiverId));
             var act = _mapper.Map<ChatLastMessageDto>(msg, opt => opt
                 .Items["receiverId"] = receiverId);
             return act;

@@ -96,6 +96,7 @@ namespace BE
                     ReferenceLoopHandling.Ignore;
                 options.SerializerSettings.ContractResolver =
                     new CamelCasePropertyNamesContractResolver();
+                options.SerializerSettings.NullValueHandling = NullValueHandling.Ignore;
             });
 
             services.AddMediatR(typeof(Startup));

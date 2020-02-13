@@ -14,9 +14,13 @@ namespace BE.Services.Model
     {
         Task<IEnumerable<PhotoDto>> GetUserPhotoRangeAsync(int authorId, int
             startIndex, int length);
+        Task<IEnumerable<PhotoDto>> GetUserPhotoRangeWithPaginationAsync(int userId, int page);
 
         Task<IEnumerable<PhotoDto>> GetEventPhotoRangeAsync(int
-            eventId, int startIndex, int length);
+            authorId, int
+            startIndex, int length);
+        Task<IEnumerable<PhotoDto>> GetEventPhotosWithPaginationAsync(int
+            eventId, int page);
         Task<Image> AddEventPhotoAsync(int eventId, IFormFile file);
         Task<Image> AddUserPhotoAsync(int authorId, IFormFile file);
     }
@@ -36,7 +40,7 @@ namespace BE.Services.Model
         authorId, int
             startIndex, int length)
         {
-            var images = await _repository.UserPhoto.GetRange(authorId,
+            var images = await _repository.UserPhoto.GetRangeAsync(authorId,
                 startIndex, length);
             var photoDtos = images.Select(e => new PhotoDto
             {
@@ -46,15 +50,39 @@ namespace BE.Services.Model
         }
         
         public async Task<IEnumerable<PhotoDto>> GetEventPhotoRangeAsync(int 
-        eventId, int startIndex, int length)
+            authorId, int
+            startIndex, int length)
         {
-            var images = await _repository.EventPhoto.GetRange(eventId,
+            var images = await _repository.EventPhoto.GetRangeAsync(authorId,
                 startIndex, length);
             var photoDtos = images.Select(e => new PhotoDto
             {
                 Path = e.Image.Path
             }).ToList();
             return photoDtos;
+        }
+
+        public async Task<IEnumerable<PhotoDto>> GetUserPhotoRangeWithPaginationAsync(int 
+        userId, int page)
+        {
+            var images = await _repository.UserPhoto
+            .GetRangeWithPaginationAsync(userId, page);
+            var photoDtos = images.Select(e => new PhotoDto
+            {
+                Path = e.IdNavigation.Path
+            }).ToList();
+            return photoDtos;
+        }
+
+        public async Task<IEnumerable<PhotoDto>> GetEventPhotosWithPaginationAsync(int
+            eventId, int page)
+        {
+            var images = await _repository.EventPhoto.SelectWithPaginationAsync(eventId,
+                page, e => new PhotoDto
+                {
+                    Path = e.Image.Path
+                });
+            return images;
         }
 
         public async Task<Image> AddEventPhotoAsync(int eventId, IFormFile file)

@@ -8,9 +8,10 @@ namespace BE.Repositories.Interfaces.User
 {
     public interface IUserPhotoRepository : IRepositoryBase<UserImage>
     {
-        Task<IEnumerable<UserImage>> GetRange(int authorId, int startIndex, int 
+        Task<IEnumerable<UserImage>> GetRangeAsync(int authorId, int startIndex, int 
         length);
         Task Add(UserImage userImage);
-        Task<int> GetPicturesAmountByEventId(int authorId);
+        Task<IEnumerable<UserImage>> GetRangeWithPaginationAsync(int userId,
+            int page);
     }
 }

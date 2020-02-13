@@ -47,7 +47,8 @@ namespace BE.Repositories
         public async Task<object> GetWithSelectedFields(int id, string[] selectedFields)
         {
             var obj = await FindByCondition(e => e.Id == id).SingleOrDefaultAsync();
-            return DynamicLinqStatement.ExtractSpecifiedFields<Models.Event>(obj, selectedFields);
+            if (obj == null) return null;
+            return DynamicLinqStatement.ExtractSpecifiedFields(obj, selectedFields);
         }
 
         public async Task<IEnumerable<Models.Event>> 

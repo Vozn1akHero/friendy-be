@@ -14,7 +14,17 @@ namespace BE.Repositories.User
         {
         }
 
-        public async Task<IEnumerable<UserImage>> GetRange(int authorId, int 
+        public async Task<IEnumerable<UserImage>> GetRangeWithPaginationAsync(
+            int userId, int page)
+        {
+            int length = 25;
+            return await FindByCondition(e => e.UserId == userId)
+                .Skip((page-1)*length)
+                .Take(length)
+                .ToListAsync();
+        }
+        
+        public async Task<IEnumerable<UserImage>> GetRangeAsync(int authorId, int 
         startIndex, int length)
         {
             return await FindByCondition(e => e.UserId == authorId && e.Id >= startIndex)
@@ -28,9 +38,5 @@ namespace BE.Repositories.User
             await SaveAsync();
         }
 
-        public Task<int> GetPicturesAmountByEventId(int authorId)
-        {
-            throw new System.NotImplementedException();
-        }
     }
 }

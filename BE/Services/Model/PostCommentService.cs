@@ -6,22 +6,21 @@ using System.Linq.Expressions;
 using System.Threading.Tasks;
 using BE.Dtos;
 using BE.Dtos.CommentDtos;
+using BE.Helpers.CustomExceptions;
 using BE.Interfaces;
 using BE.Models;
+using Microsoft.Extensions.Logging;
 
 namespace BE.Services.Model
 {
     public interface IPostCommentService
     {
+        Task<CommentLike> Like(int id, int userId);
+        Task<CommentLike> Unlike(int id, int userId);
         Task<IEnumerable<PostCommentDto>> GetRangeByPostIdAsync(int postId,
             int startIndex, int length);
-
         Task<IEnumerable<PostCommentDto>>
             GetAllMainByPostIdAuthedAsync(int postId,
-                int userId);
-
-        Task<IEnumerable<PostCommentResponseDto>>
-            GetAllCommentResponsesAsync(int commentId,
                 int userId);
         Task AddAsync(Comment comment);
     }
@@ -33,6 +32,31 @@ namespace BE.Services.Model
         public PostCommentService(IRepositoryWrapper repository)
         {
             _repository = repository;
+        }
+
+        public async Task<CommentLike> Like(int id, int userId)
+        {
+            var like = await _repository.CommentLike.FindByCommentIdAndUserId(id, userId);
+            if (like != null)
+            {
+                throw new EntityIsAlreadyLiked();
+            }
+            var newLike = new CommentLike
+            {
+                CommentId = id,
+                UserId = userId
+            };
+            await _repository.Comment.CreateLikeAsync(newLike);
+            return newLike;
+        }
+
+        public async Task<CommentLike> Unlike(int id, int userId)
+        {
+            var like = await _repository.CommentLike.FindByCommentIdAndUserId(id, userId);
+            if (like != null)
+                await _repository.Comment.UnlikeAsync(like);
+            else throw new EntityIsNotLikedException();
+            return like;
         }
 
         public Task<IEnumerable<PostCommentDto>> GetRangeByPostIdAsync(int postId, int startIndex, int length)
@@ -62,33 +86,6 @@ namespace BE.Services.Model
             var posts = await _repository
                 .MainComment
                 .GetAllByPostIdAsync(postId, selectQuery);
-            return posts;
-        }
-
-        public async Task<IEnumerable<PostCommentResponseDto>> 
-        GetAllCommentResponsesAsync(int commentId,
-            int userId)
-        {
-            Expression<Func<ResponseToComment, PostCommentResponseDto>> selectQuery = 
-            e => new PostCommentResponseDto
-                {
-                    Id = e.Id,
-                    AuthorId = e.Comment.UserId,
-                    AuthorName = e.Comment.User.Name,
-                    AuthorSurname = e.Comment.User.Surname,
-                    AuthorAvatarPath = e.Comment.User.Avatar,
-                    Content = e.Comment.Content,
-                    LikesCount = e.Comment.CommentLike.Count,
-                    PostId = e.Comment.PostId,
-                    CommentId = e.ResponseToCommentNavigation.Id,
-                    CommentAuthorName = e.ResponseToCommentNavigation.User.Name,
-                    CommentAuthorSurname = e.ResponseToCommentNavigation.User.Surname,
-                    IsCommentLikedByUser = e.Comment.CommentLike.Any(d => d.UserId == userId),
-                    Date = e.Comment.Date
-                };
-            var posts = await _repository.ResponseToComment
-            .GetAllByMainCommentIdAsync(commentId, 
-                selectQuery);
             return posts;
         }
 

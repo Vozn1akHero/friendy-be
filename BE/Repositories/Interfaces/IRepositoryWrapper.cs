@@ -43,5 +43,6 @@ namespace BE.Interfaces
         IFriendshipRecommendationRepository FriendshipRecommendation { get; }
         ISessionRepository Session { get; }
         IEventBannedUsersRepository EventBannedUsers { get; }
+        ICommentLikeRepository CommentLike { get; }
     }
 }

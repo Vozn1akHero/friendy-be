@@ -31,6 +31,16 @@ namespace BE.Controllers
                     length);
             return Ok(photos);
         }
+        
+        [HttpGet]
+        [Authorize]
+        [Route("{userId}/page/{page}")]
+        public async Task<IActionResult> GetRangeWithPaginationAsync(int userId, int page)
+        {
+            var photos =
+                await _photoService.GetUserPhotoRangeWithPaginationAsync(userId, page);
+            return Ok(photos);
+        }
 
         [HttpPost]
         [Authorize]

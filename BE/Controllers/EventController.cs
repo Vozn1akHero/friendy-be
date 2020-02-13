@@ -95,6 +95,7 @@ namespace BE.Controllers
         {
             string[] selectedFieldsArr = selectedFields.Split(",");
             var fields = await _repository.Event.GetWithSelectedFields(id, selectedFieldsArr);
+            if (fields == null) return NotFound();
             return Ok(fields);
         }
     }

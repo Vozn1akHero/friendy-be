@@ -85,5 +85,20 @@ namespace BE.Repositories
         {
             FriendyContext.SaveChanges();
         }
+        
+        public void SetAddedState<TBe>(TBe entity)
+        {
+            FriendyContext.Entry(entity).State = EntityState.Added;
+        } 
+        
+        public void SetModifiedState<TBe>(TBe entity)
+        {
+            FriendyContext.Entry(entity).State = EntityState.Modified;
+        }
+        
+        public void SetDeletedState<TBe>(TBe entity)
+        {
+            FriendyContext.Entry(entity).State = EntityState.Deleted;
+        }
     }
 }

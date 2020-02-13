@@ -16,7 +16,7 @@ namespace BE
                 .ForMember(dest => dest.ImageUrl, opt => opt.MapFrom(src => src.Message
                 .ImagePath))
                 .ForMember(dest => dest.Date, opt => opt.MapFrom(src => src.Message.Date))
-                .ForMember(dest => dest.SenderId, opt => opt.MapFrom(src => src.Message
+                /*.ForMember(dest => dest.SenderId, opt => opt.MapFrom(src => src.Message
                 .UserId))
                 .ForMember(dest => dest.SenderAvatarPath, opt => opt.MapFrom(src => src
                 .Message.User.Avatar))
@@ -26,7 +26,7 @@ namespace BE
                 src.Message.Receiver.Avatar))
                 .ForMember(dest => dest.InterlocutorId, opt => opt.MapFrom(new InterlocutorIdResolver()))
                 .ForMember(dest => dest.InterlocutorAvatarPath, opt => opt.MapFrom(new InterlocutorAvatarResolver()))
-                .ForMember(dest => dest.WrittenByRequestIssuer, opt => opt.MapFrom(new WrittenByRequestIssuerResolver()));
+                .ForMember(dest => dest.WrittenByRequestIssuer, opt => opt.MapFrom(new WrittenByRequestIssuerResolver()))*/;
         }
     }
 }

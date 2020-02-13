@@ -15,5 +15,11 @@ namespace BE.Interfaces.Repositories
         Task<IEnumerable<TType>> GetMainCommentsByPostIdAsync<TType>(int
                 postId,
             Expression<Func<Comment, TType>> select);
+
+        Task CreateLikeAsync(CommentLike like);
+        Task UnlikeAsync(CommentLike like);
+        Task LikeResponseAsync(CommentResponseLike like);
+        Task UnlikeResponseByResponseIdAndUserIdAsync(int 
+            responseId, int userId);
     }
 }

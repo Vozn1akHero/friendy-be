@@ -32,7 +32,17 @@ namespace BE.Controllers
                     length);
             return Ok(photos);
         }
-
+        
+        [HttpGet]
+        [Authorize]
+        [Route("{eventId}/page/{page}")]
+        public async Task<IActionResult> GetRangeAsync(int eventId, int page)
+        {
+            var photos =
+                await _photoService.GetEventPhotosWithPaginationAsync(eventId, page);
+            return Ok(photos);
+        }
+        
         [HttpPost]
         [Authorize]
         [AuthorizeEventAdmin]

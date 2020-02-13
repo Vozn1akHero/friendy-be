@@ -18,6 +18,7 @@
         <e p="Controllers" t="Include">
           <e p="AuthController.cs" t="Include" />
           <e p="ChatController.cs" t="Include" />
+          <e p="CommentResponseController.cs" t="Include" />
           <e p="EventAdminsController.cs" t="Include" />
           <e p="EventController.cs" t="Include" />
           <e p="EventDataController.cs" t="Include" />
@@ -192,6 +193,10 @@
         <e p="Frontend\node_modules\tslint" t="IncludeRecursive" />
         <e p="Frontend\node_modules\zone.js" t="IncludeRecursive" />
         <e p="Helpers" t="Include">
+          <e p="CustomExceptions" t="Include">
+            <e p="EntityIsAlreadyLiked.cs" t="Include" />
+            <e p="EntityIsNotLikedException.cs" t="Include" />
+          </e>
           <e p="CustomSqlQuery.cs" t="Include" />
           <e p="DynamicLinqStatement.cs" t="Include" />
           <e p="HTTPHelpers.cs" t="Include" />
@@ -235,6 +240,7 @@
           <e p="CommentLike.cs" t="Include" />
           <e p="CommentRespond.cs" t="Include" />
           <e p="CommentRespondLike.cs" t="Include" />
+          <e p="CommentResponseLike.cs" t="Include" />
           <e p="DrugsAttitude.cs" t="Include" />
           <e p="Education.cs" t="Include" />
           <e p="Event.cs" t="Include" />
@@ -317,6 +323,7 @@
               <e p="IPhotoRepository.cs" t="Include" />
             </e>
             <e p="Post" t="Include">
+              <e p="ICommentLikeRepository.cs" t="Include" />
               <e p="ICommentRepository.cs" t="Include" />
               <e p="ICommentResponse.cs" t="Include" />
               <e p="IMainCommentRepository.cs" t="Include" />
@@ -355,6 +362,7 @@
             </e>
             <e p="PhotoRepository.cs" t="Include" />
             <e p="Post" t="Include">
+              <e p="CommentLikeRepository.cs" t="Include" />
               <e p="CommentRepository.cs" t="Include" />
               <e p="CommentResponse.cs" t="Include" />
               <e p="EventPostRepository.cs" t="Include" />
@@ -389,6 +397,7 @@
           <e p="Model" t="Include">
             <e p="AuthenticationService.cs" t="Include" />
             <e p="ChatService.cs" t="Include" />
+            <e p="CommentResponseService.cs" t="Include" />
             <e p="EventDataService.cs" t="Include" />
             <e p="EventParticipantService.cs" t="Include" />
             <e p="EventPostService.cs" t="Include" />

@@ -46,6 +46,7 @@ namespace BE.Repositories
         private IFriendshipRecommendationRepository _friendshipRecommendation;
         private ISessionRepository _session;
         private IEventBannedUsersRepository _eventBannedUsers;
+        private ICommentLikeRepository _commentLike;
         
 
         public IMainCommentRepository MainComment =>
@@ -136,6 +137,9 @@ namespace BE.Repositories
         
         public IEventBannedUsersRepository EventBannedUsers => _eventBannedUsers ?? (_eventBannedUsers =
                 new EventBannedUsersRepository(_friendyContext));
+        
+        public  ICommentLikeRepository CommentLike => _commentLike ?? 
+        (_commentLike = new CommentLikeRepository(_friendyContext));
 
 
         /*public IChatParticipantsRepository ChatParticipants =>
