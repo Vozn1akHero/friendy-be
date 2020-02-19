@@ -32,15 +32,14 @@
     <DotNetCliToolReference Include="Microsoft.EntityFrameworkCore.Tools.DotNet" Version="2.0.3" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="CQRS" />
-    <Folder Include="wwwroot\ChatPhoto" />
-    <Folder Include="wwwroot\EventPhotos" />
-    <Folder Include="wwwroot\EventPost\1" />
-    <Folder Include="wwwroot\ProfileBackground" />
-    <Folder Include="wwwroot\UserPhotos" />
-    <Folder Include="wwwroot\UserPost" />
+    <Folder Include="src\Dtos\EventDtos" />
+    <Folder Include="src\Features\Chat\Commands" />
+    <Folder Include="src\Features\Chat\Queries" />
+    <Folder Include="src\Features\Photo\Services" />
+    <Folder Include="src\Features\Post\Dtos" />
+    <Folder Include="test" />
   </ItemGroup>
-  <ItemGroup>
+  <!--<ItemGroup>
     <Compile Remove="Frontend\**" />
   </ItemGroup>
   <ItemGroup>
@@ -51,6 +50,25 @@
   </ItemGroup>
   <ItemGroup>
     <Content Remove="Frontend\**" />
+    <Content Include="src\wwwroot\EventAvatar\default-event-avatar.png" />
+    <Content Include="src\wwwroot\EventBackground\default-event-background.png" />
+    <Content Include="src\wwwroot\EventPhotos\1\1.jpg" />
+    <Content Include="src\wwwroot\EventPhotos\1\2.jpg" />
+    <Content Include="src\wwwroot\EventPhotos\1\3.png" />
+    <Content Include="src\wwwroot\EventPhotos\1\4.jpg" />
+    <Content Include="src\wwwroot\EventPhotos\1\5_74e77ec5c961e11e9962b10dd72b6e65_900.jpg" />
+    <Content Include="src\wwwroot\ProfileBackground\7_185412012844811218_506049489870700_5467995208966733824_n.png" />
+    <Content Include="src\wwwroot\UserAvatar\7_153921010648411093_2186198518097476_8324811620937105408_n.jpg" />
+    <Content Include="src\wwwroot\UserAvatar\7_15528426534mn0udtift8z.jpg" />
+    <Content Include="src\wwwroot\UserAvatar\7_16835223844mn0udtift8z.jpg" />
+    <Content Include="src\wwwroot\UserAvatar\7_17200817124mn0udtift8z.jpg" />
+    <Content Include="src\wwwroot\UserAvatar\7_196341587946338567_811860422479582_7939631742581735424_n.png" />
+    <Content Include="src\wwwroot\UserAvatar\7_24210801246338567_811860422479582_7939631742581735424_n.png" />
+    <Content Include="src\wwwroot\UserAvatar\7_5597886214mn0udtift8z.jpg" />
+    <Content Include="src\wwwroot\UserAvatar\7_7430601124mn0udtift8z.jpg" />
+    <Content Include="src\wwwroot\UserAvatar\default-user-avatar.png" />
+    <Content Include="src\wwwroot\UserPost\7" />
+    <Content Include="src\wwwroot\UserPost\7_628813034res.png" />
   </ItemGroup>
   <ItemGroup>
     <_ContentIncludedByDefault Remove="Frontend\angular.json" />
@@ -63,5 +81,25 @@
     <_ContentIncludedByDefault Remove="Frontend\src\tslint.json" />
     <_ContentIncludedByDefault Remove="Frontend\tsconfig.json" />
     <_ContentIncludedByDefault Remove="Frontend\tslint.json" />
-  </ItemGroup>
+    <_ContentIncludedByDefault Remove="Properties\launchSettings.json" />
+    <_ContentIncludedByDefault Remove="wwwroot\EventAvatar\default-event-avatar.png" />
+    <_ContentIncludedByDefault Remove="wwwroot\EventBackground\default-event-background.png" />
+    <_ContentIncludedByDefault Remove="wwwroot\EventPhotos\1\1.jpg" />
+    <_ContentIncludedByDefault Remove="wwwroot\EventPhotos\1\2.jpg" />
+    <_ContentIncludedByDefault Remove="wwwroot\EventPhotos\1\3.png" />
+    <_ContentIncludedByDefault Remove="wwwroot\EventPhotos\1\4.jpg" />
+    <_ContentIncludedByDefault Remove="wwwroot\EventPhotos\1\5_74e77ec5c961e11e9962b10dd72b6e65_900.jpg" />
+    <_ContentIncludedByDefault Remove="wwwroot\ProfileBackground\7_185412012844811218_506049489870700_5467995208966733824_n.png" />
+    <_ContentIncludedByDefault Remove="wwwroot\UserAvatar\7_153921010648411093_2186198518097476_8324811620937105408_n.jpg" />
+    <_ContentIncludedByDefault Remove="wwwroot\UserAvatar\7_15528426534mn0udtift8z.jpg" />
+    <_ContentIncludedByDefault Remove="wwwroot\UserAvatar\7_16835223844mn0udtift8z.jpg" />
+    <_ContentIncludedByDefault Remove="wwwroot\UserAvatar\7_17200817124mn0udtift8z.jpg" />
+    <_ContentIncludedByDefault Remove="wwwroot\UserAvatar\7_196341587946338567_811860422479582_7939631742581735424_n.png" />
+    <_ContentIncludedByDefault Remove="wwwroot\UserAvatar\7_24210801246338567_811860422479582_7939631742581735424_n.png" />
+    <_ContentIncludedByDefault Remove="wwwroot\UserAvatar\7_5597886214mn0udtift8z.jpg" />
+    <_ContentIncludedByDefault Remove="wwwroot\UserAvatar\7_7430601124mn0udtift8z.jpg" />
+    <_ContentIncludedByDefault Remove="wwwroot\UserAvatar\default-user-avatar.png" />
+    <_ContentIncludedByDefault Remove="wwwroot\UserPost\7" />
+    <_ContentIncludedByDefault Remove="wwwroot\UserPost\7_628813034res.png" />
+  </ItemGroup>-->
 </Project>

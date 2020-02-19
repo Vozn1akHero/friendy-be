@@ -14,9 +14,6 @@
 /home/dimitr/Documents/pd/be/friendy-be/BE/obj/Debug/netcoreapp2.2/BE.RazorTargetAssemblyInfo.cache
 /home/dimitr/Documents/pd/be/friendy-be/BE/obj/Debug/netcoreapp2.2/BE.dll
 /home/dimitr/Documents/pd/be/friendy-be/BE/obj/Debug/netcoreapp2.2/BE.pdb
-D:\Projects\Praca dyplomowa\BE\BE\bin\Debug\netcoreapp2.2\appsettings.Development.json
-D:\Projects\Praca dyplomowa\BE\BE\bin\Debug\netcoreapp2.2\appsettings.json
-D:\Projects\Praca dyplomowa\BE\BE\bin\Debug\netcoreapp2.2\Properties\launchSettings.json
 D:\Projects\Praca dyplomowa\BE\BE\bin\Debug\netcoreapp2.2\BE.deps.json
 D:\Projects\Praca dyplomowa\BE\BE\bin\Debug\netcoreapp2.2\BE.runtimeconfig.json
 D:\Projects\Praca dyplomowa\BE\BE\bin\Debug\netcoreapp2.2\BE.runtimeconfig.dev.json
@@ -30,3 +27,16 @@ D:\Projects\Praca dyplomowa\BE\BE\obj\Debug\netcoreapp2.2\BE.AssemblyInfo.cs
 D:\Projects\Praca dyplomowa\BE\BE\obj\Debug\netcoreapp2.2\BE.RazorTargetAssemblyInfo.cache
 D:\Projects\Praca dyplomowa\BE\BE\obj\Debug\netcoreapp2.2\BE.dll
 D:\Projects\Praca dyplomowa\BE\BE\obj\Debug\netcoreapp2.2\BE.pdb
+D:\Projects\Praca dyplomowa\BE\BE\bin\Debug\netcoreapp2.2\src\appsettings.Development.json
+D:\Projects\Praca dyplomowa\BE\BE\bin\Debug\netcoreapp2.2\src\appsettings.json
+D:\Projects\Praca dyplomowa\BE\BE\bin\Debug\netcoreapp2.2\Properties\launchSettings.json
+D:\Projects\Praca dyplomowa\BE\BE\bin\Debug\netcoreapp2.2\Frontend\angular.json
+D:\Projects\Praca dyplomowa\BE\BE\bin\Debug\netcoreapp2.2\Frontend\e2e\tsconfig.e2e.json
+D:\Projects\Praca dyplomowa\BE\BE\bin\Debug\netcoreapp2.2\Frontend\package-lock.json
+D:\Projects\Praca dyplomowa\BE\BE\bin\Debug\netcoreapp2.2\Frontend\package.json
+D:\Projects\Praca dyplomowa\BE\BE\bin\Debug\netcoreapp2.2\Frontend\proxy.conf.json
+D:\Projects\Praca dyplomowa\BE\BE\bin\Debug\netcoreapp2.2\Frontend\src\tsconfig.app.json
+D:\Projects\Praca dyplomowa\BE\BE\bin\Debug\netcoreapp2.2\Frontend\src\tsconfig.spec.json
+D:\Projects\Praca dyplomowa\BE\BE\bin\Debug\netcoreapp2.2\Frontend\src\tslint.json
+D:\Projects\Praca dyplomowa\BE\BE\bin\Debug\netcoreapp2.2\Frontend\tsconfig.json
+D:\Projects\Praca dyplomowa\BE\BE\bin\Debug\netcoreapp2.2\Frontend\tslint.json
