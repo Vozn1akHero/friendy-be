@@ -15,13 +15,10 @@ namespace BE.Features.Chat
     {
         private readonly IChatService _chatService;
         private readonly IDialogNotifier _dialogNotifier;
-        private readonly IRepositoryWrapper _repository;
 
-        public ChatController(IRepositoryWrapper repository,
-            IDialogNotifier dialogNotifier,
+        public ChatController(IDialogNotifier dialogNotifier,
             IChatService chatService)
         {
-            _repository = repository;
             _dialogNotifier = dialogNotifier;
             _chatService = chatService;
         }
@@ -53,7 +50,6 @@ namespace BE.Features.Chat
         public async Task<IActionResult> GetByInterlocutorsIdentifiers(int to,
             [FromHeader(Name = "userId")] int userId)
         {
-            //var res = await _repository.Chat.GetByInterlocutorsIdentifiers(to, userId);
             var res = await _chatService.GetByInterlocutorsIdentifiers(to, userId);
             return Ok(res);
         }

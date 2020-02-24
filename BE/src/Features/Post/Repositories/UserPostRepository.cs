@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
 using BE.Features.Comment.Repositories;
 using BE.Models;
@@ -23,48 +24,31 @@ namespace BE.Features.Post
             await SaveAsync();
         }
 
-        public async Task<IEnumerable<UserPost>> GetRangeByIdAsync(int userId,
+        public IEnumerable<UserPost> GetRangeById(int userId,
             int startIndex, int length)
         {
-            var posts =
-                await FindByCondition(e => e.UserId == userId && e.Id < startIndex)
+            var posts = FindByCondition(e => e.UserId == userId && e.Id >= startIndex)
                     .Include(e => e.Post)
                     .Include(e => e.Post.PostLike)
                     .Include(e => e.Post.Comment)
                     .Include(e => e.User)
                     .Take(length)
                     .OrderByDescending(e => e.Id)
-                    .ToListAsync();
+                    .ToList();
             return posts;
         }
 
-        public async Task<IEnumerable<UserPost>> GetRangeByMinDateAsync(int userId,
-            DateTime date, int length)
+        public IEnumerable<T> GetByPage<T>(int userId,
+            int page,
+            Expression<Func<UserPost, T>> selector)
         {
-            var posts =
-                await FindByCondition(e => e.UserId == userId && e.Post.Date >= date)
-                    .Include(e => e.Post)
-                    .Include(e => e.Post.PostLike)
-                    .Include(e => e.Post.Comment)
-                    .Include(e => e.User)
-                    .Take(length)
-                    .OrderByDescending(e => e.Post.Date)
-                    .ToListAsync();
-            return posts;
-        }
-
-        public async Task<IEnumerable<UserPost>> GetLastByUserIdAsync(int userId,
-            int length)
-        {
-            var posts = await FindByCondition(e => e.UserId == userId)
-                .Include(e => e.Post)
-                .Include(e => e.Post.PostLike)
-                .Include(e => e.Post.Comment)
-                .Include(e => e.User)
-                .Take(length)
+            int length = 20;
+            return FindByCondition(e => e.UserId == userId)
                 .OrderByDescending(e => e.Id)
-                .ToListAsync();
-            return posts;
+                .Skip((page - 1) * length)
+                .Take(length)
+                .Select(selector)
+                .ToList();
         }
 
         public void Add(UserPost post)

@@ -101,9 +101,17 @@
           "target": "Package",
           "version": "[2.2.3, )"
         },
+        "Moq": {
+          "target": "Package",
+          "version": "[4.13.1, )"
+        },
         "NEST": {
           "target": "Package",
           "version": "[7.4.2, )"
+        },
+        "NUnit": {
+          "target": "Package",
+          "version": "[3.12.0, )"
         },
         "StackExchange.Redis": {
           "target": "Package",

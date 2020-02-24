@@ -24,7 +24,9 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
+    <PackageReference Include="Moq" Version="4.13.1" />
     <PackageReference Include="NEST" Version="7.4.2" />
+    <PackageReference Include="NUnit" Version="3.12.0" />
     <PackageReference Include="StackExchange.Redis" Version="2.0.601" />
   </ItemGroup>
   <ItemGroup>
@@ -32,12 +34,7 @@
     <DotNetCliToolReference Include="Microsoft.EntityFrameworkCore.Tools.DotNet" Version="2.0.3" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="src\Dtos\EventDtos" />
-    <Folder Include="src\Features\Chat\Commands" />
-    <Folder Include="src\Features\Chat\Queries" />
     <Folder Include="src\Features\Photo\Services" />
-    <Folder Include="src\Features\Post\Dtos" />
-    <Folder Include="test" />
   </ItemGroup>
   <!--<ItemGroup>
     <Compile Remove="Frontend\**" />

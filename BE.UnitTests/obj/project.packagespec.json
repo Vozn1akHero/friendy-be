@@ -44,6 +44,10 @@
           "version": "[2.2.0, )",
           "autoReferenced": true
         },
+        "Moq": {
+          "target": "Package",
+          "version": "[4.13.1, )"
+        },
         "NUnit3TestAdapter": {
           "target": "Package",
           "version": "[3.11.0, )"
@@ -51,6 +55,10 @@
         "nunit": {
           "target": "Package",
           "version": "[3.12.0, )"
+        },
+        "xunit": {
+          "target": "Package",
+          "version": "[2.4.1, )"
         }
       },
       "imports": [

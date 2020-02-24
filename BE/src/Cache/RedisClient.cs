@@ -1,3 +1,4 @@
+using AutoMapper.Configuration;
 using StackExchange.Redis;
 
 namespace BE.Cache

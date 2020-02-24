@@ -20,6 +20,16 @@ namespace BE.Features.Friendship
             _userFriendshipService = userFriendshipService;
         }
 
+        [HttpGet("status/{receiverId}")]
+        [Authorize]
+        public async Task<IActionResult> GetStatus(int receiverId,
+            [FromHeader(Name = "userId")] int userId)
+        {
+            var status =
+                await _userFriendshipService.GetFriendshipStatus(receiverId, userId);
+            return Ok(status);
+        }
+
         [HttpPost]
         [Authorize]
         [Route("request/{receiverId}")]
@@ -37,7 +47,6 @@ namespace BE.Features.Friendship
         public async Task<IActionResult> DeleteRequest(int receiverId,
             [FromHeader(Name = "userId")] int userId)
         {
-            //var receiverFriend = await _repository.Friend.GetByUserId(receiverId);
             var friendRequest =
                 await _repository.FriendRequest.FindByUserIds(userId, receiverId);
             if (friendRequest != null)
@@ -47,17 +56,16 @@ namespace BE.Features.Friendship
             return Ok();
         }
 
-        [HttpGet]
+        /*[HttpGet]
         [Authorize]
         [Route("request/status")]
         public async Task<IActionResult> GetReceivedRequestStatus(int receiverId,
             [FromHeader(Name = "userId")] int userId)
         {
-            //var receiverFriend = await _repository.Friend.GetByUserId(receiverId);
             var status =
                 await _repository.FriendRequest.GetStatusByUserIds(receiverId, userId);
             return Ok(status);
-        }
+        }*/
 
         [HttpGet("requests/received")]
         [Authorize]
@@ -88,11 +96,10 @@ namespace BE.Features.Friendship
         {
             await _repository.UserFriendship.AddNewAsync(id, userId);
             await _repository.Chat.Add(id, userId);
-            //await _repository.ChatParticipants.AddNewAfterFriendAdding(newChat.Id, new[] {id, userId});
             return Ok();
         }
 
-        [HttpGet]
+        /*[HttpGet]
         [Authorize]
         [Route("range/logged-in")]
         public async Task<IActionResult> GetLoggedInUserFriendsRange(
@@ -103,8 +110,21 @@ namespace BE.Features.Friendship
             var friends = await _userFriendshipService
                 .GetRangeByUserIdAsync(userId, startIndex, length);
             return Ok(friends);
-        }
+        }*/
 
+        [HttpGet]
+        [Authorize]
+        [Route("paginate/{userId}")]
+        public async Task<IActionResult> GetUserFriendsWithPagination([FromQuery(Name = "page")] int page, 
+        int userId)
+        {
+            var friends =
+                await _userFriendshipService.GetLastRangeByIdWithPaginationAsync(userId,
+                    page);
+
+            return Ok(friends);
+        }
+        
         [HttpGet]
         [Authorize]
         [Route("paginate/logged-in/{page}")]
@@ -151,7 +171,7 @@ namespace BE.Features.Friendship
             return Ok(users);
         }
 
-        [HttpGet]
+        /*[HttpGet]
         [Authorize]
         [Route("exemplary/logged-in")]
         public async Task<IActionResult> GetExemplaryLoggedInUser(
@@ -172,9 +192,9 @@ namespace BE.Features.Friendship
                 .GetExemplaryByUserIdAsync(userId);
 
             return Ok(exemplaryFriends);
-        }
+        }*/
 
-        [HttpGet]
+        /*[HttpGet]
         [Authorize]
         [Route("friendship-status")]
         public async Task<IActionResult> GetFriendshipStatus(
@@ -184,6 +204,6 @@ namespace BE.Features.Friendship
             var friendshipStatus =
                 await _repository.UserFriendship.CheckIfFriendsByUserIdsAsync(id, userId);
             return Ok(friendshipStatus);
-        }
+        }*/
     }
 }

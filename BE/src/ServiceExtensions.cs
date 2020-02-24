@@ -9,6 +9,7 @@ using BE.Features.Friendship.Services;
 using BE.Features.FriendshipRecommendation;
 using BE.Features.Photo;
 using BE.Features.Post.Services;
+using BE.Features.User;
 using BE.Features.User.Services;
 using BE.Mapping.Profiles;
 using BE.Models;
@@ -44,7 +45,6 @@ namespace BE
             services.AddTransient<IEventDataService, EventDataService>();
             services.AddTransient<IPhotoService, PhotoService>();
             services.AddTransient<IPostCommentService, PostCommentService>();
-            services.AddTransient<IUserStatusService, UserStatusService>();
             services.AddTransient<IUserEventsService, UserEventsService>();
             services.AddTransient<IUserFriendshipService, UserFriendshipService>();
             services.AddTransient<IChatService, ChatService>();
@@ -57,6 +57,7 @@ namespace BE
             services
                 .AddTransient<IEventParticipationStatusService,
                     EventParticipationStatusService>();
+            services.AddTransient<IUserDataUpdateService, UserDataUpdateService>();
         }
 
         public static void ConfigureAutoMapper(this IServiceCollection services)

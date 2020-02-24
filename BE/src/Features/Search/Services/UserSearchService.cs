@@ -60,7 +60,9 @@ namespace BE.Features.Search.Services
                     && bs.Match(f => f.Field(d => d.SmokingAttitudeId).Query
                     (usersLookUpCriteriaDto
                         .SmokingOpinionId.ToString()))
-                ))));
+                    && bs.Terms(f=>f.Field(d=>d.UserInterests).Field("id").Terms
+                    (usersLookUpCriteriaDto.Interests)))
+                )));
             var users = searchResponse.Documents;
             return users;
         }

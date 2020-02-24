@@ -1,5 +1,8 @@
 using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.Threading.Tasks;
+using BE.Dtos.PostDtos;
 using BE.Features.Post.Services;
 using BE.Helpers;
 using BE.Repositories;
@@ -20,44 +23,31 @@ namespace BE.Features.User
             _userPostService = userPostService;
         }
 
-        [HttpGet]
+        [HttpGet("range")]
         [Authorize]
-        public async Task<IActionResult> GetRangeByUserId(
-            [FromQuery(Name = "userId")] int userId,
-            [FromQuery(Name = "startIndex")] int startIndex,
-            [FromQuery(Name = "length")] int length)
+        public ActionResult
+            GetRange(int userId, int startIndex, int length)
         {
-            var posts = await _userPostService
-                .GetRangeByUserIdAsync(userId, startIndex, length);
+            var posts =
+                _userPostService.GetRangeByUserId(userId, startIndex, length);
+            if (posts == null) return NotFound();
             return Ok(posts);
         }
 
-        [HttpGet("with-min-date")]
+        [HttpGet("range")]
         [Authorize]
-        public async Task<IActionResult> GetRangeByDate(
+        public ActionResult<IEnumerable<UserPostDto>> GetByPage(
             [FromQuery(Name = "userId")] int userId,
-            [FromQuery(Name = "minDate")] DateTime date,
-            [FromQuery(Name = "length")] int length)
+            [FromQuery(Name = "page")] int page)
         {
-            var posts = await _userPostService
-                .GetRangeByMinDateAsync(userId, date, length);
-            return Ok(posts);
-        }
-
-        [HttpGet("last")]
-        [Authorize]
-        public async Task<IActionResult> GetLastByUserId(
-            [FromQuery(Name = "userId")] int userId,
-            [FromQuery(Name = "length")] int length)
-        {
-            var posts = await _userPostService
-                .GetLastByUserIdAsync(userId, length);
+            var posts = _userPostService
+                .GetByPage(userId, page);
             return Ok(posts);
         }
 
         [HttpPost]
         [Authorize]
-        public async Task<IActionResult> CreateUserPost(
+        public async Task<IActionResult> CreateAsync(
             [FromForm(Name = "image")] IFormFile image,
             [FromForm(Name = "content")] string content,
             [FromHeader(Name = "userId")] int userId)

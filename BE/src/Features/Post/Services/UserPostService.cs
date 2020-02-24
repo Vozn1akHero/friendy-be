@@ -12,17 +12,10 @@ namespace BE.Features.Post.Services
 {
     public interface IUserPostService
     {
-        Task<IEnumerable<UserPostDto>> GetRangeByUserIdAsync(int userId, int startIndex,
+        IEnumerable<UserPostDto> GetRangeByUserId(int userId, int startIndex,
             int length);
-
-        Task<IEnumerable<UserPostDto>> GetLastByUserIdAsync(int userId, int length);
-
-        Task<IEnumerable<UserPostDto>> GetRangeByMinDateAsync(int userId, DateTime date,
-            int length);
-
+        IEnumerable<UserPostDto> GetByPage(int userId, int page);
         UserPostDto GetByPostId(int postId, int userId);
-
-        //Task<UserPostDto> CreateAndReturnAsync(UserPost userPost);
         Task<UserPostDto> CreateAndReturnAsync(int authorId, string content,
             IFormFile file);
     }
@@ -40,36 +33,22 @@ namespace BE.Features.Post.Services
             _mapper = mapper;
             _imageSaver = imageSaver;
         }
-
-        public async Task<IEnumerable<UserPostDto>> GetRangeByUserIdAsync(int userId,
+        
+        public IEnumerable<UserPostDto> GetRangeByUserId(int userId,
             int startIndex, int length)
         {
-            var userPosts =
-                await _repository.UserPost.GetRangeByIdAsync(userId, startIndex, length);
+            var userPosts = _repository.UserPost.GetRangeById(userId, startIndex, length);
             var userPostsDtos = _mapper.Map<IEnumerable<UserPostDto>>(userPosts,
                 opt => opt.Items["userId"] = userId);
             return userPostsDtos;
         }
 
-        public async Task<IEnumerable<UserPostDto>> GetLastByUserIdAsync(int userId,
-            int length)
+        public IEnumerable<UserPostDto> GetByPage(int userId, int page)
         {
-            var userPosts =
-                await _repository.UserPost.GetLastByUserIdAsync(userId, length);
-            var userPostsDtos = _mapper.Map<IEnumerable<UserPostDto>>(userPosts,
-                opt => opt.Items["userId"] = userId);
-            return userPostsDtos;
+            return _repository.UserPost.GetByPage(userId, page, UserPostDto
+                .Selector(userId));
         }
 
-        public async Task<IEnumerable<UserPostDto>> GetRangeByMinDateAsync(int userId,
-            DateTime date, int length)
-        {
-            var userPosts =
-                await _repository.UserPost.GetRangeByMinDateAsync(userId, date, length);
-            var userPostsDtos = _mapper.Map<IEnumerable<UserPostDto>>(userPosts,
-                opt => opt.Items["userId"] = userId);
-            return userPostsDtos;
-        }
 
         public UserPostDto GetByPostId(int postId, int userId)
         {
@@ -86,13 +65,17 @@ namespace BE.Features.Post.Services
             if (file != null)
             {
                 imagePath = await _imageSaver
-                    .SaveAndReturnImagePath(file, "EventPost", authorId);
+                    .SaveAndReturnImagePath(file, 
+                        "EventPost",
+                        authorId);
             }
             var userPost = new UserPost
             {
                 Post = new Models.Post
                 {
-                    Content = content, ImagePath = imagePath, Date = DateTime.Now
+                    Content = content, 
+                    ImagePath = imagePath,
+                    Date = DateTime.Now
                 },
                 UserId = authorId
             };

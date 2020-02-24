@@ -12,13 +12,15 @@ namespace BE.Features.User
     public class UserDataUpdateController : ControllerBase
     {
         private readonly IUserDataIndexing _userDataIndexing;
+        private readonly IUserDataUpdateService _userDataUpdateService;
         private readonly IUserDataService _userDataService;
 
         public UserDataUpdateController(IUserDataService userDataService,
-            IUserDataIndexing userDataIndexing)
+            IUserDataIndexing userDataIndexing, IUserDataUpdateService userDataUpdateService)
         {
             _userDataService = userDataService;
             _userDataIndexing = userDataIndexing;
+            _userDataUpdateService = userDataUpdateService;
         }
 
         [HttpPut("education")]
@@ -26,7 +28,7 @@ namespace BE.Features.User
         public async Task<IActionResult> UpdateEducation([FromBody] Models.User user,
             [FromHeader(Name = "userId")] int userId)
         {
-            await _userDataService.UpdateEducationDataById(userId, user.EducationId);
+            await _userDataUpdateService.UpdateEducationDataById(userId, user.EducationId);
             await _userDataIndexing.UpdateEducation(userId, user.EducationId);
             return Ok();
         }
@@ -36,7 +38,7 @@ namespace BE.Features.User
         public async Task<IActionResult> UpdateBasic([FromBody] Models.User user,
             [FromHeader(Name = "userId")] int userId)
         {
-            await _userDataService.UpdateBasicDataById(userId, user.Name, user.Surname,
+            await _userDataUpdateService.UpdateBasicDataById(userId, user.Name, user.Surname,
                 user.Birthday);
             await _userDataIndexing.UpdateBasicData(userId, user);
             return Ok();
@@ -47,7 +49,7 @@ namespace BE.Features.User
         public async Task<IActionResult> UpdateAdditional([FromBody] ExtendedUserDto user,
             [FromHeader(Name = "userId")] int userId)
         {
-            await _userDataService.UpdateAdditionalDataById(userId,
+            await _userDataUpdateService.UpdateAdditionalDataById(userId,
                 user.ReligionId,
                 user.AlcoholAttitudeId,
                 user.SmokingAttitudeId,
@@ -66,7 +68,7 @@ namespace BE.Features.User
         public async Task<IActionResult> UpdateEmail([FromBody] Models.User user,
             [FromHeader(Name = "userId")] int userId)
         {
-            await _userDataService.UpdateEmailByIdAsync(userId, user.Email);
+            await _userDataUpdateService.UpdateEmailByIdAsync(userId, user.Email);
             return Ok();
         }
 
@@ -81,7 +83,7 @@ namespace BE.Features.User
                     newPasswordDto.OldPassword);
             if (isOldPassCorrect)
             {
-                await _userDataService.UpdatePasswordByIdAsync(userId,
+                await _userDataUpdateService.UpdatePasswordByIdAsync(userId,
                     newPasswordDto.NewPassword);
                 return Ok();
             }

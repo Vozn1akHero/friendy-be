@@ -1,4 +1,6 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading;
+using System.Threading.Tasks;
 using BE.Features.Chat.Repositories;
 using BE.Features.Comment.Repositories;
 using BE.Features.Event.Repositories;
@@ -89,7 +91,7 @@ namespace BE.Repositories
         public IPostRepository Post =>
             _post ?? (_post = new PostRepository(_friendyContext));
 
-        public IUserPostRepository UserPost =>
+        public virtual IUserPostRepository UserPost =>
             _userPost ?? (_userPost = new UserPostRepository(_friendyContext));
 
         public IPostLikeRepository PostLike =>
@@ -168,7 +170,8 @@ namespace BE.Repositories
 
         public IDatabaseTransaction BeginTransaction()
         {
-            return new EntityDatabaseTransaction(_friendyContext);
+            throw new NotImplementedException();
+            //return new EntityDatabaseTransaction(_friendyContext);
         }
 
         public int Save()
@@ -176,9 +179,12 @@ namespace BE.Repositories
             return _friendyContext.SaveChanges();
         }
 
-        public void Dispose()
+        /*public void Dispose()
         {
             _friendyContext.Dispose();
+        }*/
+        public void Dispose()
+        {
         }
     }
 }

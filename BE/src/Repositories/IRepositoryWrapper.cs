@@ -22,14 +22,12 @@ namespace BE.Repositories
 
         //IFriendRepository Friend { get; }
         IUserFriendshipRepository UserFriendship { get; }
-        IUserEventsRepository UserEvents { get; }
+        IUserEventsRepository UserEvents { get; }    
         IEventRepository Event { get; }
         IEventAdminsRepository EventAdmins { get; }
         ICommentRepository Comment { get; }
 
         IMainCommentRepository MainComment { get; }
-
-        //IMainCommentResponseRepository MainCommentResponse { get; }
         IResponseToCommentRepository ResponseToComment { get; }
         IChatRepository Chat { get; }
         IChatMessageRepository ChatMessage { get; }

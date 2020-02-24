@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using BE.Dtos.FriendDtos;
+using BE.Features.Friendship.Helpers;
 using BE.Models;
 using BE.Repositories;
 
@@ -17,6 +18,7 @@ namespace BE.Features.Friendship.Services
 
         Task<IEnumerable<FriendDto>> FilterByKeywordAsync(int userId, string keyword);
         Task<IEnumerable<ExemplaryFriendDto>> GetExemplaryByUserIdAsync(int userId);
+        Task<FriendshipStatus> GetFriendshipStatus(int id, int issuerId);
     }
 
     public class UserFriendshipService : IUserFriendshipService
@@ -68,6 +70,20 @@ namespace BE.Features.Friendship.Services
                     : e.FirstFriend.Avatar
             });
             return res;
+        }
+
+        public async Task<FriendshipStatus> GetFriendshipStatus(int id, int issuerId)
+        {
+            bool friendshipStatus =
+                await _repository.UserFriendship.CheckIfFriendsByUserIdsAsync(id, issuerId);
+            if (friendshipStatus)
+            {
+                return FriendshipStatus.FRIEND;
+            }
+            var requestStatus =
+                await _repository.FriendRequest.GetStatusByUserIds(id, issuerId);
+            if (requestStatus) return FriendshipStatus.REQUEST_SENT;
+            else return FriendshipStatus.NOT_FRIEND;
         }
 
         private IEnumerable<FriendDto> ConvertFriendshipEnumerable

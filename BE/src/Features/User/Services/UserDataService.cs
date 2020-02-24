@@ -13,18 +13,9 @@ namespace BE.Features.User.Services
     public interface IUserDataService
     {
         Task<ExtendedUserDto> GetExtendedById(int id);
-        Task UpdateEducationDataById(int id, int? educationId);
-        Task UpdateBasicDataById(int id, string name, string surname, DateTime birthday);
-
-        Task UpdateAdditionalDataById(int id, int? religionId, int? alcoholAttitudeId,
-            int? maritalStatusId, int? smokingAttitudeId);
-
-        Task UpdateEmailByIdAsync(int id, string email);
-        Task UpdatePasswordByIdAsync(int id, string password);
-
         Task<bool> CheckOldPasswordBeforeUpdateByUserIdAsync(int id,
             string password);
-
+        Task<Models.User> GetByIdAsync(int id);
         Task<IEnumerable<UserForIndexingDto>> GetDataForElasticsearchIndex();
         Task<IEnumerable<Interest>> FindInterestsByTitle(string title);
     }
@@ -51,57 +42,7 @@ namespace BE.Features.User.Services
             return userEx;
         }
 
-        public async Task UpdateBasicDataById(int id, string name, string surname,
-            DateTime birthday)
-        {
-            var user = await _repository.User.GetByIdAsync(id);
-            user.Name = name;
-            user.Surname = surname;
-            user.Birthday = birthday;
-            _friendyContext.Entry(user).State = EntityState.Modified;
-            await _friendyContext.SaveChangesAsync();
-        }
-
-        public async Task UpdateEducationDataById(int id, int? educationId)
-        {
-            var userCur = await _repository.User.GetByIdAsync(id);
-            userCur.EducationId = educationId;
-            _friendyContext.Entry(userCur).State = EntityState.Modified;
-            await _friendyContext.SaveChangesAsync();
-        }
-
-        public async Task UpdateAdditionalDataById(int id, int? religionId,
-            int? alcoholAttitudeId,
-            int? maritalStatusId, int? smokingAttitudeId)
-        {
-            var userCur = await _repository.User.GetByIdAsync(id);
-            userCur.AdditionalInfo.ReligionId = religionId;
-            userCur.AdditionalInfo.AlcoholAttitudeId = alcoholAttitudeId;
-            userCur.AdditionalInfo.MaritalStatusId = maritalStatusId;
-            userCur.AdditionalInfo.SmokingAttitudeId = smokingAttitudeId;
-            _friendyContext.Entry(userCur).State = EntityState.Modified;
-            await _friendyContext.SaveChangesAsync();
-        }
-
-        public async Task UpdateEmailByIdAsync(int id, string email)
-        {
-            var userCur = await _repository.User.GetByIdAsync(id);
-            userCur.Email = email;
-            _friendyContext.Entry(userCur).State = EntityState.Modified;
-            await _friendyContext.SaveChangesAsync();
-        }
-
-        public async Task UpdatePasswordByIdAsync(int id, string password)
-        {
-            if (password != null)
-            {
-                var userCur = await _repository.User.GetByIdAsync(id);
-                userCur.Password = BCrypt.Net.BCrypt.HashPassword(password);
-                _friendyContext.Entry(userCur).State = EntityState.Modified;
-                await _friendyContext.SaveChangesAsync();
-            }
-        }
-
+       
         public async Task<bool> CheckOldPasswordBeforeUpdateByUserIdAsync(int id,
             string password)
         {
@@ -109,6 +50,12 @@ namespace BE.Features.User.Services
                 await _repository.User.GetWithSelectedFields(id, new[] {"Password"});
             var isOldPassCorrect = BCrypt.Net.BCrypt.Verify(password, user.Password);
             return isOldPassCorrect;
+        }
+
+        public async Task<Models.User> GetByIdAsync(int id)
+        {
+            var user = await _repository.User.GetByIdAsync(id);
+            return user;
         }
 
         public async Task<IEnumerable<UserForIndexingDto>> GetDataForElasticsearchIndex()

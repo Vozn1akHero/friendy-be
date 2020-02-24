@@ -27,21 +27,12 @@ namespace BE.Features.User
         }
 
         [HttpGet]
-        [Route("all")]
-        public async Task<IActionResult> GetAllUsers()
-        {
-            var users = await _repository.User.GetAllAsync();
-            return Ok(users);
-        }
-
-        [HttpGet]
         [Authorize]
         [Route("{id}")]
-        public async Task<IActionResult> GetById(int id)
+        public async Task<Models.User> GetById(int id)
         {
-            var user = await _repository.User.GetByIdAsync(id);
-            if (user != null) return Ok(user);
-            return NotFound();
+            var user = await _userDataService.GetByIdAsync(id);
+            return user;
         }
 
         [HttpGet("{id}/with-selected-fields")]
@@ -160,20 +151,6 @@ namespace BE.Features.User
             await _repository.User.UpdateProfileBackgroundAsync(path, userId);
             return Ok(path);
         }
-
-        /*[HttpGet("is-online/{id}")]
-        [Authorize]
-        public async Task<IActionResult> IsUserOnlineAsync(int id)
-        {
-            var session = await _repository.Session.GetByUserId(id);
-            var status = session.ConnectionEnd == null;
-            return Ok(new
-            {
-                Status = status,
-                session.ConnectionStart,
-                session.ConnectionEnd
-            });
-        }*/
 
         [HttpGet("index")]
         public async Task<IActionResult> GetDataForEsCluster()
