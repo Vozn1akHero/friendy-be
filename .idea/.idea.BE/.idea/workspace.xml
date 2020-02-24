@@ -26,7 +26,24 @@
     <list default="true" id="c1be89f2-e60d-42b3-9677-aaae25f9dc78" name="Default Changelist" comment="">
       <change afterPath="$PROJECT_DIR$/BE.UnitTests/Helpers.cs" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/BE.UnitTests/UserPostTests.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/BE.UnitTests/bin/Debug/netcoreapp2.2/Frontend/angular.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/BE.UnitTests/bin/Debug/netcoreapp2.2/Frontend/e2e/tsconfig.e2e.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/BE.UnitTests/bin/Debug/netcoreapp2.2/Frontend/package-lock.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/BE.UnitTests/bin/Debug/netcoreapp2.2/Frontend/package.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/BE.UnitTests/bin/Debug/netcoreapp2.2/Frontend/proxy.conf.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/BE.UnitTests/bin/Debug/netcoreapp2.2/Frontend/src/tsconfig.app.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/BE.UnitTests/bin/Debug/netcoreapp2.2/Frontend/src/tsconfig.spec.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/BE.UnitTests/bin/Debug/netcoreapp2.2/Frontend/src/tslint.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/BE.UnitTests/bin/Debug/netcoreapp2.2/Frontend/tsconfig.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/BE.UnitTests/bin/Debug/netcoreapp2.2/Frontend/tslint.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/BE.UnitTests/bin/Debug/netcoreapp2.2/Microsoft.AspNetCore.Mvc.Abstractions.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/BE.UnitTests/bin/Debug/netcoreapp2.2/Microsoft.AspNetCore.Mvc.Abstractions.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/BE.UnitTests/bin/Debug/netcoreapp2.2/Microsoft.AspNetCore.Mvc.Core.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/BE.UnitTests/bin/Debug/netcoreapp2.2/Microsoft.AspNetCore.Mvc.Core.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/BE.UnitTests/bin/Debug/netcoreapp2.2/Microsoft.AspNetCore.Mvc.ViewFeatures.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/BE.UnitTests/bin/Debug/netcoreapp2.2/Microsoft.AspNetCore.Mvc.ViewFeatures.xml" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/BE/src/Features/Friendship/Helpers/FriendshipStatus.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/BE/src/Features/Post/Dtos/UserPostDto.cs" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/BE/src/Features/User/Services/UserDataUpdateService.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.BE/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.BE/.idea/contentModel.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.BE/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.BE/.idea/workspace.xml" afterDir="false" />
@@ -38,8 +55,8 @@
       <change beforePath="$PROJECT_DIR$/BE.UnitTests/bin/Debug/netcoreapp2.2/BE.UnitTests.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/BE.UnitTests/bin/Debug/netcoreapp2.2/BE.UnitTests.pdb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/BE.UnitTests/bin/Debug/netcoreapp2.2/BE.dll" beforeDir="false" afterPath="$PROJECT_DIR$/BE.UnitTests/bin/Debug/netcoreapp2.2/BE.dll" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/BE.UnitTests/bin/Debug/netcoreapp2.2/BE.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/BE.UnitTests/bin/Debug/netcoreapp2.2/BE.pdb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BE.UnitTests/bin/Debug/netcoreapp2.2/appsettings.Development.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/BE.UnitTests/bin/Debug/netcoreapp2.2/appsettings.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/BE.UnitTests/bin/Debug/netcoreapp2.2/appsettings.Development.json" beforeDir="false" afterPath="$PROJECT_DIR$/BE.UnitTests/bin/Debug/netcoreapp2.2/src/appsettings.Development.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BE.UnitTests/bin/Debug/netcoreapp2.2/appsettings.json" beforeDir="false" afterPath="$PROJECT_DIR$/BE.UnitTests/bin/Debug/netcoreapp2.2/src/appsettings.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/BE.UnitTests/bin/Debug/netcoreapp2.2/nunit_random_seed.tmp" beforeDir="false" afterPath="$PROJECT_DIR$/BE.UnitTests/bin/Debug/netcoreapp2.2/nunit_random_seed.tmp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/BE.UnitTests/obj/BE.UnitTests.csproj.nuget.cache" beforeDir="false" afterPath="$PROJECT_DIR$/BE.UnitTests/obj/BE.UnitTests.csproj.nuget.cache" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/BE.UnitTests/obj/BE.UnitTests.csproj.nuget.dgspec.json" beforeDir="false" />
@@ -90,7 +107,7 @@
       <change beforePath="$PROJECT_DIR$/BE/src/Dtos/PhotoDtos/PhotoDto.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BE/src/Features/Photo/Dtos/PhotoDto.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/BE/src/Dtos/PostDtos/EventPostDto.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BE/src/Features/Post/Dtos/EventPostDto.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/BE/src/Dtos/PostDtos/LikeDto.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BE/src/Features/Post/Dtos/LikeDto.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BE/src/Dtos/PostDtos/UserPostDto.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BE/src/Features/Post/Dtos/UserPostDto.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BE/src/Dtos/PostDtos/UserPostDto.cs" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/BE/src/Dtos/UserDtos/ExtendedUserDto.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BE/src/Features/User/Dtos/ExtendedUserDto.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/BE/src/Dtos/UserDtos/FoundUserDto.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BE/src/Features/User/Dtos/FoundUserDto.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/BE/src/Dtos/UserDtos/NewPasswordDto.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BE/src/Features/User/Dtos/NewPasswordDto.cs" afterDir="false" />
@@ -192,8 +209,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/BE.UnitTests/UserPostTests.cs">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="435">
-              <caret line="103" column="9" lean-forward="true" selection-start-line="103" selection-start-column="9" selection-end-line="103" selection-end-column="9" />
+            <state relative-caret-position="378">
+              <caret line="38" column="44" lean-forward="true" selection-start-line="38" selection-start-column="44" selection-end-line="38" selection-end-column="44" />
               <folding>
                 <marker date="1582554194046" expanded="false" signature="6:544" ph="..." />
                 <marker date="1582554194046" expanded="true" signature="568:5203" ph="{...}" />
@@ -247,8 +264,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/BE/src/Features/Post/Services/UserPostService.cs">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="273">
-              <caret line="42" column="12" selection-start-line="42" selection-start-column="12" selection-end-line="42" selection-end-column="12" />
+            <state relative-caret-position="84">
+              <caret line="39" column="61" selection-start-line="39" selection-start-column="49" selection-end-line="39" selection-end-column="61" />
               <folding>
                 <marker date="1582553944937" expanded="true" signature="6:210" ph="..." />
                 <marker date="1582553944937" expanded="true" signature="247:2995" ph="{...}" />
@@ -284,19 +301,19 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/BE/src/Features/Post/Repositories/UserPostRepository.cs">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="378">
-              <caret line="36" column="30" lean-forward="true" selection-start-line="36" selection-start-column="30" selection-end-line="36" selection-end-column="30" />
+            <state relative-caret-position="42">
+              <caret line="23" column="30" lean-forward="true" selection-start-line="23" selection-start-column="30" selection-end-line="23" selection-end-column="30" />
               <folding>
-                <marker date="1582553792827" expanded="false" signature="6:244" ph="..." />
-                <marker date="1582553792827" expanded="true" signature="272:2422" ph="{...}" />
-                <marker date="1582553792827" expanded="true" signature="358:2420" ph="{...}" />
-                <marker date="1582553792827" expanded="true" signature="464:484" ph="{...}" />
-                <marker date="1582553792827" expanded="true" signature="535:698" ph="{...}" />
-                <marker date="1582553792827" expanded="true" signature="801:1233" ph="{...}" />
-                <marker date="1582553792827" expanded="true" signature="1363:1652" ph="{...}" />
-                <marker date="1582553792827" expanded="true" signature="1692:1738" ph="{...}" />
-                <marker date="1582553792827" expanded="true" signature="1779:2056" ph="{...}" />
-                <marker date="1582553792827" expanded="true" signature="2118:2414" ph="{...}" />
+                <marker date="1582554287257" expanded="false" signature="6:244" ph="..." />
+                <marker date="1582554287257" expanded="true" signature="272:2423" ph="{...}" />
+                <marker date="1582554287257" expanded="true" signature="358:2421" ph="{...}" />
+                <marker date="1582554287257" expanded="true" signature="464:484" ph="{...}" />
+                <marker date="1582554287257" expanded="true" signature="535:698" ph="{...}" />
+                <marker date="1582554287257" expanded="true" signature="801:1234" ph="{...}" />
+                <marker date="1582554287257" expanded="true" signature="1364:1653" ph="{...}" />
+                <marker date="1582554287257" expanded="true" signature="1693:1739" ph="{...}" />
+                <marker date="1582554287257" expanded="true" signature="1780:2057" ph="{...}" />
+                <marker date="1582554287257" expanded="true" signature="2119:2415" ph="{...}" />
               </folding>
             </state>
           </provider>
@@ -696,10 +713,10 @@
         <option value="$PROJECT_DIR$/BE/src/Repositories/RepositoryBase.cs" />
         <option value="$PROJECT_DIR$/BE.UnitTests/Helpers.cs" />
         <option value="$PROJECT_DIR$/BE/src/Features/Comment/Repositories/IUserPostRepository.cs" />
-        <option value="$PROJECT_DIR$/BE/src/Features/Post/Repositories/UserPostRepository.cs" />
         <option value="$PROJECT_DIR$/BE/src/Features/Post/UserPostController.cs" />
         <option value="$PROJECT_DIR$/BE/src/Features/Post/Services/UserPostService.cs" />
         <option value="$PROJECT_DIR$/BE.UnitTests/UserPostTests.cs" />
+        <option value="$PROJECT_DIR$/BE/src/Features/Post/Repositories/UserPostRepository.cs" />
       </list>
     </option>
   </component>
@@ -755,21 +772,6 @@
               <item name="BE" type="24d0babc:SolutionExplorerModelNode" />
               <item name="BE" type="24d0babc:SolutionExplorerModelNode" />
               <item name="src" type="24d0babc:SolutionExplorerModelNode" />
-            </path>
-            <path>
-              <item name="" type="784c90a0:SolutionExplorerRootNode" />
-              <item name="BE" type="24d0babc:SolutionExplorerModelNode" />
-              <item name="BE" type="24d0babc:SolutionExplorerModelNode" />
-              <item name="src" type="24d0babc:SolutionExplorerModelNode" />
-              <item name="Features" type="24d0babc:SolutionExplorerModelNode" />
-            </path>
-            <path>
-              <item name="" type="784c90a0:SolutionExplorerRootNode" />
-              <item name="BE" type="24d0babc:SolutionExplorerModelNode" />
-              <item name="BE" type="24d0babc:SolutionExplorerModelNode" />
-              <item name="src" type="24d0babc:SolutionExplorerModelNode" />
-              <item name="Features" type="24d0babc:SolutionExplorerModelNode" />
-              <item name="Post" type="24d0babc:SolutionExplorerModelNode" />
             </path>
             <path>
               <item name="" type="784c90a0:SolutionExplorerRootNode" />
@@ -1030,12 +1032,12 @@
       <workItem from="1582450630736" duration="4883000" />
       <workItem from="1582461330415" duration="25076000" />
       <workItem from="1582503834778" duration="12000" />
-      <workItem from="1582541216522" duration="6055000" />
+      <workItem from="1582541216522" duration="6336000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="253826000" />
+    <option name="totallyTimeSpent" value="254107000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -1066,10 +1068,10 @@
       <window_info anchor="bottom" id="Azure Activity Log" order="10" weight="0.3297062" />
       <window_info anchor="bottom" id="Version Control" order="11" sideWeight="0.49973363" weight="0.3297062" />
       <window_info anchor="bottom" id="Database Changes" order="12" />
-      <window_info active="true" anchor="bottom" id="Unit Tests" order="13" sideWeight="0.49920085" visible="true" weight="0.30032644" />
+      <window_info anchor="bottom" id="Unit Tests" order="13" sideWeight="0.49920085" weight="0.30032644" />
       <window_info anchor="bottom" id="REST Client" order="14" weight="0.32752994" />
       <window_info anchor="bottom" id="Event Log" order="15" sideWeight="0.5007991" side_tool="true" weight="0.30032644" />
-      <window_info anchor="bottom" id="Terminal" order="16" sideWeight="0.5199787" weight="0.1882481" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="16" sideWeight="0.5199787" visible="true" weight="0.1882481" />
       <window_info anchor="bottom" id="Build" order="17" sideWeight="0.47043154" weight="0.29053319" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -1335,17 +1337,17 @@
           <option name="timeStamp" value="228" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/BE.UnitTests/UserPostTests.cs</url>
-          <line>100</line>
-          <properties documentPath="$PROJECT_DIR$/BE.UnitTests/UserPostTests.cs" initialLine="100">
+          <url>file://$PROJECT_DIR$/BE/src/Features/Post/Repositories/UserPostRepository.cs</url>
+          <line>37</line>
+          <properties documentPath="$PROJECT_DIR$/BE/src/Features/Post/Repositories/UserPostRepository.cs" initialLine="37">
             <startOffsets>
-              <option value="3617" />
+              <option value="1211" />
             </startOffsets>
             <endOffsets>
-              <option value="3671" />
+              <option value="1224" />
             </endOffsets>
           </properties>
-          <option name="timeStamp" value="267" />
+          <option name="timeStamp" value="268" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
@@ -2057,6 +2059,58 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/BE/src/Features/Post/Services/UserPostService.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="84">
+          <caret line="39" column="61" selection-start-line="39" selection-start-column="49" selection-end-line="39" selection-end-column="61" />
+          <folding>
+            <marker date="1582553944937" expanded="true" signature="6:210" ph="..." />
+            <marker date="1582553944937" expanded="true" signature="247:2995" ph="{...}" />
+            <marker date="1582553944937" expanded="true" signature="287:631" ph="{...}" />
+            <marker date="1582553944937" expanded="true" signature="684:2993" ph="{...}" />
+            <marker date="1582553944937" expanded="true" signature="954:1080" ph="{...}" />
+            <marker date="1582553944937" expanded="true" signature="1198:1478" ph="{...}" />
+            <marker date="1582553944937" expanded="true" signature="1551:1683" ph="{...}" />
+            <marker date="1582553944937" expanded="true" signature="1748:1976" ph="{...}" />
+            <marker date="1582553944937" expanded="true" signature="2095:2987" ph="{...}" />
+            <marker date="1582553944937" expanded="true" signature="2172:2369" ph="{...}" />
+            <marker date="1582553944937" expanded="true" signature="2422:2670" ph="{...}" />
+            <marker date="1582553944937" expanded="true" signature="2479:2621" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/BE/src/Features/Comment/Repositories/IUserPostRepository.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="231">
+          <caret line="16" column="33" lean-forward="true" selection-start-line="16" selection-start-column="33" selection-end-line="16" selection-end-column="33" />
+          <folding>
+            <marker date="1582553792763" expanded="false" signature="6:148" ph="..." />
+            <marker date="1582553792763" expanded="true" signature="192:548" ph="{...}" />
+            <marker date="1582553792763" expanded="true" signature="263:546" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/BE/src/Features/Post/Repositories/UserPostRepository.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="42">
+          <caret line="23" column="30" lean-forward="true" selection-start-line="23" selection-start-column="30" selection-end-line="23" selection-end-column="30" />
+          <folding>
+            <marker date="1582554287257" expanded="false" signature="6:244" ph="..." />
+            <marker date="1582554287257" expanded="true" signature="272:2423" ph="{...}" />
+            <marker date="1582554287257" expanded="true" signature="358:2421" ph="{...}" />
+            <marker date="1582554287257" expanded="true" signature="464:484" ph="{...}" />
+            <marker date="1582554287257" expanded="true" signature="535:698" ph="{...}" />
+            <marker date="1582554287257" expanded="true" signature="801:1234" ph="{...}" />
+            <marker date="1582554287257" expanded="true" signature="1364:1653" ph="{...}" />
+            <marker date="1582554287257" expanded="true" signature="1693:1739" ph="{...}" />
+            <marker date="1582554287257" expanded="true" signature="1780:2057" ph="{...}" />
+            <marker date="1582554287257" expanded="true" signature="2119:2415" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/BE/src/Repositories/RepositoryBase.cs">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="630">
@@ -2084,62 +2138,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/BE/src/Features/Comment/Repositories/IUserPostRepository.cs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="231">
-          <caret line="16" column="33" lean-forward="true" selection-start-line="16" selection-start-column="33" selection-end-line="16" selection-end-column="33" />
-          <folding>
-            <marker date="1582553792763" expanded="false" signature="6:148" ph="..." />
-            <marker date="1582553792763" expanded="true" signature="192:548" ph="{...}" />
-            <marker date="1582553792763" expanded="true" signature="263:546" ph="{...}" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/BE/src/Features/Post/Repositories/UserPostRepository.cs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="378">
-          <caret line="36" column="30" lean-forward="true" selection-start-line="36" selection-start-column="30" selection-end-line="36" selection-end-column="30" />
-          <folding>
-            <marker date="1582553792827" expanded="false" signature="6:244" ph="..." />
-            <marker date="1582553792827" expanded="true" signature="272:2422" ph="{...}" />
-            <marker date="1582553792827" expanded="true" signature="358:2420" ph="{...}" />
-            <marker date="1582553792827" expanded="true" signature="464:484" ph="{...}" />
-            <marker date="1582553792827" expanded="true" signature="535:698" ph="{...}" />
-            <marker date="1582553792827" expanded="true" signature="801:1233" ph="{...}" />
-            <marker date="1582553792827" expanded="true" signature="1363:1652" ph="{...}" />
-            <marker date="1582553792827" expanded="true" signature="1692:1738" ph="{...}" />
-            <marker date="1582553792827" expanded="true" signature="1779:2056" ph="{...}" />
-            <marker date="1582553792827" expanded="true" signature="2118:2414" ph="{...}" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/BE/src/Features/Post/Services/UserPostService.cs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="273">
-          <caret line="42" column="12" selection-start-line="42" selection-start-column="12" selection-end-line="42" selection-end-column="12" />
-          <folding>
-            <marker date="1582553944937" expanded="true" signature="6:210" ph="..." />
-            <marker date="1582553944937" expanded="true" signature="247:2995" ph="{...}" />
-            <marker date="1582553944937" expanded="true" signature="287:631" ph="{...}" />
-            <marker date="1582553944937" expanded="true" signature="684:2993" ph="{...}" />
-            <marker date="1582553944937" expanded="true" signature="954:1080" ph="{...}" />
-            <marker date="1582553944937" expanded="true" signature="1198:1478" ph="{...}" />
-            <marker date="1582553944937" expanded="true" signature="1551:1683" ph="{...}" />
-            <marker date="1582553944937" expanded="true" signature="1748:1976" ph="{...}" />
-            <marker date="1582553944937" expanded="true" signature="2095:2987" ph="{...}" />
-            <marker date="1582553944937" expanded="true" signature="2172:2369" ph="{...}" />
-            <marker date="1582553944937" expanded="true" signature="2422:2670" ph="{...}" />
-            <marker date="1582553944937" expanded="true" signature="2479:2621" ph="{...}" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/BE.UnitTests/UserPostTests.cs">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="435">
-          <caret line="103" column="9" lean-forward="true" selection-start-line="103" selection-start-column="9" selection-end-line="103" selection-end-column="9" />
+        <state relative-caret-position="378">
+          <caret line="38" column="44" lean-forward="true" selection-start-line="38" selection-start-column="44" selection-end-line="38" selection-end-column="44" />
           <folding>
             <marker date="1582554194046" expanded="false" signature="6:544" ph="..." />
             <marker date="1582554194046" expanded="true" signature="568:5203" ph="{...}" />
