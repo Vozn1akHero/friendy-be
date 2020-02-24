@@ -1,11 +1,9 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using BE.Dtos.PostDtos;
-using BE.Features.Comment.Repositories;
 using BE.Features.Post;
 using BE.Features.Post.Services;
 using BE.Features.User;
@@ -14,10 +12,8 @@ using BE.Mapping.Profiles;
 using BE.Models;
 using BE.Repositories;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Moq;
-using Newtonsoft.Json;
 using NUnit.Framework;
 
 namespace BE.UnitTests
@@ -43,33 +39,36 @@ namespace BE.UnitTests
         public void Get_User_Post_By_Page_Test()
         {
             var data = GetFakeUserPosts(20);
+            var service = GetService(data);
             var dtos = data
                 .AsQueryable()
-                .Select(UserPostDto.Selector(7)).ToArray();
-            var mockSet = Helpers.GetMockDbSet(data.ToList());
-            var mockContext = new Mock<FriendyContext>();
-            mockContext.Setup(c => c.Set<UserPost>()).Returns(mockSet.Object);
-            var mockWrapper = new Mock<RepositoryWrapper>(mockContext.Object);
-            var rep = new UserPostRepository(mockContext.Object);
-            mockWrapper.Setup(c => c.UserPost).Returns(rep);
-            var service = new UserPostService(mockWrapper.Object, null, null);
-            var res = service.GetByPage(_userId, 1);
+                .Select(UserPostDto.Selector(7))
+                .Reverse()
+                .ToList();
+            var controller = new UserPostController(service);
+            var res = controller.GetByPage(_userId, 1) as OkObjectResult;
             Assert.NotNull(res);
-            foreach (var val in res)
+            
+            var dataRes = res.Value as List<UserPostDto>;
+            Assert.AreEqual(dtos.Count, dataRes.Count);
+            for (int i = 0; i < dataRes.Count; i++)
             {
-                Assert.Equals(dtos[0].Id, val.Id);
-                Assert.Equals(dtos[0].Content, val.Content);
-                Assert.Equals(dtos[0].ImagePath, val.ImagePath);
-                Assert.Equals(dtos[0].IsPostLikedByUser, val.IsPostLikedByUser);
-                Assert.Equals(dtos[0].LikesCount, val.LikesCount);
-                Assert.Equals(dtos[0].CommentsCount, val.CommentsCount);
+                Assert.AreEqual(dataRes.ElementAt(i).Id, dataRes.ElementAt(i).Id);
+                Assert.AreEqual(dataRes.ElementAt(i).Content, dataRes.ElementAt(i).Content);
+                Assert.AreEqual(dataRes.ElementAt(i).ImagePath, dataRes.ElementAt(i).ImagePath);
+                Assert.AreEqual(dataRes.ElementAt(i).IsPostLikedByUser, dataRes.ElementAt(i)
+                .IsPostLikedByUser);
+                Assert.AreEqual(dataRes.ElementAt(i).LikesCount, dataRes.ElementAt(i).LikesCount);
+                Assert.AreEqual(dataRes.ElementAt(i).CommentsCount, dataRes.ElementAt(i)
+                .CommentsCount);
             }
         }
 
         [Test]
         public async Task Create_User_Post_Test()
         {
-            var service = GetService();
+            var data = GetFakeUserPosts(20);
+            var service = GetService(data);
             var controller = new UserPostController(service);
             var res = await controller.CreateAsync(null, "test", _userId);
             var okObjectResult = res as OkObjectResult;
@@ -81,7 +80,8 @@ namespace BE.UnitTests
         [Test]
         public void Get_User_Post_By_Id_Test()
         {
-            var service = GetService();
+            var data = GetFakeUserPosts(20);
+            var service = GetService(data);
             var controller = new UserPostController(service);
             var res = controller.GetById(1, _userId);
             var okObjectResult = res as OkObjectResult;
@@ -93,7 +93,8 @@ namespace BE.UnitTests
         [Test]
         public void Get_User_Post_Range_Test()
         {
-            var service = GetService();
+            var data = GetFakeUserPosts(20);
+            var service = GetService(data);
             var controller = new UserPostController(service);
             var res = controller.GetRange(_userId, 1, 15);
             var okObjectResult = res as OkObjectResult;
@@ -103,9 +104,8 @@ namespace BE.UnitTests
             Assert.That(model.Count, Is.GreaterThanOrEqualTo(15));
         }
 
-        private IUserPostService GetService()
+        private IUserPostService GetService(IEnumerable<UserPost> data)
         {
-            var data = GetFakeUserPosts(20);
             var mockContext = new Mock<FriendyContext>();
             var mockSet = Helpers.GetMockDbSet(data.ToList());
             mockContext.Setup(c => c.Set<UserPost>()).Returns(mockSet.Object);

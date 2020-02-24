@@ -36,7 +36,7 @@ namespace BE.Features.User
 
         [HttpGet("range")]
         [Authorize]
-        public ActionResult<IEnumerable<UserPostDto>> GetByPage(
+        public IActionResult GetByPage(
             [FromQuery(Name = "userId")] int userId,
             [FromQuery(Name = "page")] int page)
         {

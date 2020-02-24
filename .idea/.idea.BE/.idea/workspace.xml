@@ -24,165 +24,23 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c1be89f2-e60d-42b3-9677-aaae25f9dc78" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/BE.UnitTests/Helpers.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BE.UnitTests/UserPostTests.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BE.UnitTests/bin/Debug/netcoreapp2.2/Frontend/angular.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BE.UnitTests/bin/Debug/netcoreapp2.2/Frontend/e2e/tsconfig.e2e.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BE.UnitTests/bin/Debug/netcoreapp2.2/Frontend/package-lock.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BE.UnitTests/bin/Debug/netcoreapp2.2/Frontend/package.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BE.UnitTests/bin/Debug/netcoreapp2.2/Frontend/proxy.conf.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BE.UnitTests/bin/Debug/netcoreapp2.2/Frontend/src/tsconfig.app.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BE.UnitTests/bin/Debug/netcoreapp2.2/Frontend/src/tsconfig.spec.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BE.UnitTests/bin/Debug/netcoreapp2.2/Frontend/src/tslint.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BE.UnitTests/bin/Debug/netcoreapp2.2/Frontend/tsconfig.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BE.UnitTests/bin/Debug/netcoreapp2.2/Frontend/tslint.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BE.UnitTests/bin/Debug/netcoreapp2.2/Microsoft.AspNetCore.Mvc.Abstractions.dll" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BE.UnitTests/bin/Debug/netcoreapp2.2/Microsoft.AspNetCore.Mvc.Abstractions.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BE.UnitTests/bin/Debug/netcoreapp2.2/Microsoft.AspNetCore.Mvc.Core.dll" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BE.UnitTests/bin/Debug/netcoreapp2.2/Microsoft.AspNetCore.Mvc.Core.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BE.UnitTests/bin/Debug/netcoreapp2.2/Microsoft.AspNetCore.Mvc.ViewFeatures.dll" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BE.UnitTests/bin/Debug/netcoreapp2.2/Microsoft.AspNetCore.Mvc.ViewFeatures.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BE/src/Features/Friendship/Helpers/FriendshipStatus.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BE/src/Features/Post/Dtos/UserPostDto.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BE/src/Features/User/Services/UserDataUpdateService.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.BE/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.BE/.idea/contentModel.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.BE/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.BE/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BE.UnitTests/BE.UnitTests.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/BE.UnitTests/BE.UnitTests.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BE.UnitTests/CQRS/Queries.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/BE.UnitTests/UnitTest1.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/BE.UnitTests/bin/Debug/netcoreapp2.2/BE.UnitTests.deps.json" beforeDir="false" afterPath="$PROJECT_DIR$/BE.UnitTests/bin/Debug/netcoreapp2.2/BE.UnitTests.deps.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BE.UnitTests/UserPostTests.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BE.UnitTests/UserPostTests.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/BE.UnitTests/bin/Debug/netcoreapp2.2/BE.UnitTests.dll" beforeDir="false" afterPath="$PROJECT_DIR$/BE.UnitTests/bin/Debug/netcoreapp2.2/BE.UnitTests.dll" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/BE.UnitTests/bin/Debug/netcoreapp2.2/BE.UnitTests.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/BE.UnitTests/bin/Debug/netcoreapp2.2/BE.UnitTests.pdb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/BE.UnitTests/bin/Debug/netcoreapp2.2/BE.dll" beforeDir="false" afterPath="$PROJECT_DIR$/BE.UnitTests/bin/Debug/netcoreapp2.2/BE.dll" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/BE.UnitTests/bin/Debug/netcoreapp2.2/BE.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/BE.UnitTests/bin/Debug/netcoreapp2.2/BE.pdb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BE.UnitTests/bin/Debug/netcoreapp2.2/appsettings.Development.json" beforeDir="false" afterPath="$PROJECT_DIR$/BE.UnitTests/bin/Debug/netcoreapp2.2/src/appsettings.Development.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BE.UnitTests/bin/Debug/netcoreapp2.2/appsettings.json" beforeDir="false" afterPath="$PROJECT_DIR$/BE.UnitTests/bin/Debug/netcoreapp2.2/src/appsettings.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/BE.UnitTests/bin/Debug/netcoreapp2.2/nunit_random_seed.tmp" beforeDir="false" afterPath="$PROJECT_DIR$/BE.UnitTests/bin/Debug/netcoreapp2.2/nunit_random_seed.tmp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BE.UnitTests/obj/BE.UnitTests.csproj.nuget.cache" beforeDir="false" afterPath="$PROJECT_DIR$/BE.UnitTests/obj/BE.UnitTests.csproj.nuget.cache" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BE.UnitTests/obj/BE.UnitTests.csproj.nuget.dgspec.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/BE.UnitTests/obj/BE.UnitTests.csproj.nuget.g.props" beforeDir="false" afterPath="$PROJECT_DIR$/BE.UnitTests/obj/BE.UnitTests.csproj.nuget.g.props" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BE.UnitTests/obj/BE.UnitTests.csproj.nuget.g.targets" beforeDir="false" afterPath="$PROJECT_DIR$/BE.UnitTests/obj/BE.UnitTests.csproj.nuget.g.targets" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BE.UnitTests/obj/Debug/netcoreapp2.2/BE.UnitTests.assets.cache" beforeDir="false" afterPath="$PROJECT_DIR$/BE.UnitTests/obj/Debug/netcoreapp2.2/BE.UnitTests.assets.cache" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BE.UnitTests/obj/Debug/netcoreapp2.2/BE.UnitTests.csproj.FileListAbsolute.txt" beforeDir="false" afterPath="$PROJECT_DIR$/BE.UnitTests/obj/Debug/netcoreapp2.2/BE.UnitTests.csproj.FileListAbsolute.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/BE.UnitTests/obj/Debug/netcoreapp2.2/BE.UnitTests.csprojAssemblyReference.cache" beforeDir="false" afterPath="$PROJECT_DIR$/BE.UnitTests/obj/Debug/netcoreapp2.2/BE.UnitTests.csprojAssemblyReference.cache" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/BE.UnitTests/obj/Debug/netcoreapp2.2/BE.UnitTests.dll" beforeDir="false" afterPath="$PROJECT_DIR$/BE.UnitTests/obj/Debug/netcoreapp2.2/BE.UnitTests.dll" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/BE.UnitTests/obj/Debug/netcoreapp2.2/BE.UnitTests.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/BE.UnitTests/obj/Debug/netcoreapp2.2/BE.UnitTests.pdb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BE.UnitTests/obj/project.assets.json" beforeDir="false" afterPath="$PROJECT_DIR$/BE.UnitTests/obj/project.assets.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BE.UnitTests/obj/project.packagespec.json" beforeDir="false" afterPath="$PROJECT_DIR$/BE.UnitTests/obj/project.packagespec.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BE.sln" beforeDir="false" afterPath="$PROJECT_DIR$/BE.sln" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BE/BE.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/BE/BE.csproj" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/BE/Frontend" beforeDir="false" afterPath="$PROJECT_DIR$/BE/Frontend" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BE/bin/Debug/netcoreapp2.2/BE.deps.json" beforeDir="false" afterPath="$PROJECT_DIR$/BE/bin/Debug/netcoreapp2.2/BE.deps.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/BE/bin/Debug/netcoreapp2.2/BE.dll" beforeDir="false" afterPath="$PROJECT_DIR$/BE/bin/Debug/netcoreapp2.2/BE.dll" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/BE/bin/Debug/netcoreapp2.2/BE.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/BE/bin/Debug/netcoreapp2.2/BE.pdb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BE/obj/BE.csproj.nuget.cache" beforeDir="false" afterPath="$PROJECT_DIR$/BE/obj/BE.csproj.nuget.cache" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BE/obj/BE.csproj.nuget.g.props" beforeDir="false" afterPath="$PROJECT_DIR$/BE/obj/BE.csproj.nuget.g.props" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BE/obj/Debug/netcoreapp2.2/BE.assets.cache" beforeDir="false" afterPath="$PROJECT_DIR$/BE/obj/Debug/netcoreapp2.2/BE.assets.cache" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/BE/obj/Debug/netcoreapp2.2/BE.csprojAssemblyReference.cache" beforeDir="false" afterPath="$PROJECT_DIR$/BE/obj/Debug/netcoreapp2.2/BE.csprojAssemblyReference.cache" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/BE/obj/Debug/netcoreapp2.2/BE.dll" beforeDir="false" afterPath="$PROJECT_DIR$/BE/obj/Debug/netcoreapp2.2/BE.dll" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/BE/obj/Debug/netcoreapp2.2/BE.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/BE/obj/Debug/netcoreapp2.2/BE.pdb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BE/obj/project.assets.json" beforeDir="false" afterPath="$PROJECT_DIR$/BE/obj/project.assets.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BE/obj/project.packagespec.json" beforeDir="false" afterPath="$PROJECT_DIR$/BE/obj/project.packagespec.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BE/src/Cache/RedisClient.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BE/src/Cache/RedisClient.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BE/src/Dtos/AuthDtos/AuthDataDto.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BE/src/Features/Authentication/Dtos/AuthDataDto.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BE/src/Dtos/AuthDtos/AuthResponse.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BE/src/Features/Authentication/Dtos/AuthResponse.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BE/src/Dtos/ChatDtos/ClientDtos/CreatedMessageDto.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BE/src/Features/Chat/Dtos/CreatedMessageDto.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BE/src/Dtos/ChatDtos/ClientDtos/NewMessageDto.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BE/src/Features/Chat/Dtos/NewMessageDto.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BE/src/Dtos/ChatDtos/ServerDtos/ChatLastMessageDto.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BE/src/Features/Chat/Dtos/ChatLastMessageDto.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BE/src/Dtos/ChatDtos/ServerDtos/ChatMessageDto.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BE/src/Features/Chat/Dtos/ChatMessageDto.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BE/src/Dtos/ChatDtos/ServerDtos/DialogBasicDataDto.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BE/src/Features/Chat/Dtos/DialogBasicDataDto.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BE/src/Dtos/ChatDtos/ServerDtos/FriendBasicDataInDialogDto.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BE/src/Features/Chat/Dtos/FriendBasicDataInDialogDto.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BE/src/Dtos/ChatDtos/ServerDtos/ParticipantsBasicDataDto.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BE/src/Features/Chat/Dtos/ParticipantsBasicDataDto.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BE/src/Dtos/ChatDtos/ServerDtos/ParticipantsBasicDataSqlDto.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BE/src/Features/Chat/Dtos/ParticipantsBasicDataSqlDto.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BE/src/Dtos/EventParticipantDtos/BannedEventParticipantDto.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BE/src/Features/Event/Dtos/BannedEventParticipantDto.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BE/src/Dtos/EventParticipantDtos/EventParticipantDetailedDto.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BE/src/Features/Event/Dtos/EventParticipantDetailedDto.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BE/src/Dtos/EventParticipantDtos/EventParticipantForListDto.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BE/src/Features/Event/Dtos/EventParticipantForListDto.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BE/src/Dtos/EventParticipantDtos/EventParticipationRequestDto.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/BE/src/Dtos/EventParticipantDtos/ExemplaryEventParticipantDto.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BE/src/Features/Event/Dtos/ExemplaryEventParticipantDto.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BE/src/Dtos/FriendDtos/ExemplaryFriendDto.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BE/src/Features/Friendship/Dtos/ExemplaryFriendDto.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BE/src/Dtos/FriendDtos/FriendDto.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BE/src/Features/Friendship/Dtos/FriendDto.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BE/src/Dtos/FriendDtos/ShortenedFriendDto.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BE/src/Features/Friendship/Dtos/ShortenedFriendDto.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BE/src/Dtos/FriendRequestDtos/ReceivedFriendRequestDto.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BE/src/Features/Friendship/Dtos/ReceivedFriendRequestDto.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BE/src/Dtos/FriendRequestDtos/SentFriendRequestDto.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BE/src/Features/Friendship/Dtos/SentFriendRequestDto.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BE/src/Dtos/PhotoDtos/PhotoDto.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BE/src/Features/Photo/Dtos/PhotoDto.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BE/src/Dtos/PostDtos/EventPostDto.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BE/src/Features/Post/Dtos/EventPostDto.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BE/src/Dtos/PostDtos/LikeDto.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BE/src/Features/Post/Dtos/LikeDto.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BE/src/Dtos/PostDtos/UserPostDto.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/BE/src/Dtos/UserDtos/ExtendedUserDto.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BE/src/Features/User/Dtos/ExtendedUserDto.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BE/src/Dtos/UserDtos/FoundUserDto.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BE/src/Features/User/Dtos/FoundUserDto.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BE/src/Dtos/UserDtos/NewPasswordDto.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BE/src/Features/User/Dtos/NewPasswordDto.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BE/src/Dtos/UserDtos/NewUserDto.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BE/src/Features/User/Dtos/NewUserDto.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BE/src/Dtos/UserDtos/UserBasicDto.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BE/src/Features/User/Dtos/UserBasicDto.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BE/src/Dtos/UserDtos/UserForIndexingDto.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BE/src/Features/User/Dtos/UserForIndexingDto.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BE/src/Dtos/UserDtos/UserInterestForElasticsearchDto.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BE/src/Features/User/Dtos/UserInterestForElasticsearchDto.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BE/src/Dtos/UserDtos/UserLookUpModelDto.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BE/src/Features/User/Dtos/UserLookUpModelDto.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BE/src/Dtos/UserDtos/UsersLookUpCriteriaDto.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BE/src/Features/User/Dtos/UsersLookUpCriteriaDto.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BE/src/Features/Chat/ChatController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BE/src/Features/Chat/ChatController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BE/src/Features/Comment/Dto/NewCommentDto.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BE/src/Features/Comment/Dtos/NewCommentDto.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BE/src/Features/Comment/Dto/NewCommentResponseDto.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BE/src/Features/Comment/Dtos/NewCommentResponseDto.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BE/src/Features/Comment/Dto/NewMainCommentDto.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BE/src/Features/Comment/Dtos/NewMainCommentDto.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BE/src/Features/Comment/Dto/PostCommentDto.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BE/src/Features/Comment/Dtos/PostCommentDto.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BE/src/Features/Comment/Dto/PostCommentResponseDto.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BE/src/Features/Comment/Dtos/PostCommentResponseDto.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BE/src/Features/Comment/Dto/ResponseToPostCommentResponseDto.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BE/src/Features/Comment/Dtos/ResponseToPostCommentResponseDto.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BE/src/Features/Comment/Dto/TransferredResponseToResponseDto.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BE/src/Features/Comment/Dtos/TransferredResponseToResponseDto.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BE/src/Features/Comment/Repositories/IUserPostRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BE/src/Features/Comment/Repositories/IUserPostRepository.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BE/src/Features/Event/Dto/ElasticEventDto.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BE/src/Features/Event/Dtos/ElasticEventDto.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BE/src/Features/Event/Dto/EventAdminDto.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BE/src/Features/Event/Dtos/EventAdminDto.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BE/src/Features/Event/Dto/EventDataDto.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BE/src/Features/Event/Dtos/EventDataDto.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BE/src/Features/Event/Dto/EventDto.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BE/src/Features/Event/Dtos/EventDto.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BE/src/Features/Event/Dto/EventParticipationRequestDto.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BE/src/Features/Event/Dtos/EventParticipationRequestDto.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BE/src/Features/Event/Dto/EventSearchDto.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BE/src/Features/Event/Dtos/EventSearchDto.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BE/src/Features/Event/Dto/NewAvatarDto.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BE/src/Features/Event/Dtos/NewAvatarDto.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BE/src/Features/Event/Dto/NewBackgroundDto.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BE/src/Features/Event/Dtos/NewBackgroundDto.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BE/src/Features/Event/Dto/RequestConfirmationDto.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BE/src/Features/Event/Dtos/RequestConfirmationDto.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BE/src/Features/Friendship/FriendController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BE/src/Features/Friendship/FriendController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BE/src/Features/Friendship/Services/UserFriendshipService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BE/src/Features/Friendship/Services/UserFriendshipService.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BE/src/Features/Post/Repositories/UserPostRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BE/src/Features/Post/Repositories/UserPostRepository.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BE/src/Features/Post/Services/UserPostService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BE/src/Features/Post/Services/UserPostService.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/BE/src/Features/Post/UserPostController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BE/src/Features/Post/UserPostController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BE/src/Features/Search/Services/UserSearchService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BE/src/Features/Search/Services/UserSearchService.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BE/src/Features/User/Services/UserDataService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BE/src/Features/User/Services/UserDataService.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BE/src/Features/User/Services/UserStatusService.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/BE/src/Features/User/UserController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BE/src/Features/User/UserController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BE/src/Features/User/UserDataUpdateController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BE/src/Features/User/UserDataUpdateController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BE/src/Models/FriendyContext.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BE/src/Models/FriendyContext.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BE/src/Repositories/IRepositoryWrapper.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BE/src/Repositories/IRepositoryWrapper.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BE/src/Repositories/RepositoryWrapper.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BE/src/Repositories/RepositoryWrapper.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BE/src/ServiceExtensions.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BE/src/ServiceExtensions.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/JSONWebToken/HMACSHA384Signature.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/JSONWebToken/IHMACSHA384Signature.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/JSONWebToken/IJsonWebToken.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/JSONWebToken/ISignatureFactory.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/JSONWebToken/JSONWebToken.csproj" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/JSONWebToken/JsonWebToken.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/JSONWebToken/JwtBuilder.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/JSONWebToken/JwtCreator.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/JSONWebToken/JwtHMACSHA384.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/JSONWebToken/JwtHMACSHA384Creator.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/JSONWebToken/JwtHeader.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/JSONWebToken/SignatureFactory.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/JSONWebToken/obj/Debug/netcoreapp2.2/JSONWebToken.AssemblyInfo.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/JSONWebToken/obj/Debug/netcoreapp2.2/JSONWebToken.AssemblyInfoInputs.cache" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/JSONWebToken/obj/Debug/netcoreapp2.2/JSONWebToken.assets.cache" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/JSONWebToken/obj/Debug/netcoreapp2.2/JSONWebToken.csprojAssemblyReference.cache" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/JSONWebToken/obj/JSONWebToken.csproj.nuget.cache" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/JSONWebToken/obj/JSONWebToken.csproj.nuget.dgspec.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/JSONWebToken/obj/JSONWebToken.csproj.nuget.g.props" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/JSONWebToken/obj/JSONWebToken.csproj.nuget.g.targets" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/JSONWebToken/obj/project.assets.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/JSONWebToken/obj/project.packagespec.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RecommendationAlgorithm/CosSim.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RecommendationAlgorithm/Output.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RecommendationAlgorithm/RecommendationAlgorithm.csproj" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RecommendationAlgorithm/obj/Debug/netcoreapp2.2/RecommendationAlgorithm.AssemblyInfo.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RecommendationAlgorithm/obj/Debug/netcoreapp2.2/RecommendationAlgorithm.AssemblyInfoInputs.cache" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RecommendationAlgorithm/obj/Debug/netcoreapp2.2/RecommendationAlgorithm.assets.cache" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RecommendationAlgorithm/obj/Debug/netcoreapp2.2/RecommendationAlgorithm.csprojAssemblyReference.cache" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RecommendationAlgorithm/obj/RecommendationAlgorithm.csproj.nuget.cache" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RecommendationAlgorithm/obj/RecommendationAlgorithm.csproj.nuget.g.props" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RecommendationAlgorithm/obj/RecommendationAlgorithm.csproj.nuget.g.targets" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RecommendationAlgorithm/obj/project.assets.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RecommendationAlgorithm/obj/project.packagespec.json" beforeDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -209,126 +67,24 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/BE.UnitTests/UserPostTests.cs">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="378">
-              <caret line="38" column="44" lean-forward="true" selection-start-line="38" selection-start-column="44" selection-end-line="38" selection-end-column="44" />
+            <state relative-caret-position="294">
+              <caret line="44" column="48" lean-forward="true" selection-start-line="44" selection-start-column="48" selection-end-line="44" selection-end-column="48" />
               <folding>
-                <marker date="1582554194046" expanded="false" signature="6:544" ph="..." />
-                <marker date="1582554194046" expanded="true" signature="568:5203" ph="{...}" />
-                <marker date="1582554194046" expanded="true" signature="601:5201" ph="{...}" />
-                <marker date="1582554194046" expanded="true" signature="731:1080" ph="{...}" />
-                <marker date="1582554194046" expanded="true" signature="945:1022" ph="{...}" />
-                <marker date="1582554194046" expanded="true" signature="1153:2371" ph="{...}" />
-                <marker date="1582554194046" expanded="true" signature="1935:2361" ph="{...}" />
-                <marker date="1582554194046" expanded="true" signature="2437:2834" ph="{...}" />
-                <marker date="1582554194046" expanded="true" signature="2905:3262" ph="{...}" />
-                <marker date="1582554194046" expanded="true" signature="3333:3783" ph="{...}" />
-                <marker date="1582554194046" expanded="true" signature="3830:4411" ph="{...}" />
-                <marker date="1582554194046" expanded="true" signature="4479:5195" ph="{...}" />
-                <marker date="1582554194046" expanded="true" signature="4535:5185" ph="{...}" />
-                <marker date="1582554194046" expanded="true" signature="4608:5170" ph="{...}" />
-                <marker date="1582554194046" expanded="true" signature="4764:5085" ph="{...}" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/BE/src/Repositories/RepositoryBase.cs">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="630">
-              <caret line="48" column="12" selection-start-line="48" selection-start-column="12" selection-end-line="48" selection-end-column="12" />
-              <folding>
-                <marker date="1582548671322" expanded="false" signature="6:181" ph="..." />
-                <marker date="1582548671322" expanded="true" signature="208:2491" ph="{...}" />
-                <marker date="1582548671322" expanded="true" signature="291:2489" ph="{...}" />
-                <marker date="1582548671322" expanded="true" signature="361:426" ph="{...}" />
-                <marker date="1582548671322" expanded="true" signature="599:735" ph="{...}" />
-                <marker date="1582548671322" expanded="true" signature="812:919" ph="{...}" />
-                <marker date="1582548671322" expanded="true" signature="959:1072" ph="{...}" />
-                <marker date="1582548671322" expanded="true" signature="1142:1201" ph="{...}" />
-                <marker date="1582548671322" expanded="true" signature="1236:1302" ph="{...}" />
-                <marker date="1582548671322" expanded="true" signature="1337:1406" ph="{...}" />
-                <marker date="1582548671322" expanded="true" signature="1441:1510" ph="{...}" />
-                <marker date="1582548671322" expanded="true" signature="1549:1622" ph="{...}" />
-                <marker date="1582548671322" expanded="true" signature="1650:1712" ph="{...}" />
-                <marker date="1582548671322" expanded="true" signature="1763:1834" ph="{...}" />
-                <marker date="1582548671322" expanded="true" signature="1896:2053" ph="{...}" />
-                <marker date="1582548671322" expanded="true" signature="2105:2193" ph="{...}" />
-                <marker date="1582548671322" expanded="true" signature="2248:2339" ph="{...}" />
-                <marker date="1582548671322" expanded="true" signature="2393:2483" ph="{...}" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/BE/src/Features/Post/Services/UserPostService.cs">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="84">
-              <caret line="39" column="61" selection-start-line="39" selection-start-column="49" selection-end-line="39" selection-end-column="61" />
-              <folding>
-                <marker date="1582553944937" expanded="true" signature="6:210" ph="..." />
-                <marker date="1582553944937" expanded="true" signature="247:2995" ph="{...}" />
-                <marker date="1582553944937" expanded="true" signature="287:631" ph="{...}" />
-                <marker date="1582553944937" expanded="true" signature="684:2993" ph="{...}" />
-                <marker date="1582553944937" expanded="true" signature="954:1080" ph="{...}" />
-                <marker date="1582553944937" expanded="true" signature="1198:1478" ph="{...}" />
-                <marker date="1582553944937" expanded="true" signature="1551:1683" ph="{...}" />
-                <marker date="1582553944937" expanded="true" signature="1748:1976" ph="{...}" />
-                <marker date="1582553944937" expanded="true" signature="2095:2987" ph="{...}" />
-                <marker date="1582553944937" expanded="true" signature="2172:2369" ph="{...}" />
-                <marker date="1582553944937" expanded="true" signature="2422:2670" ph="{...}" />
-                <marker date="1582553944937" expanded="true" signature="2479:2621" ph="{...}" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/BE/src/Features/Comment/Repositories/IUserPostRepository.cs">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="231">
-              <caret line="16" column="33" lean-forward="true" selection-start-line="16" selection-start-column="33" selection-end-line="16" selection-end-column="33" />
-              <folding>
-                <marker date="1582553792763" expanded="false" signature="6:148" ph="..." />
-                <marker date="1582553792763" expanded="true" signature="192:548" ph="{...}" />
-                <marker date="1582553792763" expanded="true" signature="263:546" ph="{...}" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/BE/src/Features/Post/Repositories/UserPostRepository.cs">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="42">
-              <caret line="23" column="30" lean-forward="true" selection-start-line="23" selection-start-column="30" selection-end-line="23" selection-end-column="30" />
-              <folding>
-                <marker date="1582554287257" expanded="false" signature="6:244" ph="..." />
-                <marker date="1582554287257" expanded="true" signature="272:2423" ph="{...}" />
-                <marker date="1582554287257" expanded="true" signature="358:2421" ph="{...}" />
-                <marker date="1582554287257" expanded="true" signature="464:484" ph="{...}" />
-                <marker date="1582554287257" expanded="true" signature="535:698" ph="{...}" />
-                <marker date="1582554287257" expanded="true" signature="801:1234" ph="{...}" />
-                <marker date="1582554287257" expanded="true" signature="1364:1653" ph="{...}" />
-                <marker date="1582554287257" expanded="true" signature="1693:1739" ph="{...}" />
-                <marker date="1582554287257" expanded="true" signature="1780:2057" ph="{...}" />
-                <marker date="1582554287257" expanded="true" signature="2119:2415" ph="{...}" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/BE.UnitTests/Helpers.cs">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="189">
-              <caret line="9" column="95" lean-forward="true" selection-start-line="9" selection-start-column="95" selection-end-line="9" selection-end-column="95" />
-              <folding>
-                <marker date="1582501672463" expanded="true" signature="6:100" ph="..." />
-                <marker date="1582501672463" expanded="true" signature="124:890" ph="{...}" />
-                <marker date="1582501672463" expanded="true" signature="158:888" ph="{...}" />
-                <marker date="1582501672463" expanded="true" signature="260:882" ph="{...}" />
+                <marker date="1582556501808" expanded="true" signature="6:418" ph="..." />
+                <marker date="1582556501808" expanded="true" signature="442:5258" ph="{...}" />
+                <marker date="1582556501808" expanded="true" signature="475:5256" ph="{...}" />
+                <marker date="1582556501808" expanded="true" signature="605:954" ph="{...}" />
+                <marker date="1582556501808" expanded="true" signature="819:896" ph="{...}" />
+                <marker date="1582556501808" expanded="true" signature="1027:2298" ph="{...}" />
+                <marker date="1582556501808" expanded="true" signature="1636:2288" ph="{...}" />
+                <marker date="1582556501808" expanded="true" signature="2364:2810" ph="{...}" />
+                <marker date="1582556501808" expanded="true" signature="2881:3287" ph="{...}" />
+                <marker date="1582556501808" expanded="true" signature="3358:3857" ph="{...}" />
+                <marker date="1582556501808" expanded="true" signature="3930:4466" ph="{...}" />
+                <marker date="1582556501808" expanded="true" signature="4534:5250" ph="{...}" />
+                <marker date="1582556501808" expanded="true" signature="4590:5240" ph="{...}" />
+                <marker date="1582556501808" expanded="true" signature="4663:5225" ph="{...}" />
+                <marker date="1582556501808" expanded="true" signature="4819:5140" ph="{...}" />
               </folding>
             </state>
           </provider>
@@ -337,17 +93,17 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/BE/src/Features/Post/UserPostController.cs">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="165">
-              <caret line="18" column="32" selection-start-line="18" selection-start-column="32" selection-end-line="18" selection-end-column="32" />
+            <state relative-caret-position="-37">
+              <caret line="38" column="16" selection-start-line="38" selection-start-column="16" selection-end-line="38" selection-end-column="16" />
               <folding>
-                <marker date="1582553944962" expanded="false" signature="6:308" ph="..." />
-                <marker date="1582553944962" expanded="true" signature="336:2043" ph="{...}" />
-                <marker date="1582553944962" expanded="true" signature="436:2041" ph="{...}" />
-                <marker date="1582553944962" expanded="true" signature="571:639" ph="{...}" />
-                <marker date="1582553944962" expanded="true" signature="776:979" ph="{...}" />
-                <marker date="1582553944962" expanded="true" signature="1194:1327" ph="{...}" />
-                <marker date="1582553944962" expanded="true" signature="1588:1759" ph="{...}" />
-                <marker date="1582553944962" expanded="true" signature="1921:2035" ph="{...}" />
+                <marker date="1582555799744" expanded="false" signature="6:308" ph="..." />
+                <marker date="1582555799744" expanded="true" signature="336:2018" ph="{...}" />
+                <marker date="1582555799744" expanded="true" signature="436:2016" ph="{...}" />
+                <marker date="1582555799744" expanded="true" signature="571:639" ph="{...}" />
+                <marker date="1582555799744" expanded="true" signature="776:979" ph="{...}" />
+                <marker date="1582555799744" expanded="true" signature="1169:1302" ph="{...}" />
+                <marker date="1582555799744" expanded="true" signature="1563:1734" ph="{...}" />
+                <marker date="1582555799744" expanded="true" signature="1896:2010" ph="{...}" />
               </folding>
             </state>
           </provider>
@@ -380,288 +136,32 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="file://$PROJECT_DIR$/BE/src/Middlewares/UserIdInHeaderMiddleware.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/BE/src/Features/Chat/Repositories/ChatParticipantsRepository.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/BE/src/Features/Chat/Repositories/ChatRepository.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/BE/src/Features/Chat/Repositories/ChatMessageRepository.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/BE/src/Features/Chat/Repositories/ChatMessagesRepository.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/DD7BBB1E-B6CB-4178-A82C-D5136B2606B8/c7/7d554bcb/HttpRequest.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/BE/src/Features/Chat/Repositories/IChatParticipantsRepository.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/BE/src/Features/Friendship/Helpers/FriendshipStatus.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/BE/src/Features/Chat/Repositories/IChatRepository.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/BE/src/SignalR/Hubs/ProfileHub.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/BE/src/Features/Chat/Repositories/IChatMessageRepository.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/BE/src/SignalR/Hubs/PostHub.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/BE/src/Features/Chat/Repositories/IChatMessagesRepository.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/BE/src/Features/Post/Repositories/UserPostRepository.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/BE/src/Models/Chat.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/BE/src/Features/Post/UserPostController.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/BE/src/Models/ChatMessage.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/BE/src/Features/Event/Dtos/RequestConfirmationDto.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/BE/src/Models/ChatMessages.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/BE/src/Features/Comment/Repositories/ICommentLikeRepository.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/BE/src/Models/Comment.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/BE/src/Features/Comment/Repositories/CommentLikeRepository.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/BE/src/Features/FriendshipRecommendation/FriendshipRecommendationService.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/BE/src/Models/Friend.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/BE/src/Features/FriendshipRecommendation/FriendshipRecommendationController.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/BE/src/Features/Event/Dtos/EventParticipationRequestDto.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/57139BFC-E1DA-4913-8884-2BBBF31D74D3/e7/69b6a363/ICollection`1.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/BE/src/Features/Authentication/AuthController.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/BE/src/Features/Chat/Dtos/InterlocutorsDto.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/87E8CE02-3EE4-404D-9082-6C8A5038171A/46/89f79914/IActionResult.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/BE/src/Repositories/RepositoryServices/User/UserSearchingService.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/BE/src/Models/DrugsAttitude.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/BE/src/Models/MaritalStatus.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/57139BFC-E1DA-4913-8884-2BBBF31D74D3/62/574b1db1/IFormatProvider.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/BE/src/Features/Search/EventSearchController.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/57139BFC-E1DA-4913-8884-2BBBF31D74D3/2b/785076cf/Int32.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/BE/src/Features/Search/Services/EventSearchService.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/0C38BDD3-5283-466A-A7A9-C25E92BDF157/be/42e0d56f/ValueTaskAwaiter.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/BE/src/Features/Friendship/Dtos/ExemplaryFriendDto.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/0C38BDD3-5283-466A-A7A9-C25E92BDF157/cc/ddbeb460/ExceptionDispatchInfo.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/BE/src/Features/User/UserDataUpdateController.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/BE/src/Models/UserFriendship.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/BE/src/Features/Comment/Dtos/NewMainCommentDto.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/BE/src/SignalR/Services/DialogNotifier.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/BE/src/Features/Comment/Repositories/ResponseToCommentRepository.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/BE/src/Features/User/Dtos/UserForIndexingDto.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/BE/src/Features/Event/Services/EventDataService.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/BE/src/Models/ResponseToComment.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/BE/src/Features/User/Dtos/NewPasswordDto.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/BE/src/Features/Comment/Repositories/IResponseToCommentRepository.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/BE/src/Features/User/Dtos/UserInterestForElasticsearchDto.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/BE/src/Features/Comment/Dtos/ResponseToPostCommentResponseDto.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/BE/src/Features/Event/Services/UserEventsService.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/BE/src/Features/Chat/Dtos/CreatedMessageDto.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/BE/src/Features/Comment/Repositories/ICommentResponse.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/BE/src/Features/Comment/Repositories/MainCommentRepository.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/BE/src/Features/Comment/Repositories/IUserPostRepository.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/BE/src/Features/Comment/Repositories/IMainCommentRepository.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/BE/src/Models/Event.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/BE/src/Models/MainComment.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/BE/src/Features/Comment/Dtos/PostCommentResponseDto.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/BE/src/Models/ResponseToMainCommentResponse.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/BE/src/Mapping/Profiles/ChatLastMessageProfile.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/BE/src/Models/MainCommentResponse.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/BE/src/Features/Comment/Services/PostCommentService.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/BE/src/Features/Event/Dtos/EventSearchDto.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/BE/src/Models/User.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/BE/src/Models/Session.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/BE/src/Features/Event/Queries/EventPost/GetEventPostsRangeWithPaginationQuery.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/BE/src/Features/Event/Queries/EventPost/Handlers/EventPostsRangeWithPaginationQueryHandler.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/BE/src/Startup.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/BE/src/ServiceExtensions.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/BE/src/Program.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/BE/src/Models/EventPost.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/BE/src/Models/UserPost.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/BE/src/ElasticSearch/ElasticClientProvider.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/BE/src/ElasticSearch/ElasticConnectionSettings.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/BE/src/Features/Post/UserPostController.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/4156DEFD-3D50-4A5F-A099-C2B49343A450/54/a87346be/ExceptionDispatchInfo.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/BE/src/Features/Comment/Repositories/CommentRepository.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/BE/src/SignalR/Hubs/UserStatusHub.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/BE/src/Features/Friendship/FriendController.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/BE/src/Models/ChatParticipants.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/BE/src/Features/User/Dtos/UserBasicDto.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/BE/src/Features/Event/Dtos/NewAvatarDto.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/BE/src/Helpers/RawSqlQuery.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/BE/src/Features/Event/Repositories/IEventParticipationRequestRepository.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/BE/src/Features/Photo/UserPhotoRepository.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/BE/src/Features/User/Repositories/ISessionRepository.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/BE/src/Middlewares/ExceptionMiddleware.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/BE/src/Features/User/Repositories/SessionRepository.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/BE/src/Features/Authentication/Dtos/AuthResponse.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/F129BFFB-E30E-4E83-BAD7-40868B141DB2/c9/3517f827/IGroupManager.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/BE/src/Features/Event/Repositories/EventParticipationRequestRepository.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/BE/src/Features/Chat/Dtos/DialogBasicDataDto.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/BE/src/Features/Event/EventParticipationRequestController.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/BE/src/Models/FriendyContext.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/BE/src/Features/Chat/Dtos/ParticipantsBasicDataDto.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/BE/src/Features/User/Repositories/IUserPhotoRepository.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/BE/src/Models/Gender.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/BE/src/Features/Chat/Dtos/FriendBasicDataInDialogDto.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/BE/src/Models/EventParticipationRequest.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/BE/src/Helpers/HTTPHelpers.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/BE/src/Features/Chat/Dtos/ParticipantsBasicDataSqlDto.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/BE/src/Features/Event/Services/EventParticipantService.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/BE/src/Features/Photo/PhotoService.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/BE/src/Helpers/JwtService.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/7016B9C3-AD0A-470C-9D0B-31B802E847F5/0/SaltRevision.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/BE/src/Features/Authentication/Services/AuthenticationService.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/BE/src/Helpers/AuthorizeEventParticipant.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/BE/src/Features/User/Dtos/NewUserDto.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/BE/src/Repositories/IRepositoryWrapper.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/BE/src/Features/User/Repositories/IUserRepository.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/BE/src/Helpers/AuthorizeEventAdminInPostController.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/BE/src/Mapping/Profiles/EventDataProfile.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/BE/src/Repositories/IRepositoryBase.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/BE/src/Helpers/CustomSqlQuery.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/BE/src/Features/Post/Dtos/UserPostDto.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/BE/src/Features/Post/Services/EventPostService.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/7016B9C3-AD0A-470C-9D0B-31B802E847F5/1/BCrypt.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/BE/src/Features/Event/Commands/Event/EventPost/Handlers/CreateEventPostAndReturnDtoCommandHandler.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/BE/src/Features/User/UserController.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/BE/src/Middlewares/JWTInHeaderMiddleware.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/BE/src/Features/User/Repositories/UserRepository.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/BE/src/Repositories/RepositoryWrapper.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/BE/src/Features/Event/Commands/Event/EventPost/CreateEventPostAndReturnDtoCommand.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/BE/src/Repositories/RepositoryBase.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/BE/src/Mapping/Profiles/EventPostProfile.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/BE/src/Mapping/Resolvers/IsEventPostLikedByUserResolver.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/BE/src/Features/Event/Queries/EventPost/Handlers/EventPostByIdQueryHandler.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/BE/src/Features/Friendship/Dtos/SentFriendRequestDto.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/BE/src/SignalR/Hubs/DialogHub.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/BE/src/Models/FamilyStatus.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/BE/src/Features/FriendshipRecommendation/FriendshipRecommendationRepository.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/BE/src/Models/FriendshipRecommendation.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/6BCDFAAE-EEF5-425B-99B4-BFDE66161A46/a5/847d1d4e/DbSet`1.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/BE/src/Features/FriendshipRecommendation/IFriendshipRecommendationRepository.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/BE/src/Features/FriendshipRecommendation/CosSim.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/BE/src/Features/FriendshipRecommendation/Output.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/BE/src/Features/Friendship/Repositories/IFriendRequestRepository.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/BE/src/Mapping/Profiles/UserDataForEsIndexingProfile.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/BE/src/Features/Friendship/Repositories/FriendRequestRepository.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/BE/src/Models/FriendRequest.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/BE/src/HostedServices/FriendshipRecommendationHostedService.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/BE/src/Features/Event/Dtos/EventDataDto.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/BE/src/Features/User/Dtos/FoundUserDto.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/0C38BDD3-5283-466A-A7A9-C25E92BDF157/80/6dd8bfe8/PropertyInfo.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/BE/src/Features/Search/UserSearchController.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/BE/src/Features/Event/Queries/EventPost/GetEventPostRangeById.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/BE/src/Features/Event/Helpers/EventParticipationRequestCreationResult.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/BE/src/Helpers/DynamicLinqStatement.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/BE/src/Features/Photo/Repositories/IPhotoRepository.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/BE/src/Features/Event/Queries/EventPost/GetEventPostById.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/BE/src/Features/Event/Services/IEventParticipationStatusService.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/BE/src/Features/User/Dtos/UserLookUpModelDto.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/BE/src/Features/Photo/Repositories/PhotoRepository.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/BE/src/Features/Event/Helpers/EventParticipationStatus.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/BE/src/Features/Friendship/Dtos/ReceivedFriendRequestDto.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/BE/src/Models/Image.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/BE/src/Features/Event/Queries/EventPost/Handlers/EventPostRangeByIdQueryHandler.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/BE/src/Features/Event/Helpers/EventParticipationStatusRes.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/BE/src/Repositories/RepositoryServices/Interfaces/User/IUserSearchingService.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/BE/src/Mapping/Resolvers/IsUserPostLikedByUserResolver.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/8279F4B2-1DE1-4856-8FBF-2AE8C97AE28A/a8/2d3ece61/AuthorizeAttribute.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/BE/src/Features/Event/Helpers/EventParticipationRequestResponse.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/BE/src/Features/Chat/Dtos/NewMessageDto.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/BE/src/Features/Event/Dtos/EventParticipantDetailedDto.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/BE/src/Features/Event/Services/EventParticipationRequestService.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/6BCDFAAE-EEF5-425B-99B4-BFDE66161A46/07/4491e1c8/EntityFrameworkQueryableExtensions.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/BE/src/Features/Event/Dtos/EventDto.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/BE/src/Helpers/IndexedForeachLoop.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/B4EF600F-4A59-4FE2-865A-8F97F915FB9D/0c/bbf927a0/HttpPatchAttribute.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/BE.UnitTests/UserPostTests.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/BE/src/Features/Event/Repositories/IEventAdminsRepository.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/BE/src/Mapping/Profiles/UserPostProfile.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/BE/src/Features/Event/Repositories/EventAdminsRepository.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/BE/src/Models/EventAdmins.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/6BCDFAAE-EEF5-425B-99B4-BFDE66161A46/a5/847d1d4e/DbSet`1.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/0C38BDD3-5283-466A-A7A9-C25E92BDF157/80/6dd8bfe8/PropertyInfo.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/8279F4B2-1DE1-4856-8FBF-2AE8C97AE28A/a8/2d3ece61/AuthorizeAttribute.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/6BCDFAAE-EEF5-425B-99B4-BFDE66161A46/07/4491e1c8/EntityFrameworkQueryableExtensions.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/B4EF600F-4A59-4FE2-865A-8F97F915FB9D/0c/bbf927a0/HttpPatchAttribute.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/B4EF600F-4A59-4FE2-865A-8F97F915FB9D/f3/3cbba84b/FromHeaderAttribute.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/BE/src/Features/Authentication/Helpers/AuthenticationResponse.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/BE/src/Features/Event/Dtos/NewBackgroundDto.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/BE/src/Helpers/CustomExceptions/EmailIsAlreadyTakenException.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/BE/src/Models/EventParticipants.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/BE/src/Helpers/AuthorizeEventAdmin.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/BE/src/Features/Photo/EventPhotoController.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/BE/src/Features/Friendship/Dtos/ShortenedFriendDto.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/BE/src/Features/Photo/Dtos/PhotoDto.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/BE/src/Features/Event/Repositories/EventPhotoRepository.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/BE/src/Features/Event/Repositories/IEventPhotoRepository.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/BE/src/Features/Event/Commands/Event/EventCreation/EventCreationCommand.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/BE/src/Features/Event/Commands/Event/EventCreation/EventCreationCommandHandler.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/57669C9E-8E81-4772-B5A4-B54046C7B220/ab/0ede3f78/WebHostBuilder.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/BE/src/Features/User/Services/UserDataUpdateService.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/BE/src/Features/Event/EventAdminsController.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/BE/src/Helpers/AuthorizeEventCreator.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/BE/src/Helpers/CustomExceptions/EntityWasntFoundException.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/BE.UnitTests/Helpers.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/221FA654-76FD-4A6A-A7BE-C2CD9B5A08D9/a1/b4f69383/IConfiguration.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/BE/src/Features/Event/Dtos/ExemplaryEventParticipantDto.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/BE/src/Features/Event/Repositories/IEventParticipantsRepository.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/BE/src/Features/Event/Repositories/EventParticipantsRepository.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/BE/src/Features/Event/Dtos/EventParticipantForListDto.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/BE/src/Features/Event/EventParticipantController.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/BE/Frontend/node_modules/selenium-webdriver/lib/test/data/Page.aspx.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/BE/src/Cache/RedisClient.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/0C38BDD3-5283-466A-A7A9-C25E92BDF157/9a/7f6b7333/ExecutionContext.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/BE/src/Features/Event/Dtos/EventAdminDto.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/BE/src/Models/SmokingAttitude.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/BE/src/Models/Education.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/BE/src/Models/UserAdditionalInfo.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/BE/src/Models/Interest.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/BE/src/Models/Religion.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/BE/src/Models/UserInterests.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/BE/src/Models/AlcoholAttitude.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/BE/src/Features/User/Dtos/UsersLookUpCriteriaDto.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/BE/src/Mapping/Profiles/UserExtendedDataProfile.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/BE/src/ElasticSearch/UserDataUpdating.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/BE/src/Features/User/Services/UserDataService.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/BE/src/ElasticSearch/UserDataIndexing.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/BE/src/Features/Photo/UserPhotoController.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/BE/src/Models/CommentResponseLike.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/BE/src/Repositories/EntityDatabaseTransaction.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/E407D4BA-C36C-45DA-982B-FD389A659F31/0/IMapper.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/863B81D8-9327-499B-9618-D9BE52F0AC42/8e/8840741d/IFormFile.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/BE/src/Features/Event/Dtos/BannedEventParticipantDto.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/0EF11382-C1BB-450D-9203-B126A46C802D/41/fcb7a650/Enumerable.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/BE/src/Helpers/IImageSaver.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/BE/src/Features/Event/Repositories/IEventBannedUsersRepository.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/BE/src/Features/Event/EventDataController.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/BE/src/Features/Event/Repositories/EventBannedUsersRepository.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/BE/src/Features/Post/Repositories/EventPostRepository.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/BE/src/Features/Post/Repositories/PostRepository.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/BE/src/Features/Event/Repositories/IEventPostRepository.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/BE/src/Features/Comment/Dtos/NewCommentDto.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/BE/src/Models/UserImage.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/BE/src/Models/CommentRespondLike.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/BE/src/Models/EventImage.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/BE/src/Models/CommentLike.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/BE/src/Features/Chat/ChatController.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/BE/src/Features/Comment/Dtos/PostCommentDto.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/BE/src/Features/Post/PostController.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/BE/src/Features/Chat/Services/ChatService.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/BE/src/Models/CommentRespond.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/BE/src/Features/Event/Repositories/IUserEventsRepository.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/BE/src/Features/Post/Dtos/EventPostDto.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/BE/src/Features/Comment/PostCommentController.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/BE/src/Features/Event/Repositories/UserEventsRepository.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/BE/src/Mapping/Resolvers/WrittenByRequestIssuerResolver.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/BE/src/Features/Comment/Services/CommentResponseService.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/BE/src/Features/Friendship/Repositories/IUserFriendsRepository.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/BE/src/Models/Post.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/BE/src/Features/User/Dtos/ExtendedUserDto.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/BE/src/Features/Friendship/Repositories/UserFriendshipRepository.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/BE/src/Models/PostLike.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/BE/src/Models/EventBannedUsers.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/BE/src/Mapping/Resolvers/InterlocutorAvatarResolver.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/BE/src/Features/Comment/CommentResponseController.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/BE/src/Features/Comment/Repositories/IPostRepository.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/BE/src/Mapping/Resolvers/InterlocutorIdResolver.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/BE/src/Models/UserEvents.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/BE/src/Helpers/CustomExceptions/EntityIsAlreadyLiked.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/BE/src/Features/Post/EventPostController.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/BE/src/ElasticSearch/UserDetailedSearch.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/BE/src/Features/Friendship/Services/UserFriendshipService.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/BE/src/Features/Event/Repositories/EventRepository.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/BE/src/Features/Search/Services/UserSearchService.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/BE/src/Features/Event/Repositories/IEventRepository.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/BE/src/Features/Event/EventController.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/BE/src/Features/Friendship/Repositories/FriendRepository.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/BE/src/Features/Friendship/Repositories/IFriendRepository.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/BE/src/Features/Post/Dtos/LikeDto.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/BE/src/Features/Post/Services/UserPostService.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/BE/src/Features/Post/Repositories/PostLikeRepository.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/BE/src/Features/Authentication/Dtos/AuthDataDto.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/BE/src/Features/Post/Repositories/IPostLikeRepository.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/BE/src/Features/Comment/Dtos/NewCommentResponseDto.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/BE/src/Features/Event/Dtos/ElasticEventDto.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/BE/src/Features/Comment/Dtos/TransferredResponseToResponseDto.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/BE/src/Models/EventPostLikes.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/BE/src/Helpers/CustomExceptions/EntityIsNotLikedException.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/BE/src/Features/Comment/Repositories/ICommentRepository.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/BE/src/Features/Friendship/Dtos/FriendDto.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/BE/src/Features/Chat/Dtos/ChatLastMessageDto.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/BE/src/Features/Chat/Dtos/ChatMessageDto.cs" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
@@ -713,10 +213,10 @@
         <option value="$PROJECT_DIR$/BE/src/Repositories/RepositoryBase.cs" />
         <option value="$PROJECT_DIR$/BE.UnitTests/Helpers.cs" />
         <option value="$PROJECT_DIR$/BE/src/Features/Comment/Repositories/IUserPostRepository.cs" />
-        <option value="$PROJECT_DIR$/BE/src/Features/Post/UserPostController.cs" />
         <option value="$PROJECT_DIR$/BE/src/Features/Post/Services/UserPostService.cs" />
-        <option value="$PROJECT_DIR$/BE.UnitTests/UserPostTests.cs" />
         <option value="$PROJECT_DIR$/BE/src/Features/Post/Repositories/UserPostRepository.cs" />
+        <option value="$PROJECT_DIR$/BE/src/Features/Post/UserPostController.cs" />
+        <option value="$PROJECT_DIR$/BE.UnitTests/UserPostTests.cs" />
       </list>
     </option>
   </component>
@@ -766,12 +266,6 @@
               <item name="" type="784c90a0:SolutionExplorerRootNode" />
               <item name="BE" type="24d0babc:SolutionExplorerModelNode" />
               <item name="BE" type="24d0babc:SolutionExplorerModelNode" />
-            </path>
-            <path>
-              <item name="" type="784c90a0:SolutionExplorerRootNode" />
-              <item name="BE" type="24d0babc:SolutionExplorerModelNode" />
-              <item name="BE" type="24d0babc:SolutionExplorerModelNode" />
-              <item name="src" type="24d0babc:SolutionExplorerModelNode" />
             </path>
             <path>
               <item name="" type="784c90a0:SolutionExplorerRootNode" />
@@ -1037,7 +531,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="254107000" />
+    <option name="totallyTimeSpent" value="255700000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -1050,6 +544,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.20990942" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -1068,10 +563,10 @@
       <window_info anchor="bottom" id="Azure Activity Log" order="10" weight="0.3297062" />
       <window_info anchor="bottom" id="Version Control" order="11" sideWeight="0.49973363" weight="0.3297062" />
       <window_info anchor="bottom" id="Database Changes" order="12" />
-      <window_info anchor="bottom" id="Unit Tests" order="13" sideWeight="0.49920085" weight="0.30032644" />
+      <window_info active="true" anchor="bottom" id="Unit Tests" order="13" sideWeight="0.49920085" visible="true" weight="0.30032644" />
       <window_info anchor="bottom" id="REST Client" order="14" weight="0.32752994" />
       <window_info anchor="bottom" id="Event Log" order="15" sideWeight="0.5007991" side_tool="true" weight="0.30032644" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="16" sideWeight="0.5199787" visible="true" weight="0.1882481" />
+      <window_info anchor="bottom" id="Terminal" order="16" sideWeight="0.5199787" weight="0.1882481" />
       <window_info anchor="bottom" id="Build" order="17" sideWeight="0.47043154" weight="0.29053319" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -1129,19 +624,6 @@
           <item name="rootNode" type="c53c71d1:RiderDotCoverCoverageTreeModel$RootNode" />
           <item name="1" type="8b8fad3a:RiderDotCoverCoverageTreeNode" />
           <item name="2" type="8b8fad3a:RiderDotCoverCoverageTreeNode" />
-        </path>
-        <path>
-          <item name="rootNode" type="c53c71d1:RiderDotCoverCoverageTreeModel$RootNode" />
-          <item name="1" type="8b8fad3a:RiderDotCoverCoverageTreeNode" />
-          <item name="2" type="8b8fad3a:RiderDotCoverCoverageTreeNode" />
-          <item name="2257" type="8b8fad3a:RiderDotCoverCoverageTreeNode" />
-        </path>
-        <path>
-          <item name="rootNode" type="c53c71d1:RiderDotCoverCoverageTreeModel$RootNode" />
-          <item name="1" type="8b8fad3a:RiderDotCoverCoverageTreeNode" />
-          <item name="2" type="8b8fad3a:RiderDotCoverCoverageTreeNode" />
-          <item name="2257" type="8b8fad3a:RiderDotCoverCoverageTreeNode" />
-          <item name="2258" type="8b8fad3a:RiderDotCoverCoverageTreeNode" />
         </path>
       </expand>
       <select />
@@ -1836,18 +1318,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="341">
           <caret line="51" column="46" lean-forward="true" selection-start-line="51" selection-start-column="46" selection-end-line="51" selection-end-column="46" />
-          <folding>
-            <marker date="1582499802004" expanded="true" signature="6:447" ph="..." />
-            <marker date="1582499802004" expanded="true" signature="532:7256" ph="{...}" />
-            <marker date="1582499802004" expanded="true" signature="2040:2271" ph="/* public IChatParticipantsRepository ChatParticipants =&gt; ... */" />
-            <marker date="1582499802004" expanded="true" signature="2337:2357" ph="{...}" />
-            <marker date="1582499802004" expanded="true" signature="2422:2488" ph="{...}" />
-            <marker date="1582499802004" expanded="true" signature="2878:2952" ph="{...}" />
-            <marker date="1582499802004" expanded="true" signature="6871:7009" ph="{...}" />
-            <marker date="1582499802004" expanded="true" signature="7036:7106" ph="{...}" />
-            <marker date="1582499802004" expanded="true" signature="7116:7200" ph="/* public void Dispose() ... */" />
-            <marker date="1582499802004" expanded="true" signature="7230:7250" ph="{...}" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1914,27 +1384,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="336">
           <caret line="25" column="47" selection-start-line="25" selection-start-column="47" selection-end-line="25" selection-end-column="47" />
-          <folding>
-            <marker date="1582503734255" expanded="false" signature="6:247" ph="..." />
-            <marker date="1582503734255" expanded="true" signature="275:5805" ph="{...}" />
-            <marker date="1582503734255" expanded="true" signature="370:5803" ph="{...}" />
-            <marker date="1582503734255" expanded="true" signature="699:855" ph="{...}" />
-            <marker date="1582503734255" expanded="true" signature="973:1082" ph="{...}" />
-            <marker date="1582503734255" expanded="true" signature="1297:1521" ph="{...}" />
-            <marker date="1582503734255" expanded="true" signature="1773:1997" ph="{...}" />
-            <marker date="1582503734255" expanded="true" signature="2194:2314" ph="{...}" />
-            <marker date="1582503734255" expanded="true" signature="2439:2559" ph="{...}" />
-            <marker date="1582503734255" expanded="true" signature="2757:2874" ph="{...}" />
-            <marker date="1582503734255" expanded="true" signature="3015:3142" ph="{...}" />
-            <marker date="1582503734255" expanded="true" signature="3294:3440" ph="{...}" />
-            <marker date="1582503734255" expanded="true" signature="3616:3673" ph="{...}" />
-            <marker date="1582503734255" expanded="true" signature="3916:4456" ph="{...}" />
-            <marker date="1582503734255" expanded="true" signature="4216:4284" ph="{...}" />
-            <marker date="1582503734255" expanded="true" signature="4717:5219" ph="{...}" />
-            <marker date="1582503734255" expanded="true" signature="5028:5100" ph="{...}" />
-            <marker date="1582503734255" expanded="true" signature="5310:5488" ph="{...}" />
-            <marker date="1582503734255" expanded="true" signature="5609:5797" ph="{...}" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1942,18 +1391,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="210">
           <caret line="16" selection-start-line="16" selection-end-line="16" />
-          <folding>
-            <marker date="1582502862691" expanded="true" signature="6:184" ph="..." />
-            <marker date="1582502862691" expanded="true" signature="212:3437" ph="{...}" />
-            <marker date="1582502862691" expanded="true" signature="329:3435" ph="{...}" />
-            <marker date="1582502862691" expanded="true" signature="698:876" ph="{...}" />
-            <marker date="1582502862691" expanded="true" signature="1068:1284" ph="{...}" />
-            <marker date="1582502862691" expanded="true" signature="1468:1706" ph="{...}" />
-            <marker date="1582502862691" expanded="true" signature="1904:2414" ph="{...}" />
-            <marker date="1582502862691" expanded="true" signature="2598:2726" ph="{...}" />
-            <marker date="1582502862691" expanded="true" signature="2942:3429" ph="{...}" />
-            <marker date="1582502862691" expanded="true" signature="3159:3342" ph="{...}" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1961,19 +1398,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="798">
           <caret line="57" column="24" selection-start-line="57" selection-start-column="24" selection-end-line="57" selection-end-column="24" />
-          <folding>
-            <marker date="1582503517260" expanded="true" signature="6:215" ph="..." />
-            <marker date="1582503517260" expanded="true" signature="252:2746" ph="{...}" />
-            <marker date="1582503517260" expanded="true" signature="292:656" ph="{...}" />
-            <marker date="1582503517260" expanded="true" signature="709:2744" ph="{...}" />
-            <marker date="1582503517260" expanded="true" signature="993:1127" ph="{...}" />
-            <marker date="1582503517260" expanded="true" signature="1195:1381" ph="{...}" />
-            <marker date="1582503517260" expanded="true" signature="1501:1757" ph="{...}" />
-            <marker date="1582503517260" expanded="true" signature="1818:1927" ph="{...}" />
-            <marker date="1582503517260" expanded="true" signature="2018:2204" ph="{...}" />
-            <marker date="1582503517260" expanded="true" signature="2289:2517" ph="{...}" />
-            <marker date="1582503517260" expanded="true" signature="2626:2738" ph="{...}" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1981,12 +1405,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="21">
           <caret line="1" column="26" lean-forward="true" selection-start-line="1" selection-start-column="26" selection-end-line="1" selection-end-column="26" />
-          <folding>
-            <marker date="1582547422037" expanded="true" signature="6:58" ph="..." />
-            <marker date="1582547422037" expanded="true" signature="78:302" ph="{...}" />
-            <marker date="1582547422037" expanded="true" signature="116:300" ph="{...}" />
-            <marker date="1582547422037" expanded="true" signature="204:294" ph="{...}" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1994,21 +1412,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="357">
           <caret line="45" column="43" selection-start-line="45" selection-start-column="43" selection-end-line="45" selection-end-column="43" />
-          <folding>
-            <marker date="1582140512102" expanded="false" signature="6:806" ph="..." />
-            <marker date="1582140512102" expanded="true" signature="820:5956" ph="{...}" />
-            <marker date="1582140512102" expanded="true" signature="847:5954" ph="{...}" />
-            <marker date="1582140512102" expanded="true" signature="931:1025" ph="{...}" />
-            <marker date="1582140512102" expanded="true" signature="1304:4357" ph="{...}" />
-            <marker date="1582140512102" expanded="true" signature="2036:2280" ph="{...}" />
-            <marker date="1582140512102" expanded="true" signature="2333:2797" ph="{...}" />
-            <marker date="1582140512102" expanded="true" signature="2527:2778" ph="{...}" />
-            <marker date="1582140512102" expanded="true" signature="3654:4003" ph="{...}" />
-            <marker date="1582140512102" expanded="true" signature="4545:5948" ph="{...}" />
-            <marker date="1582140512102" expanded="true" signature="4726:4963" ph="{...}" />
-            <marker date="1582140512102" expanded="true" signature="5382:5627" ph="{...}" />
-            <marker date="1582140512102" expanded="true" signature="5691:5938" ph="/* app.UseSpa(spa =&gt; ... */" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -2016,16 +1419,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="120">
           <caret line="67" column="53" lean-forward="true" selection-start-line="67" selection-start-column="16" selection-end-line="67" selection-end-column="53" />
-          <folding>
-            <marker date="1582503237816" expanded="false" signature="6:608" ph="..." />
-            <marker date="1582503237816" expanded="true" signature="622:3385" ph="{...}" />
-            <marker date="1582503237816" expanded="true" signature="666:3383" ph="{...}" />
-            <marker date="1582503237816" expanded="true" signature="788:981" ph="{...}" />
-            <marker date="1582503237816" expanded="true" signature="1070:1163" ph="{...}" />
-            <marker date="1582503237816" expanded="true" signature="1265:2630" ph="{...}" />
-            <marker date="1582503237816" expanded="true" signature="2712:3377" ph="{...}" />
-            <marker date="1582503237816" expanded="true" signature="2850:3267" ph="{...}" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -2033,29 +1426,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="189">
           <caret line="9" column="95" lean-forward="true" selection-start-line="9" selection-start-column="95" selection-end-line="9" selection-end-column="95" />
-          <folding>
-            <marker date="1582501672463" expanded="true" signature="6:100" ph="..." />
-            <marker date="1582501672463" expanded="true" signature="124:890" ph="{...}" />
-            <marker date="1582501672463" expanded="true" signature="158:888" ph="{...}" />
-            <marker date="1582501672463" expanded="true" signature="260:882" ph="{...}" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/BE/src/Features/Post/UserPostController.cs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="165">
-          <caret line="18" column="32" selection-start-line="18" selection-start-column="32" selection-end-line="18" selection-end-column="32" />
-          <folding>
-            <marker date="1582553944962" expanded="false" signature="6:308" ph="..." />
-            <marker date="1582553944962" expanded="true" signature="336:2043" ph="{...}" />
-            <marker date="1582553944962" expanded="true" signature="436:2041" ph="{...}" />
-            <marker date="1582553944962" expanded="true" signature="571:639" ph="{...}" />
-            <marker date="1582553944962" expanded="true" signature="776:979" ph="{...}" />
-            <marker date="1582553944962" expanded="true" signature="1194:1327" ph="{...}" />
-            <marker date="1582553944962" expanded="true" signature="1588:1759" ph="{...}" />
-            <marker date="1582553944962" expanded="true" signature="1921:2035" ph="{...}" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -2063,20 +1433,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="84">
           <caret line="39" column="61" selection-start-line="39" selection-start-column="49" selection-end-line="39" selection-end-column="61" />
-          <folding>
-            <marker date="1582553944937" expanded="true" signature="6:210" ph="..." />
-            <marker date="1582553944937" expanded="true" signature="247:2995" ph="{...}" />
-            <marker date="1582553944937" expanded="true" signature="287:631" ph="{...}" />
-            <marker date="1582553944937" expanded="true" signature="684:2993" ph="{...}" />
-            <marker date="1582553944937" expanded="true" signature="954:1080" ph="{...}" />
-            <marker date="1582553944937" expanded="true" signature="1198:1478" ph="{...}" />
-            <marker date="1582553944937" expanded="true" signature="1551:1683" ph="{...}" />
-            <marker date="1582553944937" expanded="true" signature="1748:1976" ph="{...}" />
-            <marker date="1582553944937" expanded="true" signature="2095:2987" ph="{...}" />
-            <marker date="1582553944937" expanded="true" signature="2172:2369" ph="{...}" />
-            <marker date="1582553944937" expanded="true" signature="2422:2670" ph="{...}" />
-            <marker date="1582553944937" expanded="true" signature="2479:2621" ph="{...}" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -2084,11 +1440,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="231">
           <caret line="16" column="33" lean-forward="true" selection-start-line="16" selection-start-column="33" selection-end-line="16" selection-end-column="33" />
-          <folding>
-            <marker date="1582553792763" expanded="false" signature="6:148" ph="..." />
-            <marker date="1582553792763" expanded="true" signature="192:548" ph="{...}" />
-            <marker date="1582553792763" expanded="true" signature="263:546" ph="{...}" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -2096,18 +1447,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="42">
           <caret line="23" column="30" lean-forward="true" selection-start-line="23" selection-start-column="30" selection-end-line="23" selection-end-column="30" />
-          <folding>
-            <marker date="1582554287257" expanded="false" signature="6:244" ph="..." />
-            <marker date="1582554287257" expanded="true" signature="272:2423" ph="{...}" />
-            <marker date="1582554287257" expanded="true" signature="358:2421" ph="{...}" />
-            <marker date="1582554287257" expanded="true" signature="464:484" ph="{...}" />
-            <marker date="1582554287257" expanded="true" signature="535:698" ph="{...}" />
-            <marker date="1582554287257" expanded="true" signature="801:1234" ph="{...}" />
-            <marker date="1582554287257" expanded="true" signature="1364:1653" ph="{...}" />
-            <marker date="1582554287257" expanded="true" signature="1693:1739" ph="{...}" />
-            <marker date="1582554287257" expanded="true" signature="1780:2057" ph="{...}" />
-            <marker date="1582554287257" expanded="true" signature="2119:2415" ph="{...}" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -2115,49 +1454,46 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="630">
           <caret line="48" column="12" selection-start-line="48" selection-start-column="12" selection-end-line="48" selection-end-column="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/BE/src/Features/Post/UserPostController.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-37">
+          <caret line="38" column="16" selection-start-line="38" selection-start-column="16" selection-end-line="38" selection-end-column="16" />
           <folding>
-            <marker date="1582548671322" expanded="false" signature="6:181" ph="..." />
-            <marker date="1582548671322" expanded="true" signature="208:2491" ph="{...}" />
-            <marker date="1582548671322" expanded="true" signature="291:2489" ph="{...}" />
-            <marker date="1582548671322" expanded="true" signature="361:426" ph="{...}" />
-            <marker date="1582548671322" expanded="true" signature="599:735" ph="{...}" />
-            <marker date="1582548671322" expanded="true" signature="812:919" ph="{...}" />
-            <marker date="1582548671322" expanded="true" signature="959:1072" ph="{...}" />
-            <marker date="1582548671322" expanded="true" signature="1142:1201" ph="{...}" />
-            <marker date="1582548671322" expanded="true" signature="1236:1302" ph="{...}" />
-            <marker date="1582548671322" expanded="true" signature="1337:1406" ph="{...}" />
-            <marker date="1582548671322" expanded="true" signature="1441:1510" ph="{...}" />
-            <marker date="1582548671322" expanded="true" signature="1549:1622" ph="{...}" />
-            <marker date="1582548671322" expanded="true" signature="1650:1712" ph="{...}" />
-            <marker date="1582548671322" expanded="true" signature="1763:1834" ph="{...}" />
-            <marker date="1582548671322" expanded="true" signature="1896:2053" ph="{...}" />
-            <marker date="1582548671322" expanded="true" signature="2105:2193" ph="{...}" />
-            <marker date="1582548671322" expanded="true" signature="2248:2339" ph="{...}" />
-            <marker date="1582548671322" expanded="true" signature="2393:2483" ph="{...}" />
+            <marker date="1582555799744" expanded="false" signature="6:308" ph="..." />
+            <marker date="1582555799744" expanded="true" signature="336:2018" ph="{...}" />
+            <marker date="1582555799744" expanded="true" signature="436:2016" ph="{...}" />
+            <marker date="1582555799744" expanded="true" signature="571:639" ph="{...}" />
+            <marker date="1582555799744" expanded="true" signature="776:979" ph="{...}" />
+            <marker date="1582555799744" expanded="true" signature="1169:1302" ph="{...}" />
+            <marker date="1582555799744" expanded="true" signature="1563:1734" ph="{...}" />
+            <marker date="1582555799744" expanded="true" signature="1896:2010" ph="{...}" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/BE.UnitTests/UserPostTests.cs">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="378">
-          <caret line="38" column="44" lean-forward="true" selection-start-line="38" selection-start-column="44" selection-end-line="38" selection-end-column="44" />
+        <state relative-caret-position="294">
+          <caret line="44" column="48" lean-forward="true" selection-start-line="44" selection-start-column="48" selection-end-line="44" selection-end-column="48" />
           <folding>
-            <marker date="1582554194046" expanded="false" signature="6:544" ph="..." />
-            <marker date="1582554194046" expanded="true" signature="568:5203" ph="{...}" />
-            <marker date="1582554194046" expanded="true" signature="601:5201" ph="{...}" />
-            <marker date="1582554194046" expanded="true" signature="731:1080" ph="{...}" />
-            <marker date="1582554194046" expanded="true" signature="945:1022" ph="{...}" />
-            <marker date="1582554194046" expanded="true" signature="1153:2371" ph="{...}" />
-            <marker date="1582554194046" expanded="true" signature="1935:2361" ph="{...}" />
-            <marker date="1582554194046" expanded="true" signature="2437:2834" ph="{...}" />
-            <marker date="1582554194046" expanded="true" signature="2905:3262" ph="{...}" />
-            <marker date="1582554194046" expanded="true" signature="3333:3783" ph="{...}" />
-            <marker date="1582554194046" expanded="true" signature="3830:4411" ph="{...}" />
-            <marker date="1582554194046" expanded="true" signature="4479:5195" ph="{...}" />
-            <marker date="1582554194046" expanded="true" signature="4535:5185" ph="{...}" />
-            <marker date="1582554194046" expanded="true" signature="4608:5170" ph="{...}" />
-            <marker date="1582554194046" expanded="true" signature="4764:5085" ph="{...}" />
+            <marker date="1582556501808" expanded="true" signature="6:418" ph="..." />
+            <marker date="1582556501808" expanded="true" signature="442:5258" ph="{...}" />
+            <marker date="1582556501808" expanded="true" signature="475:5256" ph="{...}" />
+            <marker date="1582556501808" expanded="true" signature="605:954" ph="{...}" />
+            <marker date="1582556501808" expanded="true" signature="819:896" ph="{...}" />
+            <marker date="1582556501808" expanded="true" signature="1027:2298" ph="{...}" />
+            <marker date="1582556501808" expanded="true" signature="1636:2288" ph="{...}" />
+            <marker date="1582556501808" expanded="true" signature="2364:2810" ph="{...}" />
+            <marker date="1582556501808" expanded="true" signature="2881:3287" ph="{...}" />
+            <marker date="1582556501808" expanded="true" signature="3358:3857" ph="{...}" />
+            <marker date="1582556501808" expanded="true" signature="3930:4466" ph="{...}" />
+            <marker date="1582556501808" expanded="true" signature="4534:5250" ph="{...}" />
+            <marker date="1582556501808" expanded="true" signature="4590:5240" ph="{...}" />
+            <marker date="1582556501808" expanded="true" signature="4663:5225" ph="{...}" />
+            <marker date="1582556501808" expanded="true" signature="4819:5140" ph="{...}" />
           </folding>
         </state>
       </provider>
