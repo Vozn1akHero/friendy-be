@@ -34,7 +34,16 @@
     <DotNetCliToolReference Include="Microsoft.EntityFrameworkCore.Tools.DotNet" Version="2.0.3" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="src\Features\Photo\Services" />
+    <_ContentIncludedByDefault Remove="Frontend\angular.json" />
+    <_ContentIncludedByDefault Remove="Frontend\e2e\tsconfig.e2e.json" />
+    <_ContentIncludedByDefault Remove="Frontend\package-lock.json" />
+    <_ContentIncludedByDefault Remove="Frontend\package.json" />
+    <_ContentIncludedByDefault Remove="Frontend\proxy.conf.json" />
+    <_ContentIncludedByDefault Remove="Frontend\src\tsconfig.app.json" />
+    <_ContentIncludedByDefault Remove="Frontend\src\tsconfig.spec.json" />
+    <_ContentIncludedByDefault Remove="Frontend\src\tslint.json" />
+    <_ContentIncludedByDefault Remove="Frontend\tsconfig.json" />
+    <_ContentIncludedByDefault Remove="Frontend\tslint.json" />
   </ItemGroup>
   <!--<ItemGroup>
     <Compile Remove="Frontend\**" />

@@ -1,1139 +1,380 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ContentModelStore">
+    <e p="C:\Users\chlenix\.nuget\packages\microsoft.net.test.sdk\16.0.1\build\netcoreapp1.0" t="Include">
+      <e p="Microsoft.NET.Test.Sdk.Program.cs" t="Include" />
+    </e>
     <e p="C:\Users\chlenix\.nuget\packages\nunit3testadapter\3.11.0\build\netcoreapp1.0\nunit.engine.netstandard.dll" t="Include" />
     <e p="C:\Users\chlenix\.nuget\packages\nunit3testadapter\3.11.0\build\netcoreapp1.0\NUnit3.TestAdapter.dll" t="Include" />
     <e p="C:\Users\chlenix\.nuget\packages\nunit3testadapter\3.11.0\build\netcoreapp1.0\NUnit3.TestAdapter.pdb" t="Include" />
+    <e p="C:\Users\chlenix\.nuget\packages\xunit.runner.visualstudio\2.4.0\build\netcoreapp1.0\xunit.runner.reporters.netcoreapp10.dll" t="Include" />
+    <e p="C:\Users\chlenix\.nuget\packages\xunit.runner.visualstudio\2.4.0\build\netcoreapp1.0\xunit.runner.utility.netcoreapp10.dll" t="Include" />
+    <e p="C:\Users\chlenix\.nuget\packages\xunit.runner.visualstudio\2.4.0\build\netcoreapp1.0\xunit.runner.visualstudio.dotnetcore.testadapter.dll" t="Include" />
     <e p="C:\Users\chlenix\.Rider2019.1\system\extResources" t="IncludeRecursive" />
     <e p="C:\Users\chlenix\.Rider2019.1\system\resharper-host\local\Transient\ReSharperHost\v191\SolutionCaches\_BE.-688234913.00" t="ExcludeRecursive" />
     <e p="D:\Projects\Praca dyplomowa\BE" t="IncludeFlat">
       <e p="BE" t="IncludeRecursive">
+        <e p="appsettings.Development.json" t="Include" />
+        <e p="appsettings.json" t="Include" />
         <e p="BE.csproj" t="IncludeRecursive" />
         <e p="bin" t="ExcludeRecursive" />
-        <e p="Frontend" t="Include">
-          <e p=".editorconfig" t="Include" />
-          <e p=".gitignore" t="Include" />
-          <e p="angular.json" t="Include" />
-          <e p="e2e" t="Include">
-            <e p="protractor.conf.js" t="Include" />
-            <e p="src" t="Include">
-              <e p="app.e2e-spec.ts" t="Include" />
-              <e p="app.po.ts" t="Include" />
+        <e p="Cache" t="Include">
+          <e p="RedisClient.cs" t="Include" />
+        </e>
+        <e p="Elasticsearch" t="Include">
+          <e p="ElasticClientProvider.cs" t="Include" />
+          <e p="ElasticConnectionSettings.cs" t="Include" />
+          <e p="UserDataUpdating.cs" t="Include" />
+          <e p="UserDetailedSearch.cs" t="Include" />
+        </e>
+        <e p="Features" t="Include">
+          <e p="Authentication" t="Include">
+            <e p="AuthController.cs" t="Include" />
+            <e p="Dtos" t="Include">
+              <e p="AuthDataDto.cs" t="Include" />
+              <e p="AuthResponse.cs" t="Include" />
             </e>
-            <e p="tsconfig.e2e.json" t="Include" />
+            <e p="Helpers" t="Include">
+              <e p="AuthenticationResponse.cs" t="Include" />
+            </e>
+            <e p="Services" t="Include">
+              <e p="AuthenticationService.cs" t="Include" />
+            </e>
           </e>
-          <e p="node_modules\@angular\animations" t="IncludeRecursive" />
-          <e p="node_modules\@angular\cli" t="IncludeRecursive" />
-          <e p="node_modules\@angular\common" t="IncludeRecursive" />
-          <e p="node_modules\@angular\compiler" t="IncludeRecursive" />
-          <e p="node_modules\@angular\compiler-cli" t="IncludeRecursive" />
-          <e p="node_modules\@angular\core" t="IncludeRecursive" />
-          <e p="node_modules\@angular\forms" t="IncludeRecursive" />
-          <e p="node_modules\@angular\platform-browser" t="IncludeRecursive" />
-          <e p="node_modules\@angular\platform-browser-dynamic" t="IncludeRecursive" />
-          <e p="node_modules\@angular\router" t="IncludeRecursive" />
-          <e p="node_modules\@angular-devkit\build-angular" t="IncludeRecursive" />
-          <e p="node_modules\@aspnet\SignalR" t="IncludeRecursive" />
-          <e p="node_modules\@ngrx\core" t="IncludeRecursive" />
-          <e p="node_modules\@ngrx\effects" t="IncludeRecursive" />
-          <e p="node_modules\@ngrx\router-store" t="IncludeRecursive" />
-          <e p="node_modules\@ngrx\store" t="IncludeRecursive" />
-          <e p="node_modules\@ngrx\store-devtools" t="IncludeRecursive" />
-          <e p="node_modules\@types" t="IncludeRecursive">
-            <e p="jasmine" t="IncludeRecursive" />
-            <e p="jasminewd2" t="IncludeRecursive" />
-            <e p="jquery" t="IncludeRecursive" />
-            <e p="node" t="IncludeRecursive" />
-            <e p="sizzle" t="IncludeRecursive" />
-            <e p="source-list-map" t="IncludeRecursive" />
+          <e p="Chat" t="Include">
+            <e p="ChatController.cs" t="Include" />
+            <e p="Dtos" t="Include">
+              <e p="ChatLastMessageDto.cs" t="Include" />
+              <e p="ChatMessageDto.cs" t="Include" />
+              <e p="CreatedMessageDto.cs" t="Include" />
+              <e p="DialogBasicDataDto.cs" t="Include" />
+              <e p="FriendBasicDataInDialogDto.cs" t="Include" />
+              <e p="InterlocutorsDto.cs" t="Include" />
+              <e p="NewMessageDto.cs" t="Include" />
+              <e p="ParticipantsBasicDataDto.cs" t="Include" />
+              <e p="ParticipantsBasicDataSqlDto.cs" t="Include" />
+            </e>
+            <e p="Repositories" t="Include">
+              <e p="ChatMessageRepository.cs" t="Include" />
+              <e p="ChatMessagesRepository.cs" t="Include" />
+              <e p="ChatParticipantsRepository.cs" t="Include" />
+              <e p="ChatRepository.cs" t="Include" />
+              <e p="IChatMessageRepository.cs" t="Include" />
+              <e p="IChatMessagesRepository.cs" t="Include" />
+              <e p="IChatParticipantsRepository.cs" t="Include" />
+              <e p="IChatRepository.cs" t="Include" />
+            </e>
+            <e p="Services" t="Include">
+              <e p="ChatService.cs" t="Include" />
+            </e>
           </e>
-          <e p="node_modules\codelyzer" t="IncludeRecursive" />
-          <e p="node_modules\core-js" t="IncludeRecursive" />
-          <e p="node_modules\jasmine-core" t="IncludeRecursive" />
-          <e p="node_modules\jasmine-spec-reporter" t="IncludeRecursive" />
-          <e p="node_modules\jquery" t="IncludeRecursive" />
-          <e p="node_modules\js-cookie" t="IncludeRecursive" />
-          <e p="node_modules\karma" t="IncludeRecursive" />
-          <e p="node_modules\karma-chrome-launcher" t="IncludeRecursive" />
-          <e p="node_modules\karma-coverage-istanbul-reporter" t="IncludeRecursive" />
-          <e p="node_modules\karma-jasmine" t="IncludeRecursive" />
-          <e p="node_modules\karma-jasmine-html-reporter" t="IncludeRecursive" />
-          <e p="node_modules\moment" t="IncludeRecursive" />
-          <e p="node_modules\protractor" t="IncludeRecursive" />
-          <e p="node_modules\rxjs" t="IncludeRecursive" />
-          <e p="node_modules\source-map" t="IncludeRecursive" />
-          <e p="node_modules\ts-node" t="IncludeRecursive" />
-          <e p="node_modules\tslib" t="IncludeRecursive" />
-          <e p="node_modules\tslint" t="IncludeRecursive" />
-          <e p="node_modules\zone.js" t="IncludeRecursive" />
-          <e p="package-lock.json" t="Include" />
-          <e p="package.json" t="Include" />
-          <e p="proxy.conf.json" t="Include" />
-          <e p="README.md" t="Include" />
-          <e p="src" t="Include">
-            <e p="app" t="Include">
-              <e p="app-routing.module.ts" t="Include" />
-              <e p="app.component.html" t="Include" />
-              <e p="app.component.scss" t="Include" />
-              <e p="app.component.spec.ts" t="Include" />
-              <e p="app.component.ts" t="Include" />
-              <e p="app.module.ts" t="Include" />
-              <e p="auth.guard.ts" t="Include" />
-              <e p="core" t="Include">
-                <e p="auth" t="Include">
-                  <e p="auth.service.ts" t="Include" />
-                </e>
-                <e p="ngrx" t="Include">
-                  <e p="store" t="Include">
-                    <e p="app.reducer.ts" t="Include" />
-                  </e>
-                </e>
-              </e>
-              <e p="layout" t="Include">
-                <e p="footer" t="Include">
-                  <e p="footer.component.html" t="Include" />
-                  <e p="footer.component.scss" t="Include" />
-                  <e p="footer.component.ts" t="Include" />
-                </e>
-                <e p="layout.module.ts" t="Include" />
-                <e p="navigation" t="Include">
-                  <e p="navigation.component.html" t="Include" />
-                  <e p="navigation.component.scss" t="Include" />
-                  <e p="navigation.component.ts" t="Include" />
-                </e>
-              </e>
-              <e p="logged-in.resolver.ts" t="Include" />
-              <e p="modules" t="Include">
-                <e p="auth" t="Include">
-                  <e p="joinup-page" t="Include">
-                    <e p="components" t="Include">
-                      <e p="registration-success-pop-up" t="Include">
-                        <e p="registration-success-pop-up.component.html" t="Include" />
-                        <e p="registration-success-pop-up.component.scss" t="Include" />
-                        <e p="registration-success-pop-up.component.ts" t="Include" />
-                      </e>
-                    </e>
-                    <e p="joinup-page.component.html" t="Include" />
-                    <e p="joinup-page.component.scss" t="Include" />
-                    <e p="joinup-page.component.ts" t="Include" />
-                  </e>
-                  <e p="login-page" t="Include">
-                    <e p="login-page.component.html" t="Include" />
-                    <e p="login-page.component.scss" t="Include" />
-                    <e p="login-page.component.ts" t="Include" />
-                  </e>
-                </e>
-                <e p="home" t="Include">
-                  <e p="common-profile-page" t="Include">
-                    <e p="common-profile-page.component.html" t="Include" />
-                    <e p="common-profile-page.component.scss" t="Include" />
-                    <e p="common-profile-page.component.ts" t="Include" />
-                    <e p="common-profile-page.module.ts" t="Include" />
-                    <e p="components" t="Include">
-                      <e p="common-profile-friends" t="Include">
-                        <e p="common-profile-friends-item" t="Include">
-                          <e p="common-profile-friends-item.component.html" t="Include" />
-                          <e p="common-profile-friends-item.component.scss" t="Include" />
-                          <e p="common-profile-friends-item.component.ts" t="Include" />
-                        </e>
-                        <e p="common-profile-friends.component.html" t="Include" />
-                        <e p="common-profile-friends.component.scss" t="Include" />
-                        <e p="common-profile-friends.component.ts" t="Include" />
-                      </e>
-                      <e p="common-profile-header" t="Include">
-                        <e p="common-profile-header.component.html" t="Include" />
-                        <e p="common-profile-header.component.scss" t="Include" />
-                        <e p="common-profile-header.component.ts" t="Include" />
-                      </e>
-                      <e p="common-profile-photos" t="Include">
-                        <e p="common-profile-photos-item" t="Include">
-                          <e p="common-profile-photos-item.component.html" t="Include" />
-                          <e p="common-profile-photos-item.component.scss" t="Include" />
-                          <e p="common-profile-photos-item.component.ts" t="Include" />
-                        </e>
-                        <e p="common-profile-photos.component.html" t="Include" />
-                        <e p="common-profile-photos.component.scss" t="Include" />
-                        <e p="common-profile-photos.component.ts" t="Include" />
-                      </e>
-                      <e p="common-profile-post-item" t="Include">
-                        <e p="common-profile-post-item.component.html" t="Include" />
-                        <e p="common-profile-post-item.component.scss" t="Include" />
-                        <e p="common-profile-post-item.component.ts" t="Include" />
-                      </e>
-                    </e>
-                    <e p="Models" t="Include">
-                      <e p="post.model.ts" t="Include" />
-                    </e>
-                    <e p="Services" t="Include">
-                      <e p="common-profile-page.service.ts" t="Include" />
-                    </e>
-                    <e p="store" t="Include">
-                      <e p="user-data" t="Include">
-                        <e p="user-data.actions.ts" t="Include" />
-                        <e p="user-data.effects.ts" t="Include" />
-                        <e p="user-data.reducer.ts" t="Include" />
-                      </e>
-                      <e p="user-posts" t="Include">
-                        <e p="user-posts.actions.ts" t="Include" />
-                        <e p="user-posts.effects.ts" t="Include" />
-                        <e p="user-posts.reducer.ts" t="Include" />
-                      </e>
-                    </e>
-                  </e>
-                  <e p="dialog-page" t="Include">
-                    <e p="components" t="Include">
-                      <e p="chat-friend-data" t="Include">
-                        <e p="chat-friend-data.component.html" t="Include" />
-                        <e p="chat-friend-data.component.scss" t="Include" />
-                        <e p="chat-friend-data.component.ts" t="Include" />
-                      </e>
-                      <e p="chat-message-list" t="Include">
-                        <e p="chat-message-item" t="Include">
-                          <e p="chat-message-item.component.html" t="Include" />
-                          <e p="chat-message-item.component.scss" t="Include" />
-                          <e p="chat-message-item.component.ts" t="Include" />
-                        </e>
-                        <e p="chat-message-list.component.html" t="Include" />
-                        <e p="chat-message-list.component.scss" t="Include" />
-                        <e p="chat-message-list.component.ts" t="Include" />
-                      </e>
-                      <e p="chats-in-dialog-panel" t="Include">
-                        <e p="chats-in-dialog-item" t="Include">
-                          <e p="chats-in-dialog-item.component.html" t="Include" />
-                          <e p="chats-in-dialog-item.component.scss" t="Include" />
-                          <e p="chats-in-dialog-item.component.ts" t="Include" />
-                        </e>
-                        <e p="chats-in-dialog-panel.component.html" t="Include" />
-                        <e p="chats-in-dialog-panel.component.scss" t="Include" />
-                        <e p="chats-in-dialog-panel.component.ts" t="Include" />
-                      </e>
-                      <e p="new-message-in-dialog-form" t="Include">
-                        <e p="new-message-in-dialog-form.component.html" t="Include" />
-                        <e p="new-message-in-dialog-form.component.scss" t="Include" />
-                        <e p="new-message-in-dialog-form.component.ts" t="Include" />
-                      </e>
-                    </e>
-                    <e p="dialog-page.component.html" t="Include" />
-                    <e p="dialog-page.component.scss" t="Include" />
-                    <e p="dialog-page.component.ts" t="Include" />
-                    <e p="dialog-page.module.ts" t="Include" />
-                    <e p="Models" t="Include">
-                      <e p="chat-data.model.ts" t="Include" />
-                      <e p="interlocutor-data.model.ts" t="Include" />
-                      <e p="message-in-chat.model.ts" t="Include" />
-                      <e p="new-message-in-chat.model.ts" t="Include" />
-                    </e>
-                    <e p="Resolvers" t="Include">
-                      <e p="chat-data.resolver.ts" t="Include" />
-                      <e p="interlocutor-data.resolver.ts" t="Include" />
-                    </e>
-                    <e p="Services" t="Include">
-                      <e p="dialog.service.ts" t="Include" />
-                    </e>
-                    <e p="store" t="Include">
-                      <e p="dialog-messages" t="Include">
-                        <e p="dialog-messages.actions.ts" t="Include" />
-                        <e p="dialog-messages.effects.ts" t="Include" />
-                        <e p="dialog-messages.reducer.ts" t="Include" />
-                      </e>
-                    </e>
-                  </e>
-                  <e p="event-page" t="Include">
-                    <e p="components" t="Include">
-                      <e p="event-header" t="Include">
-                        <e p="event-header-bg" t="Include">
-                          <e p="event-header-bg-alter" t="Include">
-                            <e p="event-header-bg-alter.component.html" t="Include" />
-                            <e p="event-header-bg-alter.component.scss" t="Include" />
-                            <e p="event-header-bg-alter.component.ts" t="Include" />
-                          </e>
-                          <e p="event-header-bg.component.html" t="Include" />
-                          <e p="event-header-bg.component.scss" t="Include" />
-                          <e p="event-header-bg.component.ts" t="Include" />
-                        </e>
-                        <e p="event-header.component.html" t="Include" />
-                        <e p="event-header.component.scss" t="Include" />
-                        <e p="event-header.component.ts" t="Include" />
-                        <e p="event-info-panel" t="Include">
-                          <e p="event-avatar" t="Include">
-                            <e p="event-avatar-alter" t="Include">
-                              <e p="event-avatar-alter.component.html" t="Include" />
-                              <e p="event-avatar-alter.component.scss" t="Include" />
-                              <e p="event-avatar-alter.component.ts" t="Include" />
-                            </e>
-                            <e p="event-avatar.component.html" t="Include" />
-                            <e p="event-avatar.component.scss" t="Include" />
-                            <e p="event-avatar.component.ts" t="Include" />
-                          </e>
-                          <e p="event-info-panel.component.html" t="Include" />
-                          <e p="event-info-panel.component.scss" t="Include" />
-                          <e p="event-info-panel.component.ts" t="Include" />
-                        </e>
-                      </e>
-                      <e p="event-main-content" t="Include">
-                        <e p="event-main-content.component.html" t="Include" />
-                        <e p="event-main-content.component.scss" t="Include" />
-                        <e p="event-main-content.component.ts" t="Include" />
-                        <e p="event-new-post" t="Include">
-                          <e p="event-new-post.component.html" t="Include" />
-                          <e p="event-new-post.component.scss" t="Include" />
-                          <e p="event-new-post.component.ts" t="Include" />
-                        </e>
-                        <e p="event-participants" t="Include">
-                          <e p="event-participants-item" t="Include">
-                            <e p="event-participants-item.component.html" t="Include" />
-                            <e p="event-participants-item.component.scss" t="Include" />
-                            <e p="event-participants-item.component.ts" t="Include" />
-                          </e>
-                          <e p="event-participants.component.html" t="Include" />
-                          <e p="event-participants.component.scss" t="Include" />
-                          <e p="event-participants.component.ts" t="Include" />
-                        </e>
-                        <e p="event-photos" t="Include">
-                          <e p="event-photos-item" t="Include">
-                            <e p="event-photos-item.component.html" t="Include" />
-                            <e p="event-photos-item.component.scss" t="Include" />
-                            <e p="event-photos-item.component.ts" t="Include" />
-                          </e>
-                          <e p="event-photos.component.html" t="Include" />
-                          <e p="event-photos.component.scss" t="Include" />
-                          <e p="event-photos.component.ts" t="Include" />
-                        </e>
-                        <e p="event-post-list" t="Include">
-                          <e p="event-post-item" t="Include">
-                            <e p="event-post-item.component.html" t="Include" />
-                            <e p="event-post-item.component.scss" t="Include" />
-                            <e p="event-post-item.component.ts" t="Include" />
-                          </e>
-                          <e p="event-post-list.component.html" t="Include" />
-                          <e p="event-post-list.component.scss" t="Include" />
-                          <e p="event-post-list.component.ts" t="Include" />
-                        </e>
-                      </e>
-                      <e p="event-modals" t="Include">
-                        <e p="event-modals.component.html" t="Include" />
-                        <e p="event-modals.component.sass" t="Include" />
-                        <e p="event-modals.component.ts" t="Include" />
-                      </e>
-                    </e>
-                    <e p="event-page.component.html" t="Include" />
-                    <e p="event-page.component.scss" t="Include" />
-                    <e p="event-page.component.ts" t="Include" />
-                    <e p="event-page.module.ts" t="Include" />
-                    <e p="Models" t="Include">
-                      <e p="event-avatar.model.ts" t="Include" />
-                      <e p="event-background.model.ts" t="Include" />
-                      <e p="event-data.model.ts" t="Include" />
-                      <e p="event-exemplary-participant.model.ts" t="Include" />
-                      <e p="event-participant-list-item.model.ts" t="Include" />
-                      <e p="event-photo.model.ts" t="Include" />
-                      <e p="event-post.model.ts" t="Include" />
-                      <e p="event-shortened.model.ts" t="Include" />
-                      <e p="new-post.model.ts" t="Include" />
-                    </e>
-                    <e p="Resolvers" t="Include">
-                      <e p="is-event-admin.resolver.ts" t="Include" />
-                    </e>
-                    <e p="Services" t="Include">
-                      <e p="event-admin.service.ts" t="Include" />
-                      <e p="event-avatar.service.ts" t="Include" />
-                      <e p="event-background.service.ts" t="Include" />
-                      <e p="event-data.service.ts" t="Include" />
-                      <e p="event-participant.service.ts" t="Include" />
-                      <e p="event-photo.service.ts" t="Include" />
-                      <e p="event-post.service.ts" t="Include" />
-                      <e p="opensettings.service.ts" t="Include" />
-                    </e>
-                    <e p="store" t="Include">
-                      <e p="event-data" t="Include">
-                        <e p="event-data.actions.ts" t="Include" />
-                        <e p="event-data.effects.ts" t="Include" />
-                        <e p="event-data.reducer.ts" t="Include" />
-                      </e>
-                    </e>
-                  </e>
-                  <e p="event-participants-page" t="Include">
-                    <e p="event-participant-item" t="Include">
-                      <e p="event-participant-item.component.html" t="Include" />
-                      <e p="event-participant-item.component.sass" t="Include" />
-                      <e p="event-participant-item.component.ts" t="Include" />
-                    </e>
-                    <e p="event-participants-page.component.html" t="Include" />
-                    <e p="event-participants-page.component.sass" t="Include" />
-                    <e p="event-participants-page.component.ts" t="Include" />
-                  </e>
-                  <e p="event-settings-page" t="Include">
-                    <e p="components" t="Include">
-                      <e p="basic-event-settings" t="Include">
-                        <e p="basic-event-settings.component.html" t="Include" />
-                        <e p="basic-event-settings.component.scss" t="Include" />
-                        <e p="basic-event-settings.component.ts" t="Include" />
-                      </e>
-                      <e p="chosen-event-settings-subpage" t="Include">
-                        <e p="chosen-event-settings-subpage.component.html" t="Include" />
-                        <e p="chosen-event-settings-subpage.component.scss" t="Include" />
-                        <e p="chosen-event-settings-subpage.component.ts" t="Include" />
-                      </e>
-                      <e p="event-admins-settings" t="Include">
-                        <e p="event-admins" t="Include">
-                          <e p="event-admin" t="Include">
-                            <e p="event-admin.component.html" t="Include" />
-                            <e p="event-admin.component.scss" t="Include" />
-                            <e p="event-admin.component.ts" t="Include" />
-                          </e>
-                          <e p="event-admins.component.html" t="Include" />
-                          <e p="event-admins.component.scss" t="Include" />
-                          <e p="event-admins.component.ts" t="Include" />
-                        </e>
-                        <e p="event-admins-settings.component.html" t="Include" />
-                        <e p="event-admins-settings.component.scss" t="Include" />
-                        <e p="event-admins-settings.component.ts" t="Include" />
-                      </e>
-                      <e p="event-participants-settings" t="Include">
-                        <e p="event-participants" t="Include">
-                          <e p="event-participant" t="Include">
-                            <e p="event-participant.component.html" t="Include" />
-                            <e p="event-participant.component.scss" t="Include" />
-                            <e p="event-participant.component.ts" t="Include" />
-                          </e>
-                          <e p="event-participants-search" t="Include">
-                            <e p="event-participants-search.component.html" t="Include" />
-                            <e p="event-participants-search.component.scss" t="Include" />
-                            <e p="event-participants-search.component.ts" t="Include" />
-                          </e>
-                          <e p="event-participants.component.html" t="Include" />
-                          <e p="event-participants.component.scss" t="Include" />
-                          <e p="event-participants.component.ts" t="Include" />
-                        </e>
-                        <e p="event-participants-settings.component.html" t="Include" />
-                        <e p="event-participants-settings.component.scss" t="Include" />
-                        <e p="event-participants-settings.component.ts" t="Include" />
-                      </e>
-                      <e p="event-settings-nav" t="Include">
-                        <e p="event-settings-nav.component.html" t="Include" />
-                        <e p="event-settings-nav.component.scss" t="Include" />
-                        <e p="event-settings-nav.component.ts" t="Include" />
-                      </e>
-                    </e>
-                    <e p="event-settings-page.component.html" t="Include" />
-                    <e p="event-settings-page.component.scss" t="Include" />
-                    <e p="event-settings-page.component.ts" t="Include" />
-                    <e p="event-settings-page.module.ts" t="Include" />
-                    <e p="Models" t="Include">
-                      <e p="event-admin.model.ts" t="Include" />
-                      <e p="event-data.model.ts" t="Include" />
-                      <e p="event-participant-detailed.model.ts" t="Include" />
-                    </e>
-                    <e p="Resolvers" t="Include">
-                      <e p="is-event-creator.resolver.ts" t="Include" />
-                    </e>
-                    <e p="Services" t="Include">
-                      <e p="event-admins.service.ts" t="Include" />
-                      <e p="event-creator.service.ts" t="Include" />
-                      <e p="event-data.service.ts" t="Include" />
-                      <e p="event-participant.service.ts" t="Include" />
-                    </e>
-                  </e>
-                  <e p="events-page" t="Include">
-                    <e p="components" t="Include">
-                      <e p="event-creation" t="Include">
-                        <e p="event-creation.component.html" t="Include" />
-                        <e p="event-creation.component.scss" t="Include" />
-                        <e p="event-creation.component.ts" t="Include" />
-                      </e>
-                      <e p="events-list-controls" t="Include">
-                        <e p="events-list-controls.component.html" t="Include" />
-                        <e p="events-list-controls.component.scss" t="Include" />
-                        <e p="events-list-controls.component.ts" t="Include" />
-                      </e>
-                      <e p="events-mine-search" t="Include">
-                        <e p="events-mine-search.component.html" t="Include" />
-                        <e p="events-mine-search.component.scss" t="Include" />
-                        <e p="events-mine-search.component.ts" t="Include" />
-                      </e>
-                      <e p="events-search-panel" t="Include">
-                        <e p="events-search-panel.component.html" t="Include" />
-                        <e p="events-search-panel.component.scss" t="Include" />
-                        <e p="events-search-panel.component.ts" t="Include" />
-                      </e>
-                      <e p="search-event-list" t="Include">
-                        <e p="search-event-list.component.html" t="Include" />
-                        <e p="search-event-list.component.sass" t="Include" />
-                        <e p="search-event-list.component.spec.ts" t="Include" />
-                        <e p="search-event-list.component.ts" t="Include" />
-                      </e>
-                      <e p="search-events" t="Include">
-                        <e p="search-events.component.html" t="Include" />
-                        <e p="search-events.component.scss" t="Include" />
-                        <e p="search-events.component.ts" t="Include" />
-                      </e>
-                      <e p="suggested-events-item" t="Include">
-                        <e p="suggested-events-item.component.html" t="Include" />
-                        <e p="suggested-events-item.component.scss" t="Include" />
-                        <e p="suggested-events-item.component.spec.ts" t="Include" />
-                        <e p="suggested-events-item.component.ts" t="Include" />
-                      </e>
-                      <e p="user-administered-event-list" t="Include">
-                        <e p="user-administered-event-list.component.html" t="Include" />
-                        <e p="user-administered-event-list.component.scss" t="Include" />
-                        <e p="user-administered-event-list.component.ts" t="Include" />
-                      </e>
-                      <e p="user-default-event-list" t="Include">
-                        <e p="user-default-event-list.component.html" t="Include" />
-                        <e p="user-default-event-list.component.scss" t="Include" />
-                        <e p="user-default-event-list.component.ts" t="Include" />
-                      </e>
-                      <e p="user-event-item" t="Include">
-                        <e p="user-event-item.component.html" t="Include" />
-                        <e p="user-event-item.component.scss" t="Include" />
-                        <e p="user-event-item.component.ts" t="Include" />
-                      </e>
-                      <e p="user-event-list" t="Include">
-                        <e p="user-event-list.component.html" t="Include" />
-                        <e p="user-event-list.component.scss" t="Include" />
-                        <e p="user-event-list.component.ts" t="Include" />
-                      </e>
-                    </e>
-                    <e p="enums" t="Include">
-                      <e p="event-types.enum.ts" t="Include" />
-                    </e>
-                    <e p="events-page.component.html" t="Include" />
-                    <e p="events-page.component.scss" t="Include" />
-                    <e p="events-page.component.ts" t="Include" />
-                    <e p="events-page.module.ts" t="Include" />
-                    <e p="Models" t="Include">
-                      <e p="event.model.ts" t="Include" />
-                      <e p="extended-event.model.ts" t="Include" />
-                    </e>
-                    <e p="Services" t="Include">
-                      <e p="event-search.service.ts" t="Include" />
-                      <e p="events-search-panel.service.ts" t="Include" />
-                      <e p="events.service.ts" t="Include" />
-                    </e>
-                    <e p="store" t="Include">
-                      <e p="administered-events" t="Include">
-                        <e p="administered-events.actions.ts" t="Include" />
-                        <e p="administered-events.effects.ts" t="Include" />
-                        <e p="administered-events.reducer.ts" t="Include" />
-                      </e>
-                      <e p="user-events" t="Include">
-                        <e p="user-events.actions.ts" t="Include" />
-                        <e p="user-events.effects.ts" t="Include" />
-                        <e p="user-events.reducer.ts" t="Include" />
-                      </e>
-                    </e>
-                  </e>
-                  <e p="friends-page" t="Include">
-                    <e p="components" t="Include">
-                      <e p="friend-list" t="Include">
-                        <e p="friend-list.component.html" t="Include" />
-                        <e p="friend-list.component.scss" t="Include" />
-                        <e p="friend-list.component.ts" t="Include" />
-                        <e p="friends-list-item" t="Include">
-                          <e p="friends-list-item.component.html" t="Include" />
-                          <e p="friends-list-item.component.scss" t="Include" />
-                          <e p="friends-list-item.component.ts" t="Include" />
-                        </e>
-                      </e>
-                      <e p="friends-search-input" t="Include">
-                        <e p="friends-search-input.component.html" t="Include" />
-                        <e p="friends-search-input.component.scss" t="Include" />
-                        <e p="friends-search-input.component.ts" t="Include" />
-                      </e>
-                      <e p="suggested-friends-panel" t="Include">
-                        <e p="suggested-friends-item" t="Include">
-                          <e p="suggested-friends-item.component.html" t="Include" />
-                          <e p="suggested-friends-item.component.scss" t="Include" />
-                          <e p="suggested-friends-item.component.ts" t="Include" />
-                        </e>
-                        <e p="suggested-friends-panel.component.html" t="Include" />
-                        <e p="suggested-friends-panel.component.scss" t="Include" />
-                        <e p="suggested-friends-panel.component.ts" t="Include" />
-                      </e>
-                    </e>
-                    <e p="friends-page.component.html" t="Include" />
-                    <e p="friends-page.component.scss" t="Include" />
-                    <e p="friends-page.component.ts" t="Include" />
-                    <e p="friends-page.module.ts" t="Include" />
-                    <e p="Models" t="Include">
-                      <e p="friend.model.ts" t="Include" />
-                    </e>
-                    <e p="Services" t="Include">
-                      <e p="friends.service.ts" t="Include" />
-                    </e>
-                    <e p="store" t="Include">
-                      <e p="user-friends" t="Include">
-                        <e p="user-friends.actions.ts" t="Include" />
-                        <e p="user-friends.effects.ts" t="Include" />
-                        <e p="user-friends.reducer.ts" t="Include" />
-                      </e>
-                    </e>
-                  </e>
-                  <e p="friends-search-page" t="Include">
-                    <e p="components" t="Include">
-                      <e p="found-users-list" t="Include">
-                        <e p="found-user-item" t="Include">
-                          <e p="found-user-item.component.html" t="Include" />
-                          <e p="found-user-item.component.scss" t="Include" />
-                          <e p="found-user-item.component.ts" t="Include" />
-                        </e>
-                        <e p="found-users-list.component.html" t="Include" />
-                        <e p="found-users-list.component.scss" t="Include" />
-                        <e p="found-users-list.component.ts" t="Include" />
-                      </e>
-                      <e p="friends-search-form" t="Include">
-                        <e p="friends-search-form.component.html" t="Include" />
-                        <e p="friends-search-form.component.scss" t="Include" />
-                        <e p="friends-search-form.component.ts" t="Include" />
-                      </e>
-                      <e p="friends-search-panel" t="Include">
-                        <e p="friends-search-panel.component.html" t="Include" />
-                        <e p="friends-search-panel.component.scss" t="Include" />
-                        <e p="friends-search-panel.component.ts" t="Include" />
-                      </e>
-                    </e>
-                    <e p="friends-search-page.component.html" t="Include" />
-                    <e p="friends-search-page.component.scss" t="Include" />
-                    <e p="friends-search-page.component.ts" t="Include" />
-                    <e p="friends-search-page.module.ts" t="Include" />
-                    <e p="Models" t="Include">
-                      <e p="found-user.model.ts" t="Include" />
-                      <e p="user-search-dto.model.ts" t="Include" />
-                      <e p="user-search-interest.model.ts" t="Include" />
-                    </e>
-                    <e p="Resolvers" t="Include">
-                      <e p="exemplary-users.resolver.ts" t="Include" />
-                    </e>
-                    <e p="Services" t="Include">
-                      <e p="friends-search.service.ts" t="Include" />
-                    </e>
-                  </e>
-                  <e p="home-page" t="Include">
-                    <e p="home-page.component.html" t="Include" />
-                    <e p="home-page.component.scss" t="Include" />
-                    <e p="home-page.component.spec.ts" t="Include" />
-                    <e p="home-page.component.ts" t="Include" />
-                    <e p="home-record-item" t="Include">
-                      <e p="home-record-item.component.html" t="Include" />
-                      <e p="home-record-item.component.scss" t="Include" />
-                      <e p="home-record-item.component.spec.ts" t="Include" />
-                      <e p="home-record-item.component.ts" t="Include" />
-                    </e>
-                    <e p="home-stats" t="Include">
-                      <e p="home-stats.component.html" t="Include" />
-                      <e p="home-stats.component.scss" t="Include" />
-                      <e p="home-stats.component.spec.ts" t="Include" />
-                      <e p="home-stats.component.ts" t="Include" />
-                    </e>
-                    <e p="home-upcoming-events" t="Include">
-                      <e p="home-upcoming-events-item" t="Include">
-                        <e p="home-upcoming-events-item.component.html" t="Include" />
-                        <e p="home-upcoming-events-item.component.scss" t="Include" />
-                        <e p="home-upcoming-events-item.component.spec.ts" t="Include" />
-                        <e p="home-upcoming-events-item.component.ts" t="Include" />
-                      </e>
-                      <e p="home-upcoming-events.component.html" t="Include" />
-                      <e p="home-upcoming-events.component.scss" t="Include" />
-                      <e p="home-upcoming-events.component.spec.ts" t="Include" />
-                      <e p="home-upcoming-events.component.ts" t="Include" />
-                    </e>
-                  </e>
-                  <e p="messages-page" t="Include">
-                    <e p="components" t="Include">
-                      <e p="dialog-list" t="Include">
-                        <e p="dialog-list.component.html" t="Include" />
-                        <e p="dialog-list.component.scss" t="Include" />
-                        <e p="dialog-list.component.ts" t="Include" />
-                      </e>
-                      <e p="message" t="Include">
-                        <e p="message.component.html" t="Include" />
-                        <e p="message.component.scss" t="Include" />
-                        <e p="message.component.ts" t="Include" />
-                      </e>
-                      <e p="new-message-panel" t="Include">
-                        <e p="new-message-panel.component.html" t="Include" />
-                        <e p="new-message-panel.component.scss" t="Include" />
-                        <e p="new-message-panel.component.ts" t="Include" />
-                      </e>
-                      <e p="sort-messages-panel" t="Include">
-                        <e p="sort-messages-panel.component.html" t="Include" />
-                        <e p="sort-messages-panel.component.scss" t="Include" />
-                        <e p="sort-messages-panel.component.ts" t="Include" />
-                      </e>
-                    </e>
-                    <e p="messages-page.component.html" t="Include" />
-                    <e p="messages-page.component.scss" t="Include" />
-                    <e p="messages-page.component.ts" t="Include" />
-                    <e p="messages-page.module.ts" t="Include" />
-                    <e p="Models" t="Include">
-                      <e p="exemplary-message.model.ts" t="Include" />
-                    </e>
-                    <e p="Services" t="Include">
-                      <e p="exemplary-messages.service.ts" t="Include" />
-                    </e>
-                    <e p="store" t="Include">
-                      <e p="exemplary-messages" t="Include">
-                        <e p="exemplary-messages.actions.ts" t="Include" />
-                        <e p="exemplary-messages.effects.ts" t="Include" />
-                        <e p="exemplary-messages.reducer.ts" t="Include" />
-                      </e>
-                    </e>
-                  </e>
-                  <e p="photos-page" t="Include">
-                    <e p="components" t="Include">
-                      <e p="photos" t="Include">
-                        <e p="photos-item" t="Include">
-                          <e p="photos-item.component.html" t="Include" />
-                          <e p="photos-item.component.scss" t="Include" />
-                          <e p="photos-item.component.ts" t="Include" />
-                        </e>
-                        <e p="photos.component.html" t="Include" />
-                        <e p="photos.component.scss" t="Include" />
-                        <e p="photos.component.ts" t="Include" />
-                      </e>
-                      <e p="photos-page-header" t="Include">
-                        <e p="base-data-panel" t="Include">
-                          <e p="base-data-panel.component.html" t="Include" />
-                          <e p="base-data-panel.component.scss" t="Include" />
-                          <e p="base-data-panel.component.ts" t="Include" />
-                        </e>
-                        <e p="new-photo-form" t="Include">
-                          <e p="new-photo-form.component.html" t="Include" />
-                          <e p="new-photo-form.component.scss" t="Include" />
-                          <e p="new-photo-form.component.ts" t="Include" />
-                        </e>
-                        <e p="photos-page-header.component.html" t="Include" />
-                        <e p="photos-page-header.component.scss" t="Include" />
-                        <e p="photos-page-header.component.ts" t="Include" />
-                      </e>
-                    </e>
-                    <e p="Models" t="Include">
-                      <e p="base-data.model.ts" t="Include" />
-                      <e p="photo.model.ts" t="Include" />
-                    </e>
-                    <e p="photos-page.component.html" t="Include" />
-                    <e p="photos-page.component.scss" t="Include" />
-                    <e p="photos-page.component.ts" t="Include" />
-                    <e p="Services" t="Include">
-                      <e p="base-data.service.ts" t="Include" />
-                      <e p="event-photo.service.ts" t="Include" />
-                      <e p="user-photo.service.ts" t="Include" />
-                    </e>
-                  </e>
-                  <e p="profile-page" t="Include">
-                    <e p="components" t="Include">
-                      <e p="new-avatar-modal" t="Include">
-                        <e p="new-avatar-modal.component.html" t="Include" />
-                        <e p="new-avatar-modal.component.scss" t="Include" />
-                        <e p="new-avatar-modal.component.ts" t="Include" />
-                      </e>
-                      <e p="profile-avatar" t="Include">
-                        <e p="profile-avatar.component.html" t="Include" />
-                        <e p="profile-avatar.component.scss" t="Include" />
-                        <e p="profile-avatar.component.ts" t="Include" />
-                      </e>
-                      <e p="profile-background" t="Include">
-                        <e p="profile-background.component.html" t="Include" />
-                        <e p="profile-background.component.scss" t="Include" />
-                        <e p="profile-background.component.ts" t="Include" />
-                      </e>
-                      <e p="profile-friends" t="Include">
-                        <e p="profile-friends-item" t="Include">
-                          <e p="profile-friends-item.component.html" t="Include" />
-                          <e p="profile-friends-item.component.scss" t="Include" />
-                          <e p="profile-friends-item.component.ts" t="Include" />
-                        </e>
-                        <e p="profile-friends.component.html" t="Include" />
-                        <e p="profile-friends.component.scss" t="Include" />
-                        <e p="profile-friends.component.ts" t="Include" />
-                      </e>
-                      <e p="profile-header" t="Include">
-                        <e p="profile-header.component.html" t="Include" />
-                        <e p="profile-header.component.scss" t="Include" />
-                        <e p="profile-header.component.ts" t="Include" />
-                      </e>
-                      <e p="profile-new-post" t="Include">
-                        <e p="profile-new-post.component.html" t="Include" />
-                        <e p="profile-new-post.component.scss" t="Include" />
-                        <e p="profile-new-post.component.ts" t="Include" />
-                      </e>
-                      <e p="profile-photos" t="Include">
-                        <e p="profile-photos-item" t="Include">
-                          <e p="profile-photos-item.component.html" t="Include" />
-                          <e p="profile-photos-item.component.scss" t="Include" />
-                          <e p="profile-photos-item.component.ts" t="Include" />
-                        </e>
-                        <e p="profile-photos.component.html" t="Include" />
-                        <e p="profile-photos.component.scss" t="Include" />
-                        <e p="profile-photos.component.ts" t="Include" />
-                      </e>
-                      <e p="profile-post-list" t="Include">
-                        <e p="profile-post-item" t="Include">
-                          <e p="profile-post-item.component.html" t="Include" />
-                          <e p="profile-post-item.component.scss" t="Include" />
-                          <e p="profile-post-item.component.ts" t="Include" />
-                        </e>
-                        <e p="profile-post-list.component.html" t="Include" />
-                        <e p="profile-post-list.component.scss" t="Include" />
-                        <e p="profile-post-list.component.ts" t="Include" />
-                      </e>
-                    </e>
-                    <e p="Models" t="Include">
-                      <e p="exemplary-friend.model.ts" t="Include" />
-                      <e p="exemplary-photo.model.ts" t="Include" />
-                      <e p="extended-post.model.ts" t="Include" />
-                      <e p="new-post.model.ts" t="Include" />
-                      <e p="post.model.ts" t="Include" />
-                      <e p="user.model.ts" t="Include" />
-                    </e>
-                    <e p="profile-page.component.html" t="Include" />
-                    <e p="profile-page.component.scss" t="Include" />
-                    <e p="profile-page.component.ts" t="Include" />
-                    <e p="profile-page.module.ts" t="Include" />
-                    <e p="Resolvers" t="Include">
-                      <e p="profile-belonging.resolver.ts" t="Include" />
-                    </e>
-                    <e p="Services" t="Include">
-                      <e p="exemplary-friends.service.ts" t="Include" />
-                      <e p="exemplary-photos.service.ts" t="Include" />
-                      <e p="post-comments-modal.service.ts" t="Include" />
-                      <e p="profile-background.service.ts" t="Include" />
-                      <e p="profile-page-modals.service.ts" t="Include" />
-                      <e p="profile-page.service.ts" t="Include" />
-                      <e p="user-avatar.service.ts" t="Include" />
-                      <e p="user-data.service.ts" t="Include" />
-                      <e p="user-post.service.ts" t="Include" />
-                    </e>
-                    <e p="store" t="Include">
-                      <e p="user-avatar" t="Include">
-                        <e p="user-avatar.actions.ts" t="Include" />
-                        <e p="user-avatar.effects.ts" t="Include" />
-                        <e p="user-avatar.reducer.ts" t="Include" />
-                      </e>
-                      <e p="user-data" t="Include">
-                        <e p="user-data.actions.ts" t="Include" />
-                        <e p="user-data.effects.ts" t="Include" />
-                        <e p="user-data.reducer.ts" t="Include" />
-                      </e>
-                      <e p="user-exemplary-friends" t="Include">
-                        <e p="user-exemplary-friends.actions.ts" t="Include" />
-                        <e p="user-exemplary-friends.effects.ts" t="Include" />
-                        <e p="user-exemplary-friends.reducer.ts" t="Include" />
-                      </e>
-                      <e p="user-posts" t="Include">
-                        <e p="user-posts.actions.ts" t="Include" />
-                        <e p="user-posts.effects.ts" t="Include" />
-                        <e p="user-posts.reducer.ts" t="Include" />
-                      </e>
-                    </e>
-                  </e>
-                  <e p="user-settings-page" t="Include">
-                    <e p="components" t="Include">
-                      <e p="basic-user-settings" t="Include">
-                        <e p="basic-user-settings.component.html" t="Include" />
-                        <e p="basic-user-settings.component.scss" t="Include" />
-                        <e p="basic-user-settings.component.ts" t="Include" />
-                      </e>
-                      <e p="chosen-user-settings-subpage" t="Include">
-                        <e p="chosen-user-settings-subpage.component.html" t="Include" />
-                        <e p="chosen-user-settings-subpage.component.scss" t="Include" />
-                        <e p="chosen-user-settings-subpage.component.ts" t="Include" />
-                      </e>
-                      <e p="user-education-settings" t="Include">
-                        <e p="user-education-settings.component.html" t="Include" />
-                        <e p="user-education-settings.component.scss" t="Include" />
-                        <e p="user-education-settings.component.ts" t="Include" />
-                      </e>
-                      <e p="user-interests-settings" t="Include">
-                        <e p="user-interests-settings.component.html" t="Include" />
-                        <e p="user-interests-settings.component.scss" t="Include" />
-                        <e p="user-interests-settings.component.ts" t="Include" />
-                      </e>
-                      <e p="user-other-settings" t="Include">
-                        <e p="user-other-settings.component.html" t="Include" />
-                        <e p="user-other-settings.component.scss" t="Include" />
-                        <e p="user-other-settings.component.ts" t="Include" />
-                      </e>
-                      <e p="user-safety-settings" t="Include">
-                        <e p="user-safety-settings.component.html" t="Include" />
-                        <e p="user-safety-settings.component.scss" t="Include" />
-                        <e p="user-safety-settings.component.ts" t="Include" />
-                      </e>
-                      <e p="user-settings-nav" t="Include">
-                        <e p="user-settings-nav.component.html" t="Include" />
-                        <e p="user-settings-nav.component.scss" t="Include" />
-                        <e p="user-settings-nav.component.ts" t="Include" />
-                      </e>
-                    </e>
-                    <e p="Models" t="Include">
-                      <e p="additional-info.model.ts" t="Include" />
-                      <e p="alcohol-attitude.model.ts" t="Include" />
-                      <e p="basic-user-data.model.ts" t="Include" />
-                      <e p="education.model.ts" t="Include" />
-                      <e p="family-status.model.ts" t="Include" />
-                      <e p="religion.model.ts" t="Include" />
-                      <e p="smoking-attitude..model.ts" t="Include" />
-                      <e p="user-interest.model.ts" t="Include" />
-                    </e>
-                    <e p="Services" t="Include">
-                      <e p="user-data.service.ts" t="Include" />
-                    </e>
-                    <e p="user-settings-page.component.html" t="Include" />
-                    <e p="user-settings-page.component.scss" t="Include" />
-                    <e p="user-settings-page.component.ts" t="Include" />
-                    <e p="user-settings-page.module.ts" t="Include" />
-                  </e>
-                </e>
-                <e p="mainpage" t="Include">
-                  <e p="mainpage.component.html" t="Include" />
-                  <e p="mainpage.component.scss" t="Include" />
-                  <e p="mainpage.component.ts" t="Include" />
-                </e>
-                <e p="modules.module.ts" t="Include" />
-                <e p="not-found" t="Include">
-                  <e p="not-found-page.component.html" t="Include" />
-                  <e p="not-found-page.component.scss" t="Include" />
-                  <e p="not-found-page.component.ts" t="Include" />
-                </e>
-                <e p="wrapper" t="Include">
-                  <e p="components" t="Include">
-                    <e p="friend-requests-modal" t="Include">
-                      <e p="components" t="Include">
-                        <e p="friend-request-item" t="Include">
-                          <e p="friend-request-item.component.html" t="Include" />
-                          <e p="friend-request-item.component.scss" t="Include" />
-                          <e p="friend-request-item.component.ts" t="Include" />
-                        </e>
-                        <e p="received-friend-request-list" t="Include">
-                          <e p="received-friend-request-list.component.html" t="Include" />
-                          <e p="received-friend-request-list.component.scss" t="Include" />
-                          <e p="received-friend-request-list.component.ts" t="Include" />
-                        </e>
-                        <e p="sent-friend-request-list" t="Include">
-                          <e p="sent-friend-request-list.component.html" t="Include" />
-                          <e p="sent-friend-request-list.component.scss" t="Include" />
-                          <e p="sent-friend-request-list.component.ts" t="Include" />
-                        </e>
-                      </e>
-                      <e p="friend-requests-modal.component.html" t="Include" />
-                      <e p="friend-requests-modal.component.scss" t="Include" />
-                      <e p="friend-requests-modal.component.ts" t="Include" />
-                    </e>
-                  </e>
-                  <e p="Models" t="Include">
-                    <e p="received-friend-request.model.ts" t="Include" />
-                    <e p="sent-friend-request.model.ts" t="Include" />
-                  </e>
-                  <e p="Resolvers" t="Include">
-                    <e p="profile-id.resolver.ts" t="Include" />
-                  </e>
-                  <e p="Services" t="Include">
-                    <e p="friend-requests-modal.service.ts" t="Include" />
-                  </e>
-                  <e p="wrapper.component.html" t="Include" />
-                  <e p="wrapper.component.scss" t="Include" />
-                  <e p="wrapper.component.ts" t="Include" />
-                  <e p="wrapper.module.ts" t="Include" />
-                </e>
-              </e>
-              <e p="shared" t="Include">
-                <e p="components" t="Include">
-                  <e p="button-hover-info-modal" t="Include">
-                    <e p="button-hover-info-modal.component.html" t="Include" />
-                    <e p="button-hover-info-modal.component.scss" t="Include" />
-                    <e p="button-hover-info-modal.component.ts" t="Include" />
-                  </e>
-                  <e p="calendar" t="Include">
-                    <e p="calendar.component.html" t="Include" />
-                    <e p="calendar.component.scss" t="Include" />
-                    <e p="calendar.component.ts" t="Include" />
-                  </e>
-                  <e p="comments" t="Include">
-                    <e p="comments.component.html" t="Include" />
-                    <e p="comments.component.scss" t="Include" />
-                    <e p="comments.component.spec.ts" t="Include" />
-                    <e p="comments.component.ts" t="Include" />
-                    <e p="new-comment-form" t="Include">
-                      <e p="new-comment-form.component.html" t="Include" />
-                      <e p="new-comment-form.component.scss" t="Include" />
-                      <e p="new-comment-form.component.spec.ts" t="Include" />
-                      <e p="new-comment-form.component.ts" t="Include" />
-                    </e>
-                  </e>
-                  <e p="common-modal" t="Include">
-                    <e p="common-modal.component.html" t="Include" />
-                    <e p="common-modal.component.scss" t="Include" />
-                    <e p="common-modal.component.ts" t="Include" />
-                  </e>
-                  <e p="main-panel" t="Include">
-                    <e p="main-panel.component.html" t="Include" />
-                    <e p="main-panel.component.scss" t="Include" />
-                    <e p="main-panel.component.ts" t="Include" />
-                  </e>
-                  <e p="mini-search-input" t="Include">
-                    <e p="mini-search-input.component.html" t="Include" />
-                    <e p="mini-search-input.component.scss" t="Include" />
-                    <e p="mini-search-input.component.spec.ts" t="Include" />
-                    <e p="mini-search-input.component.ts" t="Include" />
-                  </e>
-                  <e p="new-message-form" t="Include">
-                    <e p="new-message-form.component.html" t="Include" />
-                    <e p="new-message-form.component.scss" t="Include" />
-                    <e p="new-message-form.component.ts" t="Include" />
-                  </e>
-                  <e p="search-input" t="Include">
-                    <e p="search-input.component.html" t="Include" />
-                    <e p="search-input.component.scss" t="Include" />
-                    <e p="search-input.component.spec.ts" t="Include" />
-                    <e p="search-input.component.ts" t="Include" />
-                  </e>
-                  <e p="transparent-bg-modal" t="Include">
-                    <e p="transparent-bg-modal.component.html" t="Include" />
-                    <e p="transparent-bg-modal.component.scss" t="Include" />
-                    <e p="transparent-bg-modal.component.ts" t="Include" />
-                  </e>
-                </e>
-                <e p="Services" t="Include">
-                  <e p="dialog-hub.service.ts" t="Include" />
-                  <e p="token-interceptor.service.ts" t="Include" />
-                  <e p="user-id.service.ts" t="Include" />
-                </e>
-                <e p="shared.module.ts" t="Include" />
-              </e>
-              <e p="submodules" t="Include">
-                <e p="post-comments-subpage" t="Include">
-                  <e p="components" t="Include">
-                    <e p="comment-list" t="Include">
-                      <e p="comment-item" t="Include">
-                        <e p="comment-item.component.html" t="Include" />
-                        <e p="comment-item.component.scss" t="Include" />
-                        <e p="comment-item.component.ts" t="Include" />
-                      </e>
-                      <e p="comment-list.component.html" t="Include" />
-                      <e p="comment-list.component.scss" t="Include" />
-                      <e p="comment-list.component.ts" t="Include" />
-                    </e>
-                    <e p="Post" t="Include">
-                      <e p="post.component.html" t="Include" />
-                      <e p="post.component.scss" t="Include" />
-                      <e p="post.component.ts" t="Include" />
-                    </e>
-                  </e>
-                  <e p="Models" t="Include">
-                    <e p="comment.model.ts" t="Include" />
-                    <e p="event-post.model.ts" t="Include" />
-                    <e p="user-post.model.ts" t="Include" />
-                  </e>
-                  <e p="post-comments-subpage.component.html" t="Include" />
-                  <e p="post-comments-subpage.component.scss" t="Include" />
-                  <e p="post-comments-subpage.component.ts" t="Include" />
-                  <e p="post-comments-subpage.module.ts" t="Include" />
-                  <e p="Services" t="Include">
-                    <e p="post-comments.service.ts" t="Include" />
-                    <e p="post-data.service.ts" t="Include" />
-                  </e>
-                </e>
-              </e>
-              <e p="user-education-settings" t="Include">
-                <e p="user-education-settings.component.html" t="Include" />
-                <e p="user-education-settings.component.scss" t="Include" />
-                <e p="user-education-settings.component.ts" t="Include" />
-              </e>
+          <e p="Comment" t="Include">
+            <e p="CommentResponseController.cs" t="Include" />
+            <e p="Dtos" t="Include">
+              <e p="NewCommentDto.cs" t="Include" />
+              <e p="NewCommentResponseDto.cs" t="Include" />
+              <e p="NewMainCommentDto.cs" t="Include" />
+              <e p="PostCommentDto.cs" t="Include" />
+              <e p="PostCommentResponseDto.cs" t="Include" />
+              <e p="ResponseToPostCommentResponseDto.cs" t="Include" />
+              <e p="TransferredResponseToResponseDto.cs" t="Include" />
             </e>
-            <e p="assets" t="Include">
-              <e p=".gitkeep" t="Include" />
-              <e p="images" t="Include">
-                <e p="fadebg.png" t="Include" />
-                <e p="icon" t="Include">
-                  <e p="binoculars.svg" t="Include" />
-                  <e p="bubble.svg" t="Include" />
-                  <e p="calendar.svg" t="Include" />
-                  <e p="cancel-circle.svg" t="Include" />
-                  <e p="chatMessage.svg" t="Include" />
-                  <e p="checkmark.svg" t="Include" />
-                  <e p="clock.svg" t="Include" />
-                  <e p="cog.svg" t="Include" />
-                  <e p="dropdowntriangle.svg" t="Include" />
-                  <e p="exit.svg" t="Include" />
-                  <e p="group.svg" t="Include" />
-                  <e p="heart.svg" t="Include" />
-                  <e p="home.svg" t="Include" />
-                  <e p="house.svg" t="Include" />
-                  <e p="image.svg" t="Include" />
-                  <e p="images.svg" t="Include" />
-                  <e p="location.svg" t="Include" />
-                  <e p="make-group.svg" t="Include" />
-                  <e p="message.svg" t="Include" />
-                  <e p="notifications.svg" t="Include" />
-                  <e p="people.svg" t="Include" />
-                  <e p="plus.svg" t="Include" />
-                  <e p="search.svg" t="Include" />
-                  <e p="symbol-defs.svg" t="Include" />
-                  <e p="user.svg" t="Include" />
-                  <e p="users.svg" t="Include" />
-                  <e p="users1.svg" t="Include" />
-                </e>
-                <e p="icon-logo.png" t="Include" />
-                <e p="icon_logo.ico" t="Include" />
-                <e p="kulki.png" t="Include" />
-                <e p="kulki2.png" t="Include" />
-                <e p="logo-white.png" t="Include" />
-                <e p="logoanim" t="Include">
-                  <e p="1.png" t="Include" />
-                  <e p="2.png" t="Include" />
-                </e>
-                <e p="mainbg.jpg" t="Include" />
-                <e p="mainpagebg.jpg" t="Include" />
-                <e p="mainpagelogo.png" t="Include" />
-                <e p="no-avatar.png" t="Include" />
-                <e p="scrollbar-black-line.png" t="Include" />
-                <e p="test" t="Include">
-                  <e p="adult-background-beard-941693.jpg" t="Include" />
-                  <e p="clouds-lake-lake-mcdonald-259881.jpg" t="Include" />
-                </e>
-              </e>
-              <e p="sass" t="Include">
-                <e p="abstracts" t="Include">
-                  <e p="_m-p-loops.scss" t="Include" />
-                  <e p="_mixins.scss" t="Include" />
-                  <e p="_utilities.scss" t="Include" />
-                </e>
-                <e p="base" t="Include">
-                  <e p="_variables.scss" t="Include" />
-                </e>
-                <e p="components" t="Include">
-                  <e p="_checkbox.scss" t="Include" />
-                  <e p="_dropdown.scss" t="Include" />
-                  <e p="_fr-btn-main-blue.scss" t="Include" />
-                  <e p="_fr-input.scss" t="Include" />
-                  <e p="_fr-modal.scss" t="Include" />
-                  <e p="_new-comment.scss" t="Include" />
-                  <e p="_new-post.scss" t="Include" />
-                  <e p="_popup-1.scss" t="Include" />
-                  <e p="_popup-2.scss" t="Include" />
-                  <e p="_radiobutton.scss" t="Include" />
-                  <e p="_settings-panel-wrapper.scss" t="Include" />
-                </e>
-              </e>
+            <e p="PostCommentController.cs" t="Include" />
+            <e p="Repositories" t="Include">
+              <e p="CommentLikeRepository.cs" t="Include" />
+              <e p="CommentRepository.cs" t="Include" />
+              <e p="ICommentLikeRepository.cs" t="Include" />
+              <e p="ICommentRepository.cs" t="Include" />
+              <e p="ICommentResponse.cs" t="Include" />
+              <e p="IMainCommentRepository.cs" t="Include" />
+              <e p="IPostRepository.cs" t="Include" />
+              <e p="IResponseToCommentRepository.cs" t="Include" />
+              <e p="IUserPostRepository.cs" t="Include" />
+              <e p="MainCommentRepository.cs" t="Include" />
+              <e p="ResponseToCommentRepository.cs" t="Include" />
             </e>
-            <e p="browserslist" t="Include" />
-            <e p="environments" t="Include">
-              <e p="environment.prod.ts" t="Include" />
-              <e p="environment.ts" t="Include" />
+            <e p="Services" t="Include">
+              <e p="CommentResponseService.cs" t="Include" />
+              <e p="PostCommentService.cs" t="Include" />
             </e>
-            <e p="index.html" t="Include" />
-            <e p="karma.conf.js" t="Include" />
-            <e p="logo.ico" t="Include" />
-            <e p="main.ts" t="Include" />
-            <e p="polyfills.ts" t="Include" />
-            <e p="styles.scss" t="Include" />
-            <e p="test.ts" t="Include" />
-            <e p="tsconfig.app.json" t="Include" />
-            <e p="tsconfig.spec.json" t="Include" />
-            <e p="tslint.json" t="Include" />
+            <e p="UnitOfWork.cs" t="Include" />
           </e>
-          <e p="tsconfig.json" t="Include" />
-          <e p="tslint.json" t="Include" />
+          <e p="Event" t="Include">
+            <e p="Commands" t="Include">
+              <e p="Event" t="Include">
+                <e p="EventCreation" t="Include">
+                  <e p="EventCreationCommand.cs" t="Include" />
+                  <e p="EventCreationCommandHandler.cs" t="Include" />
+                </e>
+                <e p="EventPost" t="Include">
+                  <e p="CreateEventPostAndReturnDtoCommand.cs" t="Include" />
+                  <e p="Handlers" t="Include">
+                    <e p="CreateEventPostAndReturnDtoCommandHandler.cs" t="Include" />
+                  </e>
+                </e>
+              </e>
+            </e>
+            <e p="Dtos" t="Include">
+              <e p="BannedEventParticipantDto.cs" t="Include" />
+              <e p="ElasticEventDto.cs" t="Include" />
+              <e p="EventAdminDto.cs" t="Include" />
+              <e p="EventDataDto.cs" t="Include" />
+              <e p="EventDto.cs" t="Include" />
+              <e p="EventParticipantDetailedDto.cs" t="Include" />
+              <e p="EventParticipantForListDto.cs" t="Include" />
+              <e p="EventParticipationRequestDto.cs" t="Include" />
+              <e p="EventSearchDto.cs" t="Include" />
+              <e p="ExemplaryEventParticipantDto.cs" t="Include" />
+              <e p="NewAvatarDto.cs" t="Include" />
+              <e p="NewBackgroundDto.cs" t="Include" />
+              <e p="RequestConfirmationDto.cs" t="Include" />
+            </e>
+            <e p="EventAdminsController.cs" t="Include" />
+            <e p="EventController.cs" t="Include" />
+            <e p="EventDataController.cs" t="Include" />
+            <e p="EventParticipantController.cs" t="Include" />
+            <e p="EventParticipationRequestController.cs" t="Include" />
+            <e p="Helpers" t="Include">
+              <e p="EventParticipationRequestCreationResult.cs" t="Include" />
+              <e p="EventParticipationRequestResponse.cs" t="Include" />
+              <e p="EventParticipationStatus.cs" t="Include" />
+              <e p="EventParticipationStatusRes.cs" t="Include" />
+            </e>
+            <e p="Queries" t="Include">
+              <e p="EventPost" t="Include">
+                <e p="GetEventPostById.cs" t="Include" />
+                <e p="GetEventPostRangeById.cs" t="Include" />
+                <e p="GetEventPostsRangeWithPaginationQuery.cs" t="Include" />
+                <e p="Handlers" t="Include">
+                  <e p="EventPostByIdQueryHandler.cs" t="Include" />
+                  <e p="EventPostRangeByIdQueryHandler.cs" t="Include" />
+                  <e p="EventPostsRangeWithPaginationQueryHandler.cs" t="Include" />
+                </e>
+              </e>
+            </e>
+            <e p="Repositories" t="Include">
+              <e p="EventAdminsRepository.cs" t="Include" />
+              <e p="EventBannedUsersRepository.cs" t="Include" />
+              <e p="EventParticipantsRepository.cs" t="Include" />
+              <e p="EventParticipationRequestRepository.cs" t="Include" />
+              <e p="EventPhotoRepository.cs" t="Include" />
+              <e p="EventRepository.cs" t="Include" />
+              <e p="IEventAdminsRepository.cs" t="Include" />
+              <e p="IEventBannedUsersRepository.cs" t="Include" />
+              <e p="IEventParticipantsRepository.cs" t="Include" />
+              <e p="IEventParticipationRequestRepository.cs" t="Include" />
+              <e p="IEventPhotoRepository.cs" t="Include" />
+              <e p="IEventPostRepository.cs" t="Include" />
+              <e p="IEventRepository.cs" t="Include" />
+              <e p="IUserEventsRepository.cs" t="Include" />
+              <e p="UserEventsRepository.cs" t="Include" />
+            </e>
+            <e p="Services" t="Include">
+              <e p="EventDataService.cs" t="Include" />
+              <e p="EventParticipantService.cs" t="Include" />
+              <e p="EventParticipationRequestService.cs" t="Include" />
+              <e p="IEventParticipationStatusService.cs" t="Include" />
+              <e p="UserEventsService.cs" t="Include" />
+            </e>
+          </e>
+          <e p="Friendship" t="Include">
+            <e p="Dtos" t="Include">
+              <e p="ExemplaryFriendDto.cs" t="Include" />
+              <e p="FriendDto.cs" t="Include" />
+              <e p="ReceivedFriendRequestDto.cs" t="Include" />
+              <e p="SentFriendRequestDto.cs" t="Include" />
+              <e p="ShortenedFriendDto.cs" t="Include" />
+            </e>
+            <e p="FriendController.cs" t="Include" />
+            <e p="Repositories" t="Include">
+              <e p="FriendRepository.cs" t="Include" />
+              <e p="FriendRequestRepository.cs" t="Include" />
+              <e p="IFriendRepository.cs" t="Include" />
+              <e p="IFriendRequestRepository.cs" t="Include" />
+              <e p="IUserFriendsRepository.cs" t="Include" />
+              <e p="UserFriendshipRepository.cs" t="Include" />
+            </e>
+            <e p="Services" t="Include">
+              <e p="UserFriendshipService.cs" t="Include" />
+            </e>
+          </e>
+          <e p="FriendshipRecommendation" t="Include">
+            <e p="FriendshipRecommendationController.cs" t="Include" />
+            <e p="Models" t="Include">
+              <e p="Output.cs" t="Include" />
+            </e>
+            <e p="Repositories" t="Include">
+              <e p="FriendshipRecommendationRepository.cs" t="Include" />
+              <e p="IFriendshipRecommendationRepository.cs" t="Include" />
+            </e>
+            <e p="Services" t="Include">
+              <e p="CosSim.cs" t="Include" />
+              <e p="FriendshipRecommendationHostedService.cs" t="Include" />
+              <e p="FriendshipRecommendationService.cs" t="Include" />
+            </e>
+          </e>
+          <e p="Photo" t="Include">
+            <e p="Dtos" t="Include">
+              <e p="PhotoDto.cs" t="Include" />
+            </e>
+            <e p="EventPhotoController.cs" t="Include" />
+            <e p="PhotoService.cs" t="Include" />
+            <e p="Repositories" t="Include">
+              <e p="IPhotoRepository.cs" t="Include" />
+              <e p="PhotoRepository.cs" t="Include" />
+            </e>
+            <e p="UserPhotoController.cs" t="Include" />
+            <e p="UserPhotoRepository.cs" t="Include" />
+          </e>
+          <e p="Post" t="Include">
+            <e p="Dtos" t="Include">
+              <e p="EventPostDto.cs" t="Include" />
+              <e p="LikeDto.cs" t="Include" />
+              <e p="UserPostDto.cs" t="Include" />
+            </e>
+            <e p="EventPostController.cs" t="Include" />
+            <e p="PostController.cs" t="Include" />
+            <e p="Repositories" t="Include">
+              <e p="EventPostRepository.cs" t="Include" />
+              <e p="IPostLikeRepository.cs" t="Include" />
+              <e p="PostLikeRepository.cs" t="Include" />
+              <e p="PostRepository.cs" t="Include" />
+              <e p="UserPostRepository.cs" t="Include" />
+            </e>
+            <e p="Services" t="Include">
+              <e p="EventPostService.cs" t="Include" />
+              <e p="UserPostService.cs" t="Include" />
+            </e>
+            <e p="UserPostController.cs" t="Include" />
+          </e>
+          <e p="Search" t="Include">
+            <e p="Dtos" t="Include">
+              <e p="UserInterestDto.cs" t="Include" />
+            </e>
+            <e p="EventSearchController.cs" t="Include" />
+            <e p="Services" t="Include">
+              <e p="EventSearchService.cs" t="Include" />
+              <e p="SQLServer_UserSearchService.cs" t="Include" />
+              <e p="UserSearchService.cs" t="Include" />
+            </e>
+            <e p="SQLServer_UserSearchController.cs" t="Include" />
+            <e p="UserSearchController.cs" t="Include" />
+          </e>
+          <e p="User" t="Include">
+            <e p="Dtos" t="Include">
+              <e p="ExtendedUserDto.cs" t="Include" />
+              <e p="NewPasswordDto.cs" t="Include" />
+              <e p="NewUserDto.cs" t="Include" />
+              <e p="UserBasicDto.cs" t="Include" />
+              <e p="UserLookUpModelDto.cs" t="Include" />
+              <e p="UsersLookUpCriteriaDto.cs" t="Include" />
+            </e>
+            <e p="Repositories" t="Include">
+              <e p="ISessionRepository.cs" t="Include" />
+              <e p="IUserPhotoRepository.cs" t="Include" />
+              <e p="IUserRepository.cs" t="Include" />
+              <e p="SessionRepository.cs" t="Include" />
+              <e p="UserRepository.cs" t="Include" />
+            </e>
+            <e p="Services" t="Include">
+              <e p="UserDataService.cs" t="Include" />
+              <e p="UserDataUpdateService.cs" t="Include" />
+            </e>
+            <e p="UserController.cs" t="Include" />
+            <e p="UserDataUpdateController.cs" t="Include" />
+          </e>
+        </e>
+        <e p="Helpers" t="Include">
+          <e p="AuthorizeEventAdmin.cs" t="Include" />
+          <e p="AuthorizeEventAdminInPostController.cs" t="Include" />
+          <e p="AuthorizeEventCreator.cs" t="Include" />
+          <e p="AuthorizeEventParticipant.cs" t="Include" />
+          <e p="CustomExceptions" t="Include">
+            <e p="EmailIsAlreadyTakenException.cs" t="Include" />
+            <e p="EntityIsAlreadyLiked.cs" t="Include" />
+            <e p="EntityIsNotLikedException.cs" t="Include" />
+            <e p="EntityWasntFoundException.cs" t="Include" />
+          </e>
+          <e p="CustomSqlQuery.cs" t="Include" />
+          <e p="DynamicLinqStatement.cs" t="Include" />
+          <e p="HTTPHelpers.cs" t="Include" />
+          <e p="IImageSaver.cs" t="Include" />
+          <e p="IndexedForeachLoop.cs" t="Include" />
+          <e p="JwtService.cs" t="Include" />
+          <e p="RawSqlQuery.cs" t="Include" />
+        </e>
+        <e p="Mapping" t="Include">
+          <e p="Profiles" t="Include">
+            <e p="ChatLastMessageProfile.cs" t="Include" />
+            <e p="EventDataProfile.cs" t="Include" />
+            <e p="EventPostProfile.cs" t="Include" />
+            <e p="FoundUserDtoProfile.cs" t="Include" />
+            <e p="UserExtendedDataProfile.cs" t="Include" />
+            <e p="UserPostProfile.cs" t="Include" />
+          </e>
+          <e p="Resolvers" t="Include">
+            <e p="AreFriendsResolver.cs" t="Include" />
+            <e p="InterlocutorAvatarResolver.cs" t="Include" />
+            <e p="InterlocutorIdResolver.cs" t="Include" />
+            <e p="IsEventPostLikedByUserResolver.cs" t="Include" />
+            <e p="IsUserPostLikedByUserResolver.cs" t="Include" />
+            <e p="WrittenByRequestIssuerResolver.cs" t="Include" />
+          </e>
+        </e>
+        <e p="Middlewares" t="Include">
+          <e p="ExceptionMiddleware.cs" t="Include" />
+          <e p="JWTInHeaderMiddleware.cs" t="Include" />
+          <e p="UserIDInHeaderMiddleware.cs" t="Include" />
+        </e>
+        <e p="Models" t="Include">
+          <e p="AlcoholAttitude.cs" t="Include" />
+          <e p="Chat.cs" t="Include" />
+          <e p="ChatMessage.cs" t="Include" />
+          <e p="ChatMessages.cs" t="Include" />
+          <e p="ChatParticipants.cs" t="Include" />
+          <e p="City.cs" t="Include" />
+          <e p="Comment.cs" t="Include" />
+          <e p="CommentLike.cs" t="Include" />
+          <e p="CommentRespond.cs" t="Include" />
+          <e p="CommentRespondLike.cs" t="Include" />
+          <e p="CommentResponseLike.cs" t="Include" />
+          <e p="District.cs" t="Include" />
+          <e p="DrugsAttitude.cs" t="Include" />
+          <e p="Education.cs" t="Include" />
+          <e p="Event.cs" t="Include" />
+          <e p="EventAdmins.cs" t="Include" />
+          <e p="EventBannedUsers.cs" t="Include" />
+          <e p="EventImage.cs" t="Include" />
+          <e p="EventParticipants.cs" t="Include" />
+          <e p="EventParticipationRequest.cs" t="Include" />
+          <e p="EventPost.cs" t="Include" />
+          <e p="EventPostLikes.cs" t="Include" />
+          <e p="FamilyStatus.cs" t="Include" />
+          <e p="Friend.cs" t="Include" />
+          <e p="FriendRequest.cs" t="Include" />
+          <e p="FriendshipRecommendation.cs" t="Include" />
+          <e p="FriendyContext.cs" t="Include" />
+          <e p="Gender.cs" t="Include" />
+          <e p="Image.cs" t="Include" />
+          <e p="Interest.cs" t="Include" />
+          <e p="MainComment.cs" t="Include" />
+          <e p="MainCommentResponse.cs" t="Include" />
+          <e p="MaritalStatus.cs" t="Include" />
+          <e p="Post.cs" t="Include" />
+          <e p="PostLike.cs" t="Include" />
+          <e p="Religion.cs" t="Include" />
+          <e p="ResponseToComment.cs" t="Include" />
+          <e p="ResponseToMainCommentResponse.cs" t="Include" />
+          <e p="Session.cs" t="Include" />
+          <e p="SmokingAttitude.cs" t="Include" />
+          <e p="User.cs" t="Include" />
+          <e p="UserAdditionalInfo.cs" t="Include" />
+          <e p="UserEvents.cs" t="Include" />
+          <e p="UserFriendship.cs" t="Include" />
+          <e p="UserImage.cs" t="Include" />
+          <e p="UserInterests.cs" t="Include" />
+          <e p="UserPost.cs" t="Include" />
+          <e p="Voivodeship.cs" t="Include" />
         </e>
         <e p="obj" t="ExcludeRecursive">
           <e p="Debug" t="Include">
@@ -1142,397 +383,46 @@
             </e>
           </e>
         </e>
+        <e p="Program.cs" t="Include" />
         <e p="Properties" t="Include">
           <e p="launchSettings.json" t="Include" />
         </e>
-        <e p="src" t="Include">
-          <e p="appsettings.Development.json" t="Include" />
-          <e p="appsettings.json" t="Include" />
-          <e p="Cache" t="Include">
-            <e p="RedisClient.cs" t="Include" />
-          </e>
-          <e p="Elasticsearch" t="Include">
-            <e p="ElasticClientProvider.cs" t="Include" />
-            <e p="ElasticConnectionSettings.cs" t="Include" />
-            <e p="UserDataIndexing.cs" t="Include" />
-            <e p="UserDataUpdating.cs" t="Include" />
-            <e p="UserDetailedSearch.cs" t="Include" />
-          </e>
-          <e p="Features" t="Include">
-            <e p="Authentication" t="Include">
-              <e p="AuthController.cs" t="Include" />
-              <e p="Dtos" t="Include">
-                <e p="AuthDataDto.cs" t="Include" />
-                <e p="AuthResponse.cs" t="Include" />
+        <e p="Repositories" t="Include">
+          <e p="EntityDatabaseTransaction.cs" t="Include" />
+          <e p="IRepositoryBase.cs" t="Include" />
+          <e p="IRepositoryWrapper.cs" t="Include" />
+          <e p="RepositoryBase.cs" t="Include" />
+          <e p="RepositoryServices" t="Include">
+            <e p="Interfaces" t="Include">
+              <e p="User" t="Include">
+                <e p="IUserSearchingService.cs" t="Include" />
               </e>
-              <e p="Helpers" t="Include">
-                <e p="AuthenticationResponse.cs" t="Include" />
-              </e>
-              <e p="Services" t="Include">
-                <e p="AuthenticationService.cs" t="Include" />
-              </e>
-            </e>
-            <e p="Chat" t="Include">
-              <e p="ChatController.cs" t="Include" />
-              <e p="Dtos" t="Include">
-                <e p="ChatLastMessageDto.cs" t="Include" />
-                <e p="ChatMessageDto.cs" t="Include" />
-                <e p="CreatedMessageDto.cs" t="Include" />
-                <e p="DialogBasicDataDto.cs" t="Include" />
-                <e p="FriendBasicDataInDialogDto.cs" t="Include" />
-                <e p="InterlocutorsDto.cs" t="Include" />
-                <e p="NewMessageDto.cs" t="Include" />
-                <e p="ParticipantsBasicDataDto.cs" t="Include" />
-                <e p="ParticipantsBasicDataSqlDto.cs" t="Include" />
-              </e>
-              <e p="Repositories" t="Include">
-                <e p="ChatMessageRepository.cs" t="Include" />
-                <e p="ChatMessagesRepository.cs" t="Include" />
-                <e p="ChatParticipantsRepository.cs" t="Include" />
-                <e p="ChatRepository.cs" t="Include" />
-                <e p="IChatMessageRepository.cs" t="Include" />
-                <e p="IChatMessagesRepository.cs" t="Include" />
-                <e p="IChatParticipantsRepository.cs" t="Include" />
-                <e p="IChatRepository.cs" t="Include" />
-              </e>
-              <e p="Services" t="Include">
-                <e p="ChatService.cs" t="Include" />
-              </e>
-            </e>
-            <e p="Comment" t="Include">
-              <e p="CommentResponseController.cs" t="Include" />
-              <e p="Dtos" t="Include">
-                <e p="NewCommentDto.cs" t="Include" />
-                <e p="NewCommentResponseDto.cs" t="Include" />
-                <e p="NewMainCommentDto.cs" t="Include" />
-                <e p="PostCommentDto.cs" t="Include" />
-                <e p="PostCommentResponseDto.cs" t="Include" />
-                <e p="ResponseToPostCommentResponseDto.cs" t="Include" />
-                <e p="TransferredResponseToResponseDto.cs" t="Include" />
-              </e>
-              <e p="PostCommentController.cs" t="Include" />
-              <e p="Repositories" t="Include">
-                <e p="CommentLikeRepository.cs" t="Include" />
-                <e p="CommentRepository.cs" t="Include" />
-                <e p="ICommentLikeRepository.cs" t="Include" />
-                <e p="ICommentRepository.cs" t="Include" />
-                <e p="ICommentResponse.cs" t="Include" />
-                <e p="IMainCommentRepository.cs" t="Include" />
-                <e p="IPostRepository.cs" t="Include" />
-                <e p="IResponseToCommentRepository.cs" t="Include" />
-                <e p="IUserPostRepository.cs" t="Include" />
-                <e p="MainCommentRepository.cs" t="Include" />
-                <e p="ResponseToCommentRepository.cs" t="Include" />
-              </e>
-              <e p="Services" t="Include">
-                <e p="CommentResponseService.cs" t="Include" />
-                <e p="PostCommentService.cs" t="Include" />
-              </e>
-              <e p="UnitOfWork.cs" t="Include" />
-            </e>
-            <e p="Event" t="Include">
-              <e p="Commands" t="Include">
-                <e p="Event" t="Include">
-                  <e p="EventCreation" t="Include">
-                    <e p="EventCreationCommand.cs" t="Include" />
-                    <e p="EventCreationCommandHandler.cs" t="Include" />
-                  </e>
-                  <e p="EventPost" t="Include">
-                    <e p="CreateEventPostAndReturnDtoCommand.cs" t="Include" />
-                    <e p="Handlers" t="Include">
-                      <e p="CreateEventPostAndReturnDtoCommandHandler.cs" t="Include" />
-                    </e>
-                  </e>
-                </e>
-              </e>
-              <e p="Dtos" t="Include">
-                <e p="BannedEventParticipantDto.cs" t="Include" />
-                <e p="ElasticEventDto.cs" t="Include" />
-                <e p="EventAdminDto.cs" t="Include" />
-                <e p="EventDataDto.cs" t="Include" />
-                <e p="EventDto.cs" t="Include" />
-                <e p="EventParticipantDetailedDto.cs" t="Include" />
-                <e p="EventParticipantForListDto.cs" t="Include" />
-                <e p="EventParticipationRequestDto.cs" t="Include" />
-                <e p="EventSearchDto.cs" t="Include" />
-                <e p="ExemplaryEventParticipantDto.cs" t="Include" />
-                <e p="NewAvatarDto.cs" t="Include" />
-                <e p="NewBackgroundDto.cs" t="Include" />
-                <e p="RequestConfirmationDto.cs" t="Include" />
-              </e>
-              <e p="EventAdminsController.cs" t="Include" />
-              <e p="EventController.cs" t="Include" />
-              <e p="EventDataController.cs" t="Include" />
-              <e p="EventParticipantController.cs" t="Include" />
-              <e p="EventParticipationRequestController.cs" t="Include" />
-              <e p="Helpers" t="Include">
-                <e p="EventParticipationRequestCreationResult.cs" t="Include" />
-                <e p="EventParticipationRequestResponse.cs" t="Include" />
-                <e p="EventParticipationStatus.cs" t="Include" />
-                <e p="EventParticipationStatusRes.cs" t="Include" />
-              </e>
-              <e p="Queries" t="Include">
-                <e p="EventPost" t="Include">
-                  <e p="GetEventPostById.cs" t="Include" />
-                  <e p="GetEventPostRangeById.cs" t="Include" />
-                  <e p="GetEventPostsRangeWithPaginationQuery.cs" t="Include" />
-                  <e p="Handlers" t="Include">
-                    <e p="EventPostByIdQueryHandler.cs" t="Include" />
-                    <e p="EventPostRangeByIdQueryHandler.cs" t="Include" />
-                    <e p="EventPostsRangeWithPaginationQueryHandler.cs" t="Include" />
-                  </e>
-                </e>
-              </e>
-              <e p="Repositories" t="Include">
-                <e p="EventAdminsRepository.cs" t="Include" />
-                <e p="EventBannedUsersRepository.cs" t="Include" />
-                <e p="EventParticipantsRepository.cs" t="Include" />
-                <e p="EventParticipationRequestRepository.cs" t="Include" />
-                <e p="EventPhotoRepository.cs" t="Include" />
-                <e p="EventRepository.cs" t="Include" />
-                <e p="IEventAdminsRepository.cs" t="Include" />
-                <e p="IEventBannedUsersRepository.cs" t="Include" />
-                <e p="IEventParticipantsRepository.cs" t="Include" />
-                <e p="IEventParticipationRequestRepository.cs" t="Include" />
-                <e p="IEventPhotoRepository.cs" t="Include" />
-                <e p="IEventPostRepository.cs" t="Include" />
-                <e p="IEventRepository.cs" t="Include" />
-                <e p="IUserEventsRepository.cs" t="Include" />
-                <e p="UserEventsRepository.cs" t="Include" />
-              </e>
-              <e p="Services" t="Include">
-                <e p="EventDataService.cs" t="Include" />
-                <e p="EventParticipantService.cs" t="Include" />
-                <e p="EventParticipationRequestService.cs" t="Include" />
-                <e p="IEventParticipationStatusService.cs" t="Include" />
-                <e p="UserEventsService.cs" t="Include" />
-              </e>
-            </e>
-            <e p="Friendship" t="Include">
-              <e p="Dtos" t="Include">
-                <e p="ExemplaryFriendDto.cs" t="Include" />
-                <e p="FriendDto.cs" t="Include" />
-                <e p="ReceivedFriendRequestDto.cs" t="Include" />
-                <e p="SentFriendRequestDto.cs" t="Include" />
-                <e p="ShortenedFriendDto.cs" t="Include" />
-              </e>
-              <e p="FriendController.cs" t="Include" />
-              <e p="Helpers" t="Include">
-                <e p="FriendshipStatus.cs" t="Include" />
-              </e>
-              <e p="Repositories" t="Include">
-                <e p="FriendRepository.cs" t="Include" />
-                <e p="FriendRequestRepository.cs" t="Include" />
-                <e p="IFriendRepository.cs" t="Include" />
-                <e p="IFriendRequestRepository.cs" t="Include" />
-                <e p="IUserFriendsRepository.cs" t="Include" />
-                <e p="UserFriendshipRepository.cs" t="Include" />
-              </e>
-              <e p="Services" t="Include">
-                <e p="UserFriendshipService.cs" t="Include" />
-              </e>
-            </e>
-            <e p="FriendshipRecommendation" t="Include">
-              <e p="CosSim.cs" t="Include" />
-              <e p="FriendshipRecommendationController.cs" t="Include" />
-              <e p="FriendshipRecommendationRepository.cs" t="Include" />
-              <e p="FriendshipRecommendationService.cs" t="Include" />
-              <e p="IFriendshipRecommendationRepository.cs" t="Include" />
-              <e p="Output.cs" t="Include" />
-            </e>
-            <e p="Photo" t="Include">
-              <e p="Dtos" t="Include">
-                <e p="PhotoDto.cs" t="Include" />
-              </e>
-              <e p="EventPhotoController.cs" t="Include" />
-              <e p="PhotoService.cs" t="Include" />
-              <e p="Repositories" t="Include">
-                <e p="IPhotoRepository.cs" t="Include" />
-                <e p="PhotoRepository.cs" t="Include" />
-              </e>
-              <e p="Services" t="Include" />
-              <e p="UserPhotoController.cs" t="Include" />
-              <e p="UserPhotoRepository.cs" t="Include" />
-            </e>
-            <e p="Post" t="Include">
-              <e p="Dtos" t="Include">
-                <e p="EventPostDto.cs" t="Include" />
-                <e p="LikeDto.cs" t="Include" />
-                <e p="UserPostDto.cs" t="Include" />
-              </e>
-              <e p="EventPostController.cs" t="Include" />
-              <e p="PostController.cs" t="Include" />
-              <e p="Repositories" t="Include">
-                <e p="EventPostRepository.cs" t="Include" />
-                <e p="IPostLikeRepository.cs" t="Include" />
-                <e p="PostLikeRepository.cs" t="Include" />
-                <e p="PostRepository.cs" t="Include" />
-                <e p="UserPostRepository.cs" t="Include" />
-              </e>
-              <e p="Services" t="Include">
-                <e p="EventPostService.cs" t="Include" />
-                <e p="UserPostService.cs" t="Include" />
-              </e>
-              <e p="UserPostController.cs" t="Include" />
-            </e>
-            <e p="Search" t="Include">
-              <e p="EventSearchController.cs" t="Include" />
-              <e p="Services" t="Include">
-                <e p="EventSearchService.cs" t="Include" />
-                <e p="UserSearchService.cs" t="Include" />
-              </e>
-              <e p="UserSearchController.cs" t="Include" />
             </e>
             <e p="User" t="Include">
-              <e p="Dtos" t="Include">
-                <e p="ExtendedUserDto.cs" t="Include" />
-                <e p="FoundUserDto.cs" t="Include" />
-                <e p="NewPasswordDto.cs" t="Include" />
-                <e p="NewUserDto.cs" t="Include" />
-                <e p="UserBasicDto.cs" t="Include" />
-                <e p="UserForIndexingDto.cs" t="Include" />
-                <e p="UserInterestForElasticsearchDto.cs" t="Include" />
-                <e p="UserLookUpModelDto.cs" t="Include" />
-                <e p="UsersLookUpCriteriaDto.cs" t="Include" />
-              </e>
-              <e p="Repositories" t="Include">
-                <e p="ISessionRepository.cs" t="Include" />
-                <e p="IUserPhotoRepository.cs" t="Include" />
-                <e p="IUserRepository.cs" t="Include" />
-                <e p="SessionRepository.cs" t="Include" />
-                <e p="UserRepository.cs" t="Include" />
-              </e>
-              <e p="Services" t="Include">
-                <e p="UserDataService.cs" t="Include" />
-                <e p="UserDataUpdateService.cs" t="Include" />
-              </e>
-              <e p="UserController.cs" t="Include" />
-              <e p="UserDataUpdateController.cs" t="Include" />
+              <e p="UserSearchingService.cs" t="Include" />
             </e>
           </e>
-          <e p="Helpers" t="Include">
-            <e p="AuthorizeEventAdmin.cs" t="Include" />
-            <e p="AuthorizeEventAdminInPostController.cs" t="Include" />
-            <e p="AuthorizeEventCreator.cs" t="Include" />
-            <e p="AuthorizeEventParticipant.cs" t="Include" />
-            <e p="CustomExceptions" t="Include">
-              <e p="EmailIsAlreadyTakenException.cs" t="Include" />
-              <e p="EntityIsAlreadyLiked.cs" t="Include" />
-              <e p="EntityIsNotLikedException.cs" t="Include" />
-              <e p="EntityWasntFoundException.cs" t="Include" />
-            </e>
-            <e p="CustomSqlQuery.cs" t="Include" />
-            <e p="DynamicLinqStatement.cs" t="Include" />
-            <e p="HTTPHelpers.cs" t="Include" />
-            <e p="IImageSaver.cs" t="Include" />
-            <e p="IndexedForeachLoop.cs" t="Include" />
-            <e p="JwtService.cs" t="Include" />
-            <e p="RawSqlQuery.cs" t="Include" />
-          </e>
-          <e p="HostedServices" t="Include">
-            <e p="FriendshipRecommendationHostedService.cs" t="Include" />
-          </e>
-          <e p="Mapping" t="Include">
-            <e p="Profiles" t="Include">
-              <e p="ChatLastMessageProfile.cs" t="Include" />
-              <e p="EventDataProfile.cs" t="Include" />
-              <e p="EventPostProfile.cs" t="Include" />
-              <e p="UserDataForEsIndexingProfile.cs" t="Include" />
-              <e p="UserExtendedDataProfile.cs" t="Include" />
-              <e p="UserPostProfile.cs" t="Include" />
-            </e>
-            <e p="Resolvers" t="Include">
-              <e p="InterlocutorAvatarResolver.cs" t="Include" />
-              <e p="InterlocutorIdResolver.cs" t="Include" />
-              <e p="IsEventPostLikedByUserResolver.cs" t="Include" />
-              <e p="IsUserPostLikedByUserResolver.cs" t="Include" />
-              <e p="WrittenByRequestIssuerResolver.cs" t="Include" />
-            </e>
-          </e>
-          <e p="Middlewares" t="Include">
-            <e p="ExceptionMiddleware.cs" t="Include" />
-            <e p="JWTInHeaderMiddleware.cs" t="Include" />
-            <e p="UserIDInHeaderMiddleware.cs" t="Include" />
-          </e>
-          <e p="Models" t="Include">
-            <e p="AlcoholAttitude.cs" t="Include" />
-            <e p="Chat.cs" t="Include" />
-            <e p="ChatMessage.cs" t="Include" />
-            <e p="ChatMessages.cs" t="Include" />
-            <e p="ChatParticipants.cs" t="Include" />
-            <e p="Comment.cs" t="Include" />
-            <e p="CommentLike.cs" t="Include" />
-            <e p="CommentRespond.cs" t="Include" />
-            <e p="CommentRespondLike.cs" t="Include" />
-            <e p="CommentResponseLike.cs" t="Include" />
-            <e p="DrugsAttitude.cs" t="Include" />
-            <e p="Education.cs" t="Include" />
-            <e p="Event.cs" t="Include" />
-            <e p="EventAdmins.cs" t="Include" />
-            <e p="EventBannedUsers.cs" t="Include" />
-            <e p="EventImage.cs" t="Include" />
-            <e p="EventParticipants.cs" t="Include" />
-            <e p="EventParticipationRequest.cs" t="Include" />
-            <e p="EventPost.cs" t="Include" />
-            <e p="EventPostLikes.cs" t="Include" />
-            <e p="FamilyStatus.cs" t="Include" />
-            <e p="Friend.cs" t="Include" />
-            <e p="FriendRequest.cs" t="Include" />
-            <e p="FriendshipRecommendation.cs" t="Include" />
-            <e p="FriendyContext.cs" t="Include" />
-            <e p="Gender.cs" t="Include" />
-            <e p="Image.cs" t="Include" />
-            <e p="Interest.cs" t="Include" />
-            <e p="MainComment.cs" t="Include" />
-            <e p="MainCommentResponse.cs" t="Include" />
-            <e p="MaritalStatus.cs" t="Include" />
-            <e p="Post.cs" t="Include" />
-            <e p="PostLike.cs" t="Include" />
-            <e p="Religion.cs" t="Include" />
-            <e p="ResponseToComment.cs" t="Include" />
-            <e p="ResponseToMainCommentResponse.cs" t="Include" />
-            <e p="Session.cs" t="Include" />
-            <e p="SmokingAttitude.cs" t="Include" />
-            <e p="User.cs" t="Include" />
-            <e p="UserAdditionalInfo.cs" t="Include" />
-            <e p="UserEvents.cs" t="Include" />
-            <e p="UserFriendship.cs" t="Include" />
-            <e p="UserImage.cs" t="Include" />
-            <e p="UserInterests.cs" t="Include" />
-            <e p="UserPost.cs" t="Include" />
-          </e>
-          <e p="Program.cs" t="Include" />
-          <e p="Repositories" t="Include">
-            <e p="EntityDatabaseTransaction.cs" t="Include" />
-            <e p="IRepositoryBase.cs" t="Include" />
-            <e p="IRepositoryWrapper.cs" t="Include" />
-            <e p="RepositoryBase.cs" t="Include" />
-            <e p="RepositoryServices" t="Include">
-              <e p="Interfaces" t="Include">
-                <e p="User" t="Include">
-                  <e p="IUserSearchingService.cs" t="Include" />
-                </e>
-              </e>
-              <e p="User" t="Include">
-                <e p="UserSearchingService.cs" t="Include" />
-              </e>
-            </e>
-            <e p="RepositoryWrapper.cs" t="Include" />
-          </e>
-          <e p="ServiceExtensions.cs" t="Include" />
-          <e p="SignalR" t="Include">
-            <e p="Hubs" t="Include">
-              <e p="DialogHub.cs" t="Include" />
-              <e p="PostHub.cs" t="Include" />
-              <e p="ProfileHub.cs" t="Include" />
-              <e p="UserStatusHub.cs" t="Include" />
-            </e>
-            <e p="Services" t="Include">
-              <e p="DialogNotifier.cs" t="Include" />
-            </e>
-          </e>
-          <e p="Startup.cs" t="Include" />
+          <e p="RepositoryWrapper.cs" t="Include" />
         </e>
+        <e p="ServiceExtensions.cs" t="Include" />
+        <e p="shared" t="Include">
+          <e p="Dtos" t="Include">
+            <e p="UserDto.cs" t="Include" />
+          </e>
+          <e p="FriendshipStatus.cs" t="Include" />
+        </e>
+        <e p="SignalR" t="Include">
+          <e p="Hubs" t="Include">
+            <e p="DialogHub.cs" t="Include" />
+            <e p="PostHub.cs" t="Include" />
+            <e p="ProfileHub.cs" t="Include" />
+            <e p="UserStatusHub.cs" t="Include" />
+          </e>
+          <e p="Services" t="Include">
+            <e p="DialogNotifier.cs" t="Include" />
+          </e>
+        </e>
+        <e p="Startup.cs" t="Include" />
         <e p="wwwroot" t="Include">
           <e p="EventAvatar" t="Include">
             <e p="1" t="Include">
@@ -1581,6 +471,22 @@
           </e>
         </e>
       </e>
+      <e p="BE.DataFiller" t="IncludeRecursive">
+        <e p="BE.DataFiller.csproj" t="IncludeRecursive" />
+        <e p="bin" t="ExcludeRecursive" />
+        <e p="cities.json" t="Include" />
+        <e p="obj" t="ExcludeRecursive">
+          <e p="Debug" t="Include">
+            <e p="netcoreapp2.2" t="Include">
+              <e p="BE.DataFiller.AssemblyInfo.cs" t="Include" />
+            </e>
+          </e>
+        </e>
+        <e p="PolishCitiesFiller.cs" t="Include" />
+        <e p="Program.cs" t="Include" />
+        <e p="user-data.json" t="Include" />
+        <e p="UserDataFiller.cs" t="Include" />
+      </e>
       <e p="BE.sln" t="IncludeFlat" />
       <e p="BE.UnitTests" t="IncludeRecursive">
         <e p="BE.UnitTests.csproj" t="IncludeRecursive" />
@@ -1595,6 +501,19 @@
           </e>
         </e>
         <e p="UserPostTests.cs" t="Include" />
+      </e>
+      <e p="BE.UnitTests.Xunit" t="IncludeRecursive">
+        <e p="BE.UnitTests.Xunit.csproj" t="IncludeRecursive" />
+        <e p="bin" t="ExcludeRecursive" />
+        <e p="Helpers.cs" t="Include" />
+        <e p="obj" t="ExcludeRecursive">
+          <e p="Debug" t="Include">
+            <e p="netcoreapp2.2" t="Include">
+              <e p="BE.UnitTests.Xunit.AssemblyInfo.cs" t="Include" />
+            </e>
+          </e>
+        </e>
+        <e p="SQLServer_UserSearchTests.cs" t="Include" />
       </e>
       <e p="packages" t="ExcludeRecursive" />
     </e>
