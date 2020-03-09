@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using BE.Features.Friendship.Dtos;
+using BE.Features.Friendship.Helpers;
 using BE.Models;
 using BE.Repositories;
 using BE.Shared;
@@ -19,6 +20,7 @@ namespace BE.Features.Friendship.Services
         Task<IEnumerable<FriendDto>> FilterByKeywordAsync(int userId, string keyword);
         Task<IEnumerable<ExemplaryFriendDto>> GetExemplaryByUserIdAsync(int userId);
         Task<FriendshipStatus> GetFriendshipStatus(int id, int issuerId);
+        Task ConfirmRequestAsync(int userId, int issuerId);
     }
 
     public class UserFriendshipService : IUserFriendshipService
@@ -80,10 +82,18 @@ namespace BE.Features.Friendship.Services
             {
                 return FriendshipStatus.FRIEND;
             }
-            var requestStatus =
-                await _repository.FriendRequest.GetStatusByUserIds(id, issuerId);
+            bool requestStatus = _repository.FriendRequest.GetStatusByUserIds(id, issuerId);
             if (requestStatus) return FriendshipStatus.REQUEST_SENT;
-            else return FriendshipStatus.NOT_FRIEND;
+            return FriendshipStatus.NOT_FRIEND;
+        }
+
+        public async Task ConfirmRequestAsync(int userId, int issuerId)
+        {
+            bool status = _repository.FriendRequest.GetStatusByUserIds(userId, issuerId);
+            if (!status) throw new FriendshipRequestNotFound();
+            await _repository.UserFriendship.AddNewAsync(userId, issuerId);
+            await _repository.Chat.Add(userId, issuerId);
+            await _repository.SaveAsync();
         }
 
         private IEnumerable<FriendDto> ConvertFriendshipEnumerable

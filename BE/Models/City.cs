@@ -8,6 +8,7 @@ namespace BE.Models
         public City()
         {
             District = new HashSet<District>();
+            Event = new HashSet<Event>();
             User = new HashSet<User>();
         }
 
@@ -19,6 +20,7 @@ namespace BE.Models
 
         public virtual Voivodeship Voivodeship { get; set; }
         public virtual ICollection<District> District { get; set; }
+        public virtual ICollection<Event> Event { get; set; }
         public virtual ICollection<User> User { get; set; }
     }
 }

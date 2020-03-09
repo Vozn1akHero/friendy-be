@@ -11,9 +11,9 @@ namespace BE.Helpers
     [AttributeUsage(AttributeTargets.Class | AttributeTargets.Method, AllowMultiple =
         true)]
     public class AuthorizeEventAdminInPostController : Attribute,
-        IAsyncAuthorizationFilter
+        IAuthorizationFilter
     {
-        public async Task OnAuthorizationAsync(AuthorizationFilterContext context)
+        public void OnAuthorization(AuthorizationFilterContext context)
         {
             var repository =
                 (IRepositoryWrapper) context.HttpContext.RequestServices.GetService(
@@ -21,7 +21,7 @@ namespace BE.Helpers
             var eventId = Convert.ToInt32(context.HttpContext.GetRouteData().Values
                 .GetValueOrDefault("eventId"));
             var userId = Convert.ToInt32(context.HttpContext.Request.Headers["userId"]);
-            var res = await repository.EventAdmins.IsUserAdminById(eventId, userId);
+            var res = repository.EventAdmins.IsUserAdminById(eventId, userId);
             if (!res) context.Result = new ForbidResult();
         }
     }

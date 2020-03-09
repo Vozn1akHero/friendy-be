@@ -15,16 +15,15 @@ namespace BE.Features.Event.Repositories
         {
         }
 
-        public async Task<IEnumerable<TType>> SelectWithPaginationAsync<TType>(
+        public async Task<IEnumerable<EventImage>> SelectWithPaginationAsyncExceptEventData(
             int eventId,
-            int
-                page, Expression<Func<EventImage, TType>> selector)
+            int page)
         {
             var length = 25;
             return await FindByCondition(e => e.EventId == eventId)
                 .Skip((page - 1) * length)
                 .Take(length)
-                .Select(selector)
+                .Include(e=>e.Image)
                 .ToListAsync();
         }
 
@@ -45,6 +44,16 @@ namespace BE.Features.Event.Repositories
                 ImageId = photoId
             });
             await SaveAsync();
+        }
+
+        public EventImage GetById(int id)
+        {
+            return FindByCondition(e => e.Id == id).SingleOrDefault();
+        }
+
+        public void DeleteByEntity(EventImage image)
+        {
+            Delete(image);
         }
     }
 }

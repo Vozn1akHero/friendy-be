@@ -23,7 +23,6 @@ namespace BE.Features.Chat.Repositories
                 SecondParticipantId = secondParticipantId
             };
             Create(newChat);
-            await SaveAsync();
         }
 
         public async Task<TType> GetByInterlocutorsIdentifiers<TType>(

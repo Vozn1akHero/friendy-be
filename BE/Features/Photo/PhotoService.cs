@@ -12,21 +12,23 @@ namespace BE.Features.Photo
 {
     public interface IPhotoService
     {
-        Task<IEnumerable<PhotoDto>> GetUserPhotoRangeAsync(int authorId, int
+        Task<IEnumerable<UserImage>> GetUserPhotoRangeAsync(int authorId, int
             startIndex, int length);
 
-        Task<IEnumerable<PhotoDto>> GetUserPhotoRangeWithPaginationAsync(int userId,
-            int page);
+        Task<IEnumerable<UserImage>> GetUserPhotoRangeWithPaginationAsync(int userId,
+            int page, int length);
 
-        Task<IEnumerable<PhotoDto>> GetEventPhotoRangeAsync(int
+        Task<IEnumerable<EventImage>> GetEventPhotoRangeAsync(int
             authorId, int
             startIndex, int length);
 
-        Task<IEnumerable<PhotoDto>> GetEventPhotosWithPaginationAsync(int
+        Task<IEnumerable<EventImage>> GetEventPhotosWithPaginationAsync(int
             eventId, int page);
 
         Task<Image> AddEventPhotoAsync(int eventId, IFormFile file);
         Task<Image> AddUserPhotoAsync(int authorId, IFormFile file);
+        Task DeleteUserPhotoAsync(UserImage userImage);
+        Task DeleteEventPhotoAsync(EventImage image);
     }
 
     public class PhotoService : IPhotoService
@@ -41,52 +43,38 @@ namespace BE.Features.Photo
             _imageSaver = imageSaver;
         }
 
-        public async Task<IEnumerable<PhotoDto>> GetUserPhotoRangeAsync(int
+        public async Task<IEnumerable<UserImage>> GetUserPhotoRangeAsync(int
             authorId, int
             startIndex, int length)
         {
             var images = await _repository.UserPhoto.GetRangeAsync(authorId,
                 startIndex, length);
-            var photoDtos = images.Select(e => new PhotoDto
-            {
-                Path = e.IdNavigation.Path
-            }).ToList();
-            return photoDtos;
+            
+            return images;
         }
 
-        public async Task<IEnumerable<PhotoDto>> GetEventPhotoRangeAsync(int
+        public async Task<IEnumerable<EventImage>> GetEventPhotoRangeAsync(int
             authorId, int
             startIndex, int length)
         {
             var images = await _repository.EventPhoto.GetRangeAsync(authorId,
                 startIndex, length);
-            var photoDtos = images.Select(e => new PhotoDto
-            {
-                Path = e.Image.Path
-            }).ToList();
-            return photoDtos;
+            return images;
         }
 
-        public async Task<IEnumerable<PhotoDto>> GetUserPhotoRangeWithPaginationAsync(int
-            userId, int page)
+        public async Task<IEnumerable<UserImage>> GetUserPhotoRangeWithPaginationAsync(int
+            userId, int page, int length)
         {
             var images = await _repository.UserPhoto
-                .GetRangeWithPaginationAsync(userId, page);
-            var photoDtos = images.Select(e => new PhotoDto
-            {
-                Path = e.IdNavigation.Path
-            }).ToList();
-            return photoDtos;
+                .GetRangeWithPaginationExceptUserDataAsync(userId, page, length);
+            return images;
         }
 
-        public async Task<IEnumerable<PhotoDto>> GetEventPhotosWithPaginationAsync(int
+        public async Task<IEnumerable<EventImage>> GetEventPhotosWithPaginationAsync(int
             eventId, int page)
         {
-            var images = await _repository.EventPhoto.SelectWithPaginationAsync(eventId,
-                page, e => new PhotoDto
-                {
-                    Path = e.Image.Path
-                });
+            var images = await _repository.EventPhoto.SelectWithPaginationAsyncExceptEventData(eventId,
+                page);
             return images;
         }
 
@@ -113,14 +101,25 @@ namespace BE.Features.Photo
                 Path = path,
                 PublishDate = DateTime.Now
             };
-            var createdImage = await _repository.Photo.Add(image);
             var userPhoto = new UserImage
             {
                 UserId = authorId,
-                ImageId = createdImage.Id
+                Image = image
             };
             await _repository.UserPhoto.Add(userPhoto);
-            return createdImage;
+            return image;
+        }
+
+        public async Task DeleteUserPhotoAsync(UserImage userImage)
+        {
+            _repository.UserPhoto.DeleteByEntity(userImage);
+            await _repository.UserPhoto.SaveAsync();
+        }
+
+        public async Task DeleteEventPhotoAsync(EventImage image)
+        {
+            _repository.EventPhoto.DeleteByEntity(image);
+            await _repository.EventPhoto.SaveAsync();
         }
     }
 }

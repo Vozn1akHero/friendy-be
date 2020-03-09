@@ -4,9 +4,11 @@ using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using BE.Features.Chat.Dtos;
+using BE.Features.Chat.Helpers;
 using BE.Helpers;
 using BE.Models;
 using BE.Repositories;
+using Microsoft.AspNetCore.Http;
 
 namespace BE.Features.Chat.Services
 {
@@ -20,7 +22,7 @@ namespace BE.Features.Chat.Services
         IEnumerable<ChatLastMessageDto> GetLastMessageByReceiverIdWithPagination(
             int receiverId, int page);
 
-        Task<ChatMessage> CreateAndReturnMessageAsync(NewMessageDto chatMessage,
+        Task<ChatMessage> CreateAndReturnMessageAsync(string text, IFormFile image,
             int chatId, int authorId, int receiverId);
 
         Task<InterlocutorsDto> GetByInterlocutorsIdentifiers(int firstParticipantId,
@@ -58,7 +60,8 @@ namespace BE.Features.Chat.Services
             var chatMessages = _repository.ChatMessages
                 .GetMessageByReceiverIdWithPagination(receiverId,
                     issuerId, page, ChatMessageDto.Selector);
-            return chatMessages;
+            var reversedChatMessages = chatMessages.Reverse();
+            return reversedChatMessages;
         }
 
         public IEnumerable<ChatLastMessageDto>
@@ -68,52 +71,47 @@ namespace BE.Features.Chat.Services
                 .GetLastMessagesByReceiverIdWithPagination(receiverId, page,
                     ChatLastMessageDto.Selector(receiverId));
             var sortedMessages = msgs.GroupBy(x => x.ChatId,
-                (key, g) => g.OrderBy(e => e.ChatId).First());
+                (key, g) => g.OrderBy(e => e.ChatId).First()).ToList();
             return sortedMessages;
         }
 
         public async Task<ChatMessage> CreateAndReturnMessageAsync(
-            NewMessageDto chatMessage,
+            string text, IFormFile image,
             int chatId, int authorId, int receiverId)
         {
+            if(text == null && image == null) throw new EmptyMessageException();
+            if (text == null && image != null) text = "";
             string imagePath = null;
-            if (chatMessage.File != null)
+            if (image != null)
             {
-                imagePath = await _imageSaver.SaveAndReturnImagePath(chatMessage.File,
+                imagePath = await _imageSaver.SaveAndReturnImagePath(image,
                     "ChatPhoto", chatId);
-                var image = new Image
+                var newImage = new Image
                 {
                     Path = imagePath,
                     PublishDate = DateTime.Now
                 };
-                await _repository.Photo.Add(image);
+                await _repository.Photo.Add(newImage);
             }
-
             var newMessage = new ChatMessage
             {
-                Content = chatMessage.Content,
+                Content = text,
                 ImagePath = imagePath,
                 UserId = authorId,
                 Date = DateTime.Now,
                 ReceiverId = receiverId
             };
-            _repository.ChatMessage.Add(newMessage);
-            var chatMessages = new ChatMessages
-            {
-                ChatId = chatId,
-                MessageId = newMessage.Id
-            };
-            _repository.ChatMessages.Add(chatMessages);
+            _repository.ChatMessages.Add(chatId, newMessage);
             await _repository.SaveAsync();
             return newMessage;
         }
 
         public async Task<InterlocutorsDto> GetByInterlocutorsIdentifiers(int 
-        firstParticipantId,
-            int secondParticipantId)
+        firstParticipantId, int secondParticipantId)
         {
-            return await _repository.Chat.GetByInterlocutorsIdentifiers(
+            var data = await _repository.Chat.GetByInterlocutorsIdentifiers(
                 firstParticipantId, secondParticipantId, InterlocutorsDto.Selector());
+            return data;
         }
     }
 }

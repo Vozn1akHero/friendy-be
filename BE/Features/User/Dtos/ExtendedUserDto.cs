@@ -12,15 +12,13 @@ namespace BE.Features.User.Dtos
         public string Name { get; set; }
         public string Surname { get; set; }
         public string Email { get; set; }
-        public string City { get; set; }
+        public City City { get; set; }
         public int GenderId { get; set; }
         public DateTime Birthday { get; set; }
         public string Avatar { get; set; }
         public string ProfileBg { get; set; }
         public string Status { get; set; }
         public int? EducationId { get; set; }
-        public string School { get; set; }
-        public bool IsOnline { get; set; }
         public Session Session { get; set; }
         public int? MaritalStatusId { get; set; }
         public int? ReligionId { get; set; }
@@ -33,7 +31,7 @@ namespace BE.Features.User.Dtos
             return e => new ExtendedUserDto
             {
                 Id = e.Id,
-                City = e.City.Title,
+                City = e.City,
                 Name = e.Name,
                 Surname = e.Surname,
                 Email = e.Email,
@@ -42,8 +40,6 @@ namespace BE.Features.User.Dtos
                 Avatar = e.Avatar,
                 ProfileBg = e.ProfileBg,
                 Status = e.Status,
-                /*IsOnline = e.Session.ConnectionStart != null & e
-                               .Session.ConnectionEnd == null,*/
                 Session = e.Session,
                 EducationId = e.EducationId,
                 MaritalStatusId = e.AdditionalInfo.MaritalStatus.Id,

@@ -1,5 +1,6 @@
 using System;
 using System.Linq.Expressions;
+using BE.Models;
 
 namespace BE.Features.Event.Dtos
 {
@@ -9,7 +10,7 @@ namespace BE.Features.Event.Dtos
         public string Title { get; set; }
         public string Street { get; set; }
         public string StreetNumber { get; set; }
-        public string City { get; set; }
+        public City City { get; set; }
         public decimal EntryPrice { get; set; }
         public int CreatorId { get; set; }
         public string Description { get; set; }

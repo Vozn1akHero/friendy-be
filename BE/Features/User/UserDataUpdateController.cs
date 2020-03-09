@@ -35,6 +35,7 @@ namespace BE.Features.User
             [FromHeader(Name = "userId")] int userId)
         {
             await _userDataUpdateService.UpdateBasicDataById(userId, user.Name, user.Surname,
+                user.CityId, user.GenderId,
                 user.Birthday);
             return Ok();
         }

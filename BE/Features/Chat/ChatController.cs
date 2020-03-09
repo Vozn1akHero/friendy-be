@@ -1,9 +1,11 @@
 using System;
 using System.Threading.Tasks;
 using BE.Features.Chat.Dtos;
+using BE.Features.Chat.Helpers;
 using BE.Features.Chat.Services;
 using BE.SignalR.Services;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BE.Features.Chat
@@ -21,16 +23,7 @@ namespace BE.Features.Chat
             _dialogNotifier = dialogNotifier;
             _chatService = chatService;
         }
-
-        [HttpPost]
-        [Authorize]
-        [Route("create")]
-        public async Task<IActionResult> Create()
-        {
-            return Ok();
-        }
-
-
+        
         [HttpGet]
         [Authorize]
         [Route("last-messages/paginate")]
@@ -50,6 +43,7 @@ namespace BE.Features.Chat
             [FromHeader(Name = "userId")] int userId)
         {
             var res = await _chatService.GetByInterlocutorsIdentifiers(to, userId);
+            if (res == null) return NotFound();
             return Ok(res);
         }
 
@@ -69,24 +63,31 @@ namespace BE.Features.Chat
         [Route("message/{chatId}/{receiverId}")]
         public async Task<IActionResult> AddNewMessage(int receiverId,
             int chatId,
-            [FromBody] NewMessageDto chatMessage,
+            [FromForm(Name = "text")] string text,
+            [FromForm(Name = "image")] IFormFile file,
             [FromHeader(Name = "userId")] int userId)
         {
-            var newMessage = await _chatService.CreateAndReturnMessageAsync(chatMessage,
-                chatId,
-                userId, receiverId);
-            await _dialogNotifier.SendNewMessageAsync(Convert.ToString(chatId), new
-                CreatedMessageDto
-                {
-                    Content = newMessage.Content,
-                    Date = newMessage.Date,
-                    ImagePath = newMessage.ImagePath,
-                    UserId = newMessage.UserId
-                });
-            var obj = _chatService.GetLastChatMessageByChatId(chatId, receiverId);
-            await _dialogNotifier.SendNewExpandedMessageAsync(Convert.ToString
-                (receiverId), obj);
-            return CreatedAtAction("AddNewMessage", newMessage);
+            try
+            {
+                var newMessage = await _chatService.CreateAndReturnMessageAsync(text, file, chatId,
+                    userId, receiverId);
+                await _dialogNotifier.SendNewMessageAsync(Convert.ToString(chatId), new
+                    CreatedMessageDto
+                    {
+                        Content = newMessage.Content,
+                        Date = newMessage.Date,
+                        ImagePath = newMessage.ImagePath,
+                        UserId = newMessage.UserId
+                    });
+                var obj = _chatService.GetLastChatMessageByChatId(chatId, receiverId);
+                await _dialogNotifier.SendNewExpandedMessageAsync(Convert.ToString
+                    (chatId), obj);
+                return CreatedAtAction("AddNewMessage", newMessage);
+            }
+            catch (EmptyMessageException)
+            {
+                return UnprocessableEntity("MESSAGE CANNOT BE EMPTY");
+            }
         }
     }
 }

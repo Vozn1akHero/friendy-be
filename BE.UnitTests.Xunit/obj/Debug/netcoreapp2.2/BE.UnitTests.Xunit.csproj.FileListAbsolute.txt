@@ -1,16 +1,4 @@
-D:\Projects\Praca dyplomowa\BE\BE.UnitTests.Xunit\bin\Debug\netcoreapp2.2\Frontend\angular.json
-D:\Projects\Praca dyplomowa\BE\BE.UnitTests.Xunit\bin\Debug\netcoreapp2.2\Frontend\e2e\tsconfig.e2e.json
-D:\Projects\Praca dyplomowa\BE\BE.UnitTests.Xunit\bin\Debug\netcoreapp2.2\Frontend\package-lock.json
-D:\Projects\Praca dyplomowa\BE\BE.UnitTests.Xunit\bin\Debug\netcoreapp2.2\Frontend\package.json
-D:\Projects\Praca dyplomowa\BE\BE.UnitTests.Xunit\bin\Debug\netcoreapp2.2\Frontend\proxy.conf.json
-D:\Projects\Praca dyplomowa\BE\BE.UnitTests.Xunit\bin\Debug\netcoreapp2.2\Frontend\src\tsconfig.app.json
-D:\Projects\Praca dyplomowa\BE\BE.UnitTests.Xunit\bin\Debug\netcoreapp2.2\Frontend\src\tsconfig.spec.json
-D:\Projects\Praca dyplomowa\BE\BE.UnitTests.Xunit\bin\Debug\netcoreapp2.2\Frontend\src\tslint.json
-D:\Projects\Praca dyplomowa\BE\BE.UnitTests.Xunit\bin\Debug\netcoreapp2.2\Frontend\tsconfig.json
-D:\Projects\Praca dyplomowa\BE\BE.UnitTests.Xunit\bin\Debug\netcoreapp2.2\Frontend\tslint.json
 D:\Projects\Praca dyplomowa\BE\BE.UnitTests.Xunit\bin\Debug\netcoreapp2.2\Properties\launchSettings.json
-D:\Projects\Praca dyplomowa\BE\BE.UnitTests.Xunit\bin\Debug\netcoreapp2.2\src\appsettings.Development.json
-D:\Projects\Praca dyplomowa\BE\BE.UnitTests.Xunit\bin\Debug\netcoreapp2.2\src\appsettings.json
 D:\Projects\Praca dyplomowa\BE\BE.UnitTests.Xunit\bin\Debug\netcoreapp2.2\xunit.runner.visualstudio.dotnetcore.testadapter.dll
 D:\Projects\Praca dyplomowa\BE\BE.UnitTests.Xunit\bin\Debug\netcoreapp2.2\xunit.runner.reporters.netcoreapp10.dll
 D:\Projects\Praca dyplomowa\BE\BE.UnitTests.Xunit\bin\Debug\netcoreapp2.2\xunit.runner.utility.netcoreapp10.dll
@@ -31,3 +19,5 @@ D:\Projects\Praca dyplomowa\BE\BE.UnitTests.Xunit\obj\Debug\netcoreapp2.2\BE.Uni
 D:\Projects\Praca dyplomowa\BE\BE.UnitTests.Xunit\obj\Debug\netcoreapp2.2\BE.UnitTests.Xunit.csproj.CopyComplete
 D:\Projects\Praca dyplomowa\BE\BE.UnitTests.Xunit\obj\Debug\netcoreapp2.2\BE.UnitTests.Xunit.dll
 D:\Projects\Praca dyplomowa\BE\BE.UnitTests.Xunit\obj\Debug\netcoreapp2.2\BE.UnitTests.Xunit.pdb
+D:\Projects\Praca dyplomowa\BE\BE.UnitTests.Xunit\bin\Debug\netcoreapp2.2\appsettings.Development.json
+D:\Projects\Praca dyplomowa\BE\BE.UnitTests.Xunit\bin\Debug\netcoreapp2.2\appsettings.json

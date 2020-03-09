@@ -12,7 +12,7 @@ namespace BE.Features.Friendship.Repositories
         Task<List<FriendRequest>> GetReceivedByUserId(int userId);
         Task<List<FriendRequest>> GetSentByUserId(int userId);
         Task DeleteByEntity(FriendRequest friendRequest);
-        Task<bool> GetStatusByUserIds(int firstId, int secondId);
+        bool GetStatusByUserIds(int firstId, int secondId);
         Task<List<SentFriendRequestDto>> GetSentByUserIdWithDto(int userId);
         Task<List<ReceivedFriendRequestDto>> GetReceivedByUserIdWithDto(int userId);
     }

@@ -1,5 +1,7 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
 using BE.Features.Event.Dtos;
 using BE.Models;
@@ -15,31 +17,6 @@ namespace BE.Features.Event.Repositories
         {
         }
 
-        public async Task CreateAndReturn(int eventId, int userId)
-        {
-            Create(new EventAdmins
-            {
-                EventId = eventId,
-                UserId = userId
-            });
-            await SaveAsync();
-        }
-
-        public async Task<List<EventAdminDto>> GetByEventIdAsync(int eventId)
-        {
-            return await FindByCondition(e => e.EventId == eventId)
-                .Select(e => new EventAdminDto
-                {
-                    Id = e.UserId,
-                    IsEventCreator = e.Event.CreatorId == e.UserId,
-                    Name = e.User.Name,
-                    Surname = e.User.Surname,
-                    City = e.User.City.Title,
-                    GenderId = e.User.GenderId,
-                    Avatar = e.User.Avatar
-                }).ToListAsync();
-        }
-
         public async Task DeleteByEventIdAndAdminId(int eventId, int adminId)
         {
             var foundEntity =
@@ -52,40 +29,28 @@ namespace BE.Features.Event.Repositories
             }
         }
 
-        public async Task<List<EventDto>> GetShortenedAdministeredEventsByUserId(
-            int userId)
+        public IEnumerable<TType> FilterRangeByEventIdAndKeyword<TType>(int eventId, string keyword, int page, int length,
+            Expression<Func<EventAdmins, TType>> selector)
         {
-            var events = await FindByCondition(e => e.UserId == userId)
-                .Select(e => new EventDto
-                {
-                    Id = e.EventId,
-                    Title = e.Event.Title,
-                    Street = e.Event.Street,
-                    StreetNumber = e.Event.StreetNumber,
-                    City = e.Event.City,
-                    AvatarPath = e.Event.Avatar,
-                    ParticipantsAmount = e.Event.ParticipantsAmount,
-                    CurrentParticipantsAmount = e.Event.EventParticipants.Count,
-                    Date = e.Event.Date
-                })
-                .ToListAsync();
-
-            return events;
+            return FindByCondition(e => e.EventId == eventId && (e.User.Name + e.User.Surname).Contains(keyword))
+                .Select(selector)
+                .Skip((page - 1) * length)
+                .Take(length)
+                .ToList();
         }
 
-        public Task<bool> IsUserAdminById(int eventId, int userId)
+        public IEnumerable<TType> GetRangeByEventIdWithPagination<TType>(int eventId, int page, int length, Expression<Func<EventAdmins, TType>> selector)
         {
-            return Task.Run(() =>
-                ExistsByCondition(e => e.EventId == eventId && e.UserId == userId));
+            return FindByCondition(e => e.EventId == eventId)
+                .Select(selector)
+                .Skip((page - 1) * length)
+                .Take(length)
+                .ToList();
         }
 
-        public async Task<List<Models.Event>> FilterAdministeredEvents(int userId,
-            string keyword)
+        public bool IsUserAdminById(int eventId, int userId)
         {
-            return await FindByCondition(e =>
-                    e.UserId == userId && e.Event.Title.Contains(keyword))
-                .Select(e => e.Event)
-                .ToListAsync();
+            return ExistsByCondition(e => e.EventId == eventId && e.UserId == userId);
         }
     }
 }

@@ -9,7 +9,10 @@ namespace BE.Features.User.Services
     public interface IUserDataUpdateService
     {
         Task UpdateEducationDataById(int id, int? educationId);
-        Task UpdateBasicDataById(int id, string name, string surname, DateTime birthday);
+        Task UpdateBasicDataById(int id, string name, string surname,
+            int cityId,
+            int genderId,
+            DateTime birthday);
 
         Task UpdateAdditionalDataById(int id, int? religionId, int? alcoholAttitudeId,
             int? maritalStatusId, int? smokingAttitudeId);
@@ -30,12 +33,16 @@ namespace BE.Features.User.Services
         }
         
          public async Task UpdateBasicDataById(int id, string name, string surname,
+             int cityId,
+             int genderId,
             DateTime birthday)
         {
             var user = await _repository.User.GetByIdAsync(id);
             user.Name = name;
             user.Surname = surname;
             user.Birthday = birthday;
+            user.CityId = cityId;
+            user.GenderId = genderId;
             _friendyContext.Entry(user).State = EntityState.Modified;
             await _friendyContext.SaveChangesAsync();
         }

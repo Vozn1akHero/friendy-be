@@ -35,13 +35,12 @@ namespace BE.Features.Event.Services
         public async Task<EventParticipationRequestResponse> CreateAndReturnAsync(
             int issuerId, int eventId)
         {
-            var isEventAdmin =
-                await _repository.EventAdmins.IsUserAdminById(eventId, issuerId);
+            var isEventAdmin =_repository.EventAdmins.IsUserAdminById(eventId, issuerId);
             if (isEventAdmin)
             {
                 var newParticipant = new EventParticipants
                     {EventId = eventId, ParticipantId = issuerId};
-                _repository.EventParticipants.AddParticipant(newParticipant);
+                _repository.EventParticipants.Create(newParticipant);
                 await _repository.SaveAsync();
                 return new EventParticipationRequestResponse
                 {
@@ -86,7 +85,7 @@ namespace BE.Features.Event.Services
         {
             //var req = _repository.EventParticipationRequest.FindById(requestId);
             _repository.EventParticipationRequest.DeleteByIssuerId(issuerId, eventId);
-            _repository.EventParticipants.AddParticipant(new EventParticipants()
+            _repository.EventParticipants.Create(new EventParticipants()
             {
                 ParticipantId = issuerId,
                 EventId = eventId

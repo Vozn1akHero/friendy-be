@@ -20,6 +20,8 @@ namespace BE.Features.Chat.Dtos
                     Name = e.FirstParticipant.Name,
                     Avatar = e.FirstParticipant.Avatar,
                     Surname = e.FirstParticipant.Surname,
+                    Birthday = e.FirstParticipant.Birthday,
+                    City = e.FirstParticipant.City,
                     Session = e.FirstParticipant.Session
                 },
                 SecondInterlocutor = new Models.User
@@ -28,6 +30,8 @@ namespace BE.Features.Chat.Dtos
                     Name = e.SecondParticipant.Name,
                     Avatar = e.SecondParticipant.Avatar,
                     Surname = e.SecondParticipant.Surname,
+                    Birthday = e.SecondParticipant.Birthday,
+                    City = e.SecondParticipant.City,
                     Session = e.SecondParticipant.Session
                 }
             };

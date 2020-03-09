@@ -24,13 +24,16 @@ namespace BE.Features.Event.Commands.Event.EventCreation
             request.Event.Background =
                 "wwwroot/EventBackground/default-event-background.png";
             var eventData = await _repository.Event.CreateAndReturn(request.Event);
-            _repository.EventParticipants.AddParticipant(new EventParticipants
+            _repository.EventParticipants.Create(new EventParticipants
             {
                 EventId = eventData.Id,
                 ParticipantId = request.CreatorId
             });
-            await _repository.EventAdmins.CreateAndReturn(eventData.Id,
-                request.CreatorId);
+            _repository.EventAdmins.Create(new EventAdmins
+            {
+                EventId = eventData.Id,
+                UserId = request.CreatorId
+            });
             await _repository.SaveAsync();
             return Unit.Value;
         }

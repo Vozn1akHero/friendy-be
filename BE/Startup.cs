@@ -51,8 +51,6 @@ namespace BE
                     path));
 
             //services.AddDirectoryBrowser();
-
-            var d = Configuration.GetValue<string>("1");
             var key = Encoding.ASCII.GetBytes(
                 Configuration.GetValue<string>("AppSettings:JWTSecret"));
 

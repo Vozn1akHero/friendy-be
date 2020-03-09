@@ -18,12 +18,9 @@ namespace BE.Features.Post
     {
         private readonly IImageSaver _imageSaver;
         private readonly IMediator _mediator;
-        private readonly IRepositoryWrapper _repository;
 
-        public EventPostController(IRepositoryWrapper repository,
-            IImageSaver imageSaver, IMediator mediator)
+        public EventPostController(IImageSaver imageSaver, IMediator mediator)
         {
-            _repository = repository;
             _imageSaver = imageSaver;
             _mediator = mediator;
         }
@@ -39,18 +36,18 @@ namespace BE.Features.Post
         {
             var imagePath = await _imageSaver
                 .SaveAndReturnImagePath(image, "EventPost", userId);
-            var newPost = new Models.Post
-            {
-                Content = content, ImagePath = imagePath, Date = DateTime.Now
-            };
-            await _repository.Post.CreateAsync(newPost);
-            var newEventPost = new EventPost
-            {
-                EventId = eventId, PostId = newPost.Id
-            };
             var newPostDto = await _mediator.Send(new CreateEventPostAndReturnDtoCommand
             {
-                EventPost = newEventPost
+                EventPost = new EventPost
+                {       
+                    EventId = eventId,
+                    Post = new Models.Post
+                    {
+                        Content = content,
+                        ImagePath = imagePath,
+                        Date = DateTime.Now
+                    }
+                }
             });
             return Ok(newPostDto);
         }
@@ -92,7 +89,7 @@ namespace BE.Features.Post
             [FromRoute(Name = "page")] int page,
             [FromRoute(Name = "eventId")] int eventId,
             [FromHeader(Name = "userId")] int userId)
-        {
+                        {
             var posts = await _mediator.Send(new GetEventPostsRangeWithPaginationQuery
             {
                 EventId = eventId,

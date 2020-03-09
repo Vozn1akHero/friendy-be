@@ -1,4 +1,6 @@
+using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
 using BE.Features.Event.Dtos;
 using BE.Models;
@@ -8,11 +10,12 @@ namespace BE.Features.Event.Repositories
 {
     public interface IEventAdminsRepository : IRepositoryBase<EventAdmins>
     {
-        Task CreateAndReturn(int eventId, int userId);
-        Task<List<EventAdminDto>> GetByEventIdAsync(int eventId);
         Task DeleteByEventIdAndAdminId(int eventId, int adminId);
-        Task<List<EventDto>> GetShortenedAdministeredEventsByUserId(int userId);
-        Task<List<Models.Event>> FilterAdministeredEvents(int userId, string keyword);
-        Task<bool> IsUserAdminById(int eventId, int userId);
+        IEnumerable<TType> FilterRangeByEventIdAndKeyword<TType>(int eventId,
+            string keyword, int page, int length,
+            Expression<Func<EventAdmins, TType>> selector);
+        IEnumerable<TType> GetRangeByEventIdWithPagination<TType>(int eventId, int page, int length,
+            Expression<Func<EventAdmins, TType>> selector);
+        bool IsUserAdminById(int eventId, int userId);
     }
 }

@@ -13,7 +13,8 @@ namespace BE.Features.Event.Repositories
         Task<TType> GetById<TType>(int id, Expression<Func<Models.Event,
             TType>> selector);
 
-        Task<IEnumerable<Models.Event>> SearchByKeyword(string keyword);
+        Task<IEnumerable<TType>> SearchByKeywordAsync<TType>(string keyword, int page, int size,
+            Expression<Func<Models.Event, TType>> selector);
         Task<bool> IsUserCreatorById(int id, int userId);
         Task<object> GetWithSelectedFields(int id, string[] selectedFields);
 

@@ -54,6 +54,9 @@
               <e p="ParticipantsBasicDataDto.cs" t="Include" />
               <e p="ParticipantsBasicDataSqlDto.cs" t="Include" />
             </e>
+            <e p="Helpers" t="Include">
+              <e p="EmptyMessageException.cs" t="Include" />
+            </e>
             <e p="Repositories" t="Include">
               <e p="ChatMessageRepository.cs" t="Include" />
               <e p="ChatMessagesRepository.cs" t="Include" />
@@ -123,7 +126,6 @@
               <e p="EventParticipantDetailedDto.cs" t="Include" />
               <e p="EventParticipantForListDto.cs" t="Include" />
               <e p="EventParticipationRequestDto.cs" t="Include" />
-              <e p="EventSearchDto.cs" t="Include" />
               <e p="ExemplaryEventParticipantDto.cs" t="Include" />
               <e p="NewAvatarDto.cs" t="Include" />
               <e p="NewBackgroundDto.cs" t="Include" />
@@ -170,6 +172,7 @@
               <e p="UserEventsRepository.cs" t="Include" />
             </e>
             <e p="Services" t="Include">
+              <e p="EventAdminService.cs" t="Include" />
               <e p="EventDataService.cs" t="Include" />
               <e p="EventParticipantService.cs" t="Include" />
               <e p="EventParticipationRequestService.cs" t="Include" />
@@ -186,6 +189,9 @@
               <e p="ShortenedFriendDto.cs" t="Include" />
             </e>
             <e p="FriendController.cs" t="Include" />
+            <e p="Helpers" t="Include">
+              <e p="FriendshipRequestNotFound.cs" t="Include" />
+            </e>
             <e p="Repositories" t="Include">
               <e p="FriendRepository.cs" t="Include" />
               <e p="FriendRequestRepository.cs" t="Include" />
@@ -213,18 +219,26 @@
               <e p="FriendshipRecommendationService.cs" t="Include" />
             </e>
           </e>
+          <e p="Helpers" t="Include">
+            <e p="LocationController.cs" t="Include" />
+            <e p="LocationService.cs" t="Include" />
+          </e>
           <e p="Photo" t="Include">
             <e p="Dtos" t="Include">
               <e p="PhotoDto.cs" t="Include" />
             </e>
             <e p="EventPhotoController.cs" t="Include" />
+            <e p="Helpers" t="Include">
+              <e p="AuthorizeImageCreator.cs" t="Include" />
+            </e>
             <e p="PhotoService.cs" t="Include" />
             <e p="Repositories" t="Include">
               <e p="IPhotoRepository.cs" t="Include" />
+              <e p="IUserPhotoRepository.cs" t="Include" />
               <e p="PhotoRepository.cs" t="Include" />
+              <e p="UserPhotoRepository.cs" t="Include" />
             </e>
             <e p="UserPhotoController.cs" t="Include" />
-            <e p="UserPhotoRepository.cs" t="Include" />
           </e>
           <e p="Post" t="Include">
             <e p="Dtos" t="Include">
@@ -243,12 +257,16 @@
             </e>
             <e p="Services" t="Include">
               <e p="EventPostService.cs" t="Include" />
+              <e p="IUserPostService.cs" t="Include" />
               <e p="UserPostService.cs" t="Include" />
             </e>
             <e p="UserPostController.cs" t="Include" />
           </e>
           <e p="Search" t="Include">
             <e p="Dtos" t="Include">
+              <e p="CommonEventDto.cs" t="Include" />
+              <e p="EventDto.cs" t="Include" />
+              <e p="EventSearchDto.cs" t="Include" />
               <e p="UserInterestDto.cs" t="Include" />
             </e>
             <e p="EventSearchController.cs" t="Include" />
@@ -271,7 +289,6 @@
             </e>
             <e p="Repositories" t="Include">
               <e p="ISessionRepository.cs" t="Include" />
-              <e p="IUserPhotoRepository.cs" t="Include" />
               <e p="IUserRepository.cs" t="Include" />
               <e p="SessionRepository.cs" t="Include" />
               <e p="UserRepository.cs" t="Include" />
@@ -424,6 +441,12 @@
         </e>
         <e p="Startup.cs" t="Include" />
         <e p="wwwroot" t="Include">
+          <e p="ChatPhoto" t="Include">
+            <e p="83171_0_39-14-99-FA-81-34-BB-31-D4-85-76-D8-65-58-E3-2D_obr.png" t="Include" />
+            <e p="83171_0_60-FD-52-98-2E-37-98-95-14-74-43-FE-3E-89-27-DC_obr.png" t="Include" />
+            <e p="83171_0_82-37-0A-3B-B9-80-B6-7A-3A-0B-48-BE-CD-E8-FA-89_obr.png" t="Include" />
+            <e p="83171_0_D2-42-A8-3F-FA-AF-ED-E7-6E-03-CE-CB-A9-2B-48-CC_obr.png" t="Include" />
+          </e>
           <e p="EventAvatar" t="Include">
             <e p="1" t="Include">
               <e p="44811218_506049489870700_5467995208966733824_n.png" t="Include" />
@@ -448,6 +471,13 @@
               <e p="4.jpg" t="Include" />
               <e p="5_74e77ec5c961e11e9962b10dd72b6e65_900.jpg" t="Include" />
             </e>
+            <e p="1_0_3C-D5-4A-92-98-64-5D-A4-8C-29-49-B2-99-D6-82-E2_4mn0udtift8z.jpg" t="Include" />
+            <e p="7_0_1D-64-A6-3D-F4-5D-8C-73-EB-16-2F-DC-5D-10-16-EB_4mn0udtift8z.jpg" t="Include" />
+            <e p="7_0_62-BC-2E-EA-E7-3C-7A-2A-59-3E-7A-B2-B9-DE-E5-DF_46338567_811860422479582_7939631742581735424_n.png" t="Include" />
+            <e p="7_0_B2-1E-EF-40-98-FC-18-A7-78-76-63-20-F8-04-5C-91_4mn0udtift8z.jpg" t="Include" />
+            <e p="7_0_DE-93-00-42-BD-F8-A9-74-36-35-83-4A-88-E4-31-C1_4mn0udtift8z.jpg" t="Include" />
+            <e p="7_0_FC-E8-38-31-E5-31-1A-6D-75-21-C7-C4-3A-5A-F1-BD_4mn0udtift8z.jpg" t="Include" />
+            <e p="7_0_FD-45-D8-2E-B0-41-37-0E-D8-01-34-4C-99-76-3C-90_46338567_811860422479582_7939631742581735424_n.png" t="Include" />
           </e>
           <e p="ProfileBackground" t="Include">
             <e p="7_185412012844811218_506049489870700_5467995208966733824_n.png" t="Include" />
@@ -464,6 +494,17 @@
             <e p="7_5597886214mn0udtift8z.jpg" t="Include" />
             <e p="7_7430601124mn0udtift8z.jpg" t="Include" />
             <e p="default-user-avatar.png" t="Include" />
+          </e>
+          <e p="UserPhotos" t="Include">
+            <e p="7_0_0E-3C-7F-BB-59-4D-05-DB-F6-01-64-3C-33-84-BC-AB_4mn0udtift8z.jpg" t="Include" />
+            <e p="7_0_20-4B-B4-8E-12-41-53-0D-54-ED-05-DC-41-2D-80-EA_46338567_811860422479582_7939631742581735424_n.png" t="Include" />
+            <e p="7_0_89-B7-AD-A4-76-20-EA-36-6F-A8-38-39-4D-04-BD-CA_4mn0udtift8z.jpg" t="Include" />
+            <e p="7_0_C3-B5-43-42-72-A4-0D-41-AE-86-34-2D-74-F1-6A-C4_47098767_905909352947654_43847669017214976_n.jpg" t="Include" />
+            <e p="7_0_E0-0D-64-07-35-26-1A-85-D1-DE-49-FD-76-C2-ED-97_44811218_506049489870700_5467995208966733824_n.png" t="Include" />
+            <e p="7_0_E0-D3-12-E2-24-26-2E-53-C6-3E-CE-B7-13-52-57-3E_74e77ec5c961e11e9962b10dd72b6e65_900.jpg" t="Include" />
+            <e p="7_0_EF-30-A9-A6-4B-96-B5-6B-60-E8-2B-2F-19-D1-15-C6_48275137_2207061726280676_5203917894936690688_n.png" t="Include" />
+            <e p="7_0_F3-60-0D-B6-12-6E-DF-9B-35-7E-EF-5E-B1-C7-BD-25_4mn0udtift8z.jpg" t="Include" />
+            <e p="7_0_FB-EE-C0-F6-1A-E2-3D-DA-93-C0-B7-D6-C5-0B-A5-CD_docs_docx.docx" t="Include" />
           </e>
           <e p="UserPost" t="Include">
             <e p="7" t="Include" />
@@ -505,6 +546,7 @@
       <e p="BE.UnitTests.Xunit" t="IncludeRecursive">
         <e p="BE.UnitTests.Xunit.csproj" t="IncludeRecursive" />
         <e p="bin" t="ExcludeRecursive" />
+        <e p="EventAdminTests.cs" t="Include" />
         <e p="Helpers.cs" t="Include" />
         <e p="obj" t="ExcludeRecursive">
           <e p="Debug" t="Include">

@@ -2,7 +2,9 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using AutoMapper;
 using BE.Features.Event.Dtos;
+using BE.Features.Search.Dtos;
 using BE.Repositories;
+using EventDto = BE.Features.Event.Dtos.EventDto;
 
 namespace BE.Features.Search.Services
 {
@@ -14,7 +16,8 @@ namespace BE.Features.Search.Services
         Task<IEnumerable<EventDto>> FilterAdministeredByKeywordAndUserId(int userId,
             string keyword);
 
-        Task<IEnumerable<EventDto>> FilterByKeyword(string keyword);
+        Task<IEnumerable<CommonEventDto>> FilterAllByKeywordAsync(int issuerId, string keyword, int page, int
+            size);
         IEnumerable<EventDto> FilterByCriteria(EventSearchDto eventSearchDto);
     }
 
@@ -49,11 +52,11 @@ namespace BE.Features.Search.Services
             return eventDtos;
         }
 
-        public async Task<IEnumerable<EventDto>> FilterByKeyword(string keyword)
+        public async Task<IEnumerable<CommonEventDto>> FilterAllByKeywordAsync(int issuerId, string keyword, int page, int 
+        size)
         {
-            var events = await _repository.Event.SearchByKeyword(keyword);
-            var eventDtos = _mapper.Map<IEnumerable<EventDto>>(events);
-            return eventDtos;
+            var events = await _repository.Event.SearchByKeywordAsync(keyword, page, size, CommonEventDto.Selector(issuerId));
+            return events;
         }
 
         public IEnumerable<EventDto> FilterByCriteria(EventSearchDto eventSearchDto)

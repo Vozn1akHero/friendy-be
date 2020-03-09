@@ -41,7 +41,7 @@ namespace BE.Repositories
 
         public bool ExistsByCondition(Expression<Func<T, bool>> exp)
         {
-            return FindAll().Any(exp);
+            return FriendyContext.Set<T>().Any(exp);
         }
 
         public void Create(T ent)

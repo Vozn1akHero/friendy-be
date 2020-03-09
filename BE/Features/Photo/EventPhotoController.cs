@@ -1,5 +1,6 @@
 using System.Threading.Tasks;
 using BE.Helpers;
+using BE.Repositories;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -11,10 +12,25 @@ namespace BE.Features.Photo
     public class EventPhotoController : ControllerBase
     {
         private readonly IPhotoService _photoService;
+        private readonly IRepositoryWrapper _repository;
 
-        public EventPhotoController(IPhotoService photoService)
+        public EventPhotoController(IPhotoService photoService,
+            IRepositoryWrapper repository)
         {
             _photoService = photoService;
+            _repository = repository;
+        }
+        
+        [HttpDelete]
+        [Authorize]
+        [AuthorizeEventAdmin]
+        [Route("{id}")]
+        public async Task<IActionResult> DeleteById(int id)
+        {
+            var entity = _repository.EventPhoto.GetById(id);
+            if (entity == null) return NotFound();
+            await _photoService.DeleteEventPhotoAsync(entity);
+            return Ok();
         }
 
         [HttpGet]
@@ -45,15 +61,15 @@ namespace BE.Features.Photo
         [HttpPost]
         [Authorize]
         [AuthorizeEventAdmin]
-        [Route("{id}")]
+        [Route("{eventId}")]
         public async Task<IActionResult> AddPhotoAsync(
-            [FromRoute(Name = "id")] int id,
+            [FromRoute(Name = "eventId")] int eventId,
             [FromForm(Name = "image")] IFormFile file,
             [FromHeader(Name = "userId")] int userId)
         {
             if (file == null) return UnprocessableEntity();
             var createdImage = await _photoService.AddEventPhotoAsync
-                (id, file);
+                (eventId, file);
             return Ok(createdImage);
         }
     }

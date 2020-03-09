@@ -316,11 +316,7 @@ namespace BE.Models
                     .HasColumnName("background")
                     .IsUnicode(false);
 
-                entity.Property(e => e.City)
-                    .IsRequired()
-                    .HasColumnName("city")
-                    .HasMaxLength(250)
-                    .IsUnicode(false);
+                entity.Property(e => e.CityId).HasColumnName("city_id");
 
                 entity.Property(e => e.CreatorId).HasColumnName("creator_id");
 
@@ -357,6 +353,12 @@ namespace BE.Models
                     .HasColumnName("title")
                     .HasMaxLength(250)
                     .IsUnicode(false);
+
+                entity.HasOne(d => d.City)
+                    .WithMany(p => p.Event)
+                    .HasForeignKey(d => d.CityId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_event_city");
 
                 entity.HasOne(d => d.Creator)
                     .WithMany(p => p.Event)
@@ -424,13 +426,13 @@ namespace BE.Models
                 entity.HasOne(d => d.Event)
                     .WithMany(p => p.EventImage)
                     .HasForeignKey(d => d.EventId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .OnDelete(DeleteBehavior.Cascade)
                     .HasConstraintName("FK_event_photo_event");
 
                 entity.HasOne(d => d.Image)
                     .WithMany(p => p.EventImage)
                     .HasForeignKey(d => d.ImageId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .OnDelete(DeleteBehavior.Cascade)
                     .HasConstraintName("FK_event_image_image");
             });
 
@@ -905,24 +907,22 @@ namespace BE.Models
             {
                 entity.ToTable("user_image", "user_info");
 
-                entity.Property(e => e.Id)
-                    .HasColumnName("id")
-                    .ValueGeneratedOnAdd();
+                entity.Property(e => e.Id).HasColumnName("id");
 
                 entity.Property(e => e.ImageId).HasColumnName("image_id");
 
                 entity.Property(e => e.UserId).HasColumnName("user_id");
 
-                entity.HasOne(d => d.IdNavigation)
-                    .WithOne(p => p.UserImage)
-                    .HasForeignKey<UserImage>(d => d.Id)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
+                entity.HasOne(d => d.Image)
+                    .WithMany(p => p.UserImage)
+                    .HasForeignKey(d => d.ImageId)
+                    .OnDelete(DeleteBehavior.Cascade)
                     .HasConstraintName("FK_user_image_image");
 
                 entity.HasOne(d => d.User)
                     .WithMany(p => p.UserImage)
                     .HasForeignKey(d => d.UserId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .OnDelete(DeleteBehavior.Cascade)
                     .HasConstraintName("FK_user_image_user");
             });
 

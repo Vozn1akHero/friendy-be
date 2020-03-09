@@ -12,56 +12,35 @@ namespace BE.Features.Event
     public class EventParticipantController : ControllerBase
     {
         private readonly IEventParticipantService _eventParticipantService;
-        private readonly IRepositoryWrapper _repository;
-
-        public EventParticipantController(IRepositoryWrapper repository,
+        
+        public EventParticipantController(
             IEventParticipantService eventParticipantService)
         {
-            _repository = repository;
             _eventParticipantService = eventParticipantService;
         }
 
-        [HttpGet("exemplary/{eventId}")]
-        public async Task<IActionResult> GetExemplary(int eventId)
-        {
-            return Ok(await _repository
-                .EventParticipants.GetExemplaryAsync(eventId));
-        }
-
-        [HttpGet("range")]
-        public async Task<IActionResult> GetRange(
-            [FromQuery(Name = "start")] int startIndex,
+        [HttpGet("range/{eventId}")]
+        public IActionResult GetRange(
+            [FromQuery(Name = "page")] int page,
+            [FromHeader(Name = "userId")] int userId,
             [FromQuery(Name = "length")] int length,
-            [FromQuery(Name = "eventId")] int eventId)
+            int eventId)
         {
-            return Ok(
-                await _repository.EventParticipants.GetRangeAsync(eventId, startIndex,
-                    length));
+            var participants = _eventParticipantService.GetRangeByEventIdWithPagination(eventId, page, length, userId);
+            return Ok(participants);
         }
 
-        [HttpGet("range-detailed")]
+        [HttpGet("filter/{eventId}")]
         [Authorize]
         [AuthorizeEventAdmin]
-        public async Task<IActionResult> GetRangeDetailed(
-            [FromQuery(Name = "start")] int startIndex,
+        public IActionResult FilterByKeyword(int eventId,
+           [FromQuery(Name = "keyword")] string keyword,
+            [FromQuery(Name = "page")] int page,
             [FromQuery(Name = "length")] int length,
-            [FromQuery(Name = "eventId")] int eventId)
-        {
-            var filteredList =
-                await _repository.EventParticipants.GetRangeDetailedAsync(eventId,
-                    startIndex, length);
-            return Ok(filteredList);
-        }
-
-        [HttpGet("filter/{keyword}")]
-        [Authorize]
-        [AuthorizeEventAdmin]
-        public async Task<IActionResult> FilterByKeyword(string keyword,
             [FromHeader(Name = "userId")] int userId)
         {
-            var filteredList =
-                await _repository.EventParticipants.FilterByKeywordAsync(keyword);
-            //var filteredListWoAdmin = filteredList.Where(e => e.Id != userId);
+            var filteredList = _eventParticipantService.FilterRangeByKeywordAndEventId(eventId, keyword, page,
+                length, userId);
             return Ok(filteredList);
         }
 
@@ -108,8 +87,7 @@ namespace BE.Features.Event
                 eventId);
             return Ok();
         }
-
-
+        
         [HttpGet("{eventId}/banned")]
         [Authorize]
         [AuthorizeEventAdmin]

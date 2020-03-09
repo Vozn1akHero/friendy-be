@@ -60,10 +60,15 @@ namespace BE.Features.Event.Repositories
             return @event;
         }
 
-        public async Task<IEnumerable<Models.Event>> SearchByKeyword(string keyword)
+        public async Task<IEnumerable<TType>> SearchByKeywordAsync<TType>(string keyword,
+            int page,
+            int size,
+            Expression<Func<Models.Event, TType>> selector)
         {
             return await FindByCondition(e => e.Title.Contains(keyword))
-                .Include(e => e.EventParticipants)
+                .Select(selector)
+                .Skip((page-1)*size)
+                .Take(size)
                 .ToListAsync();
         }
 
@@ -114,7 +119,7 @@ namespace BE.Features.Event.Repositories
             length, int issuerId)
         {
             var events =
-                await FindByCondition(e => e.City == city && e.EventParticipants.All(d => d.ParticipantId != issuerId))
+                await FindByCondition(e => e.City.Title == city && e.EventParticipants.All(d => d.ParticipantId != issuerId))
                     .Include(e => e.EventParticipants)
                     .Take(length)
                     .ToListAsync();

@@ -6,6 +6,7 @@ using BE.Features.Event.Dtos;
 using BE.Features.Event.Services;
 using BE.Features.Friendship.Services;
 using BE.Features.FriendshipRecommendation;
+using BE.Features.Helpers;
 using BE.Features.Photo;
 using BE.Features.Post.Services;
 using BE.Features.Search.Services;
@@ -39,6 +40,7 @@ namespace BE
         {
             services.AddScoped<IAuthenticationService, AuthenticationService>();
             services.AddTransient<IUserDataService, UserDataService>();
+            services.AddTransient<IEventAdminService, EventAdminService>();
             services.AddTransient<IUserPostService, UserPostService>();
             services.AddTransient<IEventParticipantService,
                 EventParticipantService>();
@@ -59,6 +61,7 @@ namespace BE
                     EventParticipationStatusService>();
             services.AddTransient<IUserDataUpdateService, UserDataUpdateService>();
             services.AddTransient<ISQLServer_UserSearchService, SQLServer_UserSearchService>();
+            services.AddTransient<ILocationService, LocationService>();
         }
 
         public static void ConfigureAutoMapper(this IServiceCollection services)

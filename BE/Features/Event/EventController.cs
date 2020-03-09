@@ -77,7 +77,6 @@ namespace BE.Features.Event
         [Route("{id}")]
         public async Task<IActionResult> GetById(int id)
         {
-            //var eventData = await _repository.Event.GetById(id);
             var eventData = await _eventDataService.GetDtoById(id);
             return Ok(eventData);
         }

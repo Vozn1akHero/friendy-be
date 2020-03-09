@@ -1,5 +1,7 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
 using BE.Features.Event.Dtos;
 using BE.Models;
@@ -21,17 +23,6 @@ namespace BE.Features.Event.Repositories
             Create(eventParticipants);
         }
 
-        public async Task<IEnumerable<ExemplaryEventParticipantDto>> GetExemplaryAsync(
-            int eventId)
-        {
-            return await FindByCondition(e => e.EventId == eventId).Select(e =>
-                new ExemplaryEventParticipantDto
-                {
-                    Id = e.ParticipantId,
-                    AvatarPath = e.Participant.Avatar
-                }).ToListAsync();
-        }
-
         public bool IsEventParticipant(int userId, int eventId)
         {
             return ExistsByCondition(e =>
@@ -46,50 +37,25 @@ namespace BE.Features.Event.Repositories
             if (foundParticipant != null) Delete(foundParticipant);
         }
 
-        public async Task<IEnumerable<EventParticipantForListDto>> GetRangeAsync(
-            int eventId, int startIndex, int length)
+        public IEnumerable<TType> GetRangeByEventId<TType>(int eventId, int page, int length,
+            Expression<Func<EventParticipants, TType>> selector)
         {
-            return await FindByCondition(e =>
-                e.EventId == eventId && e.EventId >= startIndex).Select(e =>
-                new EventParticipantForListDto
-                {
-                    Id = e.ParticipantId,
-                    Name = e.Participant.Name,
-                    Surname = e.Participant.Surname,
-                    AvatarPath = e.Participant.Avatar
-                }).Take(length).ToListAsync();
+            return FindByCondition(e => e.EventId == eventId).Select(selector)
+                .Skip((page-1)*length)
+                .Take(length)
+                .ToList();
         }
 
-        public async Task<IEnumerable<EventParticipantDetailedDto>> GetRangeDetailedAsync(
-            int eventId, int startIndex, int length)
+        public IEnumerable<TType> FilterRangeByEventIdAndKeyword<TType>(int eventId,
+            string keyword, int page, int length,
+            Expression<Func<EventParticipants, TType>> selector)
         {
-            return await FindByCondition(e =>
-                    e.EventId == eventId && e.EventId >= startIndex)
-                .Select(e => new EventParticipantDetailedDto
-                {
-                    Id = e.ParticipantId,
-                    Name = e.Participant.Name,
-                    Surname = e.Participant.Surname,
-                    AvatarPath = e.Participant.Avatar,
-                    IsAdmin =
-                        e.Event.EventAdmins.SingleOrDefault(d => d.UserId == e.Id) != null
-                }).Take(length).ToListAsync();
-        }
-
-        public async Task<IEnumerable<EventParticipantDetailedDto>> FilterByKeywordAsync(
-            string keyword)
-        {
-            return await FindByCondition(e =>
+            return FindByCondition(e =>
                     (e.Participant.Name + " " + e.Participant.Surname).Contains(keyword))
-                .Select(e => new EventParticipantDetailedDto
-                {
-                    Id = e.ParticipantId,
-                    Name = e.Participant.Name,
-                    Surname = e.Participant.Surname,
-                    AvatarPath = e.Participant.Avatar,
-                    IsAdmin =
-                        e.Event.EventAdmins.SingleOrDefault(d => d.UserId == e.Id) != null
-                }).ToListAsync();
+                .Skip((page-1)*length)
+                .Take(length)
+                .Select(selector)
+                .ToList();
         }
     }
 }

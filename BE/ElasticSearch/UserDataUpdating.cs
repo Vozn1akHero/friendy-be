@@ -31,13 +31,6 @@ namespace BE.ElasticSearch
             updatedDoc.birthday = birthday;
 
             _client.Update<ExtendedUserDto, object>(id, u => u.Doc(updatedDoc));
-
-            /*_client.UpdateByQuery<ExtendedUserDto>(u => u
-                .Query(q => q
-                    .Term(f => f.Id, id)
-                )
-                .Script($"name = {name}, surname = {surname}, birthday = {birthday}")
-            );*/
         }
 
         public void UpdateEducationData(int id, int educationId)

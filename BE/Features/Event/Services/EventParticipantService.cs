@@ -11,9 +11,12 @@ namespace BE.Features.Event.Services
 {
     public interface IEventParticipantService
     {
+        IEnumerable<EventParticipantDetailedDto> GetRangeByEventIdWithPagination(int eventId,
+            int page, int length, int issuerId);
         Task<IEnumerable<BannedEventParticipantDto>>
             FindBannedUsersByEventIdAsync(int eventId);
-
+        IEnumerable<EventParticipantDetailedDto> FilterRangeByKeywordAndEventId(int eventId, string keyword,
+            int page, int length, int issuerId);
         void BanParticipant(int id, int eventId);
         void UnbanParticipant(int id, int eventId);
         Task LeaveAsync(int issuerId, int eventId);
@@ -24,17 +27,30 @@ namespace BE.Features.Event.Services
     {
         private readonly IEventParticipationStatusService
             _eventParticipationStatusService;
-
-        private readonly IMapper _mapper;
         private readonly IRepositoryWrapper _repository;
 
         public EventParticipantService(IRepositoryWrapper repository,
-            IMapper mapper,
             IEventParticipationStatusService eventParticipationStatusService)
         {
             _repository = repository;
-            _mapper = mapper;
             _eventParticipationStatusService = eventParticipationStatusService;
+        }
+
+        public IEnumerable<EventParticipantDetailedDto> GetRangeByEventIdWithPagination(int eventId,
+            int page, int length, int issuerId)
+        {
+            var participants = _repository.EventParticipants.GetRangeByEventId(eventId, page, length, 
+            EventParticipantDetailedDto.Selector);
+            return participants;
+        }
+
+        public IEnumerable<EventParticipantDetailedDto> FilterRangeByKeywordAndEventId(int eventId, string keyword,
+         int
+            page, int length, int issuerId)
+        {
+            var participants = _repository.EventParticipants.FilterRangeByEventIdAndKeyword(eventId, keyword, page, length,
+                EventParticipantDetailedDto.Selector);
+            return participants;
         }
 
         public async Task<IEnumerable<BannedEventParticipantDto>>
@@ -71,29 +87,6 @@ namespace BE.Features.Event.Services
 
         public void BanParticipant(int id, int eventId)
         {
-            /*using(var unitOfWork = new RepositoryWrapper())
-            using(var transaction = unitOfWork.BeginTransaction())
-            {
-                try
-                {
-                    await _repository.EventBannedUsers.Add(new EventBannedUsers
-                    {
-                        EventId = eventId,
-                        UserId = id
-                    });
-                    await _repository
-                        .EventParticipants
-                        .DeleteByUserIdAndEventId(id, eventId);
-                    _repository.Save();
-                    transaction.Commit();
-                    return 1;
-                } 
-                catch(Exception)
-                {
-                    transaction.Rollback();
-                    return 0;
-                }
-            }*/
             _repository.EventBannedUsers.Add(new EventBannedUsers
             {
                 EventId = eventId,

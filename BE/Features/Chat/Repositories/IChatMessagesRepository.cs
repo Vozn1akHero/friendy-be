@@ -8,7 +8,7 @@ namespace BE.Features.Chat.Repositories
 {
     public interface IChatMessagesRepository : IRepositoryBase<ChatMessages>
     {
-        void Add(ChatMessages chatMessages);
+        //void Add(ChatMessages chatMessages);
 
         IEnumerable<TType> GetMessageByReceiverIdWithPagination<TType>(
             int receiverId, int issuerId, int page,
@@ -20,5 +20,7 @@ namespace BE.Features.Chat.Repositories
         TType
             GetLastMessageByChatIdWithPagination<TType>(int chatId,
                 Expression<Func<ChatMessages, TType>> selector);
+
+        void Add(int chatId, ChatMessage chatMessage);
     }
 }

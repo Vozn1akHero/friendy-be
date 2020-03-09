@@ -40,14 +40,11 @@ namespace BE.Features.Friendship.Repositories
             await SaveAsync();
         }
 
-        public Task<bool> GetStatusByUserIds(int firstId, int secondId)
+        public bool GetStatusByUserIds(int firstId, int secondId)
         {
-            return Task.Run(() =>
-            {
-                return ExistsByCondition(e =>
+            return ExistsByCondition(e =>
                     e.AuthorId == firstId && e.ReceiverId == secondId
                     || e.ReceiverId == firstId && e.AuthorId == secondId);
-            });
         }
 
         public async Task<List<FriendRequest>> GetReceivedByUserId(int userId)

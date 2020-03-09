@@ -21,9 +21,11 @@ namespace BE.Features.Search
         [Authorize]
         [Route("{keyword}")]
         public async Task<IActionResult> SearchByKeywordAsync(string keyword,
+            [FromQuery(Name = "page")] int page,
+            [FromQuery(Name = "size")] int size,
             [FromHeader(Name = "userId")] int userId)
         {
-            var foundEvents = await _eventSearchService.FilterByKeyword(keyword);
+            var foundEvents = await _eventSearchService.FilterAllByKeywordAsync(userId, keyword, page, size);
             return Ok(foundEvents);
         }
 

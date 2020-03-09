@@ -18,21 +18,18 @@ namespace BE.Features.Event.Services
     public class EventDataService : IEventDataService
     {
         private readonly IImageSaver _imageSaver;
-        private readonly IMapper _mapper;
         private readonly IRepositoryWrapper _repository;
 
         public EventDataService(IRepositoryWrapper repository,
-            IMapper mapper, IImageSaver imageSaver)
+            IImageSaver imageSaver)
         {
             _repository = repository;
-            _mapper = mapper;
             _imageSaver = imageSaver;
         }
 
         public async Task<EventDto> GetDtoById(int eventId)
         {
             var eventData = await _repository.Event.GetById(eventId, EventDto.Selector);
-            //var eventDataDto = _mapper.Map<EventDto>(eventData);
             return eventData;
         }
 

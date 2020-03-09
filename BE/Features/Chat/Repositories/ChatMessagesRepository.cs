@@ -70,5 +70,14 @@ namespace BE.Features.Chat.Repositories
                 .First();
             return chatMessage;
         }
+
+        public void Add(int chatId, ChatMessage chatMessage)
+        {
+            Create(new ChatMessages
+            {
+                ChatId = chatId,
+                Message = chatMessage
+            });
+        }
     }
 }
