@@ -122,6 +122,8 @@ namespace BE.Models
                     .HasMaxLength(1000)
                     .IsUnicode(false);
 
+                entity.Property(e => e.Read).HasColumnName("read");
+
                 entity.Property(e => e.ReceiverId).HasColumnName("receiver_id");
 
                 entity.Property(e => e.UserId).HasColumnName("user_id");
@@ -426,13 +428,13 @@ namespace BE.Models
                 entity.HasOne(d => d.Event)
                     .WithMany(p => p.EventImage)
                     .HasForeignKey(d => d.EventId)
-                    .OnDelete(DeleteBehavior.Cascade)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_event_photo_event");
 
                 entity.HasOne(d => d.Image)
                     .WithMany(p => p.EventImage)
                     .HasForeignKey(d => d.ImageId)
-                    .OnDelete(DeleteBehavior.Cascade)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_event_image_image");
             });
 
@@ -916,13 +918,13 @@ namespace BE.Models
                 entity.HasOne(d => d.Image)
                     .WithMany(p => p.UserImage)
                     .HasForeignKey(d => d.ImageId)
-                    .OnDelete(DeleteBehavior.Cascade)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_user_image_image");
 
                 entity.HasOne(d => d.User)
                     .WithMany(p => p.UserImage)
                     .HasForeignKey(d => d.UserId)
-                    .OnDelete(DeleteBehavior.Cascade)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_user_image_user");
             });
 

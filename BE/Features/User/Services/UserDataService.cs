@@ -14,7 +14,6 @@ namespace BE.Features.User.Services
         Task<ExtendedUserDto> GetExtendedById(int id);
         Task<bool> CheckOldPasswordBeforeUpdateByUserIdAsync(int id,
             string password);
-        Task<Models.User> GetByIdAsync(int id);
         Task<IEnumerable<Interest>> FindInterestsByTitle(string title);
     }
 
@@ -48,12 +47,6 @@ namespace BE.Features.User.Services
                 await _repository.User.GetWithSelectedFields(id, new[] {"Password"});
             var isOldPassCorrect = BCrypt.Net.BCrypt.Verify(password, user.Password);
             return isOldPassCorrect;
-        }
-
-        public async Task<Models.User> GetByIdAsync(int id)
-        {
-            var user = await _repository.User.GetByIdAsync(id);
-            return user;
         }
 
         public async Task<IEnumerable<Interest>> FindInterestsByTitle(string title)

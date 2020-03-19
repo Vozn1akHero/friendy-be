@@ -528,10 +528,24 @@
         <e p="user-data.json" t="Include" />
         <e p="UserDataFiller.cs" t="Include" />
       </e>
+      <e p="BE.FakeData" t="IncludeRecursive">
+        <e p="BE.FakeData.csproj" t="IncludeRecursive" />
+        <e p="bin" t="ExcludeRecursive" />
+        <e p="FakeEventData.cs" t="Include" />
+        <e p="FakeUserData.cs" t="Include" />
+        <e p="obj" t="ExcludeRecursive">
+          <e p="Debug" t="Include">
+            <e p="netcoreapp2.2" t="Include">
+              <e p="BE.FakeData.AssemblyInfo.cs" t="Include" />
+            </e>
+          </e>
+        </e>
+      </e>
       <e p="BE.sln" t="IncludeFlat" />
       <e p="BE.UnitTests" t="IncludeRecursive">
         <e p="BE.UnitTests.csproj" t="IncludeRecursive" />
         <e p="bin" t="ExcludeRecursive" />
+        <e p="ChatTests.cs" t="Include" />
         <e p="Helpers.cs" t="Include" />
         <e p="obj" t="ExcludeRecursive">
           <e p="Debug" t="Include">

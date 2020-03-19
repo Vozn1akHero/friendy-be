@@ -9,8 +9,8 @@ namespace BE.Features.Event.Repositories
 {
     public interface IEventPhotoRepository : IRepositoryBase<EventImage>
     {
-        Task<IEnumerable<EventImage>> SelectWithPaginationAsyncExceptEventData(int eventId,
-           int page);
+        Task<IEnumerable<TType>> SelectWithPaginationAsync<TType>(int eventId,
+           int page, int length, Expression<Func<EventImage, TType>> selector);
 
         Task<IEnumerable<EventImage>> GetRangeAsync(int eventId, int startIndex, int
             length);

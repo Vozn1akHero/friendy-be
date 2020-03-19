@@ -26,20 +26,20 @@ namespace BE.Features.Chat
         
         [HttpGet]
         [Authorize]
-        [Route("last-messages/paginate")]
-        public IActionResult GetLastMessagesWithPagination([FromQuery(Name =
-                "page")]
-            int page, [FromHeader(Name = "userId")] int userId)
+        [Route("dialog")]
+        public IActionResult GetDialogList([FromQuery(Name ="page")] int page,
+            [FromQuery(Name = "length")] int length,
+            [FromHeader(Name = "userId")] int userId)
         {
             var lastMessageList = _chatService
-                .GetLastMessageByReceiverIdWithPagination(userId, page);
+                .GetLastMessageByReceiverIdWithPagination(userId, page, length);
             return Ok(lastMessageList);
         }
 
         [HttpGet]
         [Authorize]
         [Route("data-by-interlocutors/{to}")]
-        public async Task<IActionResult> GetByInterlocutorsIdentifiers(int to,
+        public async Task<IActionResult> GetByInterlocutorsIdentifiersAsync(int to,
             [FromHeader(Name = "userId")] int userId)
         {
             var res = await _chatService.GetByInterlocutorsIdentifiers(to, userId);
@@ -51,10 +51,11 @@ namespace BE.Features.Chat
         [Authorize]
         [Route("{to}/page/{page}")]
         public IActionResult GetMessageInDialogWithPaginationAsync(int to, int page,
+            [FromQuery(Name = "length")] int length,
             [FromHeader(Name = "userId")] int userId)
         {
             var res = _chatService
-                .GetMessageByReceiverIdWithPagination(to, userId, page);
+                .GetMessageByReceiverIdWithPagination(to, userId, page, length);
             return Ok(res);
         }
 

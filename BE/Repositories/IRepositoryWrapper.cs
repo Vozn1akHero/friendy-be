@@ -45,7 +45,6 @@ namespace BE.Repositories
         ISessionRepository Session { get; }
         IEventBannedUsersRepository EventBannedUsers { get; }
         ICommentLikeRepository CommentLike { get; }
-        IDatabaseTransaction BeginTransaction();
         int Save();
         Task SaveAsync();
     }

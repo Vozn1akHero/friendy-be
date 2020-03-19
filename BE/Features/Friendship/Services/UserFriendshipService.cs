@@ -15,10 +15,9 @@ namespace BE.Features.Friendship.Services
             int startIndex, int length);
 
         Task<IEnumerable<FriendDto>>
-            GetLastRangeByIdWithPaginationAsync(int id, int page);
+            GetLastRangeByIdWithPaginationAsync(int id, int page, int length);
 
         Task<IEnumerable<FriendDto>> FilterByKeywordAsync(int userId, string keyword);
-        Task<IEnumerable<ExemplaryFriendDto>> GetExemplaryByUserIdAsync(int userId);
         Task<FriendshipStatus> GetFriendshipStatus(int id, int issuerId);
         Task ConfirmRequestAsync(int userId, int issuerId);
     }
@@ -42,11 +41,11 @@ namespace BE.Features.Friendship.Services
         }
 
         public async Task<IEnumerable<FriendDto>> GetLastRangeByIdWithPaginationAsync(
-            int id, int page)
+            int id, int page, int length)
         {
             var fr =
                 await _repository.UserFriendship.GetLastRangeByIdWithPaginationAsync(id,
-                    page);
+                    page, length);
             var res = ConvertFriendshipEnumerable(id, fr);
             return res;
         }
@@ -57,20 +56,6 @@ namespace BE.Features.Friendship.Services
             var filteredFriends = await _repository.UserFriendship.FindByName
                 (userId, keyword);
             var res = ConvertFriendshipEnumerable(userId, filteredFriends);
-            return res;
-        }
-
-        public async Task<IEnumerable<ExemplaryFriendDto>> GetExemplaryByUserIdAsync(
-            int userId)
-        {
-            var fr = await _repository.UserFriendship.GetExemplaryByUserIdAsync(userId);
-            var res = fr.Select(e => new ExemplaryFriendDto
-            {
-                Id = e.FirstFriendId == userId ? e.SecondFriendId : e.FirstFriendId,
-                AvatarPath = e.FirstFriendId == userId
-                    ? e.SecondFriend.Avatar
-                    : e.FirstFriend.Avatar
-            });
             return res;
         }
 

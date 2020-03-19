@@ -15,15 +15,16 @@ namespace BE.Features.Event.Repositories
         {
         }
 
-        public async Task<IEnumerable<EventImage>> SelectWithPaginationAsyncExceptEventData(
+        public async Task<IEnumerable<TType>> SelectWithPaginationAsync<TType>(
             int eventId,
-            int page)
+            int page,
+            int length, Expression<Func<EventImage, TType>> selector)
         {
-            var length = 25;
             return await FindByCondition(e => e.EventId == eventId)
                 .Skip((page - 1) * length)
                 .Take(length)
                 .Include(e=>e.Image)
+                .Select(selector)
                 .ToListAsync();
         }
 

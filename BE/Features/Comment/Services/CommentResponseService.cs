@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using BE.Features.Comment.Dtos;
 using BE.Helpers;
+using BE.Helpers.CustomExceptions;
 using BE.Models;
 using BE.Repositories;
 using Microsoft.AspNetCore.Http;
@@ -11,8 +12,8 @@ namespace BE.Features.Comment.Services
 {
     public interface ICommentResponseService
     {
-        Task<CommentResponseLike> Like(int id, int userId);
-        Task Unlike(int id, int userId);
+        Task<CommentResponseLike> LikeAsync(int id, int userId);
+        Task UnlikeAsync(int id, int userId);
 
         Task<IEnumerable<PostCommentResponseDto>>
             GetAllCommentResponsesAsync(int commentId,
@@ -40,23 +41,35 @@ namespace BE.Features.Comment.Services
             _imageSaver = imageSaver;
         }
 
-        public async Task<CommentResponseLike> Like(int id, int userId)
+        public async Task<CommentResponseLike> LikeAsync(int id, int userId)
         {
-            var like = new CommentResponseLike
-            {
-                CommentResponseId = id,
-                UserId = userId
-            };
-            await _repository.Comment.LikeResponseAsync(like);
-            await _repository.SaveAsync();
-            return like;
+            bool ex = _repository.ResponseToComment.CheckIfLiked(id, userId);
+            if (ex) {
+                var like = new CommentResponseLike
+                {
+                    CommentResponseId = id,
+                    UserId = userId
+                };
+                await _repository.ResponseToComment.LikeAsync(like);
+                await _repository.ResponseToComment.SaveAsync();
+                return like;
+            }
+            throw  new EntityIsAlreadyLiked();
         }
 
-        public async Task Unlike(int id, int userId)
+        public async Task UnlikeAsync(int id, int userId)
         {
-            await _repository.Comment
-                .UnlikeResponseByResponseIdAndUserIdAsync(id, userId);
-            await _repository.SaveAsync();
+            bool ex = _repository.ResponseToComment.CheckIfLiked(id, userId);
+            if (!ex)
+            {
+                await _repository.ResponseToComment
+                    .UnlikeAsync(id, userId);
+                await _repository.SaveAsync();
+            }
+            else
+            {
+                throw new EntityIsNotLikedException();
+            }
         }
 
         public async Task<IEnumerable<PostCommentResponseDto>>
@@ -89,8 +102,8 @@ namespace BE.Features.Comment.Services
                 ResponseToCommentId = responseDto.ResponseToCommentId,
                 MainCommentId = responseDto.MainCommentId
             };
-            await _unitOfWork.ResponseToCommentRepository
-                .CreateAsync(responseToResponse);
+            _unitOfWork.ResponseToCommentRepository
+                .Add(responseToResponse);
             _unitOfWork.SaveChanges();
             return await _repository.ResponseToComment.GetByIdAsync(responseToResponse.Id,
                 PostCommentResponseDto.Selector(authorId));
@@ -117,8 +130,8 @@ namespace BE.Features.Comment.Services
                 ResponseToCommentId = null,
                 MainCommentId = commentResponseDto.CommentId
             };
-            await _repository.ResponseToComment.CreateAsync(responseToResponse);
-            await _repository.ResponseToComment.SaveAsync();
+            _repository.ResponseToComment.Add(responseToResponse);
+            await _repository.SaveAsync();
             return await _repository.ResponseToComment.GetByIdAsync(responseToResponse.Id,
                 PostCommentResponseDto.Selector(authorId));
         }

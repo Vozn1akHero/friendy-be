@@ -21,3 +21,7 @@ D:\Projects\Praca dyplomowa\BE\BE.UnitTests.Xunit\obj\Debug\netcoreapp2.2\BE.Uni
 D:\Projects\Praca dyplomowa\BE\BE.UnitTests.Xunit\obj\Debug\netcoreapp2.2\BE.UnitTests.Xunit.pdb
 D:\Projects\Praca dyplomowa\BE\BE.UnitTests.Xunit\bin\Debug\netcoreapp2.2\appsettings.Development.json
 D:\Projects\Praca dyplomowa\BE\BE.UnitTests.Xunit\bin\Debug\netcoreapp2.2\appsettings.json
+D:\Projects\Praca dyplomowa\BE\BE.UnitTests.Xunit\bin\Debug\netcoreapp2.2\BE.FakeData.dll
+D:\Projects\Praca dyplomowa\BE\BE.UnitTests.Xunit\bin\Debug\netcoreapp2.2\BE.FakeData.pdb
+D:\Projects\Praca dyplomowa\BE\BE.UnitTests.Xunit\obj\Debug\netcoreapp2.2\BE.UnitTests.Xunit.genruntimeconfig.cache
+D:\Projects\Praca dyplomowa\BE\BE.UnitTests.Xunit\obj\Debug\netcoreapp2.2\BE.UnitTests.Xunit.csproj.CoreCompileInputs.cache

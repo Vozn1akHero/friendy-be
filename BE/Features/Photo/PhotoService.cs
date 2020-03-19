@@ -18,12 +18,8 @@ namespace BE.Features.Photo
         Task<IEnumerable<UserImage>> GetUserPhotoRangeWithPaginationAsync(int userId,
             int page, int length);
 
-        Task<IEnumerable<EventImage>> GetEventPhotoRangeAsync(int
-            authorId, int
-            startIndex, int length);
-
-        Task<IEnumerable<EventImage>> GetEventPhotosWithPaginationAsync(int
-            eventId, int page);
+        Task<IEnumerable<EventPhotoDto>> GetEventPhotosWithPaginationAsync(int
+            eventId, int page, int length);
 
         Task<Image> AddEventPhotoAsync(int eventId, IFormFile file);
         Task<Image> AddUserPhotoAsync(int authorId, IFormFile file);
@@ -54,8 +50,10 @@ namespace BE.Features.Photo
         }
 
         public async Task<IEnumerable<EventImage>> GetEventPhotoRangeAsync(int
-            authorId, int
-            startIndex, int length)
+            authorId, 
+            int
+            startIndex,
+            int length)
         {
             var images = await _repository.EventPhoto.GetRangeAsync(authorId,
                 startIndex, length);
@@ -70,11 +68,11 @@ namespace BE.Features.Photo
             return images;
         }
 
-        public async Task<IEnumerable<EventImage>> GetEventPhotosWithPaginationAsync(int
-            eventId, int page)
+        public async Task<IEnumerable<EventPhotoDto>> GetEventPhotosWithPaginationAsync(int
+            eventId, int page, int length)
         {
-            var images = await _repository.EventPhoto.SelectWithPaginationAsyncExceptEventData(eventId,
-                page);
+            var images = await _repository.EventPhoto.SelectWithPaginationAsync(eventId,
+                page, length, EventPhotoDto.Selector);
             return images;
         }
 

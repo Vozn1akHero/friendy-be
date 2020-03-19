@@ -23,37 +23,19 @@ namespace BE.Features.Comment.Dtos
         {
             return e => new PostCommentDto
             {
-                Id = e.Comment.Id,
-                AuthorId = e.Comment.UserId,
+                Id = e.Id,
+                AuthorId = e.Comment.User.Id,
                 AuthorName = e.Comment.User.Name,
                 AuthorSurname = e.Comment.User.Surname,
                 AuthorAvatarPath = e.Comment.User.Avatar,
                 Content = e.Comment.Content,
                 LikesCount = e.Comment.CommentLike.Count,
                 CommentsCount = e.ResponseToComment.Count,
-                PostId = e.Comment.PostId,
+                PostId = e.Comment.Post.Id,
                 IsCommentLikedByUser =
-                    e.Comment.CommentLike.Any(d => d.UserId == issuerId),
+                    e.Comment.CommentLike.Any(d => d.User.Id == issuerId),
                 Date = e.Comment.Date
             };
         }
-
-        /*public static Expression<Func<Comment, PostCommentDto>> DefaultCommentSelector(int issuerId)
-        {
-            return e=>new PostCommentDto
-            {
-                Id = e.Id,
-                AuthorId = e.UserId,
-                AuthorName = e.User.Name,
-                AuthorSurname = e.User.Surname,
-                AuthorAvatarPath = e.User.Avatar,
-                Content = e.Content,
-                LikesCount = e.CommentLike.Count,
-                CommentsCount = e..Count,
-                PostId = e.PostId,
-                IsCommentLikedByUser = e.CommentLike.Any(d => d.UserId == issuerId),
-                Date = e.Date
-            };
-        }*/
     }
 }

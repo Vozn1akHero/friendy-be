@@ -1,0 +1,15 @@
+D:\Projects\Praca dyplomowa\BE\BE.FakeData\bin\Debug\netcoreapp2.2\appsettings.Development.json
+D:\Projects\Praca dyplomowa\BE\BE.FakeData\bin\Debug\netcoreapp2.2\appsettings.json
+D:\Projects\Praca dyplomowa\BE\BE.FakeData\bin\Debug\netcoreapp2.2\Properties\launchSettings.json
+D:\Projects\Praca dyplomowa\BE\BE.FakeData\bin\Debug\netcoreapp2.2\BE.FakeData.deps.json
+D:\Projects\Praca dyplomowa\BE\BE.FakeData\bin\Debug\netcoreapp2.2\BE.FakeData.dll
+D:\Projects\Praca dyplomowa\BE\BE.FakeData\bin\Debug\netcoreapp2.2\BE.FakeData.pdb
+D:\Projects\Praca dyplomowa\BE\BE.FakeData\bin\Debug\netcoreapp2.2\BE.dll
+D:\Projects\Praca dyplomowa\BE\BE.FakeData\bin\Debug\netcoreapp2.2\BE.pdb
+D:\Projects\Praca dyplomowa\BE\BE.FakeData\obj\Debug\netcoreapp2.2\BE.FakeData.csprojAssemblyReference.cache
+D:\Projects\Praca dyplomowa\BE\BE.FakeData\obj\Debug\netcoreapp2.2\BE.FakeData.AssemblyInfoInputs.cache
+D:\Projects\Praca dyplomowa\BE\BE.FakeData\obj\Debug\netcoreapp2.2\BE.FakeData.AssemblyInfo.cs
+D:\Projects\Praca dyplomowa\BE\BE.FakeData\obj\Debug\netcoreapp2.2\BE.FakeData.csproj.CopyComplete
+D:\Projects\Praca dyplomowa\BE\BE.FakeData\obj\Debug\netcoreapp2.2\BE.FakeData.dll
+D:\Projects\Praca dyplomowa\BE\BE.FakeData\obj\Debug\netcoreapp2.2\BE.FakeData.pdb
+D:\Projects\Praca dyplomowa\BE\BE.FakeData\obj\Debug\netcoreapp2.2\BE.FakeData.csproj.CoreCompileInputs.cache

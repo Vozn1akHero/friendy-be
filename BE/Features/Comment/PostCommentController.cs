@@ -13,13 +13,10 @@ namespace BE.Features.Comment
     [Route("api/post-comment")]
     public class PostCommentController : ControllerBase
     {
-        private readonly IHubContext<PostHub> _hubContext;
         private readonly IPostCommentService _postCommentService;
 
-        public PostCommentController(IHubContext<PostHub> hubContext,
-            IPostCommentService postCommentService)
+        public PostCommentController(IPostCommentService postCommentService)
         {
-            _hubContext = hubContext;
             _postCommentService = postCommentService;
         }
 
@@ -29,7 +26,7 @@ namespace BE.Features.Comment
         public async Task<IActionResult> Like(int id,
             [FromHeader(Name = "userId")] int userId)
         {
-            var createdEntity = await _postCommentService.Like(id, userId);
+            var createdEntity = await _postCommentService.LikeAsync(id, userId);
             return CreatedAtAction("Like", createdEntity);
         }
 
@@ -38,13 +35,13 @@ namespace BE.Features.Comment
         public async Task<IActionResult> Unlike(int id,
             [FromHeader(Name = "userId")] int userId)
         {
-            var removedEntity = await _postCommentService.Unlike(id, userId);
+            var removedEntity = await _postCommentService.UnlikeAsync(id, userId);
             return Ok(removedEntity);
         }
 
         [HttpGet("all/{postId}")]
         [Authorize]
-        public async Task<IActionResult> GetAllByPostId(int postId,
+        public async Task<IActionResult> GetAllByPostIdAsync(int postId,
             [FromHeader(Name = "userId")] int userId)
         {
             var posts = await _postCommentService.GetAllMainByPostIdAsync(postId, userId);
@@ -53,15 +50,16 @@ namespace BE.Features.Comment
 
         [HttpPost]
         [Authorize]
-        public async Task<IActionResult> Create(
+        public async Task<ActionResult<PostCommentDto>> CreateAsync(
             [FromHeader(Name = "userId")] int userId,
             [FromBody] NewCommentDto newCommentDto,
             [FromForm] IFormFile file)
         {
-            var entity = await _postCommentService.CreateAndReturnMainComment(
+            var entity = await _postCommentService.CreateAndReturnMainCommentAsync(
                 newCommentDto,
-                userId, file);
-            return CreatedAtAction("Create", entity);
+                userId,
+                file);
+            return CreatedAtAction("CreateAsync", entity);
         }
     }
 }

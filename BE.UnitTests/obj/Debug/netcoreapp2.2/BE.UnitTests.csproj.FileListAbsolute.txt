@@ -23,3 +23,5 @@ D:\Projects\Praca dyplomowa\BE\BE.UnitTests\obj\Debug\netcoreapp2.2\BE.UnitTests
 D:\Projects\Praca dyplomowa\BE\BE.UnitTests\obj\Debug\netcoreapp2.2\BE.UnitTests.pdb
 D:\Projects\Praca dyplomowa\BE\BE.UnitTests\bin\Debug\netcoreapp2.2\appsettings.Development.json
 D:\Projects\Praca dyplomowa\BE\BE.UnitTests\bin\Debug\netcoreapp2.2\appsettings.json
+D:\Projects\Praca dyplomowa\BE\BE.UnitTests\bin\Debug\netcoreapp2.2\BE.FakeData.dll
+D:\Projects\Praca dyplomowa\BE\BE.UnitTests\bin\Debug\netcoreapp2.2\BE.FakeData.pdb

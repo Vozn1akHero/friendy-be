@@ -37,8 +37,7 @@ namespace BE.Features.Comment
                     dbContextTransaction.Commit();
                 }
                 catch (Exception)
-                {
-                    //Log Exception Handling message                      
+                {              
                     returnValue = false;
                     dbContextTransaction.Rollback();
                 }

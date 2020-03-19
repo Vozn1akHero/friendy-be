@@ -12,14 +12,14 @@ namespace BE.Features.Comment.Services
 {
     public interface IPostCommentService
     {
-        Task<CommentLike> Like(int id, int userId);
-        Task<CommentLike> Unlike(int id, int userId);
+        Task<CommentLike> LikeAsync(int id, int userId);
+        Task<CommentLike> UnlikeAsync(int id, int userId);
 
         Task<IEnumerable<PostCommentDto>>
             GetAllMainByPostIdAsync(int postId,
                 int userId);
 
-        Task<PostCommentDto> CreateAndReturnMainComment(NewCommentDto
+        Task<PostCommentDto> CreateAndReturnMainCommentAsync(NewCommentDto
             commentDto, int authorId, IFormFile file);
     }
 
@@ -34,26 +34,26 @@ namespace BE.Features.Comment.Services
             _imageSaver = imageSaver;
         }
 
-        public async Task<CommentLike> Like(int id, int userId)
+        public async Task<CommentLike> LikeAsync(int id, int userId)
         {
             var like = await _repository.CommentLike.FindByCommentIdAndUserId(id, userId);
             if (like != null) throw new EntityIsAlreadyLiked();
-            var newLike = new CommentLike
+            var entity = new CommentLike
             {
                 CommentId = id,
                 UserId = userId
             };
-            await _repository.Comment.CreateLikeAsync(newLike);
+            _repository.CommentLike.CreateLike(entity);
             await _repository.SaveAsync();
-            return newLike;
+            return entity;
         }
 
-        public async Task<CommentLike> Unlike(int id, int userId)
+        public async Task<CommentLike> UnlikeAsync(int id, int userId)
         {
             var like = await _repository.CommentLike.FindByCommentIdAndUserId(id, userId);
             if (like != null)
             {
-                await _repository.Comment.UnlikeAsync(like);
+                _repository.CommentLike.Delete(like);
                 await _repository.SaveAsync();
             }
             else
@@ -73,7 +73,7 @@ namespace BE.Features.Comment.Services
             return posts;
         }
 
-        public async Task<PostCommentDto> CreateAndReturnMainComment(NewCommentDto
+        public async Task<PostCommentDto> CreateAndReturnMainCommentAsync(NewCommentDto
             commentDto, int authorId, IFormFile file)
         {
             string imagePath;
@@ -91,17 +91,11 @@ namespace BE.Features.Comment.Services
                     UserId = authorId
                 }
             };
-            _repository.MainComment.Insert(newComment);
-            await _repository.MainComment.SaveAsync();
-            var createdComment = await _repository.MainComment.FindById(newComment.Id,
+            _repository.MainComment.CreateMainComment(newComment);
+            await _repository.SaveAsync();
+            var createdComment = _repository.MainComment.FindById(newComment.Id,
                 PostCommentDto.Selector(authorId));
             return createdComment;
-        }
-
-        public Task<IEnumerable<PostCommentDto>> GetRangeByPostIdAsync(int postId,
-            int startIndex, int length)
-        {
-            throw new NotImplementedException();
         }
     }
 }

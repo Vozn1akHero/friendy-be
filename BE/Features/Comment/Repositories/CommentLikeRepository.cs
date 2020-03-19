@@ -12,6 +12,16 @@ namespace BE.Features.Comment.Repositories
         {
         }
 
+        public void CreateLike(CommentLike commentLike)
+        {
+            Create(commentLike);
+        }
+
+        public void DeleteLike(CommentLike commentLike)
+        {
+            Delete(commentLike);
+        }
+
         public async Task<CommentLike> FindByLikeIdAndUserId(int id, int userId)
         {
             var like = await FindByCondition(e => e.Id == id && e.UserId == userId)

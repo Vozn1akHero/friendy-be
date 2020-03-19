@@ -19,6 +19,9 @@
     "frameworks": {
       "netcoreapp2.2": {
         "projectReferences": {
+          "D:\\Projects\\Praca dyplomowa\\BE\\BE.FakeData\\BE.FakeData.csproj": {
+            "projectPath": "D:\\Projects\\Praca dyplomowa\\BE\\BE.FakeData\\BE.FakeData.csproj"
+          },
           "D:\\Projects\\Praca dyplomowa\\BE\\BE\\BE.csproj": {
             "projectPath": "D:\\Projects\\Praca dyplomowa\\BE\\BE\\BE.csproj"
           }

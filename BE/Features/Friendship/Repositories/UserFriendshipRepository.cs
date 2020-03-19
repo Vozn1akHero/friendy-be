@@ -50,38 +50,21 @@ namespace BE.Features.Friendship.Repositories
                     || e.FirstFriendId == secondUserId && e.SecondFriendId == firstUserId)
                 .SingleOrDefaultAsync();
             Delete(friend);
-            await SaveAsync();
-        }
-
-        public async Task<IEnumerable<UserFriendship>> GetExemplaryByUserIdAsync(
-            int userId)
-        {
-            var friends = await FindByCondition(e =>
-                    e.FirstFriendId == userId || e.SecondFriendId == userId)
-                .Include(e => e.FirstFriend)
-                .Include(e => e.SecondFriend)
-                .Take(3)
-                .ToListAsync();
-
-            return friends;
         }
 
         public async Task<IEnumerable<UserFriendship>>
-            GetLastRangeByIdWithPaginationAsync(int id, int page)
+            GetLastRangeByIdWithPaginationAsync(int id, int page, int length)
         {
-            var length = 20;
-            var res =
-                await FindByCondition(
-                        e => e.FirstFriendId == id || e.SecondFriendId == id)
-                    .Include(e => e.FirstFriend)
-                    .ThenInclude(e => e.Session)
-                    .Include(e => e.SecondFriend)
-                    .ThenInclude(e => e.Session)
-                    .OrderByDescending(e => e.Id)
-                    .Skip((page - 1) * length)
-                    .Take(length)
-                    .ToListAsync();
-            return res;
+            return await FindByCondition(
+                    e => e.FirstFriendId == id || e.SecondFriendId == id)
+                .Include(e => e.FirstFriend)
+                .ThenInclude(e => e.Session)
+                .Include(e => e.SecondFriend)
+                .ThenInclude(e => e.Session)
+                .OrderByDescending(e => e.Id)
+                .Skip((page - 1) * length)
+                .Take(length)
+                .ToListAsync();
         }
 
         public async Task<bool> CheckIfFriendsByUserIdsAsync(int firstUserId,

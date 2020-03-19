@@ -12,9 +12,9 @@ namespace BE.Features.Comment.Repositories
         Task<IEnumerable<TType>> GetAllByPostIdAsync<TType>(int postId,
             Expression<Func<MainComment, TType>> select);
 
-        void Insert(MainComment comment);
+        void CreateMainComment(MainComment comment);
 
-        Task<TType> FindById<TType>(int id,
+        TType FindById<TType>(int id,
             Expression<Func<MainComment, TType>> selector);
     }
 }

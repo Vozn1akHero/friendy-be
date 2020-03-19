@@ -24,11 +24,10 @@ namespace BE.Features.Chat.Repositories
 
         public IEnumerable<TType>
             GetMessageByReceiverIdWithPagination<TType>(
-                int receiverId, int issuerId, int page,
+                int receiverId, int issuerId, int page, int length,
                 Expression<Func<ChatMessages, TType>> selector)
         {
-            var length = 20;
-            var chatMessages = FindByCondition(e =>
+            return FindByCondition(e =>
                     e.Chat.FirstParticipantId == receiverId
                     && e.Chat.SecondParticipantId == issuerId
                     || e.Chat.FirstParticipantId == issuerId
@@ -38,14 +37,12 @@ namespace BE.Features.Chat.Repositories
                 .Take(length)
                 .Select(selector)
                 .ToList();
-            return chatMessages;
         }
 
         public IEnumerable<TType>
-            GetLastMessagesByReceiverIdWithPagination<TType>(int receiverId,
-                int page, Expression<Func<ChatMessages, TType>> selector)
+            GetLastMessagesByParticipantIdWithPagination<TType>(int receiverId,
+                int page, int length, Expression<Func<ChatMessages, TType>> selector)
         {
-            var length = 20;
             var chatMessages = FindByCondition(e =>
                     e.Chat.FirstParticipantId == receiverId
                     || e.Chat.SecondParticipantId == receiverId)

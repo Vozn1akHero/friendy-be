@@ -72,8 +72,7 @@ namespace BE.Features.Event
         [Route("range/{id}")]
         public IActionResult GetAdminList(int id,
             [FromQuery(Name = "page")] int page,
-            [FromQuery(Name = "length")] int length,
-            [FromHeader(Name = "userId")] int userId)
+            [FromQuery(Name = "length")] int length)
         {
             var adminList = _eventAdminService.GetRangeByEventIdWithPagination(id, page, length);
             return Ok(adminList);

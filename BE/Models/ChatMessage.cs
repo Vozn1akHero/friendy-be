@@ -16,6 +16,7 @@ namespace BE.Models
         public DateTime Date { get; set; }
         public int UserId { get; set; }
         public int ReceiverId { get; set; }
+        public bool Read { get; set; }
 
         public virtual User Receiver { get; set; }
         public virtual User User { get; set; }

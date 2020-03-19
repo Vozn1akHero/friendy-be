@@ -8,7 +8,12 @@
     ".NETCoreApp,Version=v2.2": {
       "BE.UnitTests.Xunit/1.0.0": {
         "dependencies": {
+          "AutoFixture": "4.11.0",
+          "AutoFixture.AutoMoq": "4.11.0",
           "BE": "1.0.0",
+          "BE.FakeData": "1.0.0",
+          "Microsoft.EntityFrameworkCore": "2.2.6",
+          "Microsoft.EntityFrameworkCore.InMemory": "2.2.6",
           "Microsoft.NET.Test.Sdk": "16.0.1",
           "xunit": "2.4.0",
           "xunit.runner.visualstudio": "2.4.0",
@@ -17,6 +22,30 @@
         },
         "runtime": {
           "BE.UnitTests.Xunit.dll": {}
+        }
+      },
+      "AutoFixture/4.11.0": {
+        "dependencies": {
+          "Fare": "2.1.1",
+          "System.ComponentModel.Annotations": "4.5.0"
+        },
+        "runtime": {
+          "lib/netstandard2.0/AutoFixture.dll": {
+            "assemblyVersion": "4.11.0.0",
+            "fileVersion": "4.11.0.549"
+          }
+        }
+      },
+      "AutoFixture.AutoMoq/4.11.0": {
+        "dependencies": {
+          "AutoFixture": "4.11.0",
+          "Moq": "4.13.1"
+        },
+        "runtime": {
+          "lib/netstandard2.0/AutoFixture.AutoMoq.dll": {
+            "assemblyVersion": "4.11.0.0",
+            "fileVersion": "4.11.0.549"
+          }
         }
       },
       "AutoMapper/9.0.0": {
@@ -81,6 +110,14 @@
           "lib/netstandard2.0/Elasticsearch.Net.dll": {
             "assemblyVersion": "7.0.0.0",
             "fileVersion": "7.4.2.0"
+          }
+        }
+      },
+      "Fare/2.1.1": {
+        "runtime": {
+          "lib/netstandard1.1/Fare.dll": {
+            "assemblyVersion": "2.1.0.0",
+            "fileVersion": "2.1.1.0"
           }
         }
       },
@@ -632,6 +669,17 @@
         },
         "runtime": {
           "lib/netstandard2.0/Microsoft.EntityFrameworkCore.Design.dll": {
+            "assemblyVersion": "2.2.6.0",
+            "fileVersion": "2.2.6.19169"
+          }
+        }
+      },
+      "Microsoft.EntityFrameworkCore.InMemory/2.2.6": {
+        "dependencies": {
+          "Microsoft.EntityFrameworkCore": "2.2.6"
+        },
+        "runtime": {
+          "lib/netstandard2.0/Microsoft.EntityFrameworkCore.InMemory.dll": {
             "assemblyVersion": "2.2.6.0",
             "fileVersion": "2.2.6.19169"
           }
@@ -2713,6 +2761,14 @@
           "BE.dll": {}
         }
       },
+      "BE.FakeData/1.0.0": {
+        "dependencies": {
+          "BE": "1.0.0"
+        },
+        "runtime": {
+          "BE.FakeData.dll": {}
+        }
+      },
       "Microsoft.AspNetCore.Mvc.Abstractions/2.2.0.0": {
         "runtime": {
           "Microsoft.AspNetCore.Mvc.Abstractions.dll": {
@@ -2736,6 +2792,20 @@
       "type": "project",
       "serviceable": false,
       "sha512": ""
+    },
+    "AutoFixture/4.11.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-2C8JcuQU70dJQ8v5YVwkLPyd0pzpcXT5SF6z+K+FwoRb0HWpmLEaNHw1nYx+wpjgf35AyivF+p/7hPhWsBj0YQ==",
+      "path": "autofixture/4.11.0",
+      "hashPath": "autofixture.4.11.0.nupkg.sha512"
+    },
+    "AutoFixture.AutoMoq/4.11.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-hQmZTu+xeXVR99UItYbgsK4BH2LBOgsNFtrpRB2cXYOEHicRXcL+ewg4el6Rt8CfctxOouq6NLUZ3bzFiTiprA==",
+      "path": "autofixture.automoq/4.11.0",
+      "hashPath": "autofixture.automoq.4.11.0.nupkg.sha512"
     },
     "AutoMapper/9.0.0": {
       "type": "package",
@@ -2771,6 +2841,13 @@
       "sha512": "sha512-UoYJ4DihRktNYsp6cOvMabMJrT2IDDwZLa/HjIItLhsm0V+SBPD0R7Ml53qVzRiVE3q6Lw4uxSRWNK7011QedQ==",
       "path": "elasticsearch.net/7.4.2",
       "hashPath": "elasticsearch.net.7.4.2.nupkg.sha512"
+    },
+    "Fare/2.1.1": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-HaI8puqA66YU7/9cK4Sgbs1taUTP1Ssa4QT2PIzqJ7GvAbN1QgkjbRsjH+FSbMh1MJdvS0CIwQNLtFT+KF6KpA==",
+      "path": "fare/2.1.1",
+      "hashPath": "fare.2.1.1.nupkg.sha512"
     },
     "LazyCache/2.0.1": {
       "type": "package",
@@ -3072,6 +3149,13 @@
       "sha512": "sha512-ouDKXTXY+ItF+PAK/jkp+Cp6Ve8Pd9sblyqOErjaiK7CzeN28peFsv3NfDeoqTAXXCCKEyuv/iXYtLs4r3wI0w==",
       "path": "microsoft.entityframeworkcore.design/2.2.6",
       "hashPath": "microsoft.entityframeworkcore.design.2.2.6.nupkg.sha512"
+    },
+    "Microsoft.EntityFrameworkCore.InMemory/2.2.6": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-PREu4MsAGz3NEheW4TX4e8Bl4l34OrA4R4KFyWb3r475QRS1/ul4vK1mUzWF/fEwJgx7n1h1tvNZW7I04sl5fw==",
+      "path": "microsoft.entityframeworkcore.inmemory/2.2.6",
+      "hashPath": "microsoft.entityframeworkcore.inmemory.2.2.6.nupkg.sha512"
     },
     "Microsoft.EntityFrameworkCore.Relational/2.2.6": {
       "type": "package",
@@ -4355,6 +4439,11 @@
       "hashPath": "xunit.runner.visualstudio.2.4.0.nupkg.sha512"
     },
     "BE/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "BE.FakeData/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

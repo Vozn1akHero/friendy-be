@@ -35,26 +35,11 @@ namespace BE.Features.Photo
 
         [HttpGet]
         [Authorize]
-        [Route("range")]
-        public async Task<IActionResult> GetRangeAsync([FromQuery(Name =
-                "startIndex")]
-            int startIndex,
-            [FromQuery(Name = "length")] int length,
-            [FromQuery(Name = "eventId")] int eventId)
-        {
-            var photos =
-                await _photoService.GetEventPhotoRangeAsync(eventId, startIndex,
-                    length);
-            return Ok(photos);
-        }
-
-        [HttpGet]
-        [Authorize]
         [Route("{eventId}/page/{page}")]
-        public async Task<IActionResult> GetRangeAsync(int eventId, int page)
+        public async Task<IActionResult> GetRangeAsync(int eventId, int page, [FromQuery(Name = "length")] int length)
         {
             var photos =
-                await _photoService.GetEventPhotosWithPaginationAsync(eventId, page);
+                await _photoService.GetEventPhotosWithPaginationAsync(eventId, page, length);
             return Ok(photos);
         }
 

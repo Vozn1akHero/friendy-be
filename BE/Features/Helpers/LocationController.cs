@@ -11,7 +11,7 @@ namespace BE.Features.Helpers
     [Route("api/location")]
     public class LocationController : ControllerBase
     {
-        private ILocationService _locationService;
+        private readonly ILocationService _locationService;
 
         public LocationController(ILocationService locationService)
         {

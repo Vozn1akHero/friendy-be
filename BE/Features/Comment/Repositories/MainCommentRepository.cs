@@ -24,16 +24,16 @@ namespace BE.Features.Comment.Repositories
                 .ToListAsync();
         }
 
-        public void Insert(MainComment comment)
+        public void CreateMainComment(MainComment comment)
         {
             Create(comment);
         }
 
-        public async Task<TType> FindById<TType>(int id,
+        public TType FindById<TType>(int id,
             Expression<Func<MainComment, TType>> selector)
         {
-            return await FindByCondition(e => e.Id == id).Select(selector)
-                .SingleOrDefaultAsync();
+            return FindByCondition(e => e.Id == id).Select(selector)
+                .SingleOrDefault();
         }
     }
 }

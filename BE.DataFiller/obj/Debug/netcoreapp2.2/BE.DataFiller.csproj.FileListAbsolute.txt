@@ -1,0 +1,16 @@
+D:\Projects\Praca dyplomowa\BE\BE.DataFiller\bin\Debug\netcoreapp2.2\Properties\launchSettings.json
+D:\Projects\Praca dyplomowa\BE\BE.DataFiller\bin\Debug\netcoreapp2.2\BE.DataFiller.deps.json
+D:\Projects\Praca dyplomowa\BE\BE.DataFiller\bin\Debug\netcoreapp2.2\BE.DataFiller.runtimeconfig.json
+D:\Projects\Praca dyplomowa\BE\BE.DataFiller\bin\Debug\netcoreapp2.2\BE.DataFiller.runtimeconfig.dev.json
+D:\Projects\Praca dyplomowa\BE\BE.DataFiller\bin\Debug\netcoreapp2.2\BE.DataFiller.dll
+D:\Projects\Praca dyplomowa\BE\BE.DataFiller\bin\Debug\netcoreapp2.2\BE.DataFiller.pdb
+D:\Projects\Praca dyplomowa\BE\BE.DataFiller\bin\Debug\netcoreapp2.2\BE.dll
+D:\Projects\Praca dyplomowa\BE\BE.DataFiller\bin\Debug\netcoreapp2.2\BE.pdb
+D:\Projects\Praca dyplomowa\BE\BE.DataFiller\obj\Debug\netcoreapp2.2\BE.DataFiller.csprojAssemblyReference.cache
+D:\Projects\Praca dyplomowa\BE\BE.DataFiller\obj\Debug\netcoreapp2.2\BE.DataFiller.AssemblyInfoInputs.cache
+D:\Projects\Praca dyplomowa\BE\BE.DataFiller\obj\Debug\netcoreapp2.2\BE.DataFiller.AssemblyInfo.cs
+D:\Projects\Praca dyplomowa\BE\BE.DataFiller\obj\Debug\netcoreapp2.2\BE.DataFiller.csproj.CopyComplete
+D:\Projects\Praca dyplomowa\BE\BE.DataFiller\obj\Debug\netcoreapp2.2\BE.DataFiller.dll
+D:\Projects\Praca dyplomowa\BE\BE.DataFiller\obj\Debug\netcoreapp2.2\BE.DataFiller.pdb
+D:\Projects\Praca dyplomowa\BE\BE.DataFiller\bin\Debug\netcoreapp2.2\appsettings.Development.json
+D:\Projects\Praca dyplomowa\BE\BE.DataFiller\bin\Debug\netcoreapp2.2\appsettings.json

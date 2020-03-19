@@ -3,7 +3,7 @@ using System.Linq;
 using Microsoft.EntityFrameworkCore;
 using Moq;
 
-namespace BE.UnitTests
+namespace BE.UnitTests.Xunit
 {
     public static class Helpers
     {
@@ -13,7 +13,8 @@ namespace BE.UnitTests
             mockSet.As<IQueryable<T>>().Setup(m => m.Provider).Returns(entities.AsQueryable().Provider);
             mockSet.As<IQueryable<T>>().Setup(m => m.Expression).Returns(entities.AsQueryable().Expression);
             mockSet.As<IQueryable<T>>().Setup(m => m.ElementType).Returns(entities.AsQueryable().ElementType);
-            mockSet.As<IQueryable<T>>().Setup(m => m.GetEnumerator()).Returns(entities.AsQueryable().GetEnumerator());
+            mockSet.As<IQueryable<T>>().Setup(m => m.GetEnumerator())
+                .Returns(entities.AsQueryable().GetEnumerator());
             //mockSet.Setup(m => m.Add(It.IsAny<T>())).Callback<T>(entities.Add);
             return mockSet;
         }

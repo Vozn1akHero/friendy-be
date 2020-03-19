@@ -17,10 +17,10 @@ namespace BE.Features.Chat.Services
         ChatLastMessageDto GetLastChatMessageByChatId(int chatId, int receiverId);
 
         IEnumerable<ChatMessageDto> GetMessageByReceiverIdWithPagination(
-            int receiverId, int issuerId, int page);
+            int receiverId, int issuerId, int page, int length);
 
         IEnumerable<ChatLastMessageDto> GetLastMessageByReceiverIdWithPagination(
-            int receiverId, int page);
+            int receiverId, int page, int length);
 
         Task<ChatMessage> CreateAndReturnMessageAsync(string text, IFormFile image,
             int chatId, int authorId, int receiverId);
@@ -32,14 +32,12 @@ namespace BE.Features.Chat.Services
     public class ChatService : IChatService
     {
         private readonly IImageSaver _imageSaver;
-        private readonly IMapper _mapper;
         private readonly IRepositoryWrapper _repository;
 
-        public ChatService(IRepositoryWrapper repository, IMapper mapper,
+        public ChatService(IRepositoryWrapper repository,
             IImageSaver imageSaver)
         {
             _repository = repository;
-            _mapper = mapper;
             _imageSaver = imageSaver;
         }
 
@@ -49,30 +47,30 @@ namespace BE.Features.Chat.Services
             var msg = _repository.ChatMessages
                 .GetLastMessageByChatIdWithPagination(chatId,
                     ChatLastMessageDto.Selector(receiverId));
-            var act = _mapper.Map<ChatLastMessageDto>(msg, opt => opt
-                .Items["receiverId"] = receiverId);
-            return act;
+            /*var act = _mapper.Map<ChatLastMessageDto>(msg, opt => opt
+                .Items["receiverId"] = receiverId);*/
+            return msg;
         }
 
         public IEnumerable<ChatMessageDto>
-            GetMessageByReceiverIdWithPagination(int receiverId, int issuerId, int page)
+            GetMessageByReceiverIdWithPagination(int receiverId, int issuerId, int page, int length)
         {
             var chatMessages = _repository.ChatMessages
                 .GetMessageByReceiverIdWithPagination(receiverId,
-                    issuerId, page, ChatMessageDto.Selector);
-            var reversedChatMessages = chatMessages.Reverse();
-            return reversedChatMessages;
+                    issuerId, page, length, ChatMessageDto.Selector);
+            //var reversedChatMessages = chatMessages.Reverse();
+            return chatMessages;
         }
 
         public IEnumerable<ChatLastMessageDto>
-            GetLastMessageByReceiverIdWithPagination(int receiverId, int page)
+            GetLastMessageByReceiverIdWithPagination(int receiverId, int page, int length)
         {
             var msgs = _repository.ChatMessages
-                .GetLastMessagesByReceiverIdWithPagination(receiverId, page,
+                .GetLastMessagesByParticipantIdWithPagination(receiverId, page, length,
                     ChatLastMessageDto.Selector(receiverId));
-            var sortedMessages = msgs.GroupBy(x => x.ChatId,
-                (key, g) => g.OrderBy(e => e.ChatId).First()).ToList();
-            return sortedMessages;
+            var dialogs = msgs.GroupBy(x => x.ChatId,
+                    (key, g) => g.OrderBy(e => e.ChatId).First());
+            return dialogs;
         }
 
         public async Task<ChatMessage> CreateAndReturnMessageAsync(

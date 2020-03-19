@@ -95,29 +95,29 @@ namespace BE.Features.Friendship
 
         [HttpGet]
         [Authorize]
-        [Route("paginate/{userId}")]
-        public async Task<IActionResult> GetUserFriendsWithPagination([FromQuery(Name = "page")] int page, 
-        int userId)
+        [Route("{userId}/paginate/{page}")]
+        public async Task<IActionResult> GetUserFriendsWithPagination(int page, 
+            int userId,
+            [FromQuery(Name = "length")] int length,
+            [FromQuery(Name = "userId")] int issuerId)
         {
-            var friends =
-                await _userFriendshipService.GetLastRangeByIdWithPaginationAsync(userId,
-                    page);
-
+            var friends = await _userFriendshipService.GetLastRangeByIdWithPaginationAsync(userId, page, length);
             return Ok(friends);
         }
         
-        [HttpGet]
+        /*[HttpGet]
         [Authorize]
         [Route("paginate/logged-in/{page}")]
         public async Task<IActionResult> GetLoggedInUserFriendsWithPagination(int page,
+            [FromQuery(Name = "length")] int length,
             [FromHeader(Name = "userId")] int userId)
         {
             var friends =
                 await _userFriendshipService.GetLastRangeByIdWithPaginationAsync(userId,
-                    page);
+                    page, length);
 
             return Ok(friends);
-        }
+        }*/
 
         [HttpGet]
         [Authorize]
@@ -134,10 +134,11 @@ namespace BE.Features.Friendship
         [HttpDelete]
         [Authorize]
         [Route("remove/{id}")]
-        public async Task<IActionResult> Remove(int id,
+        public async Task<IActionResult> RemoveByIdAsync(int id,
             [FromHeader(Name = "userId")] int userId)
         {
             await _repository.UserFriendship.RemoveByIdentifiersAsync(id, userId);
+            await _repository.SaveAsync();
             return Ok();
         }
 

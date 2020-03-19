@@ -7,12 +7,17 @@
     </PropertyGroup>
 
     <ItemGroup>
+        <PackageReference Include="AutoFixture" Version="4.11.0" />
+        <PackageReference Include="AutoFixture.AutoMoq" Version="4.11.0" />
+        <PackageReference Include="Microsoft.EntityFrameworkCore" Version="2.2.6" />
+        <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="2.2.6" />
         <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.0.1" />
         <PackageReference Include="xunit" Version="2.4.0" />
         <PackageReference Include="xunit.runner.visualstudio" Version="2.4.0" />
     </ItemGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\BE.FakeData\BE.FakeData.csproj" />
       <ProjectReference Include="..\BE\BE.csproj" />
     </ItemGroup>
 

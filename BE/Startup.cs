@@ -106,7 +106,6 @@ namespace BE
             services.ConfigureSqlContext(Configuration);
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
             if (env.IsDevelopment()) app.UseDeveloperExceptionPage();
@@ -133,8 +132,8 @@ namespace BE
 
             app.UseSignalR(routes =>
             {
-                routes.MapHub<PostHub>("/postHub");
-                routes.MapHub<ProfileHub>("/profileHub");
+                //routes.MapHub<PostHub>("/postHub");
+                //routes.MapHub<ProfileHub>("/profileHub");
                 routes.MapHub<DialogHub>("/dialogHub");
                 routes.MapHub<UserStatusHub>("/userStatusHub");
             });

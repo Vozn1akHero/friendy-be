@@ -35,7 +35,7 @@ namespace BE.Features.Comment.Dtos
                 Content = e.Comment.Content,
                 LikesCount = e.CommentResponseLike.Count,
                 PostId = e.Comment.PostId,
-                CommentId = e.MainComment.CommentId,
+                CommentId = e.MainComment.Id,
                 CommentAuthorName = e.MainComment.Comment.User.Name,
                 CommentAuthorSurname = e.MainComment.Comment.User.Surname,
                 IsCommentLikedByUser = e.CommentResponseLike.Any(d => d.UserId == userId),

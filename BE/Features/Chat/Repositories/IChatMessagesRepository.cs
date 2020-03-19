@@ -11,11 +11,11 @@ namespace BE.Features.Chat.Repositories
         //void Add(ChatMessages chatMessages);
 
         IEnumerable<TType> GetMessageByReceiverIdWithPagination<TType>(
-            int receiverId, int issuerId, int page,
+            int receiverId, int issuerId, int page, int length,
             Expression<Func<ChatMessages, TType>> selector);
 
-        IEnumerable<TType> GetLastMessagesByReceiverIdWithPagination<TType>(
-            int receiverId, int page, Expression<Func<ChatMessages, TType>> selector);
+        IEnumerable<TType> GetLastMessagesByParticipantIdWithPagination<TType>(
+            int receiverId, int page, int length, Expression<Func<ChatMessages, TType>> selector);
 
         TType
             GetLastMessageByChatIdWithPagination<TType>(int chatId,

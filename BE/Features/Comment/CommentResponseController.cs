@@ -24,7 +24,7 @@ namespace BE.Features.Comment
         public async Task<IActionResult> Like(int id,
             [FromHeader(Name = "userId")] int userId)
         {
-            var createdEntity = await _commentResponseService.Like(id, userId);
+            var createdEntity = await _commentResponseService.LikeAsync(id, userId);
             return CreatedAtAction("Like", createdEntity);
         }
 
@@ -33,7 +33,7 @@ namespace BE.Features.Comment
         public async Task<IActionResult> Unlike(int id,
             [FromHeader(Name = "userId")] int userId)
         {
-            await _commentResponseService.Unlike(id, userId);
+            await _commentResponseService.UnlikeAsync(id, userId);
             return Ok();
         }
 

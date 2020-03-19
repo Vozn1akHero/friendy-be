@@ -22,14 +22,6 @@ namespace BE.Features.User
             _userDataService = userDataService;
         }
 
-        [HttpGet]
-        [Authorize]
-        [Route("{id}")]
-        public async Task<Models.User> GetById(int id)
-        {
-            var user = await _userDataService.GetByIdAsync(id);
-            return user;
-        }
 
         [HttpGet("{id}/with-selected-fields")]
         [Authorize]
@@ -65,10 +57,12 @@ namespace BE.Features.User
         }
 
         [HttpGet]
-        [Route("{userId}/extended")]
-        public async Task<IActionResult> GetExtendedInfo(int userId)
+        [Authorize]
+        [Route("{id}")]
+        public async Task<IActionResult> GetUserAsync(int id)
         {
-            var user = await _userDataService.GetExtendedById(userId);
+            var user = await _userDataService.GetExtendedById(id);
+            if (user == null) return NotFound();
             return Ok(user);
         }
 
@@ -82,7 +76,7 @@ namespace BE.Features.User
             return Ok(user);
         }
 
-        [HttpGet]
+        /*[HttpGet]
         [Authorize]
         [Route("{userId}/avatar")]
         public async Task<IActionResult> GetUserAvatar(int userId)
@@ -98,7 +92,7 @@ namespace BE.Features.User
         {
             var background = await _repository.User.GetProfileBackgroundByIdAsync(userId);
             return Ok(background);
-        }
+        }*/
 
         [HttpGet("profile-belonging/{id}")]
         [Authorize]

@@ -66,11 +66,11 @@ namespace BE.Repositories
         }
 
 
-        public IMainCommentRepository MainComment =>
+        public virtual IMainCommentRepository MainComment =>
             _mainComment ?? (_mainComment = new MainCommentRepository
                 (_friendyContext));
 
-        public IResponseToCommentRepository ResponseToComment =>
+        public virtual IResponseToCommentRepository ResponseToComment =>
             _responseToComment ?? (_responseToComment = new ResponseToCommentRepository
                 (_friendyContext));
 
@@ -79,108 +79,98 @@ namespace BE.Repositories
             await _friendyContext.SaveChangesAsync();
         }
 
-        public IUserRepository User =>
+        public virtual IUserRepository User =>
             _user ?? (_user = new UserRepository(_friendyContext));
 
-        public IUserPhotoRepository UserPhoto => _userPhoto ?? (_userPhoto =
+        public virtual IUserPhotoRepository UserPhoto => _userPhoto ?? (_userPhoto =
                                                      new UserPhotoRepository(
                                                          _friendyContext));
 
-        public IPostRepository Post =>
+        public virtual IPostRepository Post =>
             _post ?? (_post = new PostRepository(_friendyContext));
 
         public virtual IUserPostRepository UserPost =>
             _userPost ?? (_userPost = new UserPostRepository(_friendyContext));
 
-        public IPostLikeRepository PostLike =>
+        public virtual IPostLikeRepository PostLike =>
             _postLike ?? (_postLike = new PostLikeRepository(_friendyContext));
 
         //public IFriendRepository Friend => _friend ?? (_friend = new FriendRepository(_friendyContext));
-        public IEventRepository Event =>
+        public virtual IEventRepository Event =>
             _event ?? (_event = new EventRepository(_friendyContext));
 
-        public IUserFriendshipRepository UserFriendship =>
+        public virtual IUserFriendshipRepository UserFriendship =>
             _userFriendship ?? (_userFriendship =
                 new UserFriendshipRepository(_friendyContext));
 
-        public IUserEventsRepository UserEvents =>
+        public virtual IUserEventsRepository UserEvents =>
             _userEvents ??
             (_userEvents = new UserEventsRepository(_friendyContext));
 
-        public IEventAdminsRepository EventAdmins =>
+        public virtual IEventAdminsRepository EventAdmins =>
             _eventAdmins ?? (_eventAdmins =
                 new EventAdminsRepository(_friendyContext));
 
-        public ICommentRepository Comment =>
+        public virtual ICommentRepository Comment =>
             _comment ?? (_comment = new CommentRepository(_friendyContext));
 
-        public IChatRepository Chat =>
+        public virtual IChatRepository Chat =>
             _chat ?? (_chat =
                 new ChatRepository(_friendyContext));
 
-        public IChatMessageRepository ChatMessage =>
+        public virtual IChatMessageRepository ChatMessage =>
             _chatMessage ?? (_chatMessage =
                 new ChatMessageRepository(_friendyContext));
 
-        public IChatMessagesRepository ChatMessages =>
+        public virtual IChatMessagesRepository ChatMessages =>
             _chatMessages ?? (_chatMessages =
                 new ChatMessagesRepository(_friendyContext));
 
-        public IFriendRequestRepository FriendRequest =>
+        public virtual IFriendRequestRepository FriendRequest =>
             _friendRequest ?? (_friendRequest =
                 new FriendRequestRepository(_friendyContext));
 
-        public IEventPostRepository EventPost =>
+        public virtual IEventPostRepository EventPost =>
             _eventPost ??
             (_eventPost = new EventPostRepository(_friendyContext));
 
-        public IEventParticipantsRepository EventParticipants =>
+        public virtual IEventParticipantsRepository EventParticipants =>
             _eventParticipants
             ?? (_eventParticipants =
                 new EventParticipantsRepository(_friendyContext));
 
-        public IEventPhotoRepository EventPhoto =>
+        public virtual IEventPhotoRepository EventPhoto =>
             _eventPhoto ??
             (_eventPhoto = new EventPhotoRepository(_friendyContext));
 
-        public IPhotoRepository Photo =>
+        public virtual IPhotoRepository Photo =>
             _photo ?? (_photo = new PhotoRepository(_friendyContext));
 
-        public IEventParticipationRequestRepository EventParticipationRequest =>
+        public virtual IEventParticipationRequestRepository EventParticipationRequest =>
             _eventParticipationRequest ?? (_eventParticipationRequest =
                 new EventParticipationRequestRepository(_friendyContext));
 
-        public IFriendshipRecommendationRepository FriendshipRecommendation =>
+        public virtual IFriendshipRecommendationRepository FriendshipRecommendation =>
             _friendshipRecommendation ?? (_friendshipRecommendation =
                 new FriendshipRecommendationRepository(_friendyContext));
 
-        public ISessionRepository Session => _session ?? (_session =
+        public virtual ISessionRepository Session => _session ?? (_session =
                                                  new SessionRepository(_friendyContext));
 
-        public IEventBannedUsersRepository EventBannedUsers =>
+        public virtual IEventBannedUsersRepository EventBannedUsers =>
             _eventBannedUsers ?? (_eventBannedUsers =
                 new EventBannedUsersRepository(_friendyContext));
 
-        public ICommentLikeRepository CommentLike => _commentLike ??
+        public virtual ICommentLikeRepository CommentLike => _commentLike ??
                                                      (_commentLike =
                                                          new CommentLikeRepository(
                                                              _friendyContext));
-
-        public IDatabaseTransaction BeginTransaction()
-        {
-            throw new NotImplementedException();
-            //return new EntityDatabaseTransaction(_friendyContext);
-        }
 
         public int Save()
         {
             return _friendyContext.SaveChanges();
         }
 
-        /*public void Dispose()
-        {
-            _friendyContext.Dispose();
-        }*/
         public void Dispose()
         {
         }

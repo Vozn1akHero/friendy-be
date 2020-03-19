@@ -13,10 +13,13 @@ namespace BE.Features.Comment.Repositories
             GetAllByMainCommentIdAsync<TType>(int commentId,
                 Expression<Func<ResponseToComment, TType>> select);
 
-        Task CreateAsync(ResponseToComment
+        void Add(ResponseToComment
             responseToComment);
 
         Task<TType> GetByIdAsync<TType>(int id,
-            Expression<Func<ResponseToComment, TType>> select);
+            Expression<Func<ResponseToComment, TType>> selector);
+        bool CheckIfLiked(int responseId, int userId);
+        Task LikeAsync(CommentResponseLike commentResponseLike);
+        Task UnlikeAsync(int responseId, int userId);
     }
 }
