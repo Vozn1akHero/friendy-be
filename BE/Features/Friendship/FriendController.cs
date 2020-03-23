@@ -1,4 +1,5 @@
 using System.Threading.Tasks;
+using BE.Features.Friendship.Dtos;
 using BE.Features.Friendship.Helpers;
 using BE.Features.Friendship.Services;
 using BE.Repositories;
@@ -62,7 +63,7 @@ namespace BE.Features.Friendship
             [FromHeader(Name = "userId")] int userId)
         {
             var requests =
-                await _repository.FriendRequest.GetReceivedByUserIdWithDto(userId);
+                await _repository.FriendRequest.GetReceivedByUserIdAsync(userId, ReceivedFriendRequestDto.Selector);
             return Ok(requests);
         }
 
@@ -72,7 +73,7 @@ namespace BE.Features.Friendship
         public async Task<IActionResult> GetSentRequests(
             [FromHeader(Name = "userId")] int userId)
         {
-            var requests = await _repository.FriendRequest.GetSentByUserIdWithDto(userId);
+            var requests = await _repository.FriendRequest.GetSentByUserIdAsync(userId, SentFriendRequestDto.Selector);
             return Ok(requests);
         }
         

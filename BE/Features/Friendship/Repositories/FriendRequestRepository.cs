@@ -1,5 +1,7 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
 using BE.Features.Friendship.Dtos;
 using BE.Models;
@@ -47,45 +49,20 @@ namespace BE.Features.Friendship.Repositories
                     || e.ReceiverId == firstId && e.AuthorId == secondId);
         }
 
-        public async Task<List<FriendRequest>> GetReceivedByUserId(int userId)
+        public async Task<IEnumerable<TType>> GetReceivedByUserIdAsync<TType>(int userId, Expression<Func<FriendRequest, TType>> selector)
         {
             return await FindByCondition(e => e.ReceiverId == userId)
+                .Select(selector)
                 .ToListAsync();
         }
 
-        public async Task<List<FriendRequest>> GetSentByUserId(int userId)
+        public async Task<IEnumerable<TType>> GetSentByUserIdAsync<TType>(int userId, Expression<Func<FriendRequest, TType>> selector)
         {
             return await FindByCondition(e => e.AuthorId == userId)
+                .Select(selector)
                 .ToListAsync();
         }
 
-        public async Task<List<ReceivedFriendRequestDto>> GetReceivedByUserIdWithDto(
-            int userId)
-        {
-            return await FindByCondition(e => e.ReceiverId == userId)
-                .Select(e => new ReceivedFriendRequestDto
-                {
-                    RequestId = e.Id,
-                    Name = e.Author.Name,
-                    Surname = e.Author.Surname,
-                    AvatarPath = e.Receiver.Avatar,
-                    AuthorId = e.AuthorId
-                })
-                .ToListAsync();
-        }
-
-        public async Task<List<SentFriendRequestDto>> GetSentByUserIdWithDto(int userId)
-        {
-            return await FindByCondition(e => e.AuthorId == userId)
-                .Select(e => new SentFriendRequestDto
-                {
-                    RequestId = e.Id,
-                    Name = e.Receiver.Name,
-                    Surname = e.Receiver.Surname,
-                    AvatarPath = e.Receiver.Avatar,
-                    ReceiverId = e.Receiver.Id
-                })
-                .ToListAsync();
-        }
+        
     }
 }
