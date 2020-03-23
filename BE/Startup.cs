@@ -136,6 +136,7 @@ namespace BE
                 //routes.MapHub<ProfileHub>("/profileHub");
                 routes.MapHub<DialogHub>("/dialogHub");
                 routes.MapHub<UserStatusHub>("/userStatusHub");
+               // routes.MapHub<>();
             });
 
             app.UseEndpointRouting().UseMvc();

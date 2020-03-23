@@ -13,14 +13,11 @@ namespace BE.Features.Post
     [Route("api/post")]
     public class PostController : ControllerBase
     {
-        private readonly IHubContext<PostHub> _hubContext;
         private readonly IRepositoryWrapper _repository;
 
-        public PostController(IRepositoryWrapper repository,
-            IHubContext<PostHub> hubContext)
+        public PostController(IRepositoryWrapper repository)
         {
             _repository = repository;
-            _hubContext = hubContext;
         }
 
         [HttpDelete]

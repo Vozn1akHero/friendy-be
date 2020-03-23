@@ -32,7 +32,7 @@ namespace BE.Features.Photo
             return Ok();
         }
 
-        [HttpGet]
+        /*[HttpGet]
         [Authorize]
         [Route("range")]
         public async Task<IActionResult> GetRangeAsync([FromQuery(Name = "startIndex")]
@@ -44,7 +44,7 @@ namespace BE.Features.Photo
                 await _photoService.GetUserPhotoRangeAsync(userId, startIndex,
                     length);
             return Ok(photos);
-        }
+        }*/
 
         [HttpGet]
         [Authorize]

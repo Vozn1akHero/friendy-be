@@ -23,6 +23,7 @@ namespace BE.Models
         public virtual DbSet<Comment> Comment { get; set; }
         public virtual DbSet<CommentLike> CommentLike { get; set; }
         public virtual DbSet<CommentResponseLike> CommentResponseLike { get; set; }
+        public virtual DbSet<CommentToPostNotification> CommentToPostNotification { get; set; }
         public virtual DbSet<District> District { get; set; }
         public virtual DbSet<Education> Education { get; set; }
         public virtual DbSet<Event> Event { get; set; }
@@ -32,6 +33,7 @@ namespace BE.Models
         public virtual DbSet<EventParticipants> EventParticipants { get; set; }
         public virtual DbSet<EventParticipationRequest> EventParticipationRequest { get; set; }
         public virtual DbSet<EventPost> EventPost { get; set; }
+        public virtual DbSet<EventPostNotification> EventPostNotification { get; set; }
         public virtual DbSet<FriendRequest> FriendRequest { get; set; }
         public virtual DbSet<FriendshipRecommendation> FriendshipRecommendation { get; set; }
         public virtual DbSet<Gender> Gender { get; set; }
@@ -39,10 +41,12 @@ namespace BE.Models
         public virtual DbSet<Interest> Interest { get; set; }
         public virtual DbSet<MainComment> MainComment { get; set; }
         public virtual DbSet<MaritalStatus> MaritalStatus { get; set; }
+        public virtual DbSet<Notification> Notification { get; set; }
         public virtual DbSet<Post> Post { get; set; }
         public virtual DbSet<PostLike> PostLike { get; set; }
         public virtual DbSet<Religion> Religion { get; set; }
         public virtual DbSet<ResponseToComment> ResponseToComment { get; set; }
+        public virtual DbSet<ResponseToCommentNotification> ResponseToCommentNotification { get; set; }
         public virtual DbSet<Session> Session { get; set; }
         public virtual DbSet<SmokingAttitude> SmokingAttitude { get; set; }
         public virtual DbSet<User> User { get; set; }
@@ -265,6 +269,29 @@ namespace BE.Models
                     .HasConstraintName("FK_comment_response_like_user");
             });
 
+            modelBuilder.Entity<CommentToPostNotification>(entity =>
+            {
+                entity.ToTable("comment_to_post_notification", "notification");
+
+                entity.Property(e => e.Id).HasColumnName("id");
+
+                entity.Property(e => e.MainCommentId).HasColumnName("main_comment_id");
+
+                entity.Property(e => e.NotificationId).HasColumnName("notification_id");
+
+                entity.HasOne(d => d.MainComment)
+                    .WithMany(p => p.CommentToPostNotification)
+                    .HasForeignKey(d => d.MainCommentId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_comment_to_post_notification_main_comment");
+
+                entity.HasOne(d => d.Notification)
+                    .WithMany(p => p.CommentToPostNotification)
+                    .HasForeignKey(d => d.NotificationId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_comment_to_post_notification_notification");
+            });
+
             modelBuilder.Entity<District>(entity =>
             {
                 entity.ToTable("district", "geo");
@@ -446,6 +473,11 @@ namespace BE.Models
 
                 entity.Property(e => e.EventId).HasColumnName("event_id");
 
+                entity.Property(e => e.NotificationsOn)
+                    .IsRequired()
+                    .HasColumnName("notifications_on")
+                    .HasDefaultValueSql("((1))");
+
                 entity.Property(e => e.ParticipantId).HasColumnName("participant_id");
 
                 entity.HasOne(d => d.Event)
@@ -504,6 +536,29 @@ namespace BE.Models
                     .WithMany(p => p.EventPost)
                     .HasForeignKey(d => d.PostId)
                     .HasConstraintName("FK_event_post_post");
+            });
+
+            modelBuilder.Entity<EventPostNotification>(entity =>
+            {
+                entity.ToTable("event_post_notification", "notification");
+
+                entity.Property(e => e.Id).HasColumnName("id");
+
+                entity.Property(e => e.NotificationId).HasColumnName("notification_id");
+
+                entity.Property(e => e.SenderId).HasColumnName("sender_id");
+
+                entity.HasOne(d => d.Notification)
+                    .WithMany(p => p.EventPostNotification)
+                    .HasForeignKey(d => d.NotificationId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_event_post_notification_notification");
+
+                entity.HasOne(d => d.Sender)
+                    .WithMany(p => p.EventPostNotification)
+                    .HasForeignKey(d => d.SenderId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_event_post_notification_event");
             });
 
             modelBuilder.Entity<FriendRequest>(entity =>
@@ -624,6 +679,39 @@ namespace BE.Models
                     .IsUnicode(false);
             });
 
+            modelBuilder.Entity<Notification>(entity =>
+            {
+                entity.ToTable("notification", "notification");
+
+                entity.Property(e => e.Id).HasColumnName("id");
+
+                entity.Property(e => e.Date)
+                    .HasColumnName("date")
+                    .HasColumnType("datetime");
+
+                entity.Property(e => e.ImagePath)
+                    .IsRequired()
+                    .HasColumnName("image_path")
+                    .HasMaxLength(1000)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Read).HasColumnName("read");
+
+                entity.Property(e => e.RecipientId).HasColumnName("recipient_id");
+
+                entity.Property(e => e.TextContent)
+                    .IsRequired()
+                    .HasColumnName("text_content")
+                    .HasMaxLength(500)
+                    .IsUnicode(false);
+
+                entity.HasOne(d => d.Recipient)
+                    .WithMany(p => p.Notification)
+                    .HasForeignKey(d => d.RecipientId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_notification_user");
+            });
+
             modelBuilder.Entity<Post>(entity =>
             {
                 entity.ToTable("post", "post");
@@ -709,6 +797,29 @@ namespace BE.Models
                     .WithMany(p => p.ResponseToCommentResponseToCommentNavigation)
                     .HasForeignKey(d => d.ResponseToCommentId)
                     .HasConstraintName("FK_response_to_comment_comment");
+            });
+
+            modelBuilder.Entity<ResponseToCommentNotification>(entity =>
+            {
+                entity.ToTable("response_to_comment_notification", "notification");
+
+                entity.Property(e => e.Id).HasColumnName("id");
+
+                entity.Property(e => e.CommentId).HasColumnName("comment_id");
+
+                entity.Property(e => e.NotificationId).HasColumnName("notification_id");
+
+                entity.HasOne(d => d.Comment)
+                    .WithMany(p => p.ResponseToCommentNotification)
+                    .HasForeignKey(d => d.CommentId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_response_to_comment_notification_comment");
+
+                entity.HasOne(d => d.Notification)
+                    .WithMany(p => p.ResponseToCommentNotification)
+                    .HasForeignKey(d => d.NotificationId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_response_to_comment_notification_notification");
             });
 
             modelBuilder.Entity<Session>(entity =>

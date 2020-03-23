@@ -23,7 +23,7 @@ namespace BE.Features.Event.Repositories
             return await FindByCondition(e => e.EventId == eventId)
                 .Skip((page - 1) * length)
                 .Take(length)
-                .Include(e=>e.Image)
+                .OrderByDescending(e => e.Id)
                 .Select(selector)
                 .ToListAsync();
         }

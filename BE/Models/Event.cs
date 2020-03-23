@@ -13,6 +13,7 @@ namespace BE.Models
             EventParticipants = new HashSet<EventParticipants>();
             EventParticipationRequest = new HashSet<EventParticipationRequest>();
             EventPost = new HashSet<EventPost>();
+            EventPostNotification = new HashSet<EventPostNotification>();
             UserEvents = new HashSet<UserEvents>();
         }
 
@@ -37,6 +38,7 @@ namespace BE.Models
         public virtual ICollection<EventParticipants> EventParticipants { get; set; }
         public virtual ICollection<EventParticipationRequest> EventParticipationRequest { get; set; }
         public virtual ICollection<EventPost> EventPost { get; set; }
+        public virtual ICollection<EventPostNotification> EventPostNotification { get; set; }
         public virtual ICollection<UserEvents> UserEvents { get; set; }
     }
 }

@@ -23,6 +23,7 @@ namespace BE.Models
             FriendRequestReceiver = new HashSet<FriendRequest>();
             FriendshipRecommendationIssuer = new HashSet<FriendshipRecommendation>();
             FriendshipRecommendationPotentialFriend = new HashSet<FriendshipRecommendation>();
+            Notification = new HashSet<Notification>();
             PostLike = new HashSet<PostLike>();
             UserEvents = new HashSet<UserEvents>();
             UserFriendshipFirstFriend = new HashSet<UserFriendship>();
@@ -68,6 +69,7 @@ namespace BE.Models
         public virtual ICollection<FriendRequest> FriendRequestReceiver { get; set; }
         public virtual ICollection<FriendshipRecommendation> FriendshipRecommendationIssuer { get; set; }
         public virtual ICollection<FriendshipRecommendation> FriendshipRecommendationPotentialFriend { get; set; }
+        public virtual ICollection<Notification> Notification { get; set; }
         public virtual ICollection<PostLike> PostLike { get; set; }
         public virtual ICollection<UserEvents> UserEvents { get; set; }
         public virtual ICollection<UserFriendship> UserFriendshipFirstFriend { get; set; }

@@ -7,6 +7,7 @@ using BE.Features.Event.Services;
 using BE.Features.Friendship.Services;
 using BE.Features.FriendshipRecommendation;
 using BE.Features.Helpers;
+using BE.Features.Notification;
 using BE.Features.Photo;
 using BE.Features.Post.Services;
 using BE.Features.Search.Services;
@@ -62,6 +63,7 @@ namespace BE
             services.AddTransient<IUserDataUpdateService, UserDataUpdateService>();
             services.AddTransient<ISQLServer_UserSearchService, SQLServer_UserSearchService>();
             services.AddTransient<ILocationService, LocationService>();
+            services.AddTransient<INotificationService, NotificationService>();
         }
 
         public static void ConfigureAutoMapper(this IServiceCollection services)

@@ -1,4 +1,6 @@
+using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
 using BE.Models;
 using BE.Repositories;
@@ -12,8 +14,8 @@ namespace BE.Features.User.Repositories
 
         Task Add(UserImage userImage);
 
-        Task<IEnumerable<UserImage>> GetRangeWithPaginationExceptUserDataAsync(int userId,
-            int page, int length);
+        Task<IEnumerable<TType>> GetRangeWithPaginationAsync<TType>(int userId,
+            int page, int length, Expression<Func<UserImage, TType>> selector);
 
         void DeleteByEntity(UserImage userImage);
         UserImage GetById(int id);

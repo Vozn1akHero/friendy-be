@@ -29,6 +29,6 @@ D:\Projects\Praca dyplomowa\BE\BE\obj\Debug\netcoreapp2.2\BE.pdb
 D:\Projects\Praca dyplomowa\BE\BE\bin\Debug\netcoreapp2.2\Properties\launchSettings.json
 D:\Projects\Praca dyplomowa\BE\BE\bin\Debug\netcoreapp2.2\appsettings.Development.json
 D:\Projects\Praca dyplomowa\BE\BE\bin\Debug\netcoreapp2.2\appsettings.json
-D:\Projects\Praca dyplomowa\BE\BE\obj\Debug\netcoreapp2.2\BE.csprojAssemblyReference.cache
 D:\Projects\Praca dyplomowa\BE\BE\obj\Debug\netcoreapp2.2\BE.csproj.CoreCompileInputs.cache
 D:\Projects\Praca dyplomowa\BE\BE\obj\Debug\netcoreapp2.2\BE.genruntimeconfig.cache
+D:\Projects\Praca dyplomowa\BE\be\obj\Debug\netcoreapp2.2\BE.csprojAssemblyReference.cache

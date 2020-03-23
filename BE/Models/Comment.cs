@@ -10,6 +10,7 @@ namespace BE.Models
             CommentLike = new HashSet<CommentLike>();
             MainComment = new HashSet<MainComment>();
             ResponseToCommentComment = new HashSet<ResponseToComment>();
+            ResponseToCommentNotification = new HashSet<ResponseToCommentNotification>();
             ResponseToCommentResponseToCommentNavigation = new HashSet<ResponseToComment>();
         }
 
@@ -24,6 +25,7 @@ namespace BE.Models
         public virtual ICollection<CommentLike> CommentLike { get; set; }
         public virtual ICollection<MainComment> MainComment { get; set; }
         public virtual ICollection<ResponseToComment> ResponseToCommentComment { get; set; }
+        public virtual ICollection<ResponseToCommentNotification> ResponseToCommentNotification { get; set; }
         public virtual ICollection<ResponseToComment> ResponseToCommentResponseToCommentNavigation { get; set; }
     }
 }

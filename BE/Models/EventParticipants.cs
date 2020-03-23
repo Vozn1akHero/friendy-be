@@ -8,6 +8,7 @@ namespace BE.Models
         public int Id { get; set; }
         public int EventId { get; set; }
         public int ParticipantId { get; set; }
+        public bool? NotificationsOn { get; set; }
 
         public virtual Event Event { get; set; }
         public virtual User Participant { get; set; }

@@ -1,5 +1,7 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
 using BE.Features.User.Repositories;
 using BE.Models;
@@ -14,13 +16,14 @@ namespace BE.Features.Photo
         {
         }
 
-        public async Task<IEnumerable<UserImage>> GetRangeWithPaginationExceptUserDataAsync(
-            int userId, int page, int length)
+        public async Task<IEnumerable<TType>> GetRangeWithPaginationAsync<TType>(int userId,
+            int page, int length, Expression<Func<UserImage, TType>> selector)
         {
             return await FindByCondition(e => e.UserId == userId)
                 .Skip((page - 1) * length)
                 .Take(length)
-                .Include(e=>e.Image)
+                .OrderByDescending(e => e.Id)
+                .Select(selector)
                 .ToListAsync();
         }
 

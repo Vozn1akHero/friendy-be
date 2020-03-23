@@ -7,6 +7,7 @@ namespace BE.Models
     {
         public MainComment()
         {
+            CommentToPostNotification = new HashSet<CommentToPostNotification>();
             ResponseToComment = new HashSet<ResponseToComment>();
         }
 
@@ -14,6 +15,7 @@ namespace BE.Models
         public int CommentId { get; set; }
 
         public virtual Comment Comment { get; set; }
+        public virtual ICollection<CommentToPostNotification> CommentToPostNotification { get; set; }
         public virtual ICollection<ResponseToComment> ResponseToComment { get; set; }
     }
 }
