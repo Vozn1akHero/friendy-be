@@ -13,10 +13,8 @@ namespace BE.Features.Friendship.Services
     {
         Task<IEnumerable<FriendDto>> GetRangeByUserIdAsync(int userId,
             int startIndex, int length);
-
         Task<IEnumerable<FriendDto>>
             GetLastRangeByIdWithPaginationAsync(int id, int page, int length);
-
         Task<IEnumerable<FriendDto>> FilterByKeywordAsync(int userId, string keyword);
         Task<FriendshipStatus> GetFriendshipStatus(int id, int issuerId);
         Task ConfirmRequestAsync(int userId, int issuerId);

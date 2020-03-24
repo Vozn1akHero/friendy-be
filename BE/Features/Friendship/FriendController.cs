@@ -1,3 +1,5 @@
+using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 using System.Threading.Tasks;
 using BE.Features.Friendship.Dtos;
 using BE.Features.Friendship.Helpers;
@@ -76,7 +78,38 @@ namespace BE.Features.Friendship
             var requests = await _repository.FriendRequest.GetSentByUserIdAsync(userId, SentFriendRequestDto.Selector);
             return Ok(requests);
         }
-        
+
+        [HttpGet]
+        [Authorize]
+        [Route("requests/sent/filter")]
+        public async Task<IActionResult> FilterSentRequestsByKeyword([Required, FromQuery(Name = "keyword")] string keyword,
+            [Required, FromQuery(Name = "page")] int page,
+            [DefaultValue(20), FromQuery(Name = "length")] int length,
+            [FromHeader(Name = "userId")] int userId)
+        {
+            var value = await _repository.FriendRequest.FilterSentByKeywordAndUserIdAsync(keyword,
+                userId,
+                page,
+                length, ReceivedFriendRequestDto.Selector);
+            return Ok(value);
+        }
+
+        [HttpGet]
+        [Authorize]
+        [Route("requests/sent/filter")]
+        public async Task<IActionResult> FilterReceivedRequestsByKeyword([Required, FromQuery(Name = "keyword")] string keyword,
+            [Required, FromQuery(Name = "page")] int page,
+            [DefaultValue(20), FromQuery(Name = "length")] int length,
+            [FromHeader(Name = "userId")] int userId
+            )
+        {
+            var value = await _repository.FriendRequest.FilterReceivedByKeywordAndUserIdAsync(keyword, 
+                userId,
+                page, 
+                length, ReceivedFriendRequestDto.Selector);
+            return Ok(value);
+        }
+
         [HttpPost]
         [Authorize]
         [Route("confirm/{id}")]
@@ -105,20 +138,6 @@ namespace BE.Features.Friendship
             var friends = await _userFriendshipService.GetLastRangeByIdWithPaginationAsync(userId, page, length);
             return Ok(friends);
         }
-        
-        /*[HttpGet]
-        [Authorize]
-        [Route("paginate/logged-in/{page}")]
-        public async Task<IActionResult> GetLoggedInUserFriendsWithPagination(int page,
-            [FromQuery(Name = "length")] int length,
-            [FromHeader(Name = "userId")] int userId)
-        {
-            var friends =
-                await _userFriendshipService.GetLastRangeByIdWithPaginationAsync(userId,
-                    page, length);
-
-            return Ok(friends);
-        }*/
 
         [HttpGet]
         [Authorize]

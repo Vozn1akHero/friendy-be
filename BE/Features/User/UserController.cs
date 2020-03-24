@@ -76,24 +76,6 @@ namespace BE.Features.User
             return Ok(user);
         }
 
-        /*[HttpGet]
-        [Authorize]
-        [Route("{userId}/avatar")]
-        public async Task<IActionResult> GetUserAvatar(int userId)
-        {
-            var avatar = await _repository.User.GetAvatarByIdAsync(userId);
-            return Ok(avatar);
-        }
-
-        [HttpGet]
-        [Authorize]
-        [Route("{userId}/background")]
-        public async Task<IActionResult> GetProfileBackground(int userId)
-        {
-            var background = await _repository.User.GetProfileBackgroundByIdAsync(userId);
-            return Ok(background);
-        }*/
-
         [HttpGet("profile-belonging/{id}")]
         [Authorize]
         public IActionResult GetProfileBelonging(int id,
@@ -102,11 +84,10 @@ namespace BE.Features.User
             return Ok(id == userId);
         }
 
-
         [HttpPut]
         [Authorize]
         [Route("avatar")]
-        public async Task<IActionResult> UpdateUserAvatar(
+        public async Task<IActionResult> UpdateUserAvatarAsync(
             [FromForm(Name = "newAvatar")] IFormFile newAvatar,
             [FromHeader(Name = "userId")] int userId)
         {

@@ -1,3 +1,4 @@
+using System.ComponentModel;
 using System.Threading.Tasks;
 using BE.Features.Search.Services;
 using BE.Features.User.Dtos;
@@ -19,21 +20,36 @@ namespace BE.Features.Search
 
         [HttpPost]
         [Authorize]
-        public async Task<IActionResult> GetUsersByCriteria([FromQuery(Name = "page")] int page,
+        public async Task<IActionResult> GetUsersByCriteria(
+            [DefaultValue(1), FromQuery(Name = "page")] int page,
+            [DefaultValue(20), FromQuery(Name = "length")] int length,
             [FromBody] UsersLookUpCriteriaDto usersLookUpCriteriaDto, [FromHeader(Name 
             = "userId")] int userId)
         {
-            var users = await _userSearchService.SearchByCriteriaAsync(usersLookUpCriteriaDto, 
-            page, userId);
+            var users = await _userSearchService.SearchByCriteriaAsync(usersLookUpCriteriaDto,
+                userId, page, length);
             return Ok(users);
         }
 
         [HttpGet("trendy")]
         [Authorize]
-        public IActionResult GetTrendyPeople([FromQuery(Name = "page")] int page,
+        public IActionResult GetTrendyPeople([DefaultValue(1), FromQuery(Name = "page")] int page,
+            [DefaultValue(20), FromQuery(Name = "length")] int length,
             [FromHeader(Name = "userId")] int userId)
         {
-            var res = _userSearchService.TrendyUsers(userId, page);
+            var res = _userSearchService.TrendyUsers(userId, page, length);
+            return Ok(res);
+        }
+
+
+        [HttpGet("by-keyword/{keyword}")]
+        [Authorize]
+        public IActionResult FindByKeywordAsync(string keyword,
+            [DefaultValue(1), FromQuery(Name = "page")] int page,
+            [DefaultValue(20), FromQuery(Name = "length")] int length,
+            [FromHeader(Name = "userId")] int userId)
+        {
+            var res = _userSearchService.FindByKeywordAsync(keyword, issuerId: userId, page, length);
             return Ok(res);
         }
     }

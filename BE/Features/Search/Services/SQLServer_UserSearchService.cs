@@ -5,14 +5,16 @@ using AutoMapper;
 using BE.Features.User.Dtos;
 using BE.Models;
 using BE.Shared.Dtos;
+using Microsoft.EntityFrameworkCore;
 
 namespace BE.Features.Search.Services
 {
     public interface ISQLServer_UserSearchService
     {
         Task<IEnumerable<UserDto>> SearchByCriteriaAsync(
-            UsersLookUpCriteriaDto criteria, int page, int issuerId);
-        IEnumerable<UserDto> TrendyUsers(int issuerId, int page);
+            UsersLookUpCriteriaDto criteria, int issuerId, int page, int length);
+        IEnumerable<UserDto> TrendyUsers(int issuerId, int page, int length);
+        Task<IEnumerable<UserDto>> FindByKeywordAsync(string keyword, int issuerId, int page, int length);
     }
 
     public class SQLServer_UserSearchService : ISQLServer_UserSearchService
@@ -28,9 +30,8 @@ namespace BE.Features.Search.Services
         }
 
         public async Task<IEnumerable<UserDto>> SearchByCriteriaAsync
-            (UsersLookUpCriteriaDto criteria, int page, int issuerId)
+            (UsersLookUpCriteriaDto criteria, int issuerId, int page, int length)
         {
-            var length = 25;
             var foundUsers =
                 _friendyContext.Set<Models.User>().Where(e => (criteria.Name == null 
                                                                || e.Name.ToUpper() == criteria.Name.ToUpper())
@@ -65,23 +66,29 @@ namespace BE.Features.Search.Services
                     .Skip((page - 1) * length)
                     .Take(length)
                     .Select(UserDto.Selector(issuerId))
-                    /*.ProjectTo<FoundUserDto>(_mapper.ConfigurationProvider, new Dictionary<string, object>
-                     {
-                         {"issuerId", issuerId}
-                     })*/
                     .ToList();
             return foundUsers;
         }
 
-        public IEnumerable<UserDto> TrendyUsers(int issuerId, int page)
+        public IEnumerable<UserDto> TrendyUsers(int issuerId, int page, int length)
         {
-            int size = 20;
             return _friendyContext
                 .Set<Models.User>()
                 .OrderByDescending(e => e.FriendRequestReceiver.Count)
                 .Select(UserDto.Selector(issuerId))
-                .Skip((page - 1) * size)
-                .Take(size);
+                .Skip((page - 1) * length)
+                .Take(length);
+        }
+
+        public async Task<IEnumerable<UserDto>> FindByKeywordAsync(string keyword, int issuerId, int page, int length)
+        {
+            var val = await _friendyContext.Set<Models.User>()
+                .Where(e => (e.Name + " " + e.Surname).Contains(keyword))
+                .Skip((page - 1) * length)
+                .Take(length)
+                .Select(UserDto.Selector(issuerId))
+                .ToListAsync();
+            return val;
         }
     }
 }

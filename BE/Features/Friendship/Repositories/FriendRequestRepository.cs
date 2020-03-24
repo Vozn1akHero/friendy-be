@@ -36,6 +36,17 @@ namespace BE.Features.Friendship.Repositories
             await SaveAsync();
         }
 
+        public async Task<IEnumerable<TType>> FilterSentByKeywordAndUserIdAsync<TType>(string keyword,
+            int userId,
+            int page, int length,
+            Expression<Func<FriendRequest, TType>> selector)
+        {
+            return await FindByCondition(e => e.AuthorId == userId && (e.Receiver.Name + " " + e.Receiver.Surname).Contains(keyword))
+                .Skip((page - 1) * length)
+                .Select(selector)
+                .ToListAsync();
+        }
+
         public async Task DeleteByEntity(FriendRequest friendRequest)
         {
             Delete(friendRequest);
@@ -49,14 +60,27 @@ namespace BE.Features.Friendship.Repositories
                     || e.ReceiverId == firstId && e.AuthorId == secondId);
         }
 
-        public async Task<IEnumerable<TType>> GetReceivedByUserIdAsync<TType>(int userId, Expression<Func<FriendRequest, TType>> selector)
+        public async Task<IEnumerable<TType>> GetReceivedByUserIdAsync<TType>(int userId,
+            Expression<Func<FriendRequest, TType>> selector)
         {
             return await FindByCondition(e => e.ReceiverId == userId)
                 .Select(selector)
                 .ToListAsync();
         }
 
-        public async Task<IEnumerable<TType>> GetSentByUserIdAsync<TType>(int userId, Expression<Func<FriendRequest, TType>> selector)
+        public async Task<IEnumerable<TType>> FilterReceivedByKeywordAndUserIdAsync<TType>(string keyword, 
+            int userId,
+            int page, int length,
+            Expression<Func<FriendRequest, TType>> selector)
+        {
+            return await FindByCondition(e => e.ReceiverId == userId && (e.Author.Name+" "+e.Author.Surname).Contains(keyword)) 
+                .Skip((page-1)*length)
+                .Select(selector)
+                .ToListAsync();
+        }
+
+        public async Task<IEnumerable<TType>> GetSentByUserIdAsync<TType>(int userId,
+            Expression<Func<FriendRequest, TType>> selector)
         {
             return await FindByCondition(e => e.AuthorId == userId)
                 .Select(selector)
