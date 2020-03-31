@@ -30,7 +30,7 @@ namespace BE.Features.Event
 
         [HttpPost]
         [Authorize]
-        public async Task<IActionResult> Create([FromBody] Models.Event @event,
+        public async Task<IActionResult> CreateAsync([FromBody] Models.Event @event,
             [FromHeader(Name = "userId")] int userId)
         {
             await _mediator.Send(new EventCreationCommand
@@ -44,7 +44,7 @@ namespace BE.Features.Event
         [HttpGet]
         [Authorize]
         [Route("user/active")]
-        public async Task<IActionResult> GetLoggedInUserEvents(
+        public async Task<IActionResult> GetLoggedInUserEventsAsync(
             [FromHeader(Name = "userId")] int userId)
         {
             var events = await _eventsService.GetParticipatingByIdAsync(userId);
@@ -54,7 +54,7 @@ namespace BE.Features.Event
         [HttpGet]
         [Authorize]
         [Route("user/active/administered")]
-        public async Task<IActionResult> GetLoggedInUserAdministeredEvents(
+        public async Task<IActionResult> GetLoggedInUserAdministeredEventsAsync(
             [FromHeader(Name = "userId")] int userId)
         {
             var events = await _eventsService.GetAdministeredByIdAsync(userId);
@@ -64,7 +64,7 @@ namespace BE.Features.Event
         [HttpGet]
         [Authorize]
         [Route("closest")]
-        public async Task<IActionResult> GetClosestEvents(
+        public async Task<IActionResult> GetClosestEventsAsync(
             [FromHeader(Name = "userId")] int userId,
             [FromQuery(Name = "length")] int length)
         {
@@ -75,15 +75,16 @@ namespace BE.Features.Event
         [HttpGet]
         [Authorize]
         [Route("{id}")]
-        public async Task<IActionResult> GetById(int id)
+        public async Task<IActionResult> GetByIdAsync(int id)
         {
             var eventData = await _eventDataService.GetDtoById(id);
+            if (eventData == null) return NotFound();
             return Ok(eventData);
         }
 
         [HttpGet("{id}/with-selected-fields")]
         [Authorize]
-        public async Task<IActionResult> GetSelectedFields(int id,
+        public async Task<IActionResult> GetSelectedFieldsAsync(int id,
             [FromQuery(Name = "selectedFields")] string selectedFields)
         {
             var selectedFieldsArr = selectedFields.Split(",");
