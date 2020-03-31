@@ -23,7 +23,7 @@ namespace BE.Features.Authentication
 
         [HttpPost]
         [Route("create")]
-        public async Task<IActionResult> Create([FromBody] NewUserDto user)
+        public async Task<IActionResult> CreateAsync([FromBody] NewUserDto user)
         {
             try
             {

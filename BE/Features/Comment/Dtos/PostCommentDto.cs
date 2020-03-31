@@ -8,6 +8,7 @@ namespace BE.Features.Comment.Dtos
     public class PostCommentDto
     {
         public int Id { get; set; }
+        public int CommentId { get; set; }
         public int AuthorId { get; set; }
         public string AuthorName { get; set; }
         public string AuthorSurname { get; set; }
@@ -24,6 +25,7 @@ namespace BE.Features.Comment.Dtos
             return e => new PostCommentDto
             {
                 Id = e.Id,
+                CommentId = e.Comment.Id,
                 AuthorId = e.Comment.User.Id,
                 AuthorName = e.Comment.User.Name,
                 AuthorSurname = e.Comment.User.Surname,

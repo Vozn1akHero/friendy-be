@@ -41,7 +41,6 @@ namespace BE.Features.Search
             return Ok(res);
         }
 
-
         [HttpGet("by-keyword/{keyword}")]
         [Authorize]
         public IActionResult FindByKeywordAsync(string keyword,
